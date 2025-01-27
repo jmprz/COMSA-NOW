@@ -22,7 +22,7 @@
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #000000; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #152e11; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #7b9e5e; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --accent-color: #7db832; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
@@ -30,7 +30,7 @@
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: #ffffff;  /* The default color of the main navmenu links */
-  --nav-hover-color: #416144; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-hover-color: #09b003; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #060606; /* Used for navigation links of the dropdown items in the navigation menu. */
@@ -45,11 +45,15 @@
 }
 
 .dark-background {
-  --background-color: #015846;
+  --background-color: #055a0f;
   --default-color: #ffffff;
   --heading-color: #ffffff;
   --surface-color: #037e59;
   --contrast-color: #ffffff;
+}
+
+.light-green{
+ color: #7db732;
 }
 
 /* Smooth scroll */
@@ -143,9 +147,9 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: rgb(31, 97, 31);
+  --background-color: rgb(0,0,0,0);
   --heading-color: #ffffff;
-  color: var(--default-color);
+  color: white;
   background-color: var(--background-color);
   padding: 20px 0;
   transition: all 0.5s;
@@ -162,7 +166,7 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 32px;
+  max-height: 60px;
   margin-right: 8px;
 }
 
@@ -180,7 +184,7 @@ h6 {
 /* Global Header on Scroll
 ------------------------------*/
 .scrolled .header {
-  --background-color: rgba(3, 59, 45, 0.9);
+  --background-color: rgba( 2, 84, 12, 1);
 }
 
 /*--------------------------------------------------------------
@@ -674,7 +678,6 @@ section,
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
-  overflow: hidden;
   position: relative;
   background: linear-gradient(0deg, var(--background-color) 0%, color-mix(in srgb, var(--background-color) 90%, white 10%) 100%);
   padding: 0;
@@ -692,13 +695,14 @@ section,
   text-align: center;
   position: relative;
   min-height: 75vh;
-  padding-top: 60px;
+  color: white;
 }
 
 .hero h2 {
   margin-bottom: 30px;
   font-size: 48px;
   font-weight: 700;
+  color: white;
 }
 
 .hero h2 span {
@@ -736,8 +740,8 @@ section,
   line-height: 1;
   margin: 10px;
   animation-delay: 0.8s;
-  color: var(--default-color);
-  border: 2px solid var(--accent-color);
+  color: white;
+  border: 2px solid white;
 }
 
 .hero .btn-get-started:hover {
@@ -745,6 +749,78 @@ section,
   color: var(--contrast-color);
   text-decoration: none;
 }
+
+.carousel-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100000px;
+  height: 30%; /* Adjust height of the gradient overlay */
+  background: linear-gradient(to top, rgba(125, 183, 50, 0.7), transparent);
+  z-index: 0;
+}
+
+
+.carousel-container img {
+  position: absolute;
+  top: 0;
+  width: 100vw; /* Ensure full screen width */
+  height: 100%; /* Ensure full container height */
+  object-fit: cover; /* Prevents distortion and fills the container */
+  z-index: -1;
+  filter: brightness(0.6);
+  background-image:
+    linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73));
+}
+
+.carousel-details {
+  position: absolute;
+  top: 10%; /* Moves details to the top */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+  width: 80%;
+  max-width: 1200px; /* Ensures content doesn’t get too wide on larger screens */
+}
+
+.first-img{
+  top: 30%; /* Moves details to the top */
+  left: 50%;
+}
+
+.carousel-details h2 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.carousel-details p {
+  font-size: 18px;
+  max-width: 700px;
+  margin: 0 auto 20px auto;
+  color: white;
+}
+
+.carousel-details .btn-get-started {
+  display: inline-block;
+  padding: 12px 24px; /* Added padding for better button sizing */
+  font-size: 16px; /* Slightly larger font for better readability */
+}
+
+.comsa-logo-about{
+  width: 600px;
+}
+
+.comsa-logo-placement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-top: -60px; 
+}
+
 
 @media (min-width: 1024px) {
   .hero p {
@@ -763,65 +839,34 @@ section,
   }
 
   .hero h2 {
-    font-size: 28px;
+    font-size: 20px;
+  }
+
+  .carousel-details {
+    top: 15%; /* Adjust position for smaller screens */
+    width: 90%; /* Allow more space on smaller screens */
+  }
+
+  .carousel-details h2 {
+    font-size: 32px; /* Reduce heading size */
+  }
+
+  .carousel-details p {
+    font-size: 16px; /* Adjust text size */
+  }
+
+  .carousel-details .btn-get-started {
+    font-size: 14px; /* Adjust button size */
+    padding: 10px 20px;
   }
 }
 
-.hero .hero-waves {
-  display: block;
-  width: 100%;
-  height: 60px;
-  position: relative;
-}
 
-.hero .wave1 use {
-  animation: move-forever1 10s linear infinite;
-  animation-delay: -2s;
-  fill: var(--default-color);
-  opacity: 0.6;
-}
+@media (max-width: 991px) {
+  .comsa-logo-placement {
+    display: none;
+   }
 
-.hero .wave2 use {
-  animation: move-forever2 8s linear infinite;
-  animation-delay: -2s;
-  fill: var(--default-color);
-  opacity: 0.4;
-}
-
-.hero .wave3 use {
-  animation: move-forever3 6s linear infinite;
-  animation-delay: -2s;
-  fill: var(--default-color);
-}
-
-@keyframes move-forever1 {
-  0% {
-    transform: translate(85px, 0%);
-  }
-
-  100% {
-    transform: translate(-90px, 0%);
-  }
-}
-
-@keyframes move-forever2 {
-  0% {
-    transform: translate(-90px, 0%);
-  }
-
-  100% {
-    transform: translate(85px, 0%);
-  }
-}
-
-@keyframes move-forever3 {
-  0% {
-    transform: translate(-90px, 0%);
-  }
-
-  100% {
-    transform: translate(85px, 0%);
-  }
 }
 
 /*--------------------------------------------------------------
@@ -874,12 +919,24 @@ section,
   transform: translate(5px, 0);
 }
 
+.justify-text{
+  text-align: justify;
+  text-justify: inter-word;
+  text-indent: 50px;
+}
+
+.card{
+  border: none;
+}
+
 /*--------------------------------------------------------------
 # Features Section
 --------------------------------------------------------------*/
 .features .nav-tabs {
   border: 0;
 }
+
+
 
 .features .nav-link {
   background-color: var(--surface-color);
@@ -921,6 +978,10 @@ section,
   color: var(--contrast-color);
 }
 
+
+.features-placement{
+ padding-top: -100px;
+}
 
 @media (max-width: 768px) {
   .features .nav-link i {
