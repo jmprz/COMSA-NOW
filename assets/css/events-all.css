@@ -1,0 +1,371 @@
+/**
+* Template Name: Selecao
+* Template URL: https://bootstrapmade.com/selecao-bootstrap-template/
+* Updated: Aug 07 2024 with Bootstrap v5.3.3
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
+/*--------------------------------------------------------------
+# Font & Color Variables
+# Help: https://bootstrapmade.com/color-system/
+--------------------------------------------------------------*/
+/* Fonts */
+:root {
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Raleway", sans-serif;
+  --nav-font: "Poppins", sans-serif;
+}
+
+/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
+:root {
+  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --default-color: #000000; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #152e11; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #7db832; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+}
+
+/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
+:root {
+  --nav-color: #ffffff; /* The default color of the main navmenu links */
+  --nav-hover-color: #09b003; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #060606; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #2b7a4e; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+}
+
+/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
+
+.light-background {
+  --background-color: #f9f9f9;
+  --surface-color: #ffffff;
+}
+
+.dark-background {
+  --background-color: #055a0f;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #037e59;
+  --contrast-color: #ffffff;
+}
+
+.light-green {
+  color: #7db732;
+}
+
+/* Smooth scroll */
+:root {
+  scroll-behavior: smooth;
+}
+
+/* Calendar Page Specific Styles */
+#calendar-hero {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  padding: 80px 0 40px;
+  text-align: center;
+}
+
+#calendar-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+#calendar-hero p {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+
+/* Event Details Styles */
+.event-details-sidebar {
+  position: sticky;
+  top: 20px;
+  height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.event-details-sidebar img {
+  max-height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Filter Buttons */
+.filter-btn {
+  transition: all 0.3s ease;
+  border-color: var(--heading-color);
+    margin-right: 10px;
+  margin-bottom: 10px;
+  color: var(--heading-color);
+}
+
+.filter-btn:hover{
+    background-color: var(--accent-color);
+      border-color: var(--heading-color);
+}
+
+.filter-btn.active {
+  background-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+  border-color: var(--accent-color) !important;
+}
+
+/* Custom Calendar Styles */
+.calendar-container {
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.fc-toolbar-title {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+}
+
+.fc-button {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+}
+
+.fc-button:hover {
+  opacity: 0.9;
+}
+
+.fc-event {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  cursor: pointer;
+}
+
+.fc-daygrid-event-dot {
+  border-color: var(--contrast-color) !important;
+}
+
+.event-filter {
+  margin-bottom: 20px;
+ 
+}
+
+.event-details-sidebar {
+  background-color: var(--surface-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.event-material {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.event-material h5 {
+  color: var(--accent-color);
+}
+
+.comment-section {
+  margin-top: 20px;
+}
+
+.comment {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+/*
+buttons/links/icons
+*/
+.event-material .btn-outline-primary {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.event-material .btn-outline-primary:hover {
+  color: var(--contrast-color);
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.event-material .btn-outline-primary i.bi-file-slides {
+  color: #D35400; 
+}
+.event-material .btn-outline-primary i.bi-file-earmark-pdf {
+  color: #E74C3C; 
+}
+.event-material .btn-outline-primary i.bi-github {
+  color: #333;
+}
+.event-material .btn-outline-primary i.bi-play-circle {
+  color: #3498DB; 
+}
+.event-material .btn-outline-primary i.bi-link-45deg {
+  color: #2ECC71; 
+}
+
+/* register button */
+.event-details-sidebar .btn-primary {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.event-details-sidebar .btn-primary:hover {
+  background-color: #6aa02a; 
+  border-color: #6aa02a;
+}
+
+/* Comment button */
+.comment-section .btn-primary {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.comment-section .btn-primary:hover {
+  background-color: #6aa02a;
+  border-color: #6aa02a;
+}
+
+
+/* ///////////////////////////////////////////////
+//////////////////////////////////////////////// */
+
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .event-details-sidebar {
+    position: static;
+    height: auto;
+    margin-top: 30px;
+  }
+}
+
+
+/* Mobile Styles (max-width: 480px) */
+@media (max-width: 480px) {
+  /* Calendar Hero Section */
+  #calendar-hero {
+    padding: 60px 0 30px;
+  }
+  
+  #calendar-hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  #calendar-hero p {
+    font-size: 1rem;
+  }
+
+  /* Calendar Container */
+  .calendar-container {
+    padding: 15px;
+  }
+
+  /* Calendar Toolbar */
+  .fc-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .fc-toolbar-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .fc-toolbar-chunk {
+    margin-bottom: 10px;
+  }
+  
+  .fc-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .event-filter {
+    margin-bottom: 15px;
+  }
+  
+  .filter-btn {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .event-details-sidebar {
+    padding: 15px;
+  }
+  
+  .event-details-sidebar img {
+    max-height: 150px;
+  }
+  
+  .event-details-sidebar h3 {
+    font-size: 1.3rem;
+  }
+  
+  .event-details-sidebar p {
+    font-size: 0.9rem;
+  }
+
+  .event-material {
+    padding: 8px;
+  }
+  
+  .event-material h5 {
+    font-size: 1rem;
+  }
+  
+  .event-material .btn-outline-primary {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .event-details-sidebar .btn-primary {
+    font-size: 0.9rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .comment-section {
+    margin-top: 15px;
+  }
+  
+  .comment {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .comment-section textarea {
+    font-size: 0.9rem;
+  }
+  
+  .comment-section .btn-primary {
+    font-size: 0.9rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .fc-daygrid-day-frame {
+    min-height: 30px;
+  }
+  
+  .fc-daygrid-day-number {
+    font-size: 0.8rem;
+  }
+  
+  .fc-daygrid-event {
+    font-size: 0.7rem;
+  }
+  
+  .fc-daygrid-event .fc-event-time {
+    display: none;
+  }
+}
