@@ -27,6 +27,7 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/search.css">
 
   <!-- =======================================================
   * Template Name: Selecao
@@ -42,23 +43,83 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="assets/img/logo.png" alt="">
+        <img src="/assets/img/logo.png" alt="">
         <h1 class="sitename">COMSA-NOW</h1>
       </a>
 
+      
+
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#team">Team</a></li>
-  
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li class="dropdown"><a href="/index.html#about"><span>About Comsa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Dropdown 1</a></li>
+              
+
+              <!--About comsa>-->
+                <li class="dropdown"><a href="#"><span>About Comsa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Our Services</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Our</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul></li><!--About comsa ->  end -->
+
+
+                  <!--news-->
+              <li class="dropdown"><a href="/features/calendar.html"><span>News</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                  <li><a href="/features/calendar.html#calendar">News</a></li>
+                  <li><a href="/features/calendar.html#portfolio">History</a></li>
+                </ul></li><!-- newws ends-->
+
+
+              <!--Orginazation comsa -->
+              <li class="dropdown"><a href="/features/comsa-team.html"><span>Organization</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                  <li><a href="/features/comsa-team.html#executive">Who are them?</a></li>
+                  <li><a href="/features/comsa-team.html#executive">Our Executives</a></li>
+                  <li><a href="/features/comsa-team.html#Creatives">Our Creatives</a></li>
+                </ul></li><!--Orginazation comsa -> end  -->
+              
+            </ul>
+          </li>
+          <li><a href="/index.html#portfolio">Portfolio</a></li>
+          <!--<li><a href="#services">Services</a></li>-->
+        
+          <li><a href="/index.html#team">Team</a></li>
+          <li><a href="/index.html#contact">Contact</a></li>
+          <li class="dropdown"><a href="#"><span>Features</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+
+              <li class="dropdown"><a href="/features/calendar.html"><span>Comsa Calendar</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                  <li><a href="/features/calendar.html#calendar">Calendar</a></li>
+                  <li><a href="/features/calendar.html#portfolio">Events haffening</a></li>
+                  
+                </ul></li>
+
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul></li>
+
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul></li>
+
               <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                   <li><a href="#">Deep Dropdown 1</a></li>
@@ -68,17 +129,30 @@
                   <li><a href="#">Deep Dropdown 5</a></li>
                 </ul>
               </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
             </ul>
           </li>
-          <li><a href="#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+        <!-- Search bar v3.4  testing -->
+<div class="header-search">
+      <a href="#" id="search-toggle"><i class="bi bi-search"></i></a>
+      <div class="search-popup">
+        <div class="search-container">
+          <div class="search-input-container">
+            <input type="text" placeholder="Search..." class="search-input">
+            <button class="search-button"><i class="bi bi-search"></i></button>
+            <span class="search-close"><i class="bi bi-x"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>   <!-- Search bar v3.4  testing end -->
 
+
+  </div>
     </div>
+
+    
   </header>
 
   <main class="main">
@@ -243,8 +317,9 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-  <!-- Main JS File -->
+   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/search.js"></script>
 
 </body>
 

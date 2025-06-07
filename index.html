@@ -27,6 +27,7 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
+   <link rel="stylesheet" href="assets/css/search.css">
   <link href="assets/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- =======================================================
@@ -49,10 +50,45 @@
         <h1 class="sitename">COMSA-NOW</h1>
       </a>
 
+      
+
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
+          <li class="dropdown"><a href="#about"><span>About Comsa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              
+
+              <!--About comsa>-->
+                <li class="dropdown"><a href="#"><span>About Comsa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Our Services</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Our</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul></li><!--About comsa ->  end -->
+
+
+                  <!--news-->
+              <li class="dropdown"><a href="features/calendar.html"><span>News</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                  <li><a href="/features/calendar.html#calendar">News</a></li>
+                  <li><a href="/features/calendar.html#portfolio">History</a></li>
+                </ul></li><!-- newws ends-->
+
+
+              <!--Orginazation comsa -->
+              <li class="dropdown"><a href="/features/comsa-team.html"><span>Organization</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                  <li><a href="/features/comsa-team.html#executive">Who are them?</a></li>
+                  <li><a href="/features/comsa-team.html#executive">Our Executives</a></li>
+                  <li><a href="/features/comsa-team.html#Creatives">Our Creatives</a></li>
+                </ul></li><!--Orginazation comsa -> end  -->
+              
+
+            </ul>
+          </li>
           <li><a href="#portfolio">Portfolio</a></li>
           <!--<li><a href="#services">Services</a></li>-->
         
@@ -60,10 +96,32 @@
           <li><a href="#contact">Contact</a></li>
           <li class="dropdown"><a href="#"><span>Features</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-               <li><a href="calendar.html">Comsa Calendar</a></li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
+
+              <li class="dropdown"><a href="features/calendar.html"><span>Comsa Calendar</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                  <li><a href="/features/calendar.html#calendar">Calendar</a></li>
+                  <li><a href="/features/calendar.html#portfolio">Events haffening</a></li>
+                  
+                </ul></li>
+
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul></li>
+
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul></li>
+
               <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                   <li><a href="#">Deep Dropdown 1</a></li>
@@ -75,12 +133,28 @@
               </li>
             </ul>
           </li>
-          
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+        <!-- Search bar v3.4  testing -->
+<div class="header-search">
+      <a href="#" id="search-toggle"><i class="bi bi-search"></i></a>
+      <div class="search-popup">
+        <div class="search-container">
+          <div class="search-input-container">
+            <input type="text" placeholder="Search..." class="search-input">
+            <button class="search-button"><i class="bi bi-search"></i></button>
+            <span class="search-close"><i class="bi bi-x"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>   <!-- Search bar v3.4  testing end -->
 
+
+  </div>
     </div>
+
+    
   </header>
 
   <main class="main">
@@ -541,14 +615,14 @@
               <div class="accordion-item">
                 <h2 class="mb-0">
                   <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-faq-1">
-                    Question 1
+                    What to do if something does end?
                   </button>
                 </h2>
 
                 <div id="collapse-faq-1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion-faq">
-                  <div class="accordion-body">
-                    Answer 1
-                  </div>
+                  <div class="accordion-body" style="font-style: italic;">
+  "If something is meant to end, allow it to end. Everything happens for a reason, and sometimes the best thing you can do is let go and move forward."
+</div>
                 </div>
               </div>
               <!-- .accordion-item -->
@@ -765,6 +839,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/search.js"></script>
 
 </body>
 

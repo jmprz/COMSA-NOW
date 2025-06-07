@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>COMSA Events Calendar</title>
+  <meta name="description" content="COMSA Events Calendar - View upcoming and past events">
+  
+  <!-- Favicons-->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/img/favicon/site.webmanifest">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Css of it's their design -->
+  <link href="/assets/css/main.css" rel="stylesheet">
+  <link href="/assets/css/events-all.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/search.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- FullCalendar CSS -->
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+  <style>
+    
+  </style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="/index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <img src="/assets/img/logo.png" alt="">
+        <h1 class="sitename">COMSA-NOW</h1>
+      </a>
+
+      
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li class="dropdown"><a href="/index.html#about"><span>About Comsa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              
+
+              <!--About comsa>-->
+                <li class="dropdown"><a href="#"><span>About Comsa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Our Services</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Our</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul></li><!--About comsa ->  end -->
+
+
+                  <!--news-->
+              <li class="dropdown"><a href="/features/calendar.html"><span>News</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                  <li><a href="/features/calendar.html#calendar">News</a></li>
+                  <li><a href="/features/calendar.html#portfolio">History</a></li>
+                </ul></li><!-- newws ends-->
+
+
+              <!--Orginazation comsa -->
+              <li class="dropdown"><a href="/features/comsa-team.html"><span>Organization</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                  <li><a href="/features/comsa-team.html#executive">Who are them?</a></li>
+                  <li><a href="/features/comsa-team.html#executive">Our Executives</a></li>
+                  <li><a href="/features/comsa-team.html#Creatives">Our Creatives</a></li>
+                </ul></li><!--Orginazation comsa -> end  -->
+              
+            </ul>
+          </li>
+          <li><a href="/index.html#portfolio">Portfolio</a></li>
+          <!--<li><a href="#services">Services</a></li>-->
+        
+          <li><a href="/index.html#team">Team</a></li>
+          <li><a href="/index.html#contact">Contact</a></li>
+          <li class="dropdown"><a href="#"><span>Features</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+
+              <li class="dropdown"><a href="/features/calendar.html"><span>Comsa Calendar</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                  <li><a href="/features/calendar.html#calendar">Calendar</a></li>
+                  <li><a href="/features/calendar.html#portfolio">Events haffening</a></li>
+                  
+                </ul></li>
+
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul></li>
+
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul></li>
+
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+        <!-- Search bar v3.4  testing -->
+<div class="header-search">
+      <a href="#" id="search-toggle"><i class="bi bi-search"></i></a>
+      <div class="search-popup">
+        <div class="search-container">
+          <div class="search-input-container">
+            <input type="text" placeholder="Search..." class="search-input">
+            <button class="search-button"><i class="bi bi-search"></i></button>
+            <span class="search-close"><i class="bi bi-x"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>   <!-- Search bar v3.4  testing end -->
+
+
+  </div>
+    </div>
+
+    
+  </header>
+
+  <main class="main">
+  <!-- Hero Section -->
+      <section id="hero" class="hero section">
+      <div id="hero-carousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="carousel-container">
+            <img src="/assets/img/comsa.gif" alt="">
+            <div class="carousel-details first-img">
+            <h2 class="animate__animated animate__fadeInDown">Welcome to <span>COMSA-NOW</span></h2>
+            <p class="animate__animated animate__fadeInUp">This page shows the past activities Computer Science Student Association or COMSA has acheived</p>
+            <a href="/index.html#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+          </div>
+        </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="carousel-container">
+            <img src="/assets/img/gawadkalinga.jpg" alt="" class="">
+            <h2 class="animate__animated animate__fadeInDown">CSS Extension: Gawad Kalinga</h2>
+            <p class="animate__animated animate__fadeInUp">The CCS extension program is a yearly event that focuses on a gift-giving initiative for the Gawad Kalinga community. It highlights the importance of generosity and engagement within the community while strengthening the connection between them and the students. The program also emphasizes the value of collaboration to uplift those in need making a deeper sense of purpose and social accountability among the participants.</p>
+            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+          <div class="carousel-container">
+            <img src="/assets/img/comsayep.jpg" alt="" class="">
+            <h2 class="animate__animated animate__fadeInDown">COMSA YEP: Tech Crews, First Quest  </h2>
+            <p class="animate__animated animate__fadeInUp">The COMSA Year End Party celebrates the remarkable achievements of Computer Science Student Association leaders and imposes a deeper sense of leadership among them. It highlights the dedication of all student leaders under the program, recognizing their invaluable contributions to their respective roles. The event also focuses on strengthening the bonds within the community fostering a well connected and collaborative environment to each other.</p>
+            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="carousel-item">
+          <div class="carousel-container">
+            <img src="/assets/img/csexpo.jpg" alt="" class="">
+            <h2 class="animate__animated animate__fadeInDown">CS Expo 2024: Unveiling New Possibilities and Creating New Realities</h2>
+            <p class="animate__animated animate__fadeInUp">The event presents an exceptional opportunity for students to present their thesis projects, which employ diverse programming languages and techniques to enhance and create technological solutions for various industries. This event is primarily overseen by the institute’s fourth-year Computer Science students, with the overarching goal of inspiring a shift from routine to innovation, promoting automation, and contributing to global sustainability through the fields of science, innovation, and engineering.</p>
+            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+          </div>
+        </div>
+
+         <!-- Slide 5 -->
+         <div class="carousel-item">
+          <div class="carousel-container">
+            <img src="/assets/img/donationdrive.jpg" alt="" class="">
+            <h2 class="animate__animated animate__fadeInDown">Donation Drive: Typhoon Kristine</h2>
+            <p class="animate__animated animate__fadeInUp">The organization Officers and  students initiated a donation drive for the affected people of typhoon Kristine. The donated goods and clothes are delivered to the ABS CBN Foundation. The donated are goods such as sardines, noodles, and used/unused clothes.</p>
+            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+          </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+      </div>
+    </section><!-- /Hero Section -->
+
+    <!-- Calendar Section -->
+    <section id="calendar" class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8" data-aos="fade-up">
+
+            <div class="container section-title" data-aos="fade-up">
+            <h2>Comsa Calendar</h2>
+            <p>What Haffen?</p>
+            </div>
+
+            <div class="calendar-container">
+              <div id="calendar-events"></div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="event-details-sidebar">
+              <div id="event-details-content">
+                <div class="text-center">
+                  <i class="bi bi-calendar-event fs-1 text-muted"></i>
+                  <h4 class="mt-3">Select an event</h4>
+                  <p class="text-muted">Click on any event in the calendar to view details</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="event-filter" data-aos="fade-up">
+              <h4>Filter Events:</h4>
+              <button class="btn btn-outline-primary filter-btn active" data-filter="all">All Events</button>
+              <button class="btn btn-outline-primary filter-btn" data-filter="workshop">Workshops</button>
+              <button class="btn btn-outline-primary filter-btn" data-filter="webinar">Webinars</button>
+              <button class="btn btn-outline-primary filter-btn" data-filter="social">Social Events</button>
+              <button class="btn btn-outline-primary filter-btn" data-filter="meeting">Meetings</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Calendar Section -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Portfolio Section -->
+      <section id="portfolio" class="portfolio section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Events</h2>
+          <p>things that haffen</p>
+        </div><!-- End Section Title -->
+  
+        <div class="container">
+  
+          <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+  
+            <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-events">Events</li>
+              <li data-filter=".filter-collaborations">Collaborations</li>
+              <li data-filter=".filter-web">Webinars/Workshops</li>
+              <li data-filter=".filter-partnership">Partnerships</li>
+              <li data-filter=".filter-initiatives">Initiatives</li>
+            </ul><!-- End Portfolio Filters -->
+  
+            <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+  
+              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-events">
+                <img src="/assets/img/blog-test-image/blog-1.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>COMSA Year End Party</h4>
+                  <p>Event</p>
+                  <a href="/assets/img/blog-test-image/blog-1.png" title="COMSA YEP: Tech Crews, First Quest" data-gallery="portfolio-gallery-events" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div><!-- End Portfolio Item -->
+  
+              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-collaborations" style="width: auto;">
+                <img src="/assets/img/blog-test-image/blog-2.png" class="img-fluid" alt="" >
+                <div class="portfolio-info">
+                  <h4>CCS Extension</h4>
+                  <p>Collaborations</p>
+                  <a href="/assets/img/blog-test-image/blog-2.png" title="CCS Extension: Gawad Kalinga" data-gallery="portfolio-gallery-collaborations" class="glightbox preview-link"><i class="bi bi-zoom-in" ></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-partnership">
+                <img src="/assets/img/blog-test-image/blog-3.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>CS Expo 2024</h4>
+                  <p>Partnerships</p>
+                  <a href="/assets/img/blog-test-image/blog-3.png" title="CS Expo 2024: Unveiling New Possibilities and Creating New Realities" data-gallery="portfolio-gallery-partnerships" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div><!-- End Portfolio Item -->
+  
+              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-web" >
+                <img src="/assets/img/blog-test-image/blog-4.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Sample</h4>
+                  <p>Sample Description</p>
+                  <a href="/assets/img/blog-test-image/blog-4.png" title="Webinar/Workshop Sample" data-gallery="portfolio-gallery-web" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-initiatives">
+                <img src="/assets/img/blog-test-image/blog-5.png" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Donation Drive</h4>
+                  <p>Initiatives</p>
+                  <a href="/assets/img/blog-test-image/blog-5.png" title="Donation Drive: Typhoon Kristine" data-gallery="portfolio-gallery-initiatives" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div><!-- End Portfolio Item -->
+
+              
+
+
+  
+  
+            </div><!-- End Portfolio Container -->
+  
+          </div>
+  
+        </div>
+  
+      </section><!-- /Portfolio Section -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container">
+      <h3 class="sitename">COMSA-NOW</h3>
+      <p>Computer Science Student Association</p>
+      <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-facebook"></i></a>
+        <a href=""><i class="bi bi-instagram"></i></a>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright</span> <strong class="px-1 sitename">Computer Science Student Association</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+  <script src="/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  
+  <!-- FullCalendar JS -->
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+  
+  <!-- Main JS File -->
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/main-calendar.js"></script>
+  <script src="/assets/js/search.js"></script>
+
+</body>
+</html>
