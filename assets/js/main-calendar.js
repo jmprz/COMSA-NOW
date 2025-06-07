@@ -17,7 +17,7 @@
         /////////////////////////////////////////////////
         //             --img-> 800x400--
         /////////////////////////////////////////////////
-          coverImage: 'assets/img/events/haha-testin.png',
+          coverImage: '/assets/img/events/haha-testin.png',
         
         /////////////////////////////////////////////////
         //             --Sample data--
@@ -151,10 +151,12 @@
               <div class="event-material">
                 <h5>${material.title}</h5>
                 <a href="${material.url}" target="_blank" class="btn btn-sm btn-outline-primary">
+
                   ${material.type === 'slides' ? '<i class="bi bi-file-slides"></i> View Slides' : 
                     material.type === 'pdf' ? '<i class="bi bi-file-earmark-pdf"></i> Download PDF' : 
                     material.type === 'github' ? '<i class="bi bi-github"></i> View on GitHub' : 
                     material.type === 'video' ? '<i class="bi bi-play-circle"></i> Watch Video' : 
+
                     '<i class="bi bi-link-45deg"></i> Visit Link'}
                 </a>
               </div>
@@ -175,10 +177,12 @@
               <div class="event-material">
                 <h5>${material.title}</h5>
                 <a href="${material.url}" target="_blank" class="btn btn-sm btn-outline-primary">
+
                   ${material.type === 'slides' ? '<i class="bi bi-file-slides"></i> View Slides' : 
                     material.type === 'pdf' ? '<i class="bi bi-file-earmark-pdf"></i> Download PDF' : 
                     material.type === 'github' ? '<i class="bi bi-github"></i> View on GitHub' : 
                     material.type === 'video' ? '<i class="bi bi-play-circle"></i> Watch Video' : 
+
                     '<i class="bi bi-link-45deg"></i> Visit Link'}
                 </a>
               </div>
@@ -278,7 +282,9 @@
         `;
       }
       
-      // Helper function to get event color based on type
+      // 
+      //color coding for event types
+      //
       function getEventColor(type) {
         switch(type) {
           case 'workshop': return '#7db832'; // green

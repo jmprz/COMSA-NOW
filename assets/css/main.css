@@ -35,6 +35,10 @@
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #060606; /* Used for navigation links of the dropdown items in the navigation menu. */
   --nav-dropdown-hover-color: #2b7a4e; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+
+
+  --search-dark-green-transparent: rgba(5, 90, 15, 0.493); /* Dark green with 90% opacity */
+  --slight-blur: blur(5px); /* bllur for better visual */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -256,7 +260,7 @@ h6 {
 
   .navmenu .dropdown ul li {
     min-width: 200px;
-    margin-left: 0;
+    margin-left: -5px;
   }
 
   .navmenu .dropdown ul a {
@@ -275,6 +279,7 @@ h6 {
   .navmenu .dropdown ul li:hover>a {
     background-color: transparent;
     color: var(--nav-hover-color);
+    width: 98%;
   }
 
   .navmenu .dropdown:hover>ul {
@@ -772,6 +777,17 @@ section,
   background-image:
     linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73));
 }
+.carousel-container video {
+  position: absolute;
+  top: 0;
+  width: 100vw; /* Ensure full screen width */
+  height: 100%; /* Ensure full container height */
+  object-fit: cover; /* Prevents distortion and fills the container */
+  z-index: -1;
+  filter: brightness(0.6);
+  background-image:
+    linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73));
+}
 
 .carousel-details {
   position: absolute;
@@ -969,7 +985,7 @@ section,
 }
 
 .features .nav-link.active {
-  background: var(--accent-color);
+  
   color: var(--contrast-color);
   border-color: var(--accent-color);
 }
@@ -983,13 +999,8 @@ section,
  padding-top: -100px;
 }
 
-@media (max-width: 768px) {
-  .features .nav-link i {
-    padding: 0;
-    line-height: 1;
-    font-size: 36px;
-  }
-}
+
+/*--------------------------------------------------------------*/
 
 @media (max-width: 575px) {
   .features .nav-link {
@@ -2625,3 +2636,4 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
 }
+

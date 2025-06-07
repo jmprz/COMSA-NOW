@@ -1,0 +1,237 @@
+/*--------------------------------------------------------------
+# Players Section - Enhanced Design
+--------------------------------------------------------------*/
+.creatories-details {
+  --player-card-radius: 12px;
+  --player-card-padding: 30px;
+  --player-img-radius: 8px;
+  --player-transition: all 0.4s ease;
+}
+
+/* Player Navigation Box */
+.creatories-details .creatories-box {
+  background-color: var(--surface-color);
+  padding: 25px;
+
+  border-radius: var(--player-card-radius);
+  border-left: 4px solid var(--accent-color);
+  transition: var(--player-transition);
+}
+
+.creatories-details .creatories-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.creatories-details .creatories-box h4 {
+  font-family: var(--heading-font);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--heading-color);
+  border-bottom: 2px solid color-mix(in srgb, var(--accent-color), transparent 80%);
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Player List Items */
+.creatories-details .creatoriess-list {
+  background-color: transparent;
+}
+
+.creatories-details .creatoriess-list a {
+  color: var(--default-color);
+  background-color: color-mix(in srgb, var(--accent-color), transparent 95%);
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  margin-top: 12px;
+  border-radius: 6px;
+  transition: var(--player-transition);
+  font-family: var(--nav-font);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.creatories-details .creatoriess-list a:first-child {
+  margin-top: 0;
+}
+
+.creatories-details .creatoriess-list a i {
+  font-size: 18px;
+  margin-right: 12px;
+  color: var(--accent-color);
+  transition: var(--player-transition);
+}
+
+.creatories-details .creatoriess-list a.active {
+  color: var(--contrast-color);
+  background-color: var(--accent-color);
+  box-shadow: 0 5px 15px color-mix(in srgb, var(--accent-color), transparent 60%);
+}
+
+.creatories-details .creatoriess-list a.active i {
+  color: var(--contrast-color);
+  transform: rotate(45deg);
+}
+
+.creatories-details .creatoriess-list a:hover:not(.active) {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+  color: var(--accent-color);
+  transform: translateX(5px);
+}
+
+/* Player Content Section */
+.playir > div {
+  background-color: var(--surface-color);
+  padding: 30px;
+  border-radius: var(--player-card-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  transition: var(--player-transition);
+  width: auto;
+}
+
+.playir > div:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.creatories-details .creatoriess-img {
+  border-radius: var(--player-img-radius);
+  margin-bottom: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: var(--player-transition);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  width: 0px;
+}
+
+
+.creatories-details h3 {
+  font-family: var(--heading-font);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.creatories-details h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--accent-color);
+}
+
+.creatories-details p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin-bottom: 20px;
+}
+
+.creatories-details ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 25px;
+}
+
+.creatories-details ul li {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.creatories-details ul i {
+  font-size: 22px;
+  margin-right: 10px;
+  color: var(--accent-color);
+}
+
+/* Download Catalog Box */
+.creatories-details .download-catalog {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 95%);
+  border-radius: var(--player-card-radius);
+  padding: 15px 20px;
+}
+
+.creatories-details .download-catalog a {
+  color: var(--default-color);
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  transition: var(--player-transition);
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  font-weight: 500;
+}
+
+.creatories-details .download-catalog a:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.creatories-details .download-catalog a:last-child {
+  padding-bottom: 0;
+}
+
+.creatories-details .download-catalog a i {
+  font-size: 24px;
+  margin-right: 12px;
+  color: var(--accent-color);
+  transition: var(--player-transition);
+}
+
+.creatories-details .download-catalog a:hover {
+  color: var(--accent-color);
+  transform: translateX(5px);
+}
+
+.creatories-details .download-catalog a:hover i {
+  transform: scale(1.1);
+}
+
+/* Help Box */
+.creatories-details .help-box {
+  background: linear-gradient(135deg, var(--accent-color), color-mix(in srgb, var(--accent-color), black 20%));
+  color: var(--contrast-color);
+  margin-top: 30px;
+  padding: 30px 25px;
+  border-radius: var(--player-card-radius);
+  text-align: center;
+  transition: var(--player-transition);
+}
+
+.creatories-details .help-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px color-mix(in srgb, var(--accent-color), transparent 70%);
+}
+
+.creatories-details .help-box .help-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+  color: var(--contrast-color);
+}
+
+.creatories-details .help-box h4 {
+  font-family: var(--heading-font);
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--contrast-color);
+}
+
+.creatories-details .help-box p {
+  color: var(--contrast-color);
+  opacity: 0.9;
+  margin-bottom: 15px;
+}
+
+.creatories-details .help-box a {
+  color: var(--contrast-color);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px dashed var(--contrast-color);
+}

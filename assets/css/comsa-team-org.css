@@ -1,0 +1,403 @@
+/*--------------------------------------------------------------
+# comsa-team.html 
+--------------------------------------------------------------*/
+
+    .team-category {
+      margin-bottom: 50px;
+    }
+    
+    .team-category h2 {
+      color: var(--heading-color);
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .team-category h2:after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--accent-color);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .team-member-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+      background: var(--surface-color);
+    }
+    
+    .team-member-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .member-img {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+    }
+    
+    .member-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .team-member-card:hover .member-img img {
+      transform: scale(1.1);
+    }
+    
+    .member-info {
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .member-info h4 {
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: var(--heading-color);
+    }
+    
+    .member-info span {
+      display: block;
+      font-size: 14px;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+    
+    .member-description {
+      font-size: 14px;
+      color: var(--default-color);
+      margin-top: 10px;
+    }
+    
+    .social-links {
+      margin-top: 15px;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--accent-color);
+      color: var(--contrast-color);
+      border-radius: 50%;
+      margin: 0 3px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: var(--heading-color);
+      transform: translateY(-3px);
+    }
+
+
+/*--------------------------------------------------------------
+# executive Section
+--------------------------------------------------------------*/
+.executive .executive-member {
+  background-color: var(--surface-color);
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.executive .executive-member .member-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.executive .executive-member .social {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  right: 0;
+  opacity: 0;
+  transition: ease-in-out 0.3s;
+  text-align: center;
+}
+
+.executive .executive-member .social a {
+  background: color-mix(in srgb, var(--contrast-color), transparent 25%);
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin: 0 3px;
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  transition: ease-in-out 0.3s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.executive .executive-member .social a:hover {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+}
+
+.executive .executive-member .social i {
+  font-size: 18px;
+  line-height: 0;
+}
+
+.executive .executive-member .member-info {
+  padding: 25px 15px;
+}
+
+.executive .executive-member .member-info h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.executive .executive-member .member-info span {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+.executive .executive-member:hover .social {
+  opacity: 1;
+  bottom: 15px;
+}
+
+
+/*--------------------------------------------------------------
+# Creatives Section
+--------------------------------------------------------------*/
+.Creatives .Creatives-member {
+  background-color: var(--surface-color);
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.Creatives .Creatives-member .member-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.Creatives .Creatives-member .social {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  right: 0;
+  opacity: 0;
+  transition: ease-in-out 0.3s;
+  text-align: center;
+}
+
+.Creatives .Creatives-member .social a {
+  background: color-mix(in srgb, var(--contrast-color), transparent 25%);
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin: 0 3px;
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  transition: ease-in-out 0.3s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Creatives .Creatives-member .social a:hover {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+}
+
+.Creatives .Creatives-member .social i {
+  font-size: 18px;
+  line-height: 0;
+}
+
+.Creatives .Creatives-member .member-info {
+  padding: 25px 15px;
+}
+
+.Creatives .Creatives-member .member-info h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.Creatives .Creatives-member .member-info span {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+.Creatives .Creatives-member:hover .social {
+  opacity: 1;
+  bottom: 15px;
+}
+
+/*--------------------------------------------------------------
+# sbdg Section
+--------------------------------------------------------------*/
+.sbdg .sbdg-member {
+  background-color: var(--surface-color);
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.sbdg .sbdg-member .member-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.sbdg .sbdg-member .social {
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  right: 0;
+  opacity: 0;
+  transition: ease-in-out 0.3s;
+  text-align: center;
+}
+
+.sbdg .sbdg-member .social a {
+  background: color-mix(in srgb, var(--contrast-color), transparent 25%);
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin: 0 3px;
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  transition: ease-in-out 0.3s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sbdg .sbdg-member .social a:hover {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+}
+
+.sbdg .sbdg-member .social i {
+  font-size: 18px;
+  line-height: 0;
+}
+
+.sbdg .sbdg-member .member-info {
+  padding: 25px 15px;
+}
+
+.sbdg .sbdg-member .member-info h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.sbdg .sbdg-member .member-info span {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+.sbdg .sbdg-member:hover .social {
+  opacity: 1;
+  bottom: 15px;
+}
+
+@media (max-width: 575px) {
+  /* Team Category */
+  .team-category {
+    margin-bottom: 30px;
+  }
+  
+  .team-category h2 {
+    font-size: 24px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Team Member Card - Full Width */
+  .team-member-card,
+  .executive .executive-member,
+  .Creatives .Creatives-member,
+  .sbdg .sbdg-member {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  
+  .member-img {
+    height: 250px;
+  }
+  
+  .member-info {
+    padding: 15px;
+  }
+  
+  .member-info h4 {
+    font-size: 18px;
+  }
+  
+  .member-info span {
+    font-size: 13px;
+  }
+  
+  .member-description {
+    font-size: 13px;
+  }
+  
+  /* Executive Section */
+  .executive .executive-member .member-info {
+    padding: 15px;
+  }
+  
+  .executive .executive-member .member-info h4 {
+    font-size: 18px;
+  }
+  
+  /* Creatives Section */
+  .Creatives .Creatives-member .member-info {
+    padding: 15px;
+  }
+  
+  /* SBDG Section */
+  .sbdg .sbdg-member .member-info {
+    padding: 15px;
+  }
+  
+  /* Social Links */
+  .social-links a,
+  .executive .executive-member .social a,
+  .Creatives .Creatives-member .social a,
+  .sbdg .sbdg-member .social a {
+    width: 30px;
+    height: 30px;
+    margin: 0 3px;
+  }
+  
+  .social-links {
+    margin-top: 10px;
+  }
+  
+  /* Adjust hover effects for mobile */
+  .team-member-card:hover,
+  .executive .executive-member:hover,
+  .Creatives .Creatives-member:hover,
+  .sbdg .sbdg-member:hover {
+    transform: none;
+  }
+}
