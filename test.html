@@ -1,0 +1,431 @@
+<!-- Updated Hero Section -->
+<section id="hero" class="hero section">
+  <div id="threejs-container"></div>
+  <div class="hero-content" data-aos="fade-up">
+  </div>
+</section>
+<style>
+/* Updated Hero CSS */
+#hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+#threejs-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  color: white;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  width: 90%;
+  max-width: 1200px;
+}
+
+.hero-content h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-content h2 span {
+  color: #7db832;
+}
+
+.hero-content p {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  margin: 0 auto 30px;
+  max-width: 800px;
+}
+
+.btn-get-started {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #7db832;
+  color: white;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.btn-get-started:hover {
+  background: #6aa32b;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Note tooltip styles */
+.note-tooltip {
+  position: absolute;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 100;
+  max-width: 200px;
+  font-size: 14px;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+
+<script>
+
+</script>
+<script>
+    // Enhanced Three.js Implementation
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if WebGL is supported
+  if (!WEBGL.isWebGLAvailable()) {
+    const warning = WEBGL.getWebGLErrorMessage();
+    document.getElementById('threejs-container').appendChild(warning);
+    return;
+  }
+
+  // Scene setup
+  const container = document.getElementById('threejs-container');
+  const scene = new THREE.Scene();
+  
+  // Camera setup
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 10;
+  
+  // Renderer setup
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  container.appendChild(renderer.domElement);
+  
+  // Create universe background
+  createUniverseBackground();
+  
+  // Create central logo
+  const logo = createLogo();
+  scene.add(logo);
+  
+  // Create floating notes
+  const notes = createFloatingNotes();
+  notes.forEach(note => scene.add(note.mesh));
+  
+  // Mouse interaction variables
+  let isDragging = false;
+  let previousMousePosition = { x: 0, y: 0 };
+  let targetRotation = { x: 0, y: 0 };
+  let currentRotation = { x: 0, y: 0 };
+  
+  // Scroll interaction variables
+  let scrollY = 0;
+  let targetCameraZ = 10;
+  
+  // Note hover effect
+  const noteTooltip = document.createElement('div');
+  noteTooltip.className = 'note-tooltip';
+  document.body.appendChild(noteTooltip);
+  
+  // Event listeners
+  setupEventListeners();
+  
+  // Animation loop
+  animate();
+  
+  // Helper functions
+  function createUniverseBackground() {
+    // Create stars
+    const starsGeometry = new THREE.BufferGeometry();
+    const starsMaterial = new THREE.PointsMaterial({
+      color: 0xFFFFFF,
+      size: 0.1,
+      transparent: true
+    });
+    
+    const starsVertices = [];
+    for (let i = 0; i < 10000; i++) {
+      const x = (Math.random() - 0.5) * 2000;
+      const y = (Math.random() - 0.5) * 2000;
+      const z = (Math.random() - 0.5) * 2000;
+      starsVertices.push(x, y, z);
+    }
+    
+    starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+    const stars = new THREE.Points(starsGeometry, starsMaterial);
+    scene.add(stars);
+    
+    // Add some distant galaxies or nebulae
+    const galaxyGeometry = new THREE.SphereGeometry(50, 32, 32);
+    const galaxyMaterial = new THREE.MeshBasicMaterial({
+      color: 0x1a2b6d,
+      transparent: true,
+      opacity: 0.3
+    });
+    const galaxy = new THREE.Mesh(galaxyGeometry, galaxyMaterial);
+    galaxy.position.set(100, -50, -300);
+    scene.add(galaxy);
+  }
+  
+  function createLogo() {
+    const logoGeometry = new THREE.SphereGeometry(1, 32, 32);
+    const logoTexture = new THREE.TextureLoader().load('assets/img/logo.png');
+    const logoMaterial = new THREE.MeshPhongMaterial({
+      map: logoTexture,
+      transparent: true,
+      shininess: 100
+    });
+    
+    const logo = new THREE.Mesh(logoGeometry, logoMaterial);
+    
+    // Add glow effect
+    const glowGeometry = new THREE.SphereGeometry(1.1, 32, 32);
+    const glowMaterial = new THREE.MeshBasicMaterial({
+      color: 0x7db832,
+      transparent: true,
+      opacity: 0.3
+    });
+    const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+    logo.add(glow);
+    
+    // Add pulsing animation
+    logo.userData.pulseDirection = 1;
+    logo.userData.pulseSpeed = 0.005;
+    
+    return logo;
+  }
+  
+  function createFloatingNotes() {
+    const notes = [];
+    const noteCount = 16;
+    const baseRadius = 4;
+    
+    // Sample note data - replace with your actual content
+    const noteContents = [
+      "COMSA Year End Party",
+      "CSS Extension Program",
+      "CS Expo 2024",
+      "Donation Drive",
+      "Tech Workshops",
+      "Hackathon 2023",
+      "Alumni Meet",
+      "Orientation Program",
+      "Coding Competition",
+      "Faculty Interaction",
+      "Industry Visit",
+      "Sports Day",
+      "Cultural Fest",
+      "Seminar Series",
+      "Project Showcase",
+      "Community Service"
+    ];
+    
+    const noteTexture = new THREE.TextureLoader().load('assets/img/note-icon.png');
+    
+    for (let i = 0; i < noteCount; i++) {
+      // Create note geometry (using a simple plane for now)
+      const noteGeometry = new THREE.PlaneGeometry(0.8, 0.8);
+      const noteMaterial = new THREE.MeshBasicMaterial({
+        map: noteTexture,
+        transparent: true,
+        side: THREE.DoubleSide
+      });
+      
+      const noteMesh = new THREE.Mesh(noteGeometry, noteMaterial);
+      
+      // Position notes in a spherical pattern around the logo
+      const radius = baseRadius + Math.random() * 2;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.random() * Math.PI;
+      
+      noteMesh.position.x = radius * Math.sin(phi) * Math.cos(theta);
+      noteMesh.position.y = radius * Math.sin(phi) * Math.sin(theta);
+      noteMesh.position.z = radius * Math.cos(phi);
+      
+      // Make notes face outward
+      noteMesh.lookAt(new THREE.Vector3(0, 0, 0));
+      
+      // Add some random rotation for visual interest
+      noteMesh.userData = {
+        originalPosition: noteMesh.position.clone(),
+        speed: 0.2 + Math.random() * 0.3,
+        angle: Math.random() * Math.PI * 2,
+        radius: 0.5 + Math.random(),
+        content: noteContents[i]
+      };
+      
+      notes.push({
+        mesh: noteMesh,
+        content: noteContents[i]
+      });
+    }
+    
+    return notes;
+  }
+  
+  function setupEventListeners() {
+    // Mouse down
+    container.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      previousMousePosition = {
+        x: e.clientX,
+        y: e.clientY
+      };
+    });
+    
+    // Mouse move
+    container.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const deltaMove = {
+          x: e.clientX - previousMousePosition.x,
+          y: e.clientY - previousMousePosition.y
+        };
+        
+        targetRotation.y += deltaMove.x * 0.01;
+        targetRotation.x += deltaMove.y * 0.01;
+        
+        previousMousePosition = {
+          x: e.clientX,
+          y: e.clientY
+        };
+      }
+      
+      // Raycasting for note hover
+      const mouse = new THREE.Vector2(
+        (e.clientX / window.innerWidth) * 2 - 1,
+        -(e.clientY / window.innerHeight) * 2 + 1
+      );
+      
+      const raycaster = new THREE.Raycaster();
+      raycaster.setFromCamera(mouse, camera);
+      
+      const intersects = raycaster.intersectObjects(notes.map(note => note.mesh));
+      
+      if (intersects.length > 0) {
+        const note = notes.find(n => n.mesh === intersects[0].object);
+        if (note) {
+          noteTooltip.textContent = note.content;
+          noteTooltip.style.left = `${e.clientX + 10}px`;
+          noteTooltip.style.top = `${e.clientY + 10}px`;
+          noteTooltip.style.opacity = '1';
+        }
+      } else {
+        noteTooltip.style.opacity = '0';
+      }
+    });
+    
+    // Mouse up
+    container.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+    
+    // Mouse leave
+    container.addEventListener('mouseleave', () => {
+      isDragging = false;
+      noteTooltip.style.opacity = '0';
+    });
+    
+    // Touch events for mobile
+    container.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      previousMousePosition = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY
+      };
+      e.preventDefault();
+    });
+    
+    container.addEventListener('touchmove', (e) => {
+      if (isDragging) {
+        const deltaMove = {
+          x: e.touches[0].clientX - previousMousePosition.x,
+          y: e.touches[0].clientY - previousMousePosition.y
+        };
+        
+        targetRotation.y += deltaMove.x * 0.01;
+        targetRotation.x += deltaMove.y * 0.01;
+        
+        previousMousePosition = {
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY
+        };
+      }
+      e.preventDefault();
+    });
+    
+    container.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+    
+    // Scroll event
+    window.addEventListener('scroll', () => {
+      scrollY = window.scrollY;
+      targetCameraZ = 10 + scrollY * 0.05;
+    });
+    
+    // Window resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  }
+  
+  function animate() {
+    requestAnimationFrame(animate);
+    
+    // Smooth rotation
+    currentRotation.x += (targetRotation.x - currentRotation.x) * 0.05;
+    currentRotation.y += (targetRotation.y - currentRotation.y) * 0.05;
+    
+    // Apply rotation to scene
+    scene.rotation.x = currentRotation.x;
+    scene.rotation.y = currentRotation.y;
+    
+    // Smooth camera zoom
+    camera.position.z += (targetCameraZ - camera.position.z) * 0.1;
+    
+    // Animate logo pulse
+    const logo = scene.children.find(child => child.userData.pulseDirection !== undefined);
+    if (logo) {
+      const scale = logo.scale.x + (logo.userData.pulseSpeed * logo.userData.pulseDirection);
+      
+      if (scale > 1.1 || scale < 0.9) {
+        logo.userData.pulseDirection *= -1;
+      }
+      
+      logo.scale.set(scale, scale, scale);
+    }
+    
+    // Animate floating notes
+    notes.forEach(note => {
+      const time = Date.now() * 0.001;
+      const noteMesh = note.mesh;
+      const userData = noteMesh.userData;
+      
+      noteMesh.position.x = userData.originalPosition.x + Math.cos(time * userData.speed + userData.angle) * userData.radius;
+      noteMesh.position.y = userData.originalPosition.y + Math.sin(time * userData.speed * 1.3 + userData.angle) * userData.radius;
+      noteMesh.position.z = userData.originalPosition.z + Math.sin(time * userData.speed * 0.7 + userData.angle) * userData.radius;
+      
+      noteMesh.lookAt(camera.position);
+    });
+    
+    renderer.render(scene, camera);
+  }
+});
+</script>
