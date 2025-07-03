@@ -1,0 +1,115 @@
+
+
+
+
+
+
+/* Enhanced Current Events Modal Styles */
+#comsaEventsModal .modal-content {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  
+}
+
+#comsaEventsModal .modal-header {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-bottom: none;
+}
+
+#comsaEventsModal .modal-title {
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+#comsaEventsModal .modal-body {
+      background-color: var(--accent-color);
+
+  padding: 0;
+}
+
+#comsaEventsModal .carousel-inner {
+  border-radius: 0;
+  max-height: 60vh;
+}
+
+#comsaEventsModal .carousel-item img {
+  object-fit: cover;
+  height: 100%;
+  min-height: 300px;
+}
+
+#comsaEventsModal .carousel-caption {
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2rem;
+  text-align: left;
+  height: auto;
+}
+
+#comsaEventsModal .carousel-caption h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+#comsaEventsModal .carousel-caption p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  max-width: 80%;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8), 
+              -1px -1px 3px rgba(0, 0, 0, 0.4);
+}
+
+#comsaEventsModal .carousel-control-prev,
+#comsaEventsModal .carousel-control-next {
+  width: auto;
+}
+
+#comsaEventsModal .carousel-control-prev-icon,
+#comsaEventsModal .carousel-control-next-icon {
+  background-size: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  opacity: 0.9;
+}
+
+#comsaEventsModal .modal-footer {
+  padding: 1rem 1.5rem;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+#comsaEventsModal .form-switch .form-check-input {
+  width: 2.5em;
+  height: 1.5em;
+  margin-right: 0.5em;
+}
+
+#comsaEventsModal .btn-accent {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  font-weight: 500;
+}
+
+#comsaEventsModal .btn-accent:hover {
+  background-color: color-mix(in srgb, var(--accent-color), black 15%);
+}
+
+#comsaEventsModal .badge {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.35em 0.65em;
+  align-self: flex-start;
+}

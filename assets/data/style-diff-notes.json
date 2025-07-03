@@ -1,0 +1,43 @@
+
+        const notesData = [
+            {
+                title: "Company Mission",
+                content: "To innovate and deliver exceptional value to our customers through cutting-edge technology and outstanding service.",
+                color: "#3498db",
+                position: { x: -10, y: 5, z: 10 },
+                icon: "★",
+                borderColor: "#2980b9"
+            },
+            {
+                title: "Upcoming Events",
+                content: "• Q2 Planning Meeting - June 20\n• Team Building - June 25\n• Product Launch - July 10",
+                color: "#2ecc71",
+                position: { x: 12, y: 3, z: -8 },
+                icon: "📅",
+                borderColor: "#27ae60"
+            },
+            {
+                title: "Core Values",
+                content: "1. Integrity\n2. Innovation\n3. Customer Focus\n4. Teamwork\n5. Excellence",
+                color: "#f1c40f",
+                position: { x: -5, y: -7, z: -12 },
+                icon: "❤️",
+                borderColor: "#f39c12"
+            },
+            {
+                title: "Employee Spotlight",
+                content: "This month we recognize Sarah Johnson for her outstanding work on the new client portal!",
+                color: "#9b59b6",
+                position: { x: 15, y: -2, z: 5 },
+                icon: "👏",
+                borderColor: "#8e44ad"
+            },
+            {
+                title: "Tech Update",
+                content: "New software tools coming next week:\n• Project management v3.2\n• CRM integration\n• Analytics dashboard",
+                color: "#e74c3c",
+                position: { x: -8, y: 8, z: -5 },
+                icon: "💻",
+                borderColor: "#c0392b"
+            }
+        ]
