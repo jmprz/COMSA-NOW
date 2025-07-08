@@ -1,0 +1,140 @@
+const comsaAuthSystem = (function() {
+  // Private variables
+  const loginModal = document.getElementById('comsaLoginModal');
+  const forgotModal = document.getElementById('comsaForgotModal');
+  const successModal = document.getElementById('comsaSuccessModal');
+  const loginForm = document.getElementById('comsaLoginForm');
+  const forgotForm = document.getElementById('comsaForgotForm');
+  const showForgotModalBtn = document.getElementById('comsaShowForgotModal');
+  const showLoginModalBtn = document.getElementById('comsaShowLoginModal');
+  
+  // Initialize the system
+  function init() {
+    // Password toggle functionality
+    const passwordToggle = loginForm.querySelector('.comsa-password-toggle');
+    const passwordInput = document.getElementById('comsaLoginPassword');
+    
+    passwordToggle.addEventListener('click', function() {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      this.querySelector('i').classList.toggle('bi-eye');
+      this.querySelector('i').classList.toggle('bi-eye-slash');
+    });
+    
+    // Login form submission
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (this.checkValidity()) {
+        const submitBtn = this.querySelector('.comsa-auth-btn');
+        const btnText = submitBtn.querySelector('.comsa-btn-text');
+        const btnSpinner = submitBtn.querySelector('.comsa-btn-spinner');
+        
+        // Show loading state
+        btnText.classList.add('d-none');
+        btnSpinner.classList.remove('d-none');
+        submitBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+          // Handle successful login
+          const loginModalInstance = bootstrap.Modal.getInstance(loginModal);
+          loginModalInstance.hide();
+          
+          // Reset form
+          btnText.classList.remove('d-none');
+          btnSpinner.classList.add('d-none');
+          submitBtn.disabled = false;
+          this.classList.remove('was-validated');
+          this.reset();
+          
+          // Show success message (in real app, you would redirect)
+          alert('Login successful! Welcome back.');
+        }, 1500);
+      }
+      
+      this.classList.add('was-validated');
+    }, false);
+    
+    // Forgot password form submission
+    forgotForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (this.checkValidity()) {
+        const submitBtn = this.querySelector('.comsa-auth-btn');
+        const btnText = submitBtn.querySelector('.comsa-btn-text');
+        const btnSpinner = submitBtn.querySelector('.comsa-btn-spinner');
+        
+        // Show loading state
+        btnText.classList.add('d-none');
+        btnSpinner.classList.remove('d-none');
+        submitBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+          // Show success modal
+          const forgotModalInstance = bootstrap.Modal.getInstance(forgotModal);
+          forgotModalInstance.hide();
+          
+          const successModalInstance = new bootstrap.Modal(successModal);
+          successModalInstance.show();
+          
+          // Reset form
+          btnText.classList.remove('d-none');
+          btnSpinner.classList.add('d-none');
+          submitBtn.disabled = false;
+          this.classList.remove('was-validated');
+          this.reset();
+        }, 1500);
+      }
+      
+      this.classList.add('was-validated');
+    }, false);
+    
+    // Toggle between login and forgot modals
+    showForgotModalBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const loginModalInstance = bootstrap.Modal.getInstance(loginModal);
+      loginModalInstance.hide();
+      
+      const forgotModalInstance = new bootstrap.Modal(forgotModal);
+      forgotModalInstance.show();
+    });
+    
+    showLoginModalBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const forgotModalInstance = bootstrap.Modal.getInstance(forgotModal);
+      forgotModalInstance.hide();
+      
+      const loginModalInstance = new bootstrap.Modal(loginModal);
+      loginModalInstance.show();
+    });
+  }
+  
+  // Public methods
+  return {
+    init: init,
+    showLogin: function() {
+      const modal = new bootstrap.Modal(loginModal);
+      modal.show();
+    },
+    showForgot: function() {
+      const modal = new bootstrap.Modal(forgotModal);
+      modal.show();
+    }
+  };
+})();
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', comsaAuthSystem.init);
+
+// Example of how to trigger the modals from other elements
+// document.querySelector('.login-trigger').addEventListener('click', function() {
+//   comsaAuthSystem.showLogin();
+// });
+
+// document.querySelector('.forgot-trigger').addEventListener('click', function() {
+//   comsaAuthSystem.showForgot();
+// });
