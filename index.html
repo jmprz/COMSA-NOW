@@ -27,7 +27,8 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-   <link rel="stylesheet" href="assets/css/search.css">
+  <link rel="stylesheet" href="assets/css/login-form.css">
+  <link rel="stylesheet" href="assets/css/search.css">
   <link href="assets/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- =======================================================
@@ -104,18 +105,11 @@
                   
                 </ul></li>
 
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul></li>
+              <li><a href="#" data-bs-toggle="modal" data-bs-target="#comsaLoginModal"><span>Login</span></a></li>
 
               <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="features/student-dashboard.html">student dashboard</a></li>
                   <li><a href="#">Deep Dropdown 2</a></li>
                   <li><a href="#">Deep Dropdown 3</a></li>
                   <li><a href="#">Deep Dropdown 4</a></li>
@@ -307,40 +301,12 @@
     </section><!-- /About Section -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Current Events Modal Carousel -->
 <div id="comsaEventsModal" class="modal fade" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-accent text-white">
         <h5 class="modal-title fw-bold"><i class="bi bi-calendar-event me-2"></i>Current Events & Announcements</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-0">
         <div id="comsaEventsCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -369,12 +335,6 @@
         </div>
       </div>
       <div class="modal-footer bg-light">
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" role="switch" id="comsaDontShowAgain">
-          <label class="form-check-label" for="comsaDontShowAgain">
-            Don't show this again
-          </label>
-        </div>
         <button type="button" class="btn btn-accent" data-bs-dismiss="modal">
           <i class="bi bi-check-circle me-1"></i> Got it!
         </button>
@@ -887,6 +847,220 @@
 
   </main>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- COMSA Auth System -->
+<div id="comsaAuthSystem">
+  <!-- Login Modal -->
+  <div id="comsaLoginModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered comsa-auth-modal">
+      <div class="modal-content overflow-hidden">
+        <!-- Animated Background -->
+        <div class="comsa-auth-bg"></div>
+        
+        <!-- Close Button -->
+        <button type="button" class="btn-close comsa-auth-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+        
+        <div class="modal-body p-0">
+          <div class="row g-0">
+            <!-- Left Side - Graphic -->
+            <div class="col-lg-6 d-none d-lg-flex comsa-auth-graphic">
+              <div class="comsa-auth-overlay"></div>
+              <div class="position-relative p-5 h-100 d-flex flex-column justify-content-between">
+                <div>
+                  <img src="assets/img/logo.png" alt="COMSA Logo" class="comsa-auth-logo mb-4">
+                  <h3 class="text-white mb-3">Welcome Back!</h3>
+                  <p class="text-white-50">Sign in to access your COMSA member dashboard and exclusive content.</p>
+                </div>
+                <div class="comsa-auth-social">
+                  <p class="text-white-50 mb-3">Note: <br> For the new students, <br> Forget Password if you we're new.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Side - Form -->
+            <div class="col-lg-6 comsa-auth-form">
+              <div class="p-4 p-md-5">
+                <div class="text-center mb-5">
+                  <h3 class="comsa-auth-title">Member Login</h3>
+                  <p class="text-muted">Enter your credentials to continue</p>
+                </div>
+                
+                <form id="comsaLoginForm" novalidate>
+                  <div class="mb-4">
+                    <label for="comsaLoginEmail" class="form-label">Email Address</label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                      <input type="email" class="form-control comsa-input" id="comsaLoginEmail" placeholder="your.bscs@email.com" required>
+                      <div class="invalid-feedback">Please enter a valid email address</div>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label for="comsaLoginPassword" class="form-label">Password</label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                      <input type="password" class="form-control comsa-input" id="comsaLoginPassword" placeholder="••••••••" required>
+                      <button class="btn btn-outline-secondary comsa-password-toggle" type="button">
+                        <i class="bi bi-eye"></i>
+                      </button>
+                      <div class="invalid-feedback">Please enter your password</div>
+                    </div>
+                  </div>
+                  
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="comsaRemember">
+                      <label class="form-check-label" for="comsaRemember">Remember me</label>
+                    </div>
+                    <a href="#" class="text-decoration-none comsa-forgot-link" id="comsaShowForgotModal">Forgot password?</a>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary w-100 comsa-auth-btn mb-3">
+                    <span class="comsa-btn-text">Login</span>
+                    <span class="comsa-btn-spinner d-none">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      <span class="visually-hidden">Loading...</span>
+                    </span>
+                  </button>
+                  
+                  <div class="text-center mt-4">
+                    <p class="text-muted">Continue as a guest and check-out some cool<br>
+                       <a href="#" class="comsa-prj-link">Projects.</a></p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="comsaForgotModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered comsa-auth-modal comsa-forgot-modal">
+      <div class="modal-content overflow-hidden">
+        <!-- Animated Background -->
+        <div class="comsa-auth-bg"></div>
+        
+        <!-- Close Button -->
+        <button type="button" class="btn-close comsa-auth-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        
+        <div class="modal-body p-0">
+          <div class="row g-0">
+            <!-- Left Side - Graphic -->
+            <div class="col-lg-6 d-none d-lg-flex comsa-auth-graphic">
+              <div class="comsa-auth-overlay"></div>
+              <div class="position-relative p-5 h-100 d-flex flex-column justify-content-center">
+                <div>
+                  <img src="assets/img/logo.png" alt="COMSA Logo" class="comsa-auth-logo mb-4">
+                  <h3 class="text-white mb-3">Reset Your Password</h3>
+                  <p class="text-white-50">Enter your email to receive password reset instructions.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Side - Form -->
+            <div class="col-lg-6 comsa-auth-form">
+              <div class="p-4 p-md-5">
+                <div class="text-center mb-5">
+                  <h3 class="comsa-auth-title">Password Recovery</h3>
+                  <p class="text-muted">We'll send you a link to reset your password</p>
+                </div>
+                
+                <form id="comsaForgotForm" novalidate>
+                  <div class="mb-4">
+                    <label for="comsaForgotEmail" class="form-label">Email Address</label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                      <input type="email" class="form-control comsa-input" id="comsaForgotEmail" placeholder="your@email.com" required>
+                      <div class="invalid-feedback">Please enter a valid email address</div>
+                    </div>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary w-100 comsa-auth-btn mb-3">
+                    <span class="comsa-btn-text">Send Reset Link</span>
+                    <span class="comsa-btn-spinner d-none">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      <span class="visually-hidden">Loading...</span>
+                    </span>
+                  </button>
+                  
+                  <div class="text-center mt-4">
+                    <p class="text-muted">Remember your password? <a href="#" class="comsa-login-link" id="comsaShowLoginModal">Login here</a></p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Message Modal -->
+  <div id="comsaSuccessModal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered comsa-success-modal">
+      <div class="modal-content">
+        <div class="modal-body text-center p-5">
+          <div class="comsa-success-icon mb-4">
+            <i class="bi bi-check-circle-fill"></i>
+          </div>
+          <h4 class="comsa-success-title mb-3">Email Sent!</h4>
+          <p class="comsa-success-text mb-4">We've sent a password reset link to your email address. Please check your inbox and follow the instructions.</p>
+          <button type="button" class="btn btn-primary comsa-success-btn" data-bs-dismiss="modal">
+            Got it!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <footer id="footer" class="footer dark-background">
     <div class="container">
       <h3 class="sitename">COMSA-NOW</h3>
@@ -931,6 +1105,7 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/search.js"></script>
   <script src="assets/js/slide-show-updates.js"></script>
+  <script src="assets/js/comsa-auth.js"></script>
 
 </body>
 
