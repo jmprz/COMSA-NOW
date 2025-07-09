@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
    * fanktion for seaching and collecting  into data it's either data from getDefaultSearchData() || fetched from JSON file
    * it's like using if statement but (then is used) if response||searched is ok then goods to go else throw new errror
    * then data must have or used by http && / && # to take the item with than corresponded link.
-   * 
+   * n
    * if the JSON didn't work the the getDefaultSearchData() is used as seachdata (\_* *_/)
    */
   function loadSearchData() {
