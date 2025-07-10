@@ -88,6 +88,8 @@ body {
   font-weight: 500;
 }
 
+
+
 /* icon*/
 .side-nav-menu i {
   font-size: 18px;
@@ -140,8 +142,8 @@ body {
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 25px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
-  border: 1px solid var(--accent-color);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+
 }
 
 /* Profile Card */

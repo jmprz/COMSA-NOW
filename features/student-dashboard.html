@@ -13,11 +13,13 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
   <link rel="manifest" href="/assets/img/favicon/site.webmanifest">
-  
+
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -31,7 +33,7 @@
   <link href="/assets/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/login-form.css">
   <link rel="stylesheet" href="/assets/css/search.css">
-    <link rel="stylesheet" href="/assets/css/student-dash.css">
+  <link rel="stylesheet" href="/assets/css/student-dash.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
@@ -43,7 +45,7 @@
       <img src="/assets/img/logo.png" alt="COMSA Logo">
       <h3>COMSA-NOW</h3>
     </div>
-    
+
     <div class="side-nav-menu">
       <ul>
         <li class="active">
@@ -59,29 +61,29 @@
           </a>
         </li>
         <li>
-          <a href="/features/achivement-studs.html">
-            <i class="bi bi-award"></i>
-            <span>Achievements</span>
+          <a href="#" id="search-toggle">
+            <i class="bi bi-search"></i>
+            <span style="color: black;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;">Search</span>
           </a>
+            <style>
+            #search-toggle:hover {
+              background-color: green;
+            }
+            #search-toggle:hover span {
+              color: white !important;
+            }
+          </style>
         </li>
         <li>
-          <a href="#">
-            <i class="bi bi-calendar-event"></i>
-            <span>Events</span>
+          <a href="#" id="createPostTrigger">
+            <i class="bi bi-patch-plus"></i>
+            <span>create</span>
           </a>
         </li>
-        <li>
-          <a href="#">
-            <i class="bi bi-chat-left-text"></i>
-            <span>Messages</span>
-          </a>
-        </li>
-<li>
-  <a href="#" id="createPostTrigger">
-    <i class="bi bi-patch-plus"></i>
-    <span>create</span>
-  </a>
-</li>
         <li>
           <a href="/features/settings-studs.html">
             <i class="bi bi-gear"></i>
@@ -90,11 +92,22 @@
         </li>
       </ul>
     </div>
-    
+
     <div class="side-nav-footer">
       Experimental Nav
     </div>
+
+    <!-- Search modal -->
   </div>
+  <div class="search-popup">
+    <div class="search-container">
+      <div class="search-input-container">
+        <input type="text" placeholder="Search..." class="search-input">
+        <button class="search-button"><i class="bi bi-search"></i></button>
+      </div>
+    </div>
+  </div>  <!-- search modal end -->
+
 
   <!-- Main Content -->
   <div class="main-content d-flex justify-content-center">
@@ -105,14 +118,14 @@
         <div class="post-header">
           <img src="/assets/img/team/sampleTeam.jpg" class="post-avatar" alt="User Avatar">
           <div class="d-flex row gy-0">
-          <p class="post-username">john_perez</p>
-          <p class="text-black-50">(date)</p>
+            <p class="post-username">john_perez</p>
+            <p class="text-black-50">(date)</p>
           </div>
           <i class="bi bi-three-dots post-more"></i>
         </div>
-        
+
         <img src="/assets/img/csexpo.jpg" class="post-image" alt="Project Image">
-        
+
         <div class="post-actions">
           <button class="post-action like-btn" data-post="1">
             <i class="bi bi-star"></i>
@@ -121,14 +134,14 @@
             <i class="bi bi-chat-left"></i>
           </button>
         </div>
-        
+
         <div class="post-likes">1,243 likes</div>
-        
+
         <div class="post-caption">
           <span class="post-caption-username">john_perez</span>
           Just launched our AI-powered campus navigation system! 🚀 #CSExpo2024 #AI #Innovation
         </div>
-        
+
         <div class="post-comments" id="comments1">
           <div class="post-comment">
             <span class="post-comment-username">sarah_tech</span>
@@ -139,15 +152,15 @@
             Great work team! 👏
           </div>
         </div>
-        
+
         <div class="post-time">2 DAYS AGO</div>
-        
+
         <div class="post-add-comment" id="addComment1">
           <input type="text" class="comment-input" placeholder="Add a comment..." data-post="1">
           <button class="comment-submit" data-post="1">Post</button>
         </div>
       </div>
-      
+
       <!-- Post 2 -->
       <div class="post-container">
         <div class="post-header">
@@ -155,9 +168,9 @@
           <span class="post-username">Eren_yeagar</span>
           <i class="bi bi-three-dots post-more"></i>
         </div>
-        
+
         <img src="/assets/img/comsayep.jpg" class="post-image" alt="Project Image">
-        
+
         <div class="post-actions">
           <button class="post-action like-btn" data-post="2">
             <i class="bi bi-star"></i>
@@ -166,30 +179,30 @@
             <i class="bi bi-chat-left"></i>
           </button>
         </div>
-        
+
         <div class="post-likes">892 likes</div>
-        
+
         <div class="post-caption">
           <span class="post-caption-username">Eren_yeagar</span>
           Our event management system is now being used by 3 student organizations! 🎉 #WebDev #StudentProjects
         </div>
-        
+
         <div class="post-comments" id="comments2">
           <div class="post-comment">
             <span class="post-comment-username">tech_guy</span>
             What stack did you use for this?
           </div>
         </div>
-        
+
         <div class="post-time">1 WEEK AGO</div>
-        
+
         <div class="post-add-comment" id="addComment2">
           <input type="text" class="comment-input" placeholder="Add a comment..." data-post="2">
           <button class="comment-submit" data-post="2">Post</button>
         </div>
       </div>
     </div>
-    
+
     <!-- Right Sidebar -->
     <div class="right-sidebar">
       <!-- Profile Card -->
@@ -201,7 +214,7 @@
             <p>Computer Science Student</p>
           </div>
         </div>
-        
+
         <div class="profile-stats">
           <div class="stat-item">
             <div class="stat-number">24</div>
@@ -217,58 +230,14 @@
           </div>
         </div>
       </div>
-      
-      <!-- Suggestions Card -->
-      <div class="sidebar-card">
-        <div class="section-header">
-          <h4>Suggestions For You</h4>
-          <a href="#">See All</a>
-        </div>
-        
-        <div class="suggestion-item">
-          <img src="/assets/img/team/sampleTeam.jpg" class="suggestion-avatar" alt="User Avatar">
-          <div class="suggestion-info">
-            <h5>tech_wizard</h5>
-            <p>Followed by mike_dev + 3 more</p>
-          </div>
-          <a href="#" class="suggestion-follow">Follow</a>
-        </div>
-        
-        <div class="suggestion-item">
-          <img src="/assets/img/team/sampleTeam.jpg" class="suggestion-avatar" alt="User Avatar">
-          <div class="suggestion-info">
-            <h5>code_queen</h5>
-            <p>New to COMSA</p>
-          </div>
-          <a href="#" class="suggestion-follow">Follow</a>
-        </div>
-        
-        <div class="suggestion-item">
-          <img src="/assets/img/team/sampleTeam.jpg" class="suggestion-avatar" alt="User Avatar">
-          <div class="suggestion-info">
-            <h5>design_master</h5>
-            <p>Followed by sarah_johnson</p>
-          </div>
-          <a href="#" class="suggestion-follow">Follow</a>
-        </div>
-        
-        <div class="suggestion-item">
-          <img src="/assets/img/team/sampleTeam.jpg" class="suggestion-avatar" alt="User Avatar">
-          <div class="suggestion-info">
-            <h5>ai_enthusiast</h5>
-            <p>Machine Learning Club</p>
-          </div>
-          <a href="#" class="suggestion-follow">Follow</a>
-        </div>
-      </div>
-      
+
       <!-- Events Card -->
       <div class="sidebar-card">
         <div class="section-header">
           <h4>Upcoming Events</h4>
           <a href="#">View Calendar</a>
         </div>
-        
+
         <div class="event-item">
           <div class="event-date">
             <span class="day">15</span>
@@ -283,7 +252,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="event-item">
           <div class="event-date">
             <span class="day">22</span>
@@ -298,7 +267,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="event-item">
           <div class="event-date">
             <span class="day">30</span>
@@ -314,27 +283,27 @@
           </div>
         </div>
       </div>
-      
+
       <!-- Quick Links Card -->
       <div class="sidebar-card">
         <div class="section-header">
           <h4>Quick Links</h4>
         </div>
-        
+
         <div class="suggestion-item" style="padding: 10px 0;">
           <i class="bi bi-link-45deg" style="font-size: 20px; color: #7db832; margin-right: 15px;"></i>
           <div class="suggestion-info">
             <h5>Course Materials</h5>
           </div>
         </div>
-        
+
         <div class="suggestion-item" style="padding: 10px 0;">
           <i class="bi bi-link-45deg" style="font-size: 20px; color: #7db832; margin-right: 15px;"></i>
           <div class="suggestion-info">
             <h5>Student Resources</h5>
           </div>
         </div>
-        
+
         <div class="suggestion-item" style="padding: 10px 0;">
           <i class="bi bi-link-45deg" style="font-size: 20px; color: #7db832; margin-right: 15px;"></i>
           <div class="suggestion-info">
@@ -347,88 +316,103 @@
 
 
 
-<div class="modal fade" id="postTypeModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0" style="overflow: hidden; border-radius: 16px;">
-      <!-- Elegant Modal Header -->
-      <div class="modal-header border-0 py-4 position-relative" style="background: linear-gradient(135deg, var(--accent-color) 0%, #5a9e2a 100%);">
-        <div class="position-absolute top-0 end-0 me-3 mt-2">
-          <button type="button" class="btn-close btn-close-white btn-close-white-fade" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="text-center w-100">
-          <h5 class="modal-title text-white mb-0 fw-semibold" style="font-family: var(--heading-font); letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-            <i class="bi bi-plus-circle-fill me-2"></i>Create New Post
-          </h5>
-          <div class="d-flex justify-content-center mt-2">
-            <div style="width: 40px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 3px;"></div>
+  <div class="modal fade" id="postTypeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0" style="overflow: hidden; border-radius: 16px;">
+        <!-- Elegant Modal Header -->
+        <div class="modal-header border-0 py-4 position-relative"
+          style="background: linear-gradient(135deg, var(--accent-color) 0%, #5a9e2a 100%);">
+          <div class="position-absolute top-0 end-0 me-3 mt-2">
+            <button type="button" class="btn-close btn-close-white btn-close-white-fade" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="text-center w-100">
+            <h5 class="modal-title text-white mb-0 fw-semibold"
+              style="font-family: var(--heading-font); letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+              <i class="bi bi-plus-circle-fill me-2"></i>Create New Post
+            </h5>
+            <div class="d-flex justify-content-center mt-2">
+              <div style="width: 40px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 3px;"></div>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Modal Body with Beautiful Cards -->
-      <div class="modal-body px-4 py-4" style="background-color: #f9fbf7;">
-        <h6 class="text-center mb-4" style="color: var(--heading-color); font-family: var(--default-font); font-weight: 500; letter-spacing: 0.3px;">
-          Select your post type to continue
-        </h6>
-        
-        <div class="row g-4 justify-content-center">
-          <!-- Normal Post Card -->
-          <div class="col-md-6">
-            <a href="normal-post.html" class="text-decoration-none">
-              <div class="card border-0 h-100 post-type-option" style="border-radius: 12px; background-color: var(--surface-color);">
-                <div class="card-body text-center p-4 position-relative">
-                  <div class="position-absolute top-0 start-0 p-3">
-                    <div class="rounded-circle" style="width: 8px; height: 8px; background-color: var(--accent-color);"></div>
+
+        <!-- Modal Body with Beautiful Cards -->
+        <div class="modal-body px-4 py-4" style="background-color: #f9fbf7;">
+          <h6 class="text-center mb-4"
+            style="color: var(--heading-color); font-family: var(--default-font); font-weight: 500; letter-spacing: 0.3px;">
+            Select your post type to continue
+          </h6>
+
+          <div class="row g-4 justify-content-center">
+            <!-- Normal Post Card -->
+            <div class="col-md-6">
+              <a href="normal-post.html" class="text-decoration-none">
+                <div class="card border-0 h-100 post-type-option"
+                  style="border-radius: 12px; background-color: var(--surface-color);">
+                  <div class="card-body text-center p-4 position-relative">
+                    <div class="position-absolute top-0 start-0 p-3">
+                      <div class="rounded-circle"
+                        style="width: 8px; height: 8px; background-color: var(--accent-color);"></div>
+                    </div>
+                    <div class="icon-wrapper mb-3"
+                      style="background: linear-gradient(135deg, rgba(125, 184, 50, 0.1) 0%, rgba(125, 184, 50, 0.05) 100%); width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transform: rotate(45deg);">
+                      <i class="bi bi-file-earmark-text fs-2"
+                        style="color: var(--accent-color); transform: rotate(-45deg);"></i>
+                    </div>
+                    <h6 class="mb-2"
+                      style="color: var(--heading-color); font-family: var(--heading-font); font-weight: 600;">Normal
+                      Post</h6>
+                    <p class="small text-muted mb-0 px-2" style="font-family: var(--default-font); line-height: 1.5;">
+                      Share updates, thoughts, or general information with your audience
+                    </p>
                   </div>
-                  <div class="icon-wrapper mb-3" style="background: linear-gradient(135deg, rgba(125, 184, 50, 0.1) 0%, rgba(125, 184, 50, 0.05) 100%); width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transform: rotate(45deg);">
-                    <i class="bi bi-file-earmark-text fs-2" style="color: var(--accent-color); transform: rotate(-45deg);"></i>
+                  <div class="card-footer bg-transparent border-0 py-3 text-center">
+                    <span class="select-badge">
+                      Choose this style
+                      <i class="bi bi-arrow-right-short ms-1"></i>
+                    </span>
                   </div>
-                  <h6 class="mb-2" style="color: var(--heading-color); font-family: var(--heading-font); font-weight: 600;">Normal Post</h6>
-                  <p class="small text-muted mb-0 px-2" style="font-family: var(--default-font); line-height: 1.5;">
-                    Share updates, thoughts, or general information with your audience
-                  </p>
                 </div>
-                <div class="card-footer bg-transparent border-0 py-3 text-center">
-                  <span class="select-badge">
-                    Choose this style
-                    <i class="bi bi-arrow-right-short ms-1"></i>
-                  </span>
-                </div>
-              </div>
-            </a>
-          </div>
-          
-          <!-- Project Post Card -->
-          <div class="col-md-6">
-            <a href="project-post.html" class="text-decoration-none">
-              <div class="card border-0 h-100 post-type-option" style="border-radius: 12px; background-color: var(--surface-color);">
-                <div class="card-body text-center p-4 position-relative">
-                  <div class="position-absolute top-0 start-0 p-3">
-                    <div class="rounded-circle" style="width: 8px; height: 8px; background-color: var(--accent-color);"></div>
+              </a>
+            </div>
+
+            <!-- Project Post Card -->
+            <div class="col-md-6">
+              <a href="project-post.html" class="text-decoration-none">
+                <div class="card border-0 h-100 post-type-option"
+                  style="border-radius: 12px; background-color: var(--surface-color);">
+                  <div class="card-body text-center p-4 position-relative">
+                    <div class="position-absolute top-0 start-0 p-3">
+                      <div class="rounded-circle"
+                        style="width: 8px; height: 8px; background-color: var(--accent-color);"></div>
+                    </div>
+                    <div class="icon-wrapper mb-3"
+                      style="background: linear-gradient(135deg, rgba(125, 184, 50, 0.1) 0%, rgba(125, 184, 50, 0.05) 100%); width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transform: rotate(45deg);">
+                      <i class="bi bi-file-earmark-ppt fs-2"
+                        style="color: var(--accent-color); transform: rotate(-45deg);"></i>
+                    </div>
+                    <h6 class="mb-2"
+                      style="color: var(--heading-color); font-family: var(--heading-font); font-weight: 600;">Project
+                      Post</h6>
+                    <p class="small text-muted mb-0 px-2" style="font-family: var(--default-font); line-height: 1.5;">
+                      Showcase your work with detailed descriptions, media, and progress
+                    </p>
                   </div>
-                  <div class="icon-wrapper mb-3" style="background: linear-gradient(135deg, rgba(125, 184, 50, 0.1) 0%, rgba(125, 184, 50, 0.05) 100%); width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transform: rotate(45deg);">
-                    <i class="bi bi-file-earmark-ppt fs-2" style="color: var(--accent-color); transform: rotate(-45deg);"></i>
+                  <div class="card-footer bg-transparent border-0 py-3 text-center">
+                    <span class="select-badge">
+                      Choose this style
+                      <i class="bi bi-arrow-right-short ms-1"></i>
+                    </span>
                   </div>
-                  <h6 class="mb-2" style="color: var(--heading-color); font-family: var(--heading-font); font-weight: 600;">Project Post</h6>
-                  <p class="small text-muted mb-0 px-2" style="font-family: var(--default-font); line-height: 1.5;">
-                    Showcase your work with detailed descriptions, media, and progress
-                  </p>
                 </div>
-                <div class="card-footer bg-transparent border-0 py-3 text-center">
-                  <span class="select-badge">
-                    Choose this style
-                    <i class="bi bi-arrow-right-short ms-1"></i>
-                  </span>
-                </div>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
 
 
 
@@ -441,11 +425,12 @@
   <script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  
+
   <!-- Main JS File -->
   <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/search.js"></script>
   <script src="/assets/js/studs-main-func.js"></script>
-  
+
 </body>
 
 </html>

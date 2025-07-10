@@ -52,36 +52,36 @@
             <span>Home</span>
           </a>
         </li>
-        <li  class="active">
+        <li   class="active">
           <a href="#">
             <i class="bi bi-file-earmark-text"></i>
             <span>Projects</span>
           </a>
         </li>
         <li>
-          <a href="/features/achivement-studs.html">
-            <i class="bi bi-award"></i>
-            <span>Achievements</span>
+          <a href="#" id="search-toggle">
+            <i class="bi bi-search"></i>
+            <span style="color: black;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;">Search</span>
           </a>
+            <style>
+            #search-toggle:hover {
+              background-color: green;
+            }
+            #search-toggle:hover span {
+              color: white !important;
+            }
+          </style>
         </li>
         <li>
-          <a href="#">
-            <i class="bi bi-calendar-event"></i>
-            <span>Events</span>
+          <a href="#" id="createPostTrigger">
+            <i class="bi bi-patch-plus"></i>
+            <span>create</span>
           </a>
         </li>
-        <li>
-          <a href="#">
-            <i class="bi bi-chat-left-text"></i>
-            <span>Messages</span>
-          </a>
-        </li>
-<li>
-  <a href="#" id="createPostTrigger">
-    <i class="bi bi-patch-plus"></i>
-    <span>create</span>
-  </a>
-</li>
         <li>
           <a href="/features/settings-studs.html">
             <i class="bi bi-gear"></i>
@@ -95,6 +95,17 @@
       Experimental Nav
     </div>
   </div>
+
+      <!-- Search modal -->
+  </div>
+  <div class="search-popup">
+    <div class="search-container">
+      <div class="search-input-container">
+        <input type="text" placeholder="Search..." class="search-input">
+        <button class="search-button"><i class="bi bi-search"></i></button>
+      </div>
+    </div>
+  </div>  <!-- search modal end -->
 
   <!-- Main Content -->
   <div class="main-content d-flex justify-content-center">
@@ -443,6 +454,7 @@
   
   <!-- Main JS File -->
   <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/search.js"></script>
   <script src="/assets/js/studs-main-func.js"></script>
   
 </body>
