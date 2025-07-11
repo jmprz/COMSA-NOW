@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>COMSA-NOW - Student Dashboard</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <title>COMSA-NOW - Student Projects</title>
+  <meta name="description" content="Upload and showcase your student projects - games, websites, apps, and more">
+  <meta name="keywords" content="student projects, project showcase, game development, web development">
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png">
@@ -29,12 +29,12 @@
 
   <!-- Main CSS File -->
   <link href="/assets/css/main.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/login-form.css">
+  <link rel="stylesheet" href="/assets/css/project-studs-design.css">
   <link rel="stylesheet" href="/assets/css/search.css">
-    <link rel="stylesheet" href="/assets/css/student-dash.css">
+  <link rel="stylesheet" href="/assets/css/student-dash.css">
+  <link rel="stylesheet" href="/assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-
 
 <body class="index-page">
   <!-- Side Navigation -->
@@ -52,7 +52,7 @@
             <span>Home</span>
           </a>
         </li>
-        <li   class="active">
+        <li class="active">
           <a href="#">
             <i class="bi bi-file-earmark-text"></i>
             <span>Projects</span>
@@ -61,13 +61,9 @@
         <li>
           <a href="#" id="search-toggle">
             <i class="bi bi-search"></i>
-            <span style="color: black;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;">Search</span>
+            <span style="color: black; text-decoration: none; font-size: 15px; font-weight: 500; transition: all 0.3s ease;">Search</span>
           </a>
-            <style>
+          <style>
             #search-toggle:hover {
               background-color: green;
             }
@@ -92,111 +88,159 @@
     </div>
     
     <div class="side-nav-footer">
-      Experimental Nav
+      Project Hub
     </div>
   </div>
 
-      <!-- Search modal -->
-  </div>
+  <!-- Search modal -->
   <div class="search-popup">
     <div class="search-container">
       <div class="search-input-container">
-        <input type="text" placeholder="Search..." class="search-input">
+        <input type="text" placeholder="Search projects..." class="search-input">
         <button class="search-button"><i class="bi bi-search"></i></button>
       </div>
     </div>
-  </div>  <!-- search modal end -->
+  </div>
 
   <!-- Main Content -->
   <div class="main-content d-flex justify-content-center">
-    <!-- Posts Column -->
+    <!-- Projects Column -->
     <div class="posts-column">
-      <!-- Post 1 -->
-      <div class="post-container">
-        <div class="post-header">
-          <img src="/assets/img/team/sampleTeam.jpg" class="post-avatar" alt="User Avatar">
-          <div class="d-flex row gy-0">
-          <p class="post-username">john_perez</p>
-          <p class="text-black-50">(date)</p>
+      <!-- Project Upload Header -->
+      <div class="project-upload-header">
+        <h2>Student Projects</h2>
+        <p>Showcase your work and discover projects from fellow students</p>
+        <button class="btn btn-primary" id="uploadProjectBtn">
+          <i class="bi bi-upload me-2"></i>Upload New Project
+        </button>
+      </div>
+
+
+      <!-- Project 1 - Game -->
+      <div class="project-container">
+        <div class="project-header">
+          <img src="/assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+          <div class="project-author">
+            <p class="project-username">Valexore</p>
+            <p class="project-date">2 days ago</p>
           </div>
-          <i class="bi bi-three-dots post-more"></i>
+          <span class="project-badge game-badge" id="game">Game</span>
         </div>
         
-        <img src="/assets/img/csexpo.jpg" class="post-image" alt="Project Image">
+        <div class="project-content">
+          <h3 class="project-title">Cave Tactic RPG</h3>
+          <p class="project-description">
+          Darmnn if it happens, it happens...
+          </p>
+          <div class="project-media">
+            <img src="/assets/img/events/project-game-example.png" class="project-image" alt="Game Screenshot">
+            <div class="project-links">
+              <a href="#" class="project-link"><i class="bi bi-download"></i> Executable</a>
+              <a href="#" class="project-link"><i class="bi bi-github"></i> Source Code</a>
+            </div>
+          </div>
+          
+          <div class="project-tech">
+            <span class="tech-tag">Godot</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Pixel Graphics</span>
+          </div>
+        </div>
         
-        <div class="post-actions">
-          <button class="post-action like-btn" data-post="1">
+        <div class="project-stats">
+          <div class="stat">
+            <button class="post-action like-btn" data-post="2">
             <i class="bi bi-star"></i>
-          </button>
-          <button class="post-action comment-btn" data-post="1">
-            <i class="bi bi-chat-left"></i>
-          </button>
-        </div>
-        
-        <div class="post-likes">1,243 likes</div>
-        
-        <div class="post-caption">
-          <span class="post-caption-username">john_perez</span>
-          Just launched our AI-powered campus navigation system! 🚀 #CSExpo2024 #AI #Innovation
-        </div>
-        
-        <div class="post-comments" id="comments1">
-          <div class="post-comment">
-            <span class="post-comment-username">sarah_tech</span>
-            This is amazing! How did you train the ML model?
+            <span style="font-size: 18px;">67 Likes</span>
+            </button>
           </div>
-          <div class="post-comment">
-            <span class="post-comment-username">mike_dev</span>
-            Great work team! 👏
-          </div>
-        </div>
-        
-        <div class="post-time">2 DAYS AGO</div>
-        
-        <div class="post-add-comment" id="addComment1">
-          <input type="text" class="comment-input" placeholder="Add a comment..." data-post="1">
-          <button class="comment-submit" data-post="1">Post</button>
         </div>
       </div>
-      
-      <!-- Post 2 -->
-      <div class="post-container">
-        <div class="post-header">
-          <img src="/assets/img/team/sampleTeam.jpg" class="post-avatar" alt="User Avatar">
-          <span class="post-username">Eren_yeagar</span>
-          <i class="bi bi-three-dots post-more"></i>
+
+      <!-- Project 2 - Website -->
+      <div class="project-container">
+        <div class="project-header">
+          <img src="/assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+          <div class="project-author">
+            <p class="project-username">Valexore</p>
+            <p class="project-date">1 week ago</p>
+          </div>
+          <span class="project-badge web-badge"  id="website">Website</span>
         </div>
         
-        <img src="/assets/img/comsayep.jpg" class="post-image" alt="Project Image">
-        
-        <div class="post-actions">
-          <button class="post-action like-btn" data-post="2">
-            <i class="bi bi-star"></i>
-          </button>
-          <button class="post-action comment-btn" data-post="2">
-            <i class="bi bi-chat-left"></i>
-          </button>
-        </div>
-        
-        <div class="post-likes">892 likes</div>
-        
-        <div class="post-caption">
-          <span class="post-caption-username">Eren_yeagar</span>
-          Our event management system is now being used by 3 student organizations! 🎉 #WebDev #StudentProjects
-        </div>
-        
-        <div class="post-comments" id="comments2">
-          <div class="post-comment">
-            <span class="post-comment-username">tech_guy</span>
-            What stack did you use for this?
+        <div class="project-content">
+          <h3 class="project-title">Vanstastic</h3>
+          <p class="project-description">
+            it was fustrating to received dos even tho you did all the best to create a fascinating website such as Vantastic.
+          </p>
+          
+          <div class="project-media">
+            <img src="/assets/img/events/project-web-example.png" class="project-image" alt="Website Screenshot">
+            <div class="project-links">
+              <a href="#" class="project-link"><i class="bi bi-globe"></i> Live Demo</a>
+              <a href="#" class="project-link"><i class="bi bi-github"></i> Source Code</a>
+            </div>
+          </div>
+          
+          <div class="project-tech">
+            <span class="tech-tag">Php</span>
+            <span class="tech-tag">MySql</span>
+            <span class="tech-tag">Html</span>
+            <span class="tech-tag">Css</span>
+            <span class="tech-tag">Bootstrap</span>
           </div>
         </div>
         
-        <div class="post-time">1 WEEK AGO</div>
+        <div class="project-stats">
+          <div class="stat">
+            <button class="post-action like-btn" data-post="2">
+            <i class="bi bi-star"></i>
+            <span style="font-size: 18px;">67 Likes</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 - Console App -->
+      <div class="project-container">
+        <div class="project-header">
+          <img src="/assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+          <div class="project-author">
+            <p class="project-username">Valexore</p>
+            <p class="project-date">3 weeks ago</p>
+          </div>
+          <span class="project-badge console-badge" id="console">Console App</span>
+        </div>
+
+        <div class="project-content">
+          <h3 class="project-title">Scientific Calculator</h3>
+          <p class="project-description">
+            A executable console application that performs advanced mathematical 
+            calculations with a unique spiral design.
+          </p>
+          
+          <div class="project-media">
+            <img src="/assets/img/events/project-console-example.png" class="project-image" alt="Console Screenshot">
+            <div class="project-links">
+              <a href="#" class="project-link"><i class="bi bi-download"></i> Executable</a>
+              <a href="#" class="project-link"><i class="bi bi-github"></i> Source Code</a>
+            </div>
+          </div>
+          
+          <div class="project-tech">
+            <span class="tech-tag">Visual Basic</span>
+            <span class="tech-tag">dotNet</span>
+            <span class="tech-tag">Algorithms</span>
+          </div>
+        </div>
         
-        <div class="post-add-comment" id="addComment2">
-          <input type="text" class="comment-input" placeholder="Add a comment..." data-post="2">
-          <button class="comment-submit" data-post="2">Post</button>
+        <div class="project-stats">
+          <div class="stat">
+            <button class="post-action like-btn" data-post="2">
+            <i class="bi bi-star"></i>
+            <span style="font-size: 18px;">67 Likes</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -204,243 +248,246 @@
     <!-- Right Sidebar -->
     <div class="right-sidebar">
       <!-- Profile Card -->
-      <div class="sidebar-card">
-        <div class="profile-card">
-          <img src="/assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
-          <div class="profile-info">
-            <h4>your_username</h4>
-            <p>Computer Science Student</p>
-          </div>
-        </div>
-        
+      <div class="sidebar-card">     
         <div class="profile-stats">
           <div class="stat-item">
-            <div class="stat-number">24</div>
+            <div class="stat-number">5</div>
             <div class="stat-label">Projects</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">24</div>
+            <div class="stat-label">Contributions</div>
           </div>
           <div class="stat-item">
             <div class="stat-number">156</div>
             <div class="stat-label">Following</div>
           </div>
-          <div class="stat-item">
-            <div class="stat-number">1.2K</div>
-            <div class="stat-label">Followers</div>
-          </div>
         </div>
       </div>
       
-      <!-- Suggestions Card -->
+      <!-- Project Categories -->
       <div class="sidebar-card">
         <div class="section-header">
-          <h4>Suggestions For You</h4>
-          <a href="#">See All</a>
+          <h4>Project Categories</h4>
         </div>
         
-        <div class="suggestion-item">
-          <img src="/assets/img/team/sampleTeam.jpg" class="suggestion-avatar" alt="User Avatar">
-          <div class="suggestion-info">
-            <h5>tech_wizard</h5>
-            <p>Followed by mike_dev + 3 more</p>
-          </div>
-          <a href="#" class="suggestion-follow">Follow</a>
+<div class="category-list">
+  <a href="#" class="category-item" id="category-all">
+    <i class="bi bi-recycle category-icon" style="color: green;"></i>
+    <span>All</span>
+    <span class="category-count">99+</span>
+  </a>
+
+  <a href="#" class="category-item" id="category-games">
+    <i class="bi bi-controller category-icon game-icon"></i>
+    <span>Games</span>
+    <span class="category-count">42</span>
+  </a>
+  
+  <a href="#" class="category-item" id="category-websites">
+    <i class="bi bi-globe category-icon web-icon"></i>
+    <span>Websites</span>
+    <span class="category-count">76</span>
+  </a>
+
+  <a href="#" class="category-item" id="category-mobile">
+    <i class="bi bi-phone category-icon mobile-icon"></i>
+    <span>Mobile Apps</span>
+    <span class="category-count">35</span>
+  </a>
+
+  <a href="#" class="category-item" id="category-console">
+    <i class="bi bi-terminal category-icon console-icon"></i>
+    <span>Console Apps</span>
+    <span class="category-count">28</span>
+  </a>
+
+  <a href="#" class="category-item" id="category-ai">
+    <i class="bi bi-robot category-icon ai-icon"></i>
+    <span>AI/ML</span>
+    <span class="category-count">19</span>
+  </a>
+
+  <a href="#" class="category-item" id="category-databases">
+    <i class="bi bi-database category-icon db-icon"></i>
+    <span>Databases</span>
+    <span class="category-count">23</span>
+  </a>
+</div>
+      </div>
+      
+      <!-- Trending Projects -->
+      <div class="sidebar-card">
+        <div class="section-header">
+          <h4>Trending Projects</h4>
+          <a href="#">View All</a>
         </div>
         
-        <div class="suggestion-item">
-          <img src="/assets/img/team/sampleTeam.jpg" class="suggestion-avatar" alt="User Avatar">
-          <div class="suggestion-info">
-            <h5>code_queen</h5>
-            <p>New to COMSA</p>
+        <div class="trending-project">
+          <div class="trending-project-info">
+            <h5>Virtual Campus Tour</h5>
+            <p class="trending-project-author">by vr_enthusiast</p>
+            <div class="trending-project-stats">
+              <span><i class="bi bi-star-fill"></i> 210</span>
+            </div>
           </div>
-          <a href="#" class="suggestion-follow">Follow</a>
+          <img src="/assets/img/trending1.jpg" alt="Trending Project" class="trending-project-image">
         </div>
         
-        <div class="suggestion-item">
-          <img src="/assets/img/team/sampleTeam.jpg" class="suggestion-avatar" alt="User Avatar">
-          <div class="suggestion-info">
-            <h5>design_master</h5>
-            <p>Followed by sarah_johnson</p>
+        <div class="trending-project">
+          <div class="trending-project-info">
+            <h5>Code Collab Platform</h5>
+            <p class="trending-project-author">by team_coders</p>
+            <div class="trending-project-stats">
+              <span><i class="bi bi-star-fill"></i> 187</span>
+            </div>
           </div>
-          <a href="#" class="suggestion-follow">Follow</a>
+          <img src="/assets/img/trending2.jpg" alt="Trending Project" class="trending-project-image">
         </div>
         
-        <div class="suggestion-item">
-          <img src="/assets/img/team/sampleTeam.jpg" class="suggestion-avatar" alt="User Avatar">
-          <div class="suggestion-info">
-            <h5>ai_enthusiast</h5>
-            <p>Machine Learning Club</p>
+        <div class="trending-project">
+          <div class="trending-project-info">
+            <h5>AR Chemistry Lab</h5>
+            <p class="trending-project-author">by science_tech</p>
+            <div class="trending-project-stats">
+              <span><i class="bi bi-star-fill"></i> 156</span>
+            </div>
           </div>
-          <a href="#" class="suggestion-follow">Follow</a>
+          <img src="/assets/img/trending3.jpg" alt="Trending Project" class="trending-project-image">
         </div>
       </div>
       
-      <!-- Events Card -->
+      <!-- Resources Card -->
       <div class="sidebar-card">
         <div class="section-header">
-          <h4>Upcoming Events</h4>
-          <a href="#">View Calendar</a>
+          <h4>Project Resources</h4>
         </div>
         
-        <div class="event-item">
-          <div class="event-date">
-            <span class="day">15</span>
-            <span class="month">Jun</span>
-          </div>
-          <div class="event-info">
-            <h5>CS Expo 2024</h5>
-            <p>10:00 AM - 4:00 PM</p>
-            <div class="event-location">
-              <i class="bi bi-geo-alt"></i>
-              <span>University Main Hall</span>
-            </div>
+        <div class="resource-item">
+          <i class="bi bi-book resource-icon"></i>
+          <div class="resource-info">
+            <h5>Project Guidelines</h5>
+            <p>How to structure your student project</p>
           </div>
         </div>
         
-        <div class="event-item">
-          <div class="event-date">
-            <span class="day">22</span>
-            <span class="month">Jun</span>
-          </div>
-          <div class="event-info">
-            <h5>Hackathon Workshop</h5>
-            <p>2:00 PM - 5:00 PM</p>
-            <div class="event-location">
-              <i class="bi bi-geo-alt"></i>
-              <span>Computer Lab B</span>
-            </div>
+        <div class="resource-item">
+          <i class="bi bi-tools resource-icon"></i>
+          <div class="resource-info">
+            <h5>Development Tools</h5>
+            <p>Recommended tools for students</p>
           </div>
         </div>
         
-        <div class="event-item">
-          <div class="event-date">
-            <span class="day">30</span>
-            <span class="month">Jun</span>
-          </div>
-          <div class="event-info">
-            <h5>Tech Career Fair</h5>
-            <p>9:00 AM - 3:00 PM</p>
-            <div class="event-location">
-              <i class="bi bi-geo-alt"></i>
-              <span>Student Center</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Quick Links Card -->
-      <div class="sidebar-card">
-        <div class="section-header">
-          <h4>Quick Links</h4>
-        </div>
-        
-        <div class="suggestion-item" style="padding: 10px 0;">
-          <i class="bi bi-link-45deg" style="font-size: 20px; color: #7db832; margin-right: 15px;"></i>
-          <div class="suggestion-info">
-            <h5>Course Materials</h5>
-          </div>
-        </div>
-        
-        <div class="suggestion-item" style="padding: 10px 0;">
-          <i class="bi bi-link-45deg" style="font-size: 20px; color: #7db832; margin-right: 15px;"></i>
-          <div class="suggestion-info">
-            <h5>Student Resources</h5>
-          </div>
-        </div>
-        
-        <div class="suggestion-item" style="padding: 10px 0;">
-          <i class="bi bi-link-45deg" style="font-size: 20px; color: #7db832; margin-right: 15px;"></i>
-          <div class="suggestion-info">
-            <h5>Research Opportunities</h5>
+        <div class="resource-item">
+          <i class="bi bi-lightbulb resource-icon"></i>
+          <div class="resource-info">
+            <h5>Project Ideas</h5>
+            <p>Inspiration for your next project</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-
-
-<div class="modal fade" id="postTypeModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0" style="overflow: hidden; border-radius: 16px;">
-      <!-- Elegant Modal Header -->
-      <div class="modal-header border-0 py-4 position-relative" style="background: linear-gradient(135deg, var(--accent-color) 0%, #5a9e2a 100%);">
-        <div class="position-absolute top-0 end-0 me-3 mt-2">
-          <button type="button" class="btn-close btn-close-white btn-close-white-fade" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="text-center w-100">
-          <h5 class="modal-title text-white mb-0 fw-semibold" style="font-family: var(--heading-font); letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-            <i class="bi bi-plus-circle-fill me-2"></i>Create New Post
-          </h5>
-          <div class="d-flex justify-content-center mt-2">
-            <div style="width: 40px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 3px;"></div>
-          </div>
-        </div>
+<!-- Project Upload Modal -->
+<div class="modal fade" id="projectUploadModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Upload Your Project</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      
-      <!-- Modal Body with Beautiful Cards -->
-      <div class="modal-body px-4 py-4" style="background-color: #f9fbf7;">
-        <h6 class="text-center mb-4" style="color: var(--heading-color); font-family: var(--default-font); font-weight: 500; letter-spacing: 0.3px;">
-          Select your post type to continue
-        </h6>
-        
-        <div class="row g-4 justify-content-center">
-          <!-- Normal Post Card -->
-          <div class="col-md-6">
-            <a href="normal-post.html" class="text-decoration-none">
-              <div class="card border-0 h-100 post-type-option" style="border-radius: 12px; background-color: var(--surface-color);">
-                <div class="card-body text-center p-4 position-relative">
-                  <div class="position-absolute top-0 start-0 p-3">
-                    <div class="rounded-circle" style="width: 8px; height: 8px; background-color: var(--accent-color);"></div>
-                  </div>
-                  <div class="icon-wrapper mb-3" style="background: linear-gradient(135deg, rgba(125, 184, 50, 0.1) 0%, rgba(125, 184, 50, 0.05) 100%); width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transform: rotate(45deg);">
-                    <i class="bi bi-file-earmark-text fs-2" style="color: var(--accent-color); transform: rotate(-45deg);"></i>
-                  </div>
-                  <h6 class="mb-2" style="color: var(--heading-color); font-family: var(--heading-font); font-weight: 600;">Normal Post</h6>
-                  <p class="small text-muted mb-0 px-2" style="font-family: var(--default-font); line-height: 1.5;">
-                    Share updates, thoughts, or general information with your audience
-                  </p>
-                </div>
-                <div class="card-footer bg-transparent border-0 py-3 text-center">
-                  <span class="select-badge">
-                    Choose this style
-                    <i class="bi bi-arrow-right-short ms-1"></i>
-                  </span>
-                </div>
+      <div class="modal-body">
+        <form id="projectUploadForm" class="compact-form">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="projectTitle" class="form-label">Project Title*</label>
+              <input type="text" class="form-control" id="projectTitle" required>
+            </div>
+            
+            <div class="col-md-6">
+              <label for="projectType" class="form-label">Project Type*</label>
+              <select class="form-select" id="projectType" required>
+                <option value="">Select type</option>
+                <option value="game">Game</option>
+                <option value="website">Website</option>
+                <option value="mobile">Mobile App</option>
+                <option value="console">Console App</option>
+                <option value="ai">AI/ML</option>
+                <option value="database">Database</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="col-12">
+              <label for="projectDescription" class="form-label">Description*</label>
+              <textarea class="form-control" id="projectDescription" rows="3" required></textarea>
+            </div>
+            
+            <div class="col-md-6">
+              <label for="projectTechnologies" class="form-label">Technologies Used</label>
+              <input type="text" class="form-control" id="projectTechnologies" placeholder="JavaScript, React, Node.js">
+            </div>
+            
+            <div class="col-md-6">
+              <label for="projectTeam" class="form-label">Team Members</label>
+              <input type="text" class="form-control" id="projectTeam" placeholder="username1, username2">
+            </div>
+            
+            <div class="col-12">
+              <label class="form-label">Project Media (2-8 images)</label>
+              <div class="upload-area" id="mediaUploadArea">
+                <i class="bi bi-images upload-icon"></i>
+                <p class="mb-1">Drag & drop or click to upload</p>
+                <small class="text-muted">Max 8 images (800x600 recommended)</small>
+                <input type="file" id="mediaUpload" multiple accept="image/*" style="display: none;" max="8">
               </div>
-            </a>
-          </div>
-          
-          <!-- Project Post Card -->
-          <div class="col-md-6">
-            <a href="project-post.html" class="text-decoration-none">
-              <div class="card border-0 h-100 post-type-option" style="border-radius: 12px; background-color: var(--surface-color);">
-                <div class="card-body text-center p-4 position-relative">
-                  <div class="position-absolute top-0 start-0 p-3">
-                    <div class="rounded-circle" style="width: 8px; height: 8px; background-color: var(--accent-color);"></div>
-                  </div>
-                  <div class="icon-wrapper mb-3" style="background: linear-gradient(135deg, rgba(125, 184, 50, 0.1) 0%, rgba(125, 184, 50, 0.05) 100%); width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transform: rotate(45deg);">
-                    <i class="bi bi-file-earmark-ppt fs-2" style="color: var(--accent-color); transform: rotate(-45deg);"></i>
-                  </div>
-                  <h6 class="mb-2" style="color: var(--heading-color); font-family: var(--heading-font); font-weight: 600;">Project Post</h6>
-                  <p class="small text-muted mb-0 px-2" style="font-family: var(--default-font); line-height: 1.5;">
-                    Showcase your work with detailed descriptions, media, and progress
-                  </p>
-                </div>
-                <div class="card-footer bg-transparent border-0 py-3 text-center">
-                  <span class="select-badge">
-                    Choose this style
-                    <i class="bi bi-arrow-right-short ms-1"></i>
-                  </span>
-                </div>
+              <div id="mediaPreview" class="d-flex flex-wrap gap-2 mt-2"></div>
+              <div id="mediaCounter" class="text-muted small mt-1">0/8 images selected</div>
+            </div>
+            
+            <div class="row-md-5">
+              <label class="form-label">Project Links</label>
+              <div class="input-group mb-2">
+                <span class="input-group-text"><i class="bi bi-download"></i></span>
+                <input type="url" class="form-control" placeholder="Executable Download URL">
               </div>
-            </a>
+              <div class="input-group mb-2">
+                <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                <input type="url" class="form-control" placeholder="Live Demo URL">
+              </div>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-github"></i></span>
+                <input type="url" class="form-control" placeholder="GitHub Repository">
+              </div>
+            </div>
+            
           </div>
-        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" form="projectUploadForm" class="btn btn-primary">Upload Project</button>
       </div>
     </div>
   </div>
 </div>
 
 
+<!-- Project viewer Modal -->
+<div class="modal fade" id="projectImageViewer" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-transparent border-0">
+      <div class="modal-header border-0">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img id="projectImageView" src="" alt="Project Image" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>
 
 
   <!-- Vendor JS Files -->
@@ -456,7 +503,7 @@
   <script src="/assets/js/main.js"></script>
   <script src="/assets/js/search.js"></script>
   <script src="/assets/js/studs-main-func.js"></script>
-  
+
 </body>
 
 </html>
