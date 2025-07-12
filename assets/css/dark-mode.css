@@ -1,0 +1,121 @@
+/* ===================== */
+/* DARK MODE STYLES */
+/* ===================== */
+
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Side Navigation - Dark */
+body.dark-mode .side-nav {
+  background-color: #1e1e1e;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+  color: #7db832;
+}
+
+body.dark-mode .side-nav-header {
+  border-bottom: 1px solid #333;
+}
+
+body.dark-mode .side-nav-menu a {
+  color: #e0e0e0;
+}
+
+body.dark-mode .side-nav-menu li:hover {
+  background-color: rgba(125, 184, 50, 0.1);
+}
+
+body.dark-mode .side-nav-menu li.active {
+  background-color: #2a3a1e;
+}
+
+body.dark-mode .side-nav-menu i {
+  color: #7db832;
+}
+
+/* Main Content - Dark */
+body.dark-mode .main-content {
+  background-color: #121212;
+}
+
+/* Cards - Dark */
+body.dark-mode .sidebar-card,
+body.dark-mode .post-container {
+  background-color: #1e1e1e;
+  border-color: #333;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Text Colors - Dark */
+body.dark-mode .profile-info h4,
+body.dark-mode .section-header h4,
+body.dark-mode .suggestion-info h5,
+body.dark-mode .event-info h5,
+body.dark-mode .post-caption,
+body.dark-mode .post-comment,
+body.dark-mode .post-caption-username,
+body.dark-mode .post-comment-username {
+  color: #e0e0e0;
+}
+
+body.dark-mode .profile-info p,
+body.dark-mode .stat-label,
+body.dark-mode .suggestion-info p,
+body.dark-mode .event-info p,
+body.dark-mode .post-time {
+  color: #aaa;
+}
+
+/* Borders - Dark */
+body.dark-mode .profile-card,
+body.dark-mode .event-item,
+body.dark-mode .post-comment {
+  border-color: #333 !important;
+}
+
+/* Inputs - Dark */
+body.dark-mode .comment-input {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+}
+
+/* Modal - Dark */
+body.dark-mode .modal-content {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+  border-color: #333;
+}
+
+/* Toggle Switch - Dark */
+body.dark-mode .toggle-slider {
+  background-color: #555;
+}
+
+/* Special Elements - Dark */
+body.dark-mode .suggestion-avatar,
+body.dark-mode .post-avatar {
+  border-color: #444;
+}
+
+body.dark-mode .post-more {
+  color: #e0e0e0;
+}
+
+body.dark-mode .post-action {
+  color: #e0e0e0;
+}
+
+/* Create Post Modal - Dark */
+body.dark-mode .post-type-option {
+  background-color: #252525;
+  border-color: #333 !important;
+}
+
+body.dark-mode .select-badge {
+  background-color: rgba(125, 184, 50, 0.2);
+}
