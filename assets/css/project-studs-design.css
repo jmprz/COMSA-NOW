@@ -1,0 +1,472 @@
+/* Project Page Specific Styles */
+.project-upload-header {
+  background-color: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e6e6e6;
+  text-align: center;
+}
+
+.project-upload-header h2 {
+  color: #055a0f;
+  margin-bottom: 10px;
+}
+
+.project-upload-header p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+#uploadProjectBtn {
+  background-color: #7db832;
+  border: none;
+  padding: 10px 25px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+#uploadProjectBtn:hover {
+  background-color: #055a0f;
+  transform: translateY(-2px);
+}
+
+/* Project Container */
+.project-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+  margin-bottom: 30px;
+  border: 1px solid #e6e6e6;
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  position: relative;
+}
+
+.project-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+  object-fit: cover;
+  border: 2px solid #7db832;
+}
+
+.project-author {
+  flex: 1;
+}
+
+
+
+
+.project-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+.game-badge {
+  background-color: #6f42c1;
+}
+
+.web-badge {
+  background-color: #20c997;
+}
+
+.console-badge {
+  background-color: #fd7e14;
+}
+
+.mobile-badge {
+  background-color: #0dcaf0;
+}
+
+.ai-badge {
+  background-color: #d63384;
+}
+
+.db-badge {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.project-content {
+  padding: 0 16px 16px;
+}
+
+.project-title {
+  font-size: 20px;
+  color: #055a0f;
+  margin-bottom: 10px;
+}
+
+.project-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.project-media {
+  margin-bottom: 15px;
+}
+
+.project-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.project-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #7db832;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #7db832;
+  transition: all 0.3s;
+}
+
+.project-link:hover {
+  background-color: #7db832;
+  color: white;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.tech-tag {
+  background-color: #f0f7e9;
+  color: #055a0f;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.project-stats {
+  display: flex;
+  gap: 20px;
+  padding: 12px 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.project-stats .stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.project-stats .stat i {
+  color: #7db832;
+}
+
+/* Category List */
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Active category style */
+.category-item.active {
+  background-color: #f0f0f0;
+  font-weight: 700;
+  color: #055a0f;
+}
+
+.category-item.active .category-icon {
+  color: #4CAF50 !important;
+}
+
+.project-container {
+  transition: all 0.3s ease;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.category-item:hover {
+  background-color: #f0f7e9;
+  transform: translateX(5px);
+}
+
+.category-icon {
+  font-size: 18px;
+  margin-right: 12px;
+  width: 24px;
+  text-align: center;
+}
+
+.game-icon {
+  color: #6f42c1;
+}
+
+.web-icon {
+  color: #20c997;
+}
+
+.mobile-icon {
+  color: #0dcaf0;
+}
+
+.console-icon {
+  color: #fd7e14;
+}
+
+.ai-icon {
+  color: #d63384;
+}
+
+.db-icon {
+  color: #ffc107;
+}
+
+.category-count {
+  margin-left: auto;
+  background-color: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+
+
+/* compact forms */
+.compact-form label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.compact-form .form-control,
+.compact-form .form-select {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.75rem;
+}
+
+.compact-form textarea.form-control {
+  min-height: 100px;
+}
+
+.upload-area {
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: #f8f9fa;
+}
+
+.upload-area:hover, .drag-over {
+  border-color: #7db832;
+  background-color: #f0f7e9;
+}
+
+.upload-icon {
+  font-size: 2rem;
+  color: #7db832;
+  margin-bottom: 0.5rem;
+}
+
+.upload-preview {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}
+
+#mediaCounter {
+  text-align: right;
+}
+
+
+#projectImageViewer .modal-content {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+#projectImageViewer .modal-body {
+  padding: 0;
+}
+
+#projectImageView {
+  max-height: 80vh;
+  width: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.project-image {
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.project-image:hover {
+  transform: scale(1.02);
+}
+
+
+
+/* Trending Projects */
+.trending-project {
+  display: flex;
+  gap: 15px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.trending-project:last-child {
+  border-bottom: none;
+}
+
+.trending-project-info {
+  flex: 1;
+}
+
+.trending-project-info h5 {
+  font-size: 15px;
+  margin: 0 0 5px;
+  color: #333;
+}
+
+.trending-project-author {
+  font-size: 12px;
+  color: #8e8e8e;
+  margin: 0 0 8px;
+}
+
+.trending-project-stats {
+  display: flex;
+  gap: 15px;
+}
+
+.trending-project-stats span {
+  font-size: 12px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.trending-project-stats i {
+  color: #7db832;
+  font-size: 14px;
+}
+
+.trending-project-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Resources */
+.resource-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.resource-item:last-child {
+  border-bottom: none;
+}
+
+.resource-icon {
+  font-size: 20px;
+  color: #7db832;
+  margin-right: 15px;
+  width: 24px;
+  text-align: center;
+}
+
+.resource-info h5 {
+  font-size: 15px;
+  margin: 0 0 3px;
+  color: #333;
+}
+
+.resource-info p {
+  font-size: 12px;
+  color: #8e8e8e;
+  margin: 0;
+}
+
+/* Upload Modal */
+.upload-area {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: #f9f9f9;
+}
+
+.upload-area:hover, .drag-over {
+  border-color: #7db832;
+  background-color: #f0f7e9;
+}
+
+.upload-icon {
+  font-size: 40px;
+  color: #7db832;
+  margin-bottom: 10px;
+}
+
+.upload-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .project-filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .project-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .project-link {
+    justify-content: center;
+  }
+}
