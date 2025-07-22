@@ -73,9 +73,9 @@
           </style>
         </li>
         <li>
-          <a href="#" id="createPostTrigger">
-            <i class="bi bi-patch-plus"></i>
-            <span>create</span>
+          <a href="/features/studs-chat.html">
+            <i class="bi bi-chat-right-dots"></i>
+            <span>Chat</span>
           </a>
         </li>
         <li>
@@ -106,14 +106,7 @@
   <div class="main-content d-flex justify-content-center">
     <!-- Projects Column -->
     <div class="posts-column">
-      <!-- Project Upload Header -->
-      <div class="project-upload-header">
-        <h2>Student Projects</h2>
-        <p>Showcase your work and discover projects from fellow students</p>
-        <button class="btn btn-primary" id="uploadProjectBtn">
-          <i class="bi bi-upload me-2"></i>Upload New Project
-        </button>
-      </div>
+
 
 
       <!-- Project 1 - Game -->
@@ -247,22 +240,12 @@
     
     <!-- Right Sidebar -->
     <div class="right-sidebar">
-      <!-- Profile Card -->
+       <!-- Project Upload -->
       <div class="sidebar-card">     
-        <div class="profile-stats">
-          <div class="stat-item">
-            <div class="stat-number">5</div>
-            <div class="stat-label">Projects</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">24</div>
-            <div class="stat-label">Contributions</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">156</div>
-            <div class="stat-label">Following</div>
-          </div>
-        </div>
+        <h2>Student Projects</h2>
+        <button class="btn btn-primary" id="uploadProjectBtn">
+          <i class="bi bi-upload me-2"></i>Upload New Project
+        </button>
       </div>
       
       <!-- Project Categories -->
@@ -319,8 +302,8 @@
       <!-- Trending Projects -->
       <div class="sidebar-card">
         <div class="section-header">
-          <h4>Trending Projects</h4>
-          <a href="#">View All</a>
+          <h4>Top 3 Trending Projects</h4>
+
         </div>
         
         <div class="trending-project">
@@ -331,7 +314,7 @@
               <span><i class="bi bi-star-fill"></i> 210</span>
             </div>
           </div>
-          <img src="/assets/img/trending1.jpg" alt="Trending Project" class="trending-project-image">
+          <img src="/assets/img/team/tung-tung-tung-sahur.png" alt="Trending Project" class="project-avatar">
         </div>
         
         <div class="trending-project">
@@ -342,7 +325,7 @@
               <span><i class="bi bi-star-fill"></i> 187</span>
             </div>
           </div>
-          <img src="/assets/img/trending2.jpg" alt="Trending Project" class="trending-project-image">
+          <img src="/assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
         </div>
         
         <div class="trending-project">
@@ -353,7 +336,7 @@
               <span><i class="bi bi-star-fill"></i> 156</span>
             </div>
           </div>
-          <img src="/assets/img/trending3.jpg" alt="Trending Project" class="trending-project-image">
+          <img src="/assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
         </div>
       </div>
       
@@ -468,7 +451,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" form="projectUploadForm" class="btn btn-primary">Upload Project</button>
+        <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: green;">Upload Project</button>
       </div>
     </div>
   </div>
@@ -501,7 +484,7 @@
   
   <!-- Main JS File -->
   <script src="/assets/js/main.js"></script>
-  <script src="/assets/js/search.js"></script>
+  <script src="/assets/js/studs-search.js"></script>
   <script src="/assets/js/studs-main-func.js"></script>
 
 </body>
