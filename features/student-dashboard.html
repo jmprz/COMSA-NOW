@@ -20,7 +20,10 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
-
+<link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
   <!-- Vendor CSS Files -->
   <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -40,63 +43,7 @@
 
 
 <body class="index-page">
-  <!-- Side Navigation -->
-  <div class="side-nav">
-    <div class="side-nav-header">
-      <img src="/assets/img/logo.png" alt="COMSA Logo">
-      <h3>COMSA-NOW</h3>
-    </div>
-
-    <div class="side-nav-menu">
-      <ul>
-        <li class="active">
-          <a href="#">
-            <i class="bi bi-house-door"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li>
-          <a href="/features/project-studs.html">
-            <i class="bi bi-file-earmark-text"></i>
-            <span>Projects</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" id="search-toggle">
-            <i class="bi bi-search"></i>
-            <span style="color: black;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;">Search</span>
-          </a>
-            <style>
-            #search-toggle:hover {
-              background-color: green;
-            }
-            #search-toggle:hover span {
-              color: white !important;
-            }
-          </style>
-        </li>
-        <li>
-          <a href="/features/studs-chat.html">
-            <i class="bi bi-chat-right-dots"></i>
-            <span>Chat</span>
-          </a>
-        </li>
-        <li>
-          <a href="/features/settings-studs.html">
-            <i class="bi bi-gear"></i>
-            <span>Settings</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="side-nav-footer">
-      Experimental Nav
-    </div>
+ 
 
     <!-- Search modal -->
   </div>
@@ -110,10 +57,68 @@
   </div>  <!-- search modal end -->
 
 
-  <!-- Main Content -->
-  <div class="main-content d-flex justify-content-center">
+<!-- Main Content -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- Side Navigation -->
+    <div class="col-md-2 d-none d-lg-block bg-light min-vh-100">
+      <div class="side-nav py-4 px-3 d-flex flex-column justify-content-between h-100">
+
+        <!-- Side Nav Header -->
+      <div>
+          <div class="text-center mb-5 side-nav-header">
+             <img src="/assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
+            <h3 class="fw-bold">COMSA-NOW</h3>
+          </div>
+
+          <!-- Nav Menu -->
+          <div class="side-nav-menu d-flex flex-column gap-3">
+            <a href="#" class="btn text-start d-flex align-items-center gap-2 btn-active">
+              <i class="ri-home-9-line"></i> <span>Home</span>
+            </a>
+            <a href="/features/project-studs.html" class="btn text-start d-flex align-items-center gap-2">
+              <i class="ri-shapes-line"></i> <span>Projects</span>
+            </a>
+            <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
+              <i class="ri-search-line"></i> <span>Search</span>
+            </a>
+            <a href="#" class="btn text-start d-flex align-items-center gap-2">
+              <i class="ri-notification-3-line"></i> <span>Notification</span>
+            </a>
+            <a href="/features/settings-studs.html" class="btn text-start d-flex align-items-center gap-2">
+              <i class="ri-settings-line"></i> <span>Settings</span>
+            </a>
+          </div>
+      </div>
+        <!-- Side Nav Footer -->
+        <div class="text-muted small text-center mt-4">
+          Experimental Nav
+        </div>
+      </div>
+    </div>
+
     <!-- Posts Column -->
+     <div class="col-lg-7">
     <div class="posts-column">
+    <!-- Mobile Only Header -->
+<div class="d-lg-none d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
+  <div class="d-flex align-items-center">
+    <h5 class="ms-2 mb-0 fw-bold">COMSA-NOW</h5>
+  </div>
+  
+  <div class="d-flex align-items-center gap-2">
+    <!-- Search Button -->
+    <button class="btn p-2" type="button" id="search-toggle">
+      <i class="ri-search-line fs-1"></i>
+    </button>
+
+    <!-- Profile Icon Button -->
+    <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#profileModal">
+      <img src="/assets/img/team/sampleTeam.jpg" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
+    </button>
+  </div>
+</div>
+
       <!-- Post 1 -->
       <div class="post-container">
         <div class="post-header">
@@ -206,8 +211,10 @@
         </div>
       </div>
     </div>
+    </div>
 
     <!-- Right Sidebar -->
+     <div class="col-lg-3 d-none d-sm-block">
     <div class="right-sidebar">
       <!-- Profile Card -->
       <div class="sidebar-card">
@@ -239,7 +246,7 @@
       <div class="sidebar-card">
         <div class="section-header">
           <h4>Upcoming Events</h4>
-          <a href="/features/calendar.html#calendar">View Calendar</a>
+          <a href="#">View Calendar</a>
         </div>
 
         <div class="event-item">
@@ -317,7 +324,7 @@
       </div>
     </div>
   </div>
-
+</div>
 
 
   <div class="modal fade" id="postTypeModal" tabindex="-1" aria-hidden="true">
@@ -419,6 +426,89 @@
   </div>
 
 
+<!-- Bottom Navigation Bar (for md and below) -->
+<nav class="d-lg-none fixed-bottom bg-light border-top">
+  <div class="d-flex justify-content-around py-2">
+    <a href="#" class="text-center mt-2 btn-active-mobile">
+      <i class="ri-home-9-line fs-1"></i>
+    </a>
+    <a href="/features/project-studs.html" class="text-center mt-2">
+      <i class="ri-shapes-line fs-1"></i>
+    </a>
+    <a href="#" class="text-center mt-2">
+      <i class="ri-add-circle-line fs-1"></i>
+    </a>
+    <a href="#" id="createPostTrigger" class="text-center mt-2">
+      <i class="ri-notification-3-line fs-1"></i>
+    </a>
+    <a href="/features/settings-studs.html" class="text-center mt-2">
+      <i class="ri-settings-line fs-1"></i>
+    </a>
+  </div>
+</nav>
+
+<!-- Profile Modal for Mobile -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-slideout modal-sm m-0 ms-auto">
+    <div class="modal-content vh-100">
+      <div class="modal-header">
+        <h5 class="modal-title" id="profileModalLabel">Your Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Clone of Right Sidebar -->
+        <div class="right-sidebar">
+
+          <!-- Profile Card -->
+          <div class="sidebar-card">
+            <div class="profile-card">
+              <img src="/assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
+              <div class="profile-info">
+                <h4>your_username</h4>
+                <p>Computer Science Student</p>
+              </div>
+            </div>
+
+            <div class="profile-stats">
+              <div class="stat-item">
+                <div class="stat-number">24</div>
+                <div class="stat-label">Projects</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">156</div>
+                <div class="stat-label">Following</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">1.2K</div>
+                <div class="stat-label">Followers</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Events Card -->
+          <div class="sidebar-card">
+            <div class="section-header">
+              <h4>Upcoming Events</h4>
+              <a href="#">View Calendar</a>
+            </div>
+
+            <!-- ... same event items ... -->
+          </div>
+
+          <!-- Quick Links Card -->
+          <div class="sidebar-card">
+            <div class="section-header">
+              <h4>Quick Links</h4>
+            </div>
+
+            <!-- ... same suggestion items ... -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
   <!-- Vendor JS Files -->
@@ -432,7 +522,7 @@
 
   <!-- Main JS File -->
   <script src="/assets/js/main.js"></script>
-<script src="/assets/js/studs-search.js"></script>
+  <script src="/assets/js/search.js"></script>
   <script src="/assets/js/studs-main-func.js"></script>
 
 </body>

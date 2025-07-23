@@ -18,6 +18,10 @@
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
 
   <!-- Vendor CSS Files -->
   <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,340 +38,191 @@
   <link rel="stylesheet" href="/assets/css/student-dash.css">
   <link rel="stylesheet" href="/assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <style>
-    /* Settings Page Specific Styles */
-    .settings-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 30px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.05);
-    }
-    
-    .settings-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    
-    .settings-header h2 {
-      font-weight: 600;
-      color: #333;
-    }
-    
-    .settings-section {
-      margin-bottom: 30px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 20px;
-    }
-    
-    .settings-section:last-child {
-      border-bottom: none;
-    }
-    
-    .settings-section h3 {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: #444;
-      display: flex;
-      align-items: center;
-    }
-    
-    .settings-section h3 i {
-      margin-right: 10px;
-      color: #7db832;
-    }
-    
-    .settings-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #f5f5f5;
-    }
-    
-    .settings-item:last-child {
-      border-bottom: none;
-    }
-    
-    .settings-item .item-info {
-      flex: 1;
-    }
-    
-    .settings-item .item-info h4 {
-      font-size: 1rem;
-      margin-bottom: 3px;
-      font-weight: 500;
-    }
-    
-    .settings-item .item-info p {
-      font-size: 0.85rem;
-      color: #777;
-      margin: 0;
-    }
-    
-    .settings-item .item-action {
-      margin-left: 15px;
-    }
-    
-    .btn-settings {
-      background-color: #7db832;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      transition: all 0.3s;
-    }
-    
-    .btn-settings:hover {
-      background-color: #6aa028;
-      color: white;
-    }
-    
-    .btn-settings-outline {
-      background-color: transparent;
-      border: 1px solid #7db832;
-      color: #7db832;
-      padding: 6px 12px;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      transition: all 0.3s;
-    }
-    
-    .btn-settings-outline:hover {
-      background-color: #7db832;
-      color: white;
-    }
-    
-    .toggle-switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 24px;
-    }
-    
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    
-    .toggle-slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 24px;
-    }
-    
-    .toggle-slider:before {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-    
-    input:checked + .toggle-slider {
-      background-color: #7db832;
-    }
-    
-    input:checked + .toggle-slider:before {
-      transform: translateX(26px);
-    }
-    
-    .about-comsa {
-      background-color: #f9fbf7;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
-    
-    .about-comsa h4 {
-      color: #7db832;
-      margin-bottom: 15px;
-    }
-    
-    .about-comsa p {
-      color: #555;
-      line-height: 1.6;
-    }
 
-    /* Dark mode styles */
-    body.dark-mode {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-
-    body.dark-mode .settings-container {
-      background-color: #1e1e1e;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    }
-
-    body.dark-mode .settings-header h2 {
-      color: #e0e0e0;
-    }
-
-    body.dark-mode .settings-section h3 {
-      color: #bbbbbb;
-    }
-
-    body.dark-mode .settings-item .item-info h4 {
-      color: #dddddd;
-    }
-
-    body.dark-mode .settings-item .item-info p {
-      color: #999999;
-    }
-
-    body.dark-mode .about-comsa {
-      background-color: #252525;
-    }
-
-    body.dark-mode .about-comsa p {
-      color: #bbbbbb;
-    }
-
-    /* Modal custom styles */
-    .modal-dark .modal-content {
-      background-color: #1e1e1e;
-      color: #e0e0e0;
-    }
-
-    .modal-dark .modal-header {
-      border-bottom-color: #333;
-    }
-
-    .modal-dark .modal-footer {
-      border-top-color: #333;
-    }
-
-    .modal-dark .close {
-      color: #e0e0e0;
-    }
-
-    /* Profile picture upload preview */
-    .profile-pic-preview {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 20px;
-      display: block;
-      border: 3px solid #7db832;
-    }
-
-    /* Account activity table */
-    .activity-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .activity-table th, 
-    .activity-table td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .activity-table th {
-      background-color: #f5f5f5;
-    }
-
-    body.dark-mode .activity-table th {
-      background-color: #252525;
-    }
-
-    body.dark-mode .activity-table td {
-      border-bottom-color: #333;
-    }
-
-    /* Policy content */
-    .policy-content {
-      max-height: 400px;
-      overflow-y: auto;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 5px;
-      margin-bottom: 20px;
-    }
-
-    body.dark-mode .policy-content {
-      background-color: #252525;
-    }
-  </style>
 </head>
 
 <body class="index-page">
-  <!-- Side Navigation -->
-  <div class="side-nav">
-    <div class="side-nav-header">
-      <img src="/assets/img/logo.png" alt="COMSA Logo">
-      <h3>COMSA-NOW</h3>
+ <div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar (Left Column) -->
+    <div class="col-md-2 d-none d-lg-block bg-light min-vh-100">
+      <div class="side-nav py-4 px-3 d-flex flex-column justify-content h-100">
+       <div>
+          <div class="text-center mb-5 side-nav-header">
+             <img src="/assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
+            <h3 class="fw-bold">COMSA-NOW</h3>
+          </div>
+
+          <!-- Nav Menu -->
+          <div class="side-nav-menu d-flex flex-column gap-3">
+            <a href="/features/student-dashboard.html" class="btn text-start d-flex align-items-center gap-2">
+              <i class="ri-home-9-line"></i> <span>Home</span>
+            </a>
+            <a href="/features/project-studs.html" class="btn text-start d-flex align-items-center gap-2">
+              <i class="ri-shapes-line"></i> <span>Projects</span>
+            </a>
+            <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
+              <i class="ri-search-line"></i> <span>Search</span>
+            </a>
+            <a href="#" class="btn text-start d-flex align-items-center gap-2">
+              <i class="ri-notification-3-line"></i> <span>Notification</span>
+            </a>
+            <a href="/features/settings-studs.html" class="btn text-start d-flex align-items-center gap-2 btn-active">
+              <i class="ri-settings-line"></i> <span>Settings</span>
+            </a>
+          </div>
+      </div>
+      </div>
     </div>
-    
-    <div class="side-nav-menu">
-      <ul>
-        <li>
-          <a href="/features/student-dashboard.html">
-            <i class="bi bi-house-door"></i>
-            <span>Home</span>
-          </a>
-        </li>
-        <li>
-          <a href="/features/project-studs.html">
-            <i class="bi bi-file-earmark-text"></i>
-            <span>Projects</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" id="search-toggle">
-            <i class="bi bi-search"></i>
-            <span style="color: black;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;">Search</span>
-          </a>
-            <style>
-            #search-toggle:hover {
-              background-color: green;
-            }
-            #search-toggle:hover span {
-              color: white !important;
-            }
-          </style>
-        </li>
-        <li>
-          <a href="/features/studs-chat.html">
-            <i class="bi bi-chat-right-dots"></i>
-            <span>Chat</span>
-          </a>
-        </li>
-        <li class="active">
-          <a href="#">
-            <i class="bi bi-gear"></i>
-            <span>Settings</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    
-    <div class="side-nav-footer">
-      Experimental Nav
+
+    <!-- Settings Content (Right Column) -->
+    <div class="col-lg-9 p-4">
+      <div class="settings-container">
+      <div class="settings-header">
+        <h2><i class="bi bi-gear-fill"></i> Account Settings</h2>
+        <p class="text-muted">Manage your account preferences and security</p>
+      </div>
+      
+      <!-- Account Settings Section -->
+      <div class="settings-section">
+        <h3><i class="bi bi-person-circle"></i> Account Information</h3>
+        
+        <div class="settings-item">
+          <div class="item-info">
+            <h4>Profile Picture</h4>
+            <p>Update your profile photo</p>
+          </div>
+          <div class="item-action">
+            <button class="btn-settings" data-bs-toggle="modal" data-bs-target="#profilePicModal">Change</button>
+          </div>
+        </div>
+        
+        <div class="settings-item">
+          <div class="item-info">
+            <h4>Password</h4>
+            <p>Last changed 3 months ago</p>
+          </div>
+          <div class="item-action">
+            <button class="btn-settings">Change</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Privacy & Security Section -->
+      <div class="settings-section">
+        <h3><i class="bi bi-shield-lock"></i> Privacy & Security</h3>
+        
+        <div class="settings-item">
+          <div class="item-info">
+            <h4>Account Activity</h4>
+            <p>View login history and active sessions</p>
+          </div>
+          <div class="item-action">
+            <button class="btn-settings-outline" data-bs-toggle="modal" data-bs-target="#accountActivityModal">View</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Preferences Section -->
+      <div class="settings-section">
+        <h3><i class="bi bi-sliders"></i> Preferences</h3>
+        
+        <div class="settings-item">
+          <div class="item-info">
+            <h4>Dark Mode</h4>
+            <p>Switch between light and dark theme</p>
+          </div>
+          <div class="item-action">
+            <label class="toggle-switch">
+              <input type="checkbox" id="darkModeToggle">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Support & About Section -->
+      <div class="settings-section">
+        <h3><i class="bi bi-info-circle"></i> Support & Information</h3>
+        
+        <div class="settings-item">
+          <div class="item-info">
+            <h4>Help Center</h4>
+            <p>Get help with using COMSA-NOW</p>
+          </div>
+          <div class="item-action">
+            <button class="btn-settings-outline">Visit</button>
+          </div>
+        </div>
+        
+        <div class="settings-item">
+          <div class="item-info">
+            <h4>Privacy Policy</h4>
+            <p>Read our data privacy guidelines</p>
+          </div>
+          <div class="item-action">
+            <button class="btn-settings-outline" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">View</button>
+          </div>
+        </div>
+        
+        <div class="settings-item">
+          <div class="item-info">
+            <h4>Terms of Service</h4>
+            <p>Review our terms and conditions</p>
+          </div>
+          <div class="item-action">
+            <button class="btn-settings-outline" data-bs-toggle="modal" data-bs-target="#termsModal">View</button>
+          </div>
+        </div>
+        
+        <div class="settings-item">
+          <div class="item-info">
+            <h4>Report a Problem</h4>
+            <p>Let us know about any issues</p>
+          </div>
+          <div class="item-action">
+            <button class="btn-settings-outline">Contact</button>
+          </div>
+        </div>
+      </div>
+      <!-- About COMSA Section -->
+      <div class="about-comsa">
+        <h4>About COMSA</h4>
+        <p>The Computer Science Students' Association (COMSA) is the official organization for Computer Science students at our university. We aim to foster a community of tech enthusiasts, provide learning opportunities, and bridge the gap between academia and industry through workshops, hackathons, and networking events.</p>
+        <p>COMSA-NOW is our digital platform designed to connect students, showcase projects, and facilitate collaboration within the Computer Science community.</p>
+      </div>
+      
+      <!-- Account Actions -->
+      <div class="d-flex justify-content-end mt-4">
+        <button class="btn btn-danger">Log Out</button>
+      </div>
     </div>
   </div>
+  
+  <!-- Bottom Navigation Bar (for md and below) -->
+<nav class="d-lg-none fixed-bottom bg-light border-top">
+  <div class="d-flex justify-content-around py-2">
+    <a href="/features/student-dashboard.html" class="text-center mt-2">
+      <i class="ri-home-9-line fs-1"></i>
+    </a>
+    <a href="/features/project-studs.html" class="text-center mt-2">
+      <i class="ri-shapes-line fs-1"></i>
+    </a>
+    <a href="#" class="text-center mt-2">
+      <i class="ri-add-circle-line fs-1"></i>
+    </a>
+    <a href="#" id="createPostTrigger" class="text-center mt-2">
+      <i class="ri-notification-3-line fs-1"></i>
+    </a>
+    <a href="/features/settings-studs.html" class="text-center mt-2 btn-active-mobile">
+      <i class="ri-settings-line fs-1"></i>
+    </a>
+  </div>
+</nav>
+  </div>
 
+
+  
   <!-- Search modal -->
   <div class="search-popup">
     <div class="search-container">
@@ -528,131 +383,8 @@
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <div class="settings-container">
-      <div class="settings-header">
-        <h2><i class="bi bi-gear-fill"></i> Account Settings</h2>
-        <p class="text-muted">Manage your account preferences and security</p>
-      </div>
-      
-      <!-- Account Settings Section -->
-      <div class="settings-section">
-        <h3><i class="bi bi-person-circle"></i> Account Information</h3>
-        
-        <div class="settings-item">
-          <div class="item-info">
-            <h4>Profile Picture</h4>
-            <p>Update your profile photo</p>
-          </div>
-          <div class="item-action">
-            <button class="btn-settings" data-bs-toggle="modal" data-bs-target="#profilePicModal">Change</button>
-          </div>
-        </div>
-        
-        <div class="settings-item">
-          <div class="item-info">
-            <h4>Password</h4>
-            <p>Last changed 3 months ago</p>
-          </div>
-          <div class="item-action">
-            <button class="btn-settings">Change</button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Privacy & Security Section -->
-      <div class="settings-section">
-        <h3><i class="bi bi-shield-lock"></i> Privacy & Security</h3>
-        
-        <div class="settings-item">
-          <div class="item-info">
-            <h4>Account Activity</h4>
-            <p>View login history and active sessions</p>
-          </div>
-          <div class="item-action">
-            <button class="btn-settings-outline" data-bs-toggle="modal" data-bs-target="#accountActivityModal">View</button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Preferences Section -->
-      <div class="settings-section">
-        <h3><i class="bi bi-sliders"></i> Preferences</h3>
-        
-        <div class="settings-item">
-          <div class="item-info">
-            <h4>Dark Mode</h4>
-            <p>Switch between light and dark theme</p>
-          </div>
-          <div class="item-action">
-            <label class="toggle-switch">
-              <input type="checkbox" id="darkModeToggle">
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Support & About Section -->
-      <div class="settings-section">
-        <h3><i class="bi bi-info-circle"></i> Support & Information</h3>
-        
-        <div class="settings-item">
-          <div class="item-info">
-            <h4>Help Center</h4>
-            <p>Get help with using COMSA-NOW</p>
-          </div>
-          <div class="item-action">
-            <button class="btn-settings-outline">Visit</button>
-          </div>
-        </div>
-        
-        <div class="settings-item">
-          <div class="item-info">
-            <h4>Privacy Policy</h4>
-            <p>Read our data privacy guidelines</p>
-          </div>
-          <div class="item-action">
-            <button class="btn-settings-outline" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">View</button>
-          </div>
-        </div>
-        
-        <div class="settings-item">
-          <div class="item-info">
-            <h4>Terms of Service</h4>
-            <p>Review our terms and conditions</p>
-          </div>
-          <div class="item-action">
-            <button class="btn-settings-outline" data-bs-toggle="modal" data-bs-target="#termsModal">View</button>
-          </div>
-        </div>
-        
-        <div class="settings-item">
-          <div class="item-info">
-            <h4>Report a Problem</h4>
-            <p>Let us know about any issues</p>
-          </div>
-          <div class="item-action">
-            <button class="btn-settings-outline">Contact</button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- About COMSA Section -->
-      <div class="about-comsa">
-        <h4>About COMSA</h4>
-        <p>The Computer Science Students' Association (COMSA) is the official organization for Computer Science students at our university. We aim to foster a community of tech enthusiasts, provide learning opportunities, and bridge the gap between academia and industry through workshops, hackathons, and networking events.</p>
-        <p>COMSA-NOW is our digital platform designed to connect students, showcase projects, and facilitate collaboration within the Computer Science community.</p>
-      </div>
-      
-      <!-- Account Actions -->
-      <div class="d-flex justify-content-end mt-4">
-        <button class="btn btn-danger">Log Out</button>
-      </div>
-    </div>
-  </div>
 
+  
   <!-- Vendor JS Files -->
   <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/assets/vendor/php-email-form/validate.js"></script>
