@@ -6,19 +6,6 @@
   margin-left: 15px;
 }
 
-#search-toggle {
-  font-size: 1.2rem;
-  color: var(--nav-color);
-  transition: color 0.3s;
-    cursor: pointer;
-}
-
-#search-toggle:hover {
-  color: white;
-  background-color: var(--nav-hover-color);
-    border-radius: 15px;
-    padding: 10px;
-}
 
 .search-popup {
   position: fixed;
