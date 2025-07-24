@@ -900,7 +900,7 @@
                   <p class="text-white-50">Sign in to access your COMSA member dashboard and exclusive content.</p>
                 </div>
                 <div class="comsa-auth-social">
-                  <p class="text-white-50 mb-3">Note: <br> For the new students, <br> Forget Password if you we're new.</p>
+                  <p class="text-white-50 mb-3">Note: <br> For the new students, <br> Forget Password if you are new.</p>
                 </div>
               </div>
             </div>
@@ -913,12 +913,12 @@
                   <p class="text-muted">Enter your credentials to continue</p>
                 </div>
                 
-                <form id="comsaLoginForm" novalidate>
+                <form id="comsaLoginForm">
                   <div class="mb-4">
                     <label for="comsaLoginEmail" class="form-label">Email Address</label>
                     <div class="input-group">
                       <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                      <input type="email" class="form-control comsa-input" id="comsaLoginEmail" placeholder="your.bscs@email.com" required>
+                      <input name="email" type="email" class="form-control comsa-input" id="comsaLoginEmail" placeholder="your.bscs@email.com" required>
                       <div class="invalid-feedback">Please enter a valid email address</div>
                     </div>
                   </div>
@@ -927,7 +927,7 @@
                     <label for="comsaLoginPassword" class="form-label">Password</label>
                     <div class="input-group">
                       <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                      <input type="password" class="form-control comsa-input" id="comsaLoginPassword" placeholder="••••••••" required>
+                      <input name="password" type="password" class="form-control comsa-input" id="comsaLoginPassword" placeholder="••••••••" required>
                       <button class="btn btn-outline-secondary comsa-password-toggle" type="button">
                         <i class="bi bi-eye"></i>
                       </button>
@@ -942,6 +942,8 @@
                     </div>
                     <a href="#" class="text-decoration-none comsa-forgot-link" id="comsaShowForgotModal">Forgot password?</a>
                   </div>
+                  
+                  <div id="errorMessage" class="text-center text-danger"></div>
                   
                   <button type="submit" class="btn btn-primary w-100 comsa-auth-btn mb-3">
                     <span class="comsa-btn-text">Login</span>
@@ -963,6 +965,7 @@
       </div>
     </div>
   </div>
+  
 
   <!-- Forgot Password Modal -->
   <div id="comsaForgotModal" class="modal fade" tabindex="-1" aria-hidden="true">
@@ -1105,6 +1108,8 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/search.js"></script>
   <script src="assets/js/slide-show-updates.js"></script>
+
+  <!-- currently, this handles the auth manually, to delete this script -->
   <script src="assets/js/comsa-auth.js"></script>
 
 </body>
