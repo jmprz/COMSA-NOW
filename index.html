@@ -70,17 +70,17 @@
                   <!--news-->
               <li class="dropdown"><a href="features/calendar.html"><span>News</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
-                  <li><a href="/features/calendar.html#calendar">News</a></li>
-                  <li><a href="/features/calendar.html#portfolio">History</a></li>
+                  <li><a href="features/calendar.html#calendar">News</a></li>
+                  <li><a href="features/calendar.html#portfolio">History</a></li>
                 </ul></li><!-- newws ends-->
 
 
               <!--Orginazation comsa -->
-              <li class="dropdown"><a href="/features/comsa-team.html"><span>Organization</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <li class="dropdown"><a href="features/comsa-team.html"><span>Organization</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
-                  <li><a href="/features/comsa-team.html#executive">Who are them?</a></li>
-                  <li><a href="/features/comsa-team.html#executive">Our Executives</a></li>
-                  <li><a href="/features/comsa-team.html#Creatives">Our Creatives</a></li>
+                  <li><a href="features/comsa-team.html#executive">Who are them?</a></li>
+                  <li><a href="features/comsa-team.html#executive">Our Executives</a></li>
+                  <li><a href="features/comsa-team.html#Creatives">Our Creatives</a></li>
                 </ul></li><!--Orginazation comsa -> end  -->
               
 
@@ -96,8 +96,8 @@
 
               <li class="dropdown"><a href="features/calendar.html"><span>Comsa Calendar</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
               <ul>
-                  <li><a href="/features/calendar.html#calendar">Calendar</a></li>
-                  <li><a href="/features/calendar.html#portfolio">Events haffening</a></li>
+                  <li><a href="features/calendar.html#calendar">Calendar</a></li>
+                  <li><a href="features/calendar.html#portfolio">Events haffening</a></li>
                   
                 </ul></li>
 
@@ -575,7 +575,7 @@
                   <p class="text-white-50">Sign in to access your COMSA member dashboard and exclusive content.</p>
                 </div>
                 <div class="comsa-auth-social">
-                  <p class="text-white-50 mb-3">Note: <br> For the new students, <br> Forget Password if you we're new.</p>
+                  <p class="text-white-50 mb-3">Note: <br> For the new students, <br> Forget Password if you are new.</p>
                 </div>
               </div>
             </div>
@@ -588,12 +588,12 @@
                   <p class="text-muted">Enter your credentials to continue</p>
                 </div>
                 
-                <form id="comsaLoginForm" novalidate>
+                <form id="comsaLoginForm">
                   <div class="mb-4">
                     <label for="comsaLoginEmail" class="form-label">Email Address</label>
                     <div class="input-group">
                       <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                      <input type="email" class="form-control comsa-input" id="comsaLoginEmail" placeholder="your.bscs@email.com" required>
+                      <input name="email" type="email" class="form-control comsa-input" id="comsaLoginEmail" placeholder="your.bscs@email.com" required>
                       <div class="invalid-feedback">Please enter a valid email address</div>
                     </div>
                   </div>
@@ -602,7 +602,7 @@
                     <label for="comsaLoginPassword" class="form-label">Password</label>
                     <div class="input-group">
                       <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                      <input type="password" class="form-control comsa-input" id="comsaLoginPassword" placeholder="••••••••" required>
+                      <input name="password" type="password" class="form-control comsa-input" id="comsaLoginPassword" placeholder="••••••••" required>
                       <button class="btn btn-outline-secondary comsa-password-toggle" type="button">
                         <i class="bi bi-eye"></i>
                       </button>
@@ -618,6 +618,8 @@
                     <a href="#" class="text-decoration-none comsa-forgot-link" id="comsaShowForgotModal">Forgot password?</a>
                   </div>
                   
+                  <div id="errorMessage" class="text-center text-danger"></div>
+                  
                   <button type="submit" class="btn btn-primary w-100 comsa-auth-btn mb-3">
                     <span class="comsa-btn-text">Login</span>
                     <span class="comsa-btn-spinner d-none">
@@ -628,7 +630,7 @@
                   
                   <div class="text-center mt-4">
                     <p class="text-muted">Continue as a guest and check-out some cool<br>
-                       <a href="/features/project-studs.html" class="comsa-prj-link">Projects.</a></p>
+                       <a href="features/project-studs.html" class="comsa-prj-link">Projects.</a></p>
                   </div>
                 </form>
               </div>
@@ -638,6 +640,7 @@
       </div>
     </div>
   </div>
+  
 
   <!-- Forgot Password Modal -->
   <div id="comsaForgotModal" class="modal fade" tabindex="-1" aria-hidden="true">
@@ -780,6 +783,8 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/search.js"></script>
   <script src="assets/js/slide-show-updates.js"></script>
+
+  <!-- currently, this handles the auth manually, to delete this script -->
   <script src="assets/js/comsa-auth.js"></script>
 
 </body>
