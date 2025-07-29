@@ -7,10 +7,13 @@ const comsaAuthSystem = (function () {
   const forgotForm = document.getElementById('comsaForgotForm');
   const showForgotModalBtn = document.getElementById('comsaShowForgotModal');
   const showLoginModalBtn = document.getElementById('comsaShowLoginModal');
+  const loginButton = document.getElementById('loginButton');
 
   // Initialize the system
   function init() {
     // Password toggle functionality
+    console.log("loginButton exists?", loginButton);
+
     const passwordToggle = loginForm.querySelector('.comsa-password-toggle');
     const passwordInput = document.getElementById('comsaLoginPassword');
 
@@ -60,7 +63,7 @@ const comsaAuthSystem = (function () {
               this.reset();
 
               //redirect
-              window.location.href = "/comsa/COMSA-NOW/features/student-dashboard.html";
+              window.location.href = "/comsa/COMSA-NOW/features/student-dashboard.php";
             } else {
               // const errorList = Object.values(data.errors).join("\n");
               // alert(errorList || 'Login failed');
@@ -147,6 +150,29 @@ const comsaAuthSystem = (function () {
       const loginModalInstance = new bootstrap.Modal(loginModal);
       loginModalInstance.show();
     });
+
+    loginButton.addEventListener('click', async function (e) {
+      e.preventDefault();
+
+
+      console.log("clicked and working");
+      try {
+        const res = await fetch("../backend/api/check_session.php", {
+          credentials: "include",
+        });
+
+        const data = await res.json();
+
+        if (data.loggedIn) {
+          window.location.href = "/comsa/COMSA-NOW/features/student-dashboard.php";
+        } else {
+          const loginModal = new bootstrap.Modal(document.getElementById('comsaLoginModal'));
+          loginModal.show();
+        }
+      } catch (err) {
+        console.error("Session check failed", err);
+      }
+    })
   }
 
   // Public methods
