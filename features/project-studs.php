@@ -425,13 +425,13 @@ if (!isset($_SESSION['user_id'])) {
                     <label for="projectType" class="form-label">Project Type*</label>
                     <select class="form-select" id="projectType" required>
                       <option value="">Select type</option>
-                      <option value="game">Game</option>
-                      <option value="website">Website</option>
-                      <option value="mobile">Mobile App</option>
-                      <option value="console">Console App</option>
-                      <option value="ai">AI/ML</option>
-                      <option value="database">Database</option>
-                      <option value="other">Other</option>
+                      <option value="Games">Game</option>
+                      <option value="Websites">Website</option>
+                      <option value="Mobile Apps">Mobile App</option>
+                      <option value="Console">Console App</option>
+                      <option value="AI/ML">AI/ML</option>
+                      <option value="Databases">Database</option>
+                      <option value="Others">Other</option>
                     </select>
                   </div>
 
@@ -450,10 +450,10 @@ if (!isset($_SESSION['user_id'])) {
 
                   <div class="col-md-6">
                     <label for="projectTeam" class="form-label">Team Members</label>
-                      <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
-                        <input type="text" class="form-control" id="projectTeam" placeholder="username1, username2">
-                        <span id="tagsMemberWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
-                      </div>
+                    <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
+                      <input type="text" class="form-control" id="projectTeam" placeholder="username1, username2">
+                      <span id="tagsMemberWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
+                    </div>
                   </div>
 
                   <div class="col-12">
@@ -486,7 +486,22 @@ if (!isset($_SESSION['user_id'])) {
 
                 </div>
               </form>
+
+
             </div>
+            <div id="uploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+              <div id="uploadLoader" class="text-center">
+                <div class="spinner-border text-success" role="status"></div>
+                <p class="mt-2 fw-semibold">Uploading...</p>
+              </div>
+              <div id="uploadSuccess" class="text-center d-none">
+                <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                <p class="mt-2 fw-semibold">Upload Successful!</p>
+              </div>
+            </div>
+
+            <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
+
             <div class="modal-footer">
               <button type="button" class="close-uploadInfo btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
               <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: green;">Upload Project</button>

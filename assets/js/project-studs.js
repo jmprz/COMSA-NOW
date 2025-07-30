@@ -172,6 +172,25 @@ function renderPreview() {
     }
 }
 
+function showFieldError(fieldId) {
+    const input = document.getElementById(fieldId);
+    if (!input) return;
+
+    input.classList.add("is-invalid");
+
+    let feedback = document.createElement("div");
+    feedback.className = "invalid-feedback";
+    feedback.innerText = "This field is required.";
+    if (!input.nextElementSibling || !input.nextElementSibling.classList.contains("invalid-feedback")) {
+        input.parentNode.appendChild(feedback);
+    }
+}
+
+function clearFieldErrors() {
+    document.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
+    document.querySelectorAll(".invalid-feedback").forEach(el => el.remove());
+}
+
 closeUpload.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -192,6 +211,96 @@ closeUpload.forEach((btn) => {
 
 })
 
+uploadForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (this.checkValidity()) {
+        const formData = new FormData();
+
+        formData.append("projectTitle", document.getElementById("projectTitle").value);
+        formData.append("projectType", document.getElementById("projectType").value);
+        formData.append("projectDescription", document.getElementById("projectDescription").value);
+        formData.append("downloadLink", document.getElementById("downloadLink").value);
+        formData.append("githubLink", document.getElementById("githubLink").value);
+        formData.append("liveLink", document.getElementById("liveLink").value);
+
+        tags.forEach((tag, index) => {
+            formData.append('tags[]', tag);
+        })
+        members.forEach((member, index) => {
+            formData.append('members[]', member);
+        })
+        selectedFiles.forEach((file, index) => {
+            formData.append('selectedFiles[]', file);
+        })
+
+        document.getElementById("uploadOverlay").classList.remove("d-none");
+        document.getElementById("uploadLoader").classList.remove("d-none");
+        document.getElementById("uploadSuccess").classList.add("d-none");
+
+        clearFieldErrors();
+        document.getElementById("generalUploadError").classList.add("d-none");
+
+        fetch("../../backend/api/student_upload_proj.php", {
+            method: "POST",
+            body: formData,
+        })
+            .then(res => res.json())
+            .then(response => {
+                if (response.success) {
+                    document.getElementById("uploadLoader").classList.add("d-none");
+                    document.getElementById("uploadSuccess").classList.remove("d-none");
+
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById("projectUploadModal"));
+                        modal.hide();
+                        document.getElementById("uploadOverlay").classList.add("d-none");
+
+                        // Reset form and visuals
+                        uploadForm.reset();
+                        selectedFiles = [];
+                        tags = [];
+                        members = [];
+                        tagWrapper.innerHTML = "";
+                        tagMemberWrapper.innerHTML = "";
+                        mediaPreview.innerHTML = "";
+                        mediaCounter.innerText = "0/8 images selected";
+                    }, 1500);
+                } else {
+                    // Hide overlay
+                    document.getElementById("uploadOverlay").classList.add("d-none");
+
+                    if (response.errors) {
+                        if (response.errors.empty_input) {
+                            showFieldError("projectTitle");
+                            showFieldError("projectType");
+                            showFieldError("projectDescription");
+                        }
+
+                        if (response.errors.empty_images) {
+                            document.getElementById("generalUploadError").innerText = response.errors.empty_images;
+                            document.getElementById("generalUploadError").classList.remove("d-none");
+                        }
+
+                        // Server or unknown errors
+                        Object.entries(response.errors).forEach(([key, msg]) => {
+                            if (!["empty_input", "empty_images"].includes(key)) {
+                                document.getElementById("generalUploadError").innerText = msg;
+                                document.getElementById("generalUploadError").classList.remove("d-none");
+                            }
+                        });
+                    }
+                }
+            })
+            .catch(err => {
+                console.error("Upload failed:", err);
+                document.getElementById("uploadOverlay").classList.add("d-none");
+                document.getElementById("generalUploadError").innerText = "An unexpected error occurred.";
+                document.getElementById("generalUploadError").classList.remove("d-none");
+            });
+    }
+})
 
 
 
