@@ -1,11 +1,15 @@
 <?php
-require_once "../../backend/config/session.php";
+  require_once "../../backend/config/session.php";
 
-if (!isset($_SESSION["user_id"])) {
-  // Redirect to login page if not logged in
-  header("Location: ../index.html");
-  exit();
-}
+  if (!isset($_SESSION["user_id"])) {
+    // Redirect to login page if not logged in
+    header("Location: ../index.html");
+    exit();
+  }
+
+  $name = htmlspecialchars($_SESSION['user_name']);
+  $email = htmlspecialchars($_SESSION['user_email']);
+  $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
 ?>
 
 <!DOCTYPE html>
@@ -85,7 +89,7 @@ if (!isset($_SESSION["user_id"])) {
               <a href="#" class="btn text-start d-flex align-items-center gap-2 btn-active">
                 <i class="ri-home-9-line"></i> <span>Home</span>
               </a>
-              <a href="../features/project-studs.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="../features/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-shapes-line"></i> <span>Projects</span>
               </a>
               <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
@@ -94,7 +98,7 @@ if (!isset($_SESSION["user_id"])) {
               <a href="#" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-notification-3-line"></i> <span>Notification</span>
               </a>
-              <a href="../features/settings-studs.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="../features/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-settings-line"></i> <span>Settings</span>
               </a>
             </div>
@@ -230,7 +234,7 @@ if (!isset($_SESSION["user_id"])) {
             <div class="profile-card">
               <img src="../assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
               <div class="profile-info">
-                <h4>your_username</h4>
+                <h4> <?=$name?> </h4>
                 <p>Computer Science Student</p>
               </div>
             </div>
@@ -441,7 +445,7 @@ if (!isset($_SESSION["user_id"])) {
         <a href="#" class="text-center mt-2 btn-active-mobile">
           <i class="ri-home-9-line fs-1"></i>
         </a>
-        <a href="../features/project-studs.html" class="text-center mt-2">
+        <a href="../features/project-studs.php" class="text-center mt-2">
           <i class="ri-shapes-line fs-1"></i>
         </a>
         <a href="#" class="text-center mt-2">
@@ -450,7 +454,7 @@ if (!isset($_SESSION["user_id"])) {
         <a href="#" id="createPostTrigger" class="text-center mt-2">
           <i class="ri-notification-3-line fs-1"></i>
         </a>
-        <a href="../features/settings-studs.html" class="text-center mt-2">
+        <a href="../features/settings-studs.php" class="text-center mt-2">
           <i class="ri-settings-line fs-1"></i>
         </a>
       </div>
