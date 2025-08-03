@@ -1,11 +1,22 @@
 <?php
-  require_once "../../backend/config/session.php";
+  require_once "../../../backend/config/session.php";
 
   if (!isset($_SESSION["user_id"])) {
-    header("Location: ../index.html");
+    // Redirect to login page if not logged in
+    header("Location: ../../../index.html");
     exit();
   }
+
+
+
+
+// paki ayos ng logout directory path....
+
+
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,9 +29,9 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
   <link rel="manifest" href="../assets/img/favicon/site.webmanifest">
 
   <!-- Fonts -->
@@ -32,19 +43,19 @@
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 
   <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link rel="stylesheet" href="../assets/css/search.css">
-  <link href="../assets/css/main.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/login-form.css">
-  <link rel="stylesheet" href="../assets/css/student-dash.css">
-  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link rel="stylesheet" href="../../assets/css/search.css">
+  <link href="../../assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/login-form.css">
+  <link rel="stylesheet" href="../../assets/css/student-dash.css">
+  <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
@@ -57,16 +68,16 @@
         <div class="side-nav py-4 px-3 d-flex flex-column justify-content h-100">
           <div>
             <div class="text-center mb-5 side-nav-header">
-              <img src="../assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
+              <img src="../../assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
               <h3 class="fw-bold">COMSA-NOW</h3>
             </div>
 
             <!-- Nav Menu -->
             <div class="side-nav-menu d-flex flex-column gap-3">
-              <a href="../features/student-dashboard.php" class="btn text-start d-flex align-items-center gap-2">
+              <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-home-9-line"></i> <span>Home</span>
               </a>
-              <a href="../features/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
+              <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-shapes-line"></i> <span>Projects</span>
               </a>
               <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
@@ -75,7 +86,7 @@
               <a href="#" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-notification-3-line"></i> <span>Notification</span>
               </a>
-              <a href="../features/settings-studs.php"
+              <a href="../../pages-to-accounts/for-students/settings-studs.php"
                 class="btn text-start d-flex align-items-center gap-2 btn-active">
                 <i class="ri-settings-line"></i> <span>Settings</span>
               </a>
@@ -217,10 +228,10 @@
       <!-- Bottom Navigation Bar (for md and below) -->
       <nav class="d-lg-none fixed-bottom bg-light border-top">
         <div class="d-flex justify-content-around py-2">
-          <a href="../features/student-dashboard.php" class="text-center mt-2">
+          <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="text-center mt-2">
             <i class="ri-home-9-line fs-1"></i>
           </a>
-          <a href="../features/project-studs.php" class="text-center mt-2">
+          <a href="../../pages-to-accounts/for-students/project-studs.php" class="text-center mt-2">
             <i class="ri-shapes-line fs-1"></i>
           </a>
           <a href="#" class="text-center mt-2">
@@ -229,7 +240,7 @@
           <a href="#" id="createPostTrigger" class="text-center mt-2">
             <i class="ri-notification-3-line fs-1"></i>
           </a>
-          <a href="../features/settings-studs.php" class="text-center mt-2 btn-active-mobile">
+          <a href="../../pages-to-accounts/for-students/settings-studs.php" class="text-center mt-2 btn-active-mobile">
             <i class="ri-settings-line fs-1"></i>
           </a>
         </div>
@@ -257,7 +268,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body text-center">
-            <img id="profilePicPreview" src="../assets/img/team/sampleTeam.jpg" class="profile-pic-preview"
+            <img id="profilePicPreview" src="../../assets/img/team/sampleTeam.jpg" class="profile-pic-preview"
               alt="Current Profile Picture">
             <div class="mb-3">
               <input type="file" class="form-control" id="profilePicUpload" accept="image/*">
@@ -422,277 +433,20 @@
 
 
     <!-- Vendor JS Files -->
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/php-email-form/validate.js"></script>
-    <script src="../assets/vendor/aos/aos.js"></script>
-    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../../assets/vendor/aos/aos.js"></script>
+    <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/settings-studs.js"></script>
-    <script src="../assets/js/studs-search.js"></script>
-    <script src="../assets/js/studs-main-func.js"></script>
-
-    <script>
-      // Wait for DOM to be fully loaded
-      document.addEventListener('DOMContentLoaded', function () {
-        // =============================================
-        // DARK MODE FUNCTIONALITY
-        // =============================================
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-
-        // Function to set dark mode
-        const setDarkMode = (enabled) => {
-          if (enabled) {
-            body.classList.add('dark-mode');
-            localStorage.setItem('darkMode', 'dark');
-            darkModeToggle.checked = true;
-            console.log('Dark mode enabled');
-          } else {
-            body.classList.remove('dark-mode');
-            localStorage.setItem('darkMode', 'light');
-            darkModeToggle.checked = false;
-            console.log('Dark mode disabled');
-          }
-
-          // Dispatch custom event for other components to listen to
-          document.dispatchEvent(new CustomEvent('darkModeChange', {
-            detail: { isDarkMode: enabled }
-          }));
-        };
-
-        // Check for saved user preference or use system preference
-        const initializeDarkMode = () => {
-          try {
-            const savedMode = localStorage.getItem('darkMode');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-            if (savedMode === 'dark' || (!savedMode && systemPrefersDark)) {
-              setDarkMode(true);
-            } else {
-              setDarkMode(false);
-            }
-          } catch (error) {
-            console.error('Error initializing dark mode:', error);
-            // Fallback to light mode if there's an error
-            setDarkMode(false);
-          }
-        };
-
-        // Initialize dark mode
-        initializeDarkMode();
-
-        // Listen for system preference changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-          if (!localStorage.getItem('darkMode')) { // Only auto-change if no explicit preference
-            setDarkMode(e.matches);
-          }
-        });
-
-        // Toggle dark mode
-        if (darkModeToggle) {
-          darkModeToggle.addEventListener('change', function () {
-            setDarkMode(this.checked);
-          });
-        }
-
-        // =============================================
-        // PROFILE PICTURE MODAL FUNCTIONALITY
-        // =============================================
-        const initializeProfilePictureModal = () => {
-          try {
-            const profilePicModal = new bootstrap.Modal('#profilePicModal');
-            const profilePicUpload = document.getElementById('profilePicUpload');
-            const profilePicPreview = document.getElementById('profilePicPreview');
-            const removeProfilePic = document.getElementById('removeProfilePic');
-            const saveProfilePic = document.getElementById('saveProfilePic');
-
-            if (!profilePicUpload || !profilePicPreview) return;
-
-            // Preview uploaded image
-            profilePicUpload.addEventListener('change', function (e) {
-              const file = e.target.files[0];
-              if (file) {
-                // Validate file type and size
-                const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
-                const maxSize = 5 * 1024 * 1024; // 5MB
-
-                if (!validTypes.includes(file.type)) {
-                  alert('Please select a valid image file (JPEG, PNG, GIF)');
-                  this.value = '';
-                  return;
-                }
-
-                if (file.size > maxSize) {
-                  alert('Image size must be less than 5MB');
-                  this.value = '';
-                  return;
-                }
-
-                const reader = new FileReader();
-                reader.onloadstart = () => {
-                  profilePicPreview.src = '../assets/img/loading.gif'; // Show loading indicator
-                };
-                reader.onload = (event) => {
-                  profilePicPreview.src = event.target.result;
-                };
-                reader.onerror = () => {
-                  alert('Error reading image file');
-                  profilePicPreview.src = '../assets/img/default-profile.png';
-                };
-                reader.readAsDataURL(file);
-              }
-            });
-
-            // Remove current profile picture
-            if (removeProfilePic) {
-              removeProfilePic.addEventListener('click', function () {
-                profilePicPreview.src = '../assets/img/default-profile.png';
-                profilePicUpload.value = '';
-              });
-            }
-
-            // Save profile picture
-            if (saveProfilePic) {
-              saveProfilePic.addEventListener('click', function () {
-                // Simulate upload delay
-                this.disabled = true;
-                this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...';
-
-                // In a real app, you would upload to server here
-                setTimeout(() => {
-                  // Show success message with Toast
-                  const toastHTML = `
-                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                  <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-success text-white">
-                      <strong class="me-auto">Success</strong>
-                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                      Profile picture updated successfully!
-                    </div>
-                  </div>
-                </div>
-              `;
-
-                  document.body.insertAdjacentHTML('beforeend', toastHTML);
-
-                  // Remove toast after 3 seconds
-                  setTimeout(() => {
-                    const toast = document.querySelector('.toast');
-                    if (toast) {
-                      toast.classList.remove('show');
-                      setTimeout(() => toast.remove(), 300);
-                    }
-                  }, 3000);
-
-                  // Reset button and close modal
-                  this.disabled = false;
-                  this.textContent = 'Save Changes';
-                  profilePicModal.hide();
-                }, 1500);
-              });
-            }
-          } catch (error) {
-            console.error('Error initializing profile picture modal:', error);
-          }
-        };
-
-        // =============================================
-        // TOOLTIP INITIALIZATION
-        // =============================================
-        const initializeTooltips = () => {
-          try {
-            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-              new bootstrap.Tooltip(tooltipTriggerEl, {
-                trigger: 'hover focus'
-              });
-            });
-          } catch (error) {
-            console.error('Error initializing tooltips:', error);
-          }
-        };
-
-        // =============================================
-        // MODAL INITIALIZATION
-        // =============================================
-        const initializeModals = () => {
-          try {
-            // Initialize all modals with enhanced options
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-              new bootstrap.Modal(modal, {
-                backdrop: 'static',
-                keyboard: false
-              });
-            });
-
-            // Add custom behavior to policy modals
-            const policyModals = ['#privacyPolicyModal', '#termsModal'];
-            policyModals.forEach(modalId => {
-              const modalEl = document.querySelector(modalId);
-              if (modalEl) {
-                modalEl.addEventListener('shown.bs.modal', function () {
-                  const policyContent = this.querySelector('.policy-content');
-                  if (policyContent) {
-                    policyContent.scrollTop = 0; // Reset scroll position
-                  }
-                });
-              }
-            });
-          } catch (error) {
-            console.error('Error initializing modals:', error);
-          }
-        };
-
-        // =============================================
-        // ACCOUNT ACTIVITY TABLE ENHANCEMENTS
-        // =============================================
-        const enhanceActivityTable = () => {
-          try {
-            const activityTable = document.querySelector('.activity-table');
-            if (activityTable) {
-              // Make table rows interactive
-              const rows = activityTable.querySelectorAll('tbody tr');
-              rows.forEach(row => {
-                row.addEventListener('click', function () {
-                  rows.forEach(r => r.classList.remove('table-active'));
-                  this.classList.add('table-active');
-                });
-              });
-            }
-          } catch (error) {
-            console.error('Error enhancing activity table:', error);
-          }
-        };
-
-        // =============================================
-        // INITIALIZE ALL COMPONENTS
-        // =============================================
-        initializeProfilePictureModal();
-        initializeTooltips();
-        initializeModals();
-        enhanceActivityTable();
-
-        // Add resize observer for responsive adjustments
-        const resizeObserver = new ResizeObserver(entries => {
-          // Handle responsive adjustments here if needed
-        });
-
-        resizeObserver.observe(document.body);
-
-        // Cleanup on page unload
-        window.addEventListener('beforeunload', function () {
-          resizeObserver.disconnect();
-        });
-      });
-    </script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../for-students/js/settings-logout.js"></script>
+      <script src="../for-students/js/studs-search.js"></script>
+    <script src="../../assets/js/studs-main-func.js"></script>
+    
 </body>
 
 </html>

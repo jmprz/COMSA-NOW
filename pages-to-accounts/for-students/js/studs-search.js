@@ -31,25 +31,25 @@ document.addEventListener('DOMContentLoaded', function() {
       { 
         title: 'My Projects', 
         content: 'View and manage your current projects', 
-        link: '/features/project-studs.html',
+        link: '../../pages-to-accounts/for-students/project-studs.php',
         keywords: 'projects work assignments tasks' 
       },
       { 
         title: 'Messages', 
         content: 'Check your inbox and send messages', 
-        link: '/features/studs-chat.html',
+        link: '../../pages-to-accounts/for-students/studs-chat.html',
         keywords: 'messages chat inbox communication' 
       },
       { 
         title: 'Calendar', 
         content: 'View your academic schedule and events', 
-        link: '/features/calendar.html',
+        link: '../../features/calendar.html',
         keywords: 'calendar schedule events dates' 
       },
       { 
         title: 'Settings', 
         content: 'Update your profile and preferences', 
-        link: '/features/settings-studs.html',
+        link: '../../pages-to-accounts/for-students/settings-studs.php',
         keywords: 'settings profile preferences account' 
       },
       { 
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { 
         title: 'Upload Projects', 
         content: 'For uploading projects', 
-        link: '/features/project-studs.html',
+        link: '../../pages-to-accounts/for-students/project-studs.php',
         keywords: 'upload projects assignments files documents' 
       }
     ];

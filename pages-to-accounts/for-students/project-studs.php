@@ -1,10 +1,11 @@
 <?php
-require_once "../../backend/config/session.php";
+  require_once "../../../backend/config/session.php";
 
-if (!isset($_SESSION['user_id'])) {
-  header("location: ../index.html");
-  exit();
-}
+  if (!isset($_SESSION["user_id"])) {
+    // Redirect to login page if not logged in
+    header("Location: ../../index.html");
+    exit();
+  }
 
 ?>
 
@@ -19,9 +20,9 @@ if (!isset($_SESSION['user_id'])) {
   <meta name="keywords" content="student projects, project showcase, game development, web development">
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
   <link rel="manifest" href="../assets/img/favicon/site.webmanifest">
 
   <!-- Fonts -->
@@ -32,19 +33,19 @@ if (!isset($_SESSION['user_id'])) {
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
     rel="stylesheet" />
   <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="../assets/css/main.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/project-studs-design.css">
-  <link rel="stylesheet" href="../assets/css/search.css">
-  <link rel="stylesheet" href="../assets/css/student-dash.css">
-  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link href="../../assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/project-studs-design.css">
+  <link rel="stylesheet" href="../../assets/css/search.css">
+  <link rel="stylesheet" href="../../assets/css/student-dash.css">
+  <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
@@ -61,16 +62,16 @@ if (!isset($_SESSION['user_id'])) {
             <!-- Side Nav Header -->
             <div>
               <div class="text-center mb-5 side-nav-header">
-                <img src="../assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
+                <img src="../../assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
                 <h3 class="fw-bold">COMSA-NOW</h3>
               </div>
 
               <!-- Nav Menu -->
               <div class="side-nav-menu d-flex flex-column gap-3">
-                <a href="../features/student-dashboard.php" class="btn text-start d-flex align-items-center gap-2">
+                <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-home-9-line"></i> <span>Home</span>
                 </a>
-                <a href="../features/project-studs.php" class="btn text-start d-flex align-items-center gap-2 btn-active">
+                <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2 btn-active">
                   <i class="ri-shapes-line"></i> <span>Projects</span>
                 </a>
                 <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
@@ -79,7 +80,7 @@ if (!isset($_SESSION['user_id'])) {
                 <a href="#" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-notification-3-line"></i> <span>Notification</span>
                 </a>
-                <a href="../features/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
+                <a href="../../pages-to-accounts/for-students/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-settings-line"></i> <span>Settings</span>
                 </a>
               </div>
@@ -110,7 +111,7 @@ if (!isset($_SESSION['user_id'])) {
 
                 <!-- Profile Icon Button -->
                 <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#profileModal">
-                  <img src="../assets/img/team/sampleTeam.jpg" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
+                  <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
                 </button>
               </div>
             </div>
@@ -142,7 +143,7 @@ if (!isset($_SESSION['user_id'])) {
             <!-- Project 1 - Game -->
             <div class="project-container">
               <div class="project-header">
-                <img src="../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
                 <div class="project-author">
                   <p class="project-username">Valexore</p>
                   <p class="project-date">2 days ago</p>
@@ -156,7 +157,7 @@ if (!isset($_SESSION['user_id'])) {
                   Darmnn if it happens, it happens...
                 </p>
                 <div class="project-media">
-                  <img src="../assets/img/events/project-game-example.png" class="project-image" alt="Game Screenshot">
+                  <img src="../../assets/img/events/project-game-example.png" class="project-image" alt="Game Screenshot">
                   <div class="project-links">
                     <a href="#" class="project-link"><i class="bi bi-download"></i> Executable</a>
                     <a href="#" class="project-link"><i class="bi bi-github"></i> Source Code</a>
@@ -183,7 +184,7 @@ if (!isset($_SESSION['user_id'])) {
             <!-- Project 2 - Website -->
             <div class="project-container">
               <div class="project-header">
-                <img src="../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
                 <div class="project-author">
                   <p class="project-username">Valexore</p>
                   <p class="project-date">1 week ago</p>
@@ -198,7 +199,7 @@ if (!isset($_SESSION['user_id'])) {
                 </p>
 
                 <div class="project-media">
-                  <img src="../assets/img/events/project-web-example.png" class="project-image" alt="Website Screenshot">
+                  <img src="../../assets/img/events/project-web-example.png" class="project-image" alt="Website Screenshot">
                   <div class="project-links">
                     <a href="#" class="project-link"><i class="bi bi-globe"></i> Live Demo</a>
                     <a href="#" class="project-link"><i class="bi bi-github"></i> Source Code</a>
@@ -227,7 +228,7 @@ if (!isset($_SESSION['user_id'])) {
             <!-- Project 3 - Console App -->
             <div class="project-container">
               <div class="project-header">
-                <img src="../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
                 <div class="project-author">
                   <p class="project-username">Valexore</p>
                   <p class="project-date">3 weeks ago</p>
@@ -243,7 +244,7 @@ if (!isset($_SESSION['user_id'])) {
                 </p>
 
                 <div class="project-media">
-                  <img src="../assets/img/events/project-console-example.png" class="project-image" alt="Console Screenshot">
+                  <img src="../../assets/img/events/project-console-example.png" class="project-image" alt="Console Screenshot">
                   <div class="project-links">
                     <a href="#" class="project-link"><i class="bi bi-download"></i> Executable</a>
                     <a href="#" class="project-link"><i class="bi bi-github"></i> Source Code</a>
@@ -337,7 +338,7 @@ if (!isset($_SESSION['user_id'])) {
                           <span><i class="bi bi-star-fill"></i> 210</span>
                         </div>
                       </div>
-                      <img src="../assets/img/team/tung-tung-tung-sahur.png" alt="Trending Project" class="project-avatar">
+                      <img src="../../assets/img/team/tung-tung-tung-sahur.png" alt="Trending Project" class="project-avatar">
                     </div>
                     <div class="trending-project">
                       <div class="trending-project-info">
@@ -347,7 +348,7 @@ if (!isset($_SESSION['user_id'])) {
                           <span><i class="bi bi-star-fill"></i> 187</span>
                         </div>
                       </div>
-                      <img src="../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+                      <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
                     </div>
                     <div class="trending-project">
                       <div class="trending-project-info">
@@ -357,7 +358,7 @@ if (!isset($_SESSION['user_id'])) {
                           <span><i class="bi bi-star-fill"></i> 156</span>
                         </div>
                       </div>
-                      <img src="../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+                      <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
                     </div>
                   </div>
                 </div>
@@ -528,10 +529,10 @@ if (!isset($_SESSION['user_id'])) {
       <!-- Bottom Navigation Bar (for md and below) -->
       <nav class="d-lg-none fixed-bottom bg-light border-top">
         <div class="d-flex justify-content-around py-2">
-          <a href="../features/student-dashboard.php" class="text-center mt-2">
+          <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="text-center mt-2">
             <i class="ri-home-9-line fs-1"></i>
           </a>
-          <a href="../features/project-studs.php" class="text-center mt-2 btn-active-mobile">
+          <a href="../../pages-to-accounts/for-students/project-studs.php" class="text-center mt-2 btn-active-mobile">
             <i class="ri-shapes-line fs-1"></i>
           </a>
           <a id="uploadProjectBtn" class="text-center mt-2">
@@ -540,7 +541,7 @@ if (!isset($_SESSION['user_id'])) {
           <a href="#" id="createPostTrigger" class="text-center mt-2">
             <i class="ri-notification-3-line fs-1"></i>
           </a>
-          <a href="../features/settings-studs.php" class="text-center mt-2">
+          <a href="../../pages-to-accounts/for-students/settings-studs.php" class="text-center mt-2">
             <i class="ri-settings-line fs-1"></i>
           </a>
         </div>
@@ -579,7 +580,7 @@ if (!isset($_SESSION['user_id'])) {
             <div class="modal-body">
               <!-- Paste trending project cards here -->
               <div class="trending-project d-flex mb-3">
-                <img src="../assets/img/team/tung-tung-tung-sahur.png" alt="Trending Project" class="project-avatar me-2">
+                <img src="../../assets/img/team/tung-tung-tung-sahur.png" alt="Trending Project" class="project-avatar me-2">
                 <div>
                   <h6 class="mb-0">Virtual Campus Tour</h6>
                   <small>by vr_enthusiast</small><br>
@@ -587,7 +588,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
               </div>
               <div class="trending-project d-flex mb-3">
-                <img src="../assets/img/team/sampleTeam.jpg" class="project-avatar me-2" alt="User Avatar">
+                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar me-2" alt="User Avatar">
                 <div>
                   <h6 class="mb-0">Code Collab Platform</h6>
                   <small>by team_coders</small><br>
@@ -595,7 +596,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
               </div>
               <div class="trending-project d-flex mb-3">
-                <img src="../assets/img/team/sampleTeam.jpg" class="project-avatar me-2" alt="User Avatar">
+                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar me-2" alt="User Avatar">
                 <div>
                   <h6 class="mb-0">AR Chemistry Lab</h6>
                   <small>by science_tech</small><br>
@@ -652,21 +653,21 @@ if (!isset($_SESSION['user_id'])) {
       </div>
 
       <!-- Vendor JS Files -->
-      <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="../assets/vendor/php-email-form/validate.js"></script>
-      <script src="../assets/vendor/aos/aos.js"></script>
-      <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-      <script src="../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-      <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-      <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+      <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="../../assets/vendor/php-email-form/validate.js"></script>
+      <script src="../../assets/vendor/aos/aos.js"></script>
+      <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+      <script src="../../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+      <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+      <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
 
       <!-- Main JS File -->
-      <script src="../assets/js/main.js"></script>
-      <script src="../assets/js/studs-search.js"></script>
-      <script src="../assets/js/studs-main-func.js"></script>
+      <script src="../../assets/js/main.js"></script>
+      <script src="../for-students/js/studs-search.js"></script>
+      <script src="../for-students/js/project-upload.js"></script>
 
       <!-- Main JS File -->
-      <script src="../assets/js/project-studs.js"></script>
+      <script src="../for-students/js/project-studs.js"></script>
 </body>
 
 </html>

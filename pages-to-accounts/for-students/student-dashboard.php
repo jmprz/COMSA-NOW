@@ -1,9 +1,9 @@
 <?php
-  require_once "../../backend/config/session.php";
+  require_once "../../../backend/config/session.php";
 
   if (!isset($_SESSION["user_id"])) {
     // Redirect to login page if not logged in
-    header("Location: ../index.html");
+    header("Location: ../../index.html");
     exit();
   }
 
@@ -23,9 +23,9 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="..//assets/img/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../..//assets/img/favicon/favicon-16x16.png">
   <link rel="manifest" href="../assets/img/favicon/site.webmanifest">
 
   <!-- Fonts -->
@@ -38,19 +38,19 @@
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
     rel="stylesheet" />
   <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="../assets/css/main.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/login-form.css">
-  <link rel="stylesheet" href="../assets/css/search.css">
-  <link rel="stylesheet" href="../assets/css/student-dash.css">
-  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link href="../../assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/login-form.css">
+  <link rel="stylesheet" href="../../assets/css/search.css">
+  <link rel="stylesheet" href="../../assets/css/student-dash.css">
+  <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
@@ -80,7 +80,7 @@
           <!-- Side Nav Header -->
           <div>
             <div class="text-center mb-5 side-nav-header">
-              <img src="../assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
+              <img src="../../assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
               <h3 class="fw-bold">COMSA-NOW</h3>
             </div>
 
@@ -89,7 +89,7 @@
               <a href="#" class="btn text-start d-flex align-items-center gap-2 btn-active">
                 <i class="ri-home-9-line"></i> <span>Home</span>
               </a>
-              <a href="../features/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
+              <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-shapes-line"></i> <span>Projects</span>
               </a>
               <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
@@ -98,7 +98,7 @@
               <a href="#" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-notification-3-line"></i> <span>Notification</span>
               </a>
-              <a href="../features/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
+              <a href="../../pages-to-accounts/for-students/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-settings-line"></i> <span>Settings</span>
               </a>
             </div>
@@ -135,7 +135,7 @@
           <!-- Post 1 -->
           <div class="post-container">
             <div class="post-header">
-              <img src="../assets/img/team/sampleTeam.jpg" class="post-avatar" alt="User Avatar">
+              <img src="../../assets/img/team/sampleTeam.jpg" class="post-avatar" alt="User Avatar">
               <div class="d-flex row gy-0">
                 <p class="project-username">john_perez</p>
                 <p class="project-date">1 week ago</p>
@@ -143,7 +143,7 @@
               <i class="bi bi-three-dots post-more"></i>
             </div>
 
-            <img src="../assets/img/csexpo.jpg" class="post-image" alt="Project Image">
+            <img src="../../assets/img/csexpo.jpg" class="post-image" alt="Project Image">
 
             <div class="post-actions">
               <button class="post-action like-btn" data-post="1">
@@ -183,7 +183,7 @@
           <!-- Post 2 -->
           <div class="post-container">
             <div class="post-header">
-              <img src="../assets/img/team/sampleTeam.jpg" class="post-avatar" alt="User Avatar">
+              <img src="../../assets/img/team/sampleTeam.jpg" class="post-avatar" alt="User Avatar">
               <div class="d-flex row gy-0">
                 <p class="project-username">john_perez</p>
                 <p class="project-date">1 week ago</p>
@@ -191,7 +191,7 @@
               <i class="bi bi-three-dots post-more"></i>
             </div>
 
-            <img src="../assets/img/comsayep.jpg" class="post-image" alt="Project Image">
+            <img src="../../assets/img/comsayep.jpg" class="post-image" alt="Project Image">
 
             <div class="post-actions">
               <button class="post-action like-btn" data-post="2">
@@ -232,7 +232,7 @@
           <!-- Profile Card -->
           <div class="sidebar-card">
             <div class="profile-card">
-              <img src="../assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
+              <img src="../../assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
               <div class="profile-info">
                 <h4> <?=$name?> </h4>
                 <p>Computer Science Student</p>
@@ -445,7 +445,7 @@
         <a href="#" class="text-center mt-2 btn-active-mobile">
           <i class="ri-home-9-line fs-1"></i>
         </a>
-        <a href="../features/project-studs.php" class="text-center mt-2">
+        <a href="../../pages-to-accounts/project-studs.php" class="text-center mt-2">
           <i class="ri-shapes-line fs-1"></i>
         </a>
         <a href="#" class="text-center mt-2">
@@ -454,7 +454,7 @@
         <a href="#" id="createPostTrigger" class="text-center mt-2">
           <i class="ri-notification-3-line fs-1"></i>
         </a>
-        <a href="../features/settings-studs.php" class="text-center mt-2">
+        <a href="../pages-to-accounts/for-students/settings-studs.php" class="text-center mt-2">
           <i class="ri-settings-line fs-1"></i>
         </a>
       </div>
@@ -475,7 +475,7 @@
               <!-- Profile Card -->
               <div class="sidebar-card">
                 <div class="profile-card">
-                  <img src="../assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
+                  <img src="../../assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
                   <div class="profile-info">
                     <h4>your_username</h4>
                     <p>Computer Science Student</p>
@@ -525,18 +525,18 @@
 
 
     <!-- Vendor JS Files -->
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/php-email-form/validate.js"></script>
-    <script src="../assets/vendor/aos/aos.js"></script>
-    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../../assets/vendor/aos/aos.js"></script>
+    <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/search.js"></script>
-    <script src="../assets/js/studs-main-func.js"></script>
+    <script src="../../assets/js/main.js"></script>
+      <script src="../for-students/js/studs-search.js"></script>
+    <script src="../../assets/js/studs-main-func.js"></script>
 
 </body>
 
