@@ -88,11 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-
-
-
-
-//
 // Project category filter functionality
 //
    document.addEventListener('DOMContentLoaded', function() {
