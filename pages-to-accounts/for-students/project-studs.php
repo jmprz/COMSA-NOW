@@ -183,7 +183,7 @@ if (!isset($_SESSION["user_id"])) {
 
 
             <!-- Project 2 - Website -->
-            <div class="project-container">
+            <!-- <div class="project-container">
               <div class="project-header">
                 <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
                 <div class="project-author">
@@ -224,10 +224,10 @@ if (!isset($_SESSION["user_id"])) {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Project 3 - Console App -->
-            <div class="project-container">
+            <!-- <div class="project-container">
               <div class="project-header">
                 <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
                 <div class="project-author">
@@ -267,7 +267,7 @@ if (!isset($_SESSION["user_id"])) {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-lg">
@@ -687,7 +687,7 @@ if (!isset($_SESSION["user_id"])) {
   <!-- Main JS File -->
   <script src="../../assets/js/main.js"></script>
   <script src="../for-students/js/studs-search.js"></script>
-  <script src="../for-students/js/project-upload.js"></script>
+  <script src="../for-students/js/project-upload.js" defer></script>
 
   <!-- Main JS File -->
   <script src="../for-students/js/project-studs.js"></script>

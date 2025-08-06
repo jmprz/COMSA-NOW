@@ -80,6 +80,11 @@
   background-color: #20c997;
 }
 
+.others-badge {
+  background-color: #20c997;
+}
+
+
 .console-badge {
   background-color: #fd7e14;
 }
@@ -92,7 +97,7 @@
   background-color: #d63384;
 }
 
-.db-badge {
+.databases-badge {
   background-color: #ffc107;
   color: #212529;
 }

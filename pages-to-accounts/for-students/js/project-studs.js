@@ -267,6 +267,7 @@ uploadForm.addEventListener("submit", function (e) {
                         tagMemberWrapper.innerHTML = "";
                         mediaPreview.innerHTML = "";
                         mediaCounter.innerText = "0/8 images selected";
+                        window.location.reload();
                     }, 1500);
                 } else {
                     // Hide overlay
@@ -308,9 +309,15 @@ uploadForm.addEventListener("submit", function (e) {
 document.addEventListener('DOMContentLoaded', () => {
     const socket = new WebSocket("ws://localhost:8080");
 
-    // socket.onopen = () => {
-    //     console.log("WebSocket connected ✅");
-    // };
+    const categoryClassMap = {
+        'websites': 'web',
+        'mobile apps': 'mobile',
+        'games': 'game',
+        'ai/ml': 'ai',
+        'console apps': 'console',
+        'databases': 'databases',
+        'others': 'others'
+    };
 
     socket.onmessage = (event) => {
         console.log("📨 Message received:", event.data);
@@ -345,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.type === 'comment') {
             const commentsEl = document.getElementById('modalComments');
             const commentCountEl = document.getElementById(`comment-count-${data.project_id}`);
-            if (!commentsEl || !commentCountEl ) {
+            if (!commentsEl || !commentCountEl) {
                 console.warn("⚠️ 'modalComments' element not found");
                 return;
             }
@@ -365,10 +372,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("❌ WebSocket error", err);
     };
 
-    // socket.onclose = () => {
-    //     console.warn("WebSocket connection closed");
-    // };
-
     const feed = document.getElementById('projectFeed');
     if (!feed) {
         console.error('⚠️ projectField element not found!');
@@ -384,6 +387,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     const postEl = document.createElement('div');
                     postEl.classList.add('post');
 
+                    const categoryKey = post.project_category.toLowerCase().trim();
+                    const categoryClass = categoryClassMap[categoryKey] || 'all';
+
+                    console.log(categoryKey);
+
                     postEl.innerHTML = `
                         <div class="project-container" id="${post.id}-project">
                             <div class="project-header">
@@ -392,8 +400,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <p class="project-username">${post.student_name}</p>
                                 <p class="project-date">${post.created_at}</p>
                                 </div>
-                                <span class="project-badge game-badge" id="game">${post.project_category}</span>
-                            </div>
+                                <span class="project-badge ${categoryClass}-badge">
+                                ${post.project_category}
+                                </span>                            
+                                </div>
 
                             <div class="project-content">
                                 <h3 class="project-title">${post.project_title}</h3>
@@ -439,10 +449,92 @@ document.addEventListener('DOMContentLoaded', () => {
                     feed.appendChild(postEl);
                 });
 
+                const categoryItems = document.querySelectorAll('.category-item');
+                const projectContainers = document.querySelectorAll('.project-container');
+
+                categoryItems.forEach(item => {
+                    item.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        const categoryId = this.id.replace('category-', '');
+
+                        // Remove active class from all category items
+                        categoryItems.forEach(ci => ci.classList.remove('active'));
+
+                        // Add active class to clicked category
+                        this.classList.add('active');
+
+                        // Show/hide projects based on category
+                        projectContainers.forEach(project => {
+                            console.log("2");
+
+                            const badgeEl = project.querySelector('.project-badge');
+                            if (!badgeEl) {
+                                console.warn("⚠️ project-badge not found for project:", project);
+                                return;
+                            }
+
+                            const projectBadge = badgeEl.textContent.trim();
+                            console.log("3");
+
+                            if (categoryId === 'all') {
+                                project.style.display = 'block';
+                            } else {
+                                console.log("4");
+                                const categoryMap = {
+                                    'games': 'Games',
+                                    'websites': 'Websites',
+                                    'mobile': 'Mobile Apps',
+                                    'console': 'Console Apps',
+                                    'ai': 'AI/ML',
+                                    'databases': 'Databases',
+                                    'others': 'Others'
+                                };
+
+                                if (categoryMap[categoryId].toLowerCase() === projectBadge.toLowerCase()) {
+                                    console.log("5");
+                                    project.style.display = 'block';
+                                } else {
+                                    project.style.display = 'none';
+                                }
+                            }
+                        });
+
+                    });
+                });
+
+                // Activate "All" category by default
+                const allCategory = document.getElementById('category-all');
+                if (allCategory) {
+                    allCategory.classList.add('active');
+                }
 
             }
 
         });
+    const projectImageViewer = new bootstrap.Modal(document.getElementById('projectImageViewer'));
+
+    // Get all project images
+    const projectImages = document.querySelectorAll('.project-image');
+
+    projectImages.forEach((image, index) => {
+        // Assign unique ID to each image if not already present
+        if (!image.id) {
+            image.id = `project-image-${index}`;
+        }
+
+        image.addEventListener('click', function () {
+            // Get the image source and alt text
+            const imgSrc = this.src;
+            const imgAlt = this.alt || 'Project Image';
+
+            // Set the modal content
+            document.getElementById('projectImageView').src = imgSrc;
+
+            // Show the modal
+            projectImageViewer.show();
+        });
+    });
 
     feed.addEventListener("click", async (e) => {
         const commentBtn = e.target.closest('.comment-btn');
@@ -540,82 +632,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
-
-//     const projectId = e.target.dataset.id;
-//     if (e.target.classList.contains('like-btn')) {
-//         const res = await fetch(`../../../backend/api/like_project.php`, {
-//             method: 'POST',
-//             credentials: 'include',
-//             headers: { 'Content-Type': 'application/json' },
-//             body: JSON.stringify({ project_id: projectId })
-//         });
-
-//         const result = await res.json();
-
-//         if (result.status === 'liked') {
-//             e.target.classList.add('liked'); // Optional: style change
-//             const countEl = e.target.parentElement.querySelector('.like-count');
-//             countEl.textContent = parseInt(countEl.textContent) + 1;
-//             ws.send(JSON.stringify({ type: 'like', project_id: projectId, action: 'like' }));
-//         } else if (result.status === 'unliked') {
-//             e.target.classList.remove('liked');
-//             const countEl = e.target.parentElement.querySelector('.like-count');
-//             countEl.textContent = Math.max(parseInt(countEl.textContent) - 1, 0);
-//             ws.send(JSON.stringify({ type: 'like', project_id: projectId, action: 'unlike' }));
-//         }
-//     }
-
-//     if (e.target.classList.contains('toggle-comments')) {
-//         const commentBox = document.getElementById(`comments-${projectId}`);
-//         if (commentBox.style.display === 'none') {
-//             const res = await fetch(`../../../backend/api/get_comments.php?project_id=${projectId}`);
-//             const comments = await res.json();
-//             console.log(comments)
-//             commentBox.innerHTML = comments.map(c => `<p><strong>${c.name}</strong>: ${c.comment}</p>`).join('');
-//             commentBox.style.display = 'block';
-//         } else {
-//             commentBox.style.display = 'none';
-//         }
-//     }
-
-//     if (e.target.classList.contains('add-comment')) {
-//         const input = document.querySelector(`.comment-input[data-id="${projectId}"]`);
-//         const text = input.value;
-//         if (text.trim() !== '') {
-//             const res = await fetch("../../../backend/api/add_comment.php", {
-//                 method: 'POST',
-//                 headers: { "Content-type": "application/json" },
-//                 credentials: 'include',
-//                 body: JSON.stringify({ project_id: projectId, comment: text })
-//             });
-
-//             const data = await res.json();
-//             if (data.success && data.comment) {
-//                 const commentBox = document.getElementById(`comments-${projectId}`);
-//                 const newCommentHTML = `<p><strong>You</strong>: ${data.comment.comment}</p>`;
-//                 commentBox.insertAdjacentHTML('beforeend', newCommentHTML);
-//                 commentBox.style.display = 'block';
-
-//                 const commentCountEl = input.closest('.post').querySelector('.comment-count');
-//                 commentCountEl.textContent = parseInt(commentCountEl.textContent) + 1;
-
-//                 input.value = ''; // ✅ Clear input
-
-//                 ws.send(JSON.stringify({
-//                     type: 'comment',
-//                     project_id: projectId,
-//                     comment: {
-//                         name: data.comment.name,
-//                         comment: data.comment.comment,
-//                         date: data.created_at
-//                     },
-//                     self: true
-//                 }));
-//             }
-//         }
-//     }
-
-// });
 
 
 
