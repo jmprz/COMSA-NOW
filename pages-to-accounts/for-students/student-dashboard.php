@@ -1,15 +1,15 @@
 <?php
-  require_once "../../../backend/config/session.php";
+require_once "../../../backend/config/session.php";
 
-  if (!isset($_SESSION["user_id"])) {
-    // Redirect to login page if not logged in
-    header("Location: ../../index.html");
-    exit();
-  }
+if (!isset($_SESSION["user_id"])) {
+  // Redirect to login page if not logged in
+  header("Location: /somsa/COMSA-NOW/");
+  exit();
+}
 
-  $name = htmlspecialchars($_SESSION['user_name']);
-  $email = htmlspecialchars($_SESSION['user_email']);
-  $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
+$name = htmlspecialchars($_SESSION['user_name']);
+$email = htmlspecialchars($_SESSION['user_email']);
+$studentNumber = htmlspecialchars($_SESSION['user_student_number']);
 ?>
 
 <!DOCTYPE html>
@@ -232,9 +232,14 @@
           <!-- Profile Card -->
           <div class="sidebar-card">
             <div class="profile-card">
-              <img src="../../assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
+              <!-- Avatar Image -->
+              <img src="../../assets/img/team/sampleTeam.jpg" class="profile-avatar d-none" id="user-avatar" alt="Profile Avatar">
+
+              <!-- Initials Fallback -->
+              <div class="profile-avatar-initials d-none" id="avatar-initials"></div>
+
               <div class="profile-info">
-                <h4> <?=$name?> </h4>
+                <h4><?= $name ?></h4>
                 <p>Computer Science Student</p>
               </div>
             </div>
@@ -535,7 +540,8 @@
 
     <!-- Main JS File -->
     <script src="../../assets/js/main.js"></script>
-      <script src="../for-students/js/studs-search.js"></script>
+    <script src="../for-students/js/studs-search.js"></script>
+
     <script src="../../assets/js/studs-main-func.js"></script>
 
 </body>

@@ -305,7 +305,6 @@ uploadForm.addEventListener("submit", function (e) {
 })
 
 
-// this is the code for the newsFeed using websocket
 document.addEventListener('DOMContentLoaded', () => {
     const socket = new WebSocket("ws://localhost:8080");
 
@@ -390,7 +389,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     const categoryKey = post.project_category.toLowerCase().trim();
                     const categoryClass = categoryClassMap[categoryKey] || 'all';
 
-                    console.log(categoryKey);
+                    //carousel images
+                    const carouselId = `carousel-${post.id}`;
+                    const hasImages = post.images && post.images.length > 0;
+                    const carouselControls = hasImages && post.images.length > 1
+                        ? `
+                        <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        `
+                        : '';
+
+                    const carouselHTML = `
+                        <!-- your project header -->
+                        <div id="${carouselId}" class="carousel slide">
+                            <div class="carousel-inner">
+                                ${post.images.map((img, index) => `
+                                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                    <img src="../../../backend/${img}" class="d-block w-100" alt="Project Image ${index + 1}">
+                                </div>`).join('')}
+                            </div>
+                        ${carouselControls}
+                        </div>`;
+
 
                     postEl.innerHTML = `
                         <div class="project-container" id="${post.id}-project">
@@ -403,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span class="project-badge ${categoryClass}-badge">
                                 ${post.project_category}
                                 </span>                            
-                                </div>
+                            </div>
 
                             <div class="project-content">
                                 <h3 class="project-title">${post.project_title}</h3>
@@ -417,13 +443,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </span>
                                 </p>
                                 <div class="project-media">
-                                <img src="../../assets/img/events/project-game-example.png" class="project-image" alt="Game Screenshot">
-                                <div class="project-links">
-                                    ${post.download_link ? `<a href="${post.download_link}" class="project-link"><i class="bi bi-download"></i>Executable</a>` : ''}
-                                    ${post.live_link ? ` <a href="${post.live_link}" class="project-link"><i class="bi bi-globe"></i>Live</a>` : ''}
-                                    ${post.github_link ? ` <a href="${post.github_link}" class="project-link"><i class="bi bi-github"></i>Source Code</a>` : ''}
+                                ${carouselHTML}
+                                    <div class="project-links">
+                                        ${post.download_link ? `<a href="${post.download_link}" class="project-link"><i class="bi bi-download"></i>Executable</a>` : ''}
+                                        ${post.live_link ? ` <a href="${post.live_link}" class="project-link"><i class="bi bi-globe"></i>Live</a>` : ''}
+                                        ${post.github_link ? ` <a href="${post.github_link}" class="project-link"><i class="bi bi-github"></i>Source Code</a>` : ''}
 
-                                </div>
+                                    </div>
                                 </div>
 
                                 <div class="project-tech">
@@ -446,7 +472,18 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </div>
                     `;
+
                     feed.appendChild(postEl);
+                    const insertedCarousel = document.getElementById(carouselId);
+                    if (insertedCarousel) {
+                        const carouselInstance = new bootstrap.Carousel(insertedCarousel, {
+                            interval: false,
+                            ride: false,
+                            wrap: true // optional
+                        });
+
+                        console.log(carouselInstance._config);
+                    };
                 });
 
                 const categoryItems = document.querySelectorAll('.category-item');
@@ -512,6 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         });
+
     const projectImageViewer = new bootstrap.Modal(document.getElementById('projectImageViewer'));
 
     // Get all project images

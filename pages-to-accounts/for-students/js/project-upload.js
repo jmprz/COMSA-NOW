@@ -88,19 +88,3 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// Project category filter functionality
-//
-// document.addEventListener('DOMContentLoaded', function () {
-
-//   // Initialize viewer for project images
-
-//   // Optional: Add keyboard navigation
-//   document.addEventListener('keydown', function (e) {
-//     if (projectImageViewer._isShown) {
-//       if (e.key === 'Escape') {
-//         projectImageViewer.hide();
-//       }
-//     }
-//   });
-// });
-

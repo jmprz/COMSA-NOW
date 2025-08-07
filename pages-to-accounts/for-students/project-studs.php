@@ -3,7 +3,7 @@ require_once "../../../backend/config/session.php";
 
 if (!isset($_SESSION["user_id"])) {
   // Redirect to login page if not logged in
-  header("Location: ../../index.html");
+  header("Location: /comsa/COMSA-NOW/");
   exit();
 }
 
