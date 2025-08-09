@@ -1,3 +1,4 @@
+console.log("SCRIPT IS LOADED ✅");
 
 const uploadForm = document.getElementById("projectUploadForm");
 const closeUpload = document.querySelectorAll(".close-uploadInfo");
@@ -242,7 +243,7 @@ uploadForm.addEventListener("submit", function (e) {
         clearFieldErrors();
         document.getElementById("generalUploadError").classList.add("d-none");
 
-        fetch("../../backend/api/student_upload_proj.php", {
+        fetch("../../../backend/api/student_upload_proj.php", {
             method: "POST",
             body: formData,
         })
@@ -266,6 +267,7 @@ uploadForm.addEventListener("submit", function (e) {
                         tagMemberWrapper.innerHTML = "";
                         mediaPreview.innerHTML = "";
                         mediaCounter.innerText = "0/8 images selected";
+                        window.location.reload();
                     }, 1500);
                 } else {
                     // Hide overlay
@@ -301,6 +303,374 @@ uploadForm.addEventListener("submit", function (e) {
             });
     }
 })
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const socket = new WebSocket("ws://localhost:8080");
+
+    const categoryClassMap = {
+        'websites': 'web',
+        'mobile apps': 'mobile',
+        'games': 'game',
+        'ai/ml': 'ai',
+        'console apps': 'console',
+        'databases': 'databases',
+        'others': 'others'
+    };
+
+    socket.onmessage = (event) => {
+        console.log("📨 Message received:", event.data);
+
+        let data;
+        try {
+            data = JSON.parse(event.data);
+        } catch (e) {
+            console.error("❌ Failed to parse message as JSON:", e);
+            return;
+        }
+
+        if (data.type === 'like') {
+            const likeIcon = document.getElementById(`like-icon-${data.project_id}`);
+
+            if (data.status) {
+                if (data.status === 'liked') {
+                    likeIcon.classList.remove('bi-star');
+                    likeIcon.classList.add('bi-star-fill');
+                } else if (data.status === 'unliked') {
+                    likeIcon.classList.remove('bi-star-fill');
+                    likeIcon.classList.add('bi-star');
+                }
+                const likeCountEl = document.getElementById(`like-count-${data.project_id}`);
+
+                if (likeCountEl && typeof data.like_count !== 'undefined') {
+                    likeCountEl.innerText = `${data.like_count} Likes`;
+                }
+            }
+        }
+
+        if (data.type === 'comment') {
+            const commentsEl = document.getElementById('modalComments');
+            const commentCountEl = document.getElementById(`comment-count-${data.project_id}`);
+            if (!commentsEl || !commentCountEl) {
+                console.warn("⚠️ 'modalComments' element not found");
+                return;
+            }
+
+            const newEl = `<div class="mb-2"><strong>${data.name}</strong>: ${data.comment}</div>`;
+            commentsEl.insertAdjacentHTML('beforeend', newEl);
+
+            commentCountEl.textContent = `${data.comment_count} Comments`;
+
+            console.log("✅ Comment added to modal");
+        } else {
+            console.log("ℹ️ Message type not handled:", data.type);
+        }
+    };
+
+    socket.onerror = (err) => {
+        console.error("❌ WebSocket error", err);
+    };
+
+    const feed = document.getElementById('projectFeed');
+    if (!feed) {
+        console.error('⚠️ projectField element not found!');
+        return;
+    }
+
+    fetch('../../../backend/api/get_project.php')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data.success) {
+                data.posts.forEach(post => {
+                    const postEl = document.createElement('div');
+                    postEl.classList.add('post');
+
+                    const categoryKey = post.project_category.toLowerCase().trim();
+                    const categoryClass = categoryClassMap[categoryKey] || 'all';
+
+                    //carousel images
+                    const carouselId = `carousel-${post.id}`;
+                    const hasImages = post.images && post.images.length > 0;
+                    const carouselControls = hasImages && post.images.length > 1
+                        ? `
+                        <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        `
+                        : '';
+
+                    const carouselHTML = `
+                        <!-- your project header -->
+                        <div id="${carouselId}" class="carousel slide">
+                            <div class="carousel-inner">
+                                ${post.images.map((img, index) => `
+                                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                    <img src="../../../backend/${img}" class="d-block w-100" alt="Project Image ${index + 1}">
+                                </div>`).join('')}
+                            </div>
+                        ${carouselControls}
+                        </div>`;
+
+
+                    postEl.innerHTML = `
+                        <div class="project-container" id="${post.id}-project">
+                            <div class="project-header">
+                                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+                                <div class="project-author">
+                                <p class="project-username">${post.student_name}</p>
+                                <p class="project-date">${post.created_at}</p>
+                                </div>
+                                <span class="project-badge ${categoryClass}-badge">
+                                ${post.project_category}
+                                </span>                            
+                            </div>
+
+                            <div class="project-content">
+                                <h3 class="project-title">${post.project_title}</h3>
+                                <p class="project-description">
+                                ${post.project_description}
+                                </p>
+                                <p class="project-members">
+                                    <span style="font-weight: bold; font-size: 15px;">Team Members:</span>
+                                    <span style="font-size: 14px;">
+                                        ${post.team_members.map(member => member).join(', ')}
+                                    </span>
+                                </p>
+                                <div class="project-media">
+                                ${carouselHTML}
+                                    <div class="project-links">
+                                        ${post.download_link ? `<a href="${post.download_link}" class="project-link"><i class="bi bi-download"></i>Executable</a>` : ''}
+                                        ${post.live_link ? ` <a href="${post.live_link}" class="project-link"><i class="bi bi-globe"></i>Live</a>` : ''}
+                                        ${post.github_link ? ` <a href="${post.github_link}" class="project-link"><i class="bi bi-github"></i>Source Code</a>` : ''}
+
+                                    </div>
+                                </div>
+
+                                <div class="project-tech">
+                                    ${post.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                                </div>
+
+                            </div>
+
+                            <div class="project-stats">
+                                <div class="stat d-flex align-items-start">
+                                <button class="post-action d-flex flex-column like-btn" data-id="${post.id}">
+                                    <i class="bi ${post.liked_by_user ? 'bi-star-fill' : 'bi-star'} like-icon" id="like-icon-${post.id}"></i>
+                                    <span class="like-count" style="font-size: 13px;" id="like-count-${post.id}">${post.like_count} Likes</span>
+                                </button>
+                                <button class="post-action d-flex flex-column comment-btn" data-id="${post.id}" data-post='${JSON.stringify(post).replace(/'/g, "&apos;")}'>
+                                    <i class="bi bi-chat-left"></i>
+                                    <span class="comment-count" style="font-size: 13px;" id="comment-count-${post.id}">${post.comment_count} Comments</span>
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    feed.appendChild(postEl);
+                    const insertedCarousel = document.getElementById(carouselId);
+                    if (insertedCarousel) {
+                        const carouselInstance = new bootstrap.Carousel(insertedCarousel, {
+                            interval: false,
+                            ride: false,
+                            wrap: true // optional
+                        });
+
+                        console.log(carouselInstance._config);
+                    };
+                });
+
+                const categoryItems = document.querySelectorAll('.category-item');
+                const projectContainers = document.querySelectorAll('.project-container');
+
+                categoryItems.forEach(item => {
+                    item.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        const categoryId = this.id.replace('category-', '');
+
+                        // Remove active class from all category items
+                        categoryItems.forEach(ci => ci.classList.remove('active'));
+
+                        // Add active class to clicked category
+                        this.classList.add('active');
+
+                        // Show/hide projects based on category
+                        projectContainers.forEach(project => {
+                            console.log("2");
+
+                            const badgeEl = project.querySelector('.project-badge');
+                            if (!badgeEl) {
+                                console.warn("⚠️ project-badge not found for project:", project);
+                                return;
+                            }
+
+                            const projectBadge = badgeEl.textContent.trim();
+                            console.log("3");
+
+                            if (categoryId === 'all') {
+                                project.style.display = 'block';
+                            } else {
+                                console.log("4");
+                                const categoryMap = {
+                                    'games': 'Games',
+                                    'websites': 'Websites',
+                                    'mobile': 'Mobile Apps',
+                                    'console': 'Console Apps',
+                                    'ai': 'AI/ML',
+                                    'databases': 'Databases',
+                                    'others': 'Others'
+                                };
+
+                                if (categoryMap[categoryId].toLowerCase() === projectBadge.toLowerCase()) {
+                                    console.log("5");
+                                    project.style.display = 'block';
+                                } else {
+                                    project.style.display = 'none';
+                                }
+                            }
+                        });
+
+                    });
+                });
+
+                // Activate "All" category by default
+                const allCategory = document.getElementById('category-all');
+                if (allCategory) {
+                    allCategory.classList.add('active');
+                }
+
+            }
+
+        });
+
+    const projectImageViewer = new bootstrap.Modal(document.getElementById('projectImageViewer'));
+
+    // Get all project images
+    const projectImages = document.querySelectorAll('.project-image');
+
+    projectImages.forEach((image, index) => {
+        // Assign unique ID to each image if not already present
+        if (!image.id) {
+            image.id = `project-image-${index}`;
+        }
+
+        image.addEventListener('click', function () {
+            // Get the image source and alt text
+            const imgSrc = this.src;
+            const imgAlt = this.alt || 'Project Image';
+
+            // Set the modal content
+            document.getElementById('projectImageView').src = imgSrc;
+
+            // Show the modal
+            projectImageViewer.show();
+        });
+    });
+
+    feed.addEventListener("click", async (e) => {
+        const commentBtn = e.target.closest('.comment-btn');
+        const postComment = e.target.closest('.add-comment');
+        const likeBtn = e.target.closest('.like-btn');
+
+        //this handle the appearance of the comment modal;
+        if (commentBtn) {
+            const postData = JSON.parse(commentBtn.dataset.post.replace(/&apos;/g, "'"));
+
+            const commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
+            const modalPostEl = document.getElementById('modalPostContent');
+            const commentsEl = document.getElementById('modalComments');
+            const modalHeader = document.getElementById('modalProjectHeader');
+            const projectId = commentBtn.dataset.id;
+
+            document.querySelector('#commentModal .comment-input').dataset.id = projectId;
+            document.querySelector('#commentModal .add-comment').dataset.id = projectId;
+
+
+            // Render post details
+            modalPostEl.innerHTML = `
+            <div class="modal-project">
+                <h5>${postData.project_title}</h5>
+                <p class="text-muted" style="font-size: 13px;">${postData.student_name} · ${postData.created_at}</p>
+                <p>${postData.project_description}</p>
+                ${postData.technologies.map(tech => `<span class="badge bg-secondary me-1">${tech}</span>`).join('')}
+            </div>
+            <hr>
+            `;
+
+            modalHeader.innerHTML = `${postData.student_name}'s Project`;
+
+            commentsEl.innerHTML = `<div class="text-muted">Loading comments...</div>`;
+
+            try {
+                const response = await fetch(`../../../backend/api/get_comments.php?project_id=${projectId}`);
+                const data = await response.json();
+                console.log(data)
+
+                if (!data || data.length === 0) {
+                    commentsEl.innerHTML = `<div class="text-muted">No comments yet.</div>`;
+                } else {
+                    commentsEl.innerHTML = data.map(c =>
+                        `<div class="mb-2"><strong>${c.name}</strong>: ${c.comment}</div>`
+                    ).join('');
+                }
+
+                commentModal.show();
+            } catch (err) {
+                commentsEl.innerHTML = `<div class="text-danger">Failed to load comments.</div>`;
+            }
+        }
+
+        if (postComment) {
+            const parentDiv = postComment.closest('.parent-comment-div');
+            const inputEl = parentDiv.querySelector('.comment-input');
+            const comment = inputEl.value;
+            const projectId = postComment.dataset.id;
+
+            if (comment.trim() !== '') {
+
+                const res = await fetch("../../../backend/api/add_comment.php", {
+                    method: 'POST',
+                    headers: { "Content-type": "application/json" },
+                    credentials: 'include',
+                    body: JSON.stringify({ project_id: projectId, comment: comment })
+                });
+
+                const data = await res.json();
+
+                if (data.success && data.comment) {
+                    inputEl.value = '';
+                    const submitBtn = parentDiv.querySelector('.add-comment');
+                    submitBtn.disabled = true;
+                    setTimeout(() => submitBtn.disabled = false, 500);
+
+                }
+            }
+        }
+
+        if (likeBtn) {
+            const projectId = likeBtn.dataset.id;
+            const res = await fetch(`../../../backend/api/like_project.php`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ project_id: projectId })
+            });
+
+        }
+
+
+    });
+
+
+});
+
 
 
 

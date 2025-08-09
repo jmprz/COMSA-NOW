@@ -134,6 +134,21 @@ body {
   text-align: center;
 }
 
+.profile-avatar-initials {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-right: 15px;
+  background-color: #7db832;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(125, 184, 50, 0.3);
+}
+
 .stat-item {
   flex: 1;
 }

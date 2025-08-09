@@ -103,14 +103,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
           const reader = new FileReader();
           reader.onloadstart = () => {
-            profilePicPreview.src = "../assets/img/loading.gif"; // Show loading indicator
+            // Show loading indicator
           };
           reader.onload = (event) => {
             profilePicPreview.src = event.target.result;
           };
           reader.onerror = () => {
             alert("Error reading image file");
-            profilePicPreview.src = "../assets/img/default-profile.png";
+            //should display the default avatar
           };
           reader.readAsDataURL(file);
         }
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Remove current profile picture
       if (removeProfilePic) {
         removeProfilePic.addEventListener("click", function () {
-          profilePicPreview.src = "../assets/img/default-profile.png";
+          profilePicPreview.src = "../../../assets/img/default-profile.png";
           profilePicUpload.value = "";
         });
       }

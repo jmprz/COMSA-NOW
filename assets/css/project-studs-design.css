@@ -7,6 +7,7 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
   border: 1px solid #e6e6e6;
   text-align: center;
+  width: 100%;
 }
 
 .project-upload-header h2 {
@@ -80,6 +81,11 @@
   background-color: #20c997;
 }
 
+.others-badge {
+  background-color: #20c997;
+}
+
+
 .console-badge {
   background-color: #fd7e14;
 }
@@ -92,7 +98,7 @@
   background-color: #d63384;
 }
 
-.db-badge {
+.databases-badge {
   background-color: #ffc107;
   color: #212529;
 }
@@ -470,3 +476,59 @@
     justify-content: center;
   }
 }
+
+
+/* project post image styling */
+.project-container {
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure images scale responsively */
+.project-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  max-height: 400px; /* optional, to prevent very tall images */
+}
+
+/* Carousel should stretch to container width */
+
+
+.carousel-item img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Optional: make sure carousel container doesn't overflow */
+.project-media .carousel {
+  width: 100%;
+}
+
+
+[class^="col-"] > * {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.row {
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 991.98px) {
+  .row {
+    flex-wrap: wrap !important;
+  }
+}
+

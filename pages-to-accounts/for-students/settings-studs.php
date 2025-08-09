@@ -3,17 +3,9 @@
 
   if (!isset($_SESSION["user_id"])) {
     // Redirect to login page if not logged in
-    header("Location: ../../../index.html");
+    header("Location: /comsa/COMSA-NOW/");
     exit();
   }
-
-
-
-
-// paki ayos ng logout directory path....
-
-
-
 
 ?>
 
@@ -443,7 +435,7 @@
 
     <!-- Main JS File -->
     <script src="../../assets/js/main.js"></script>
-    <script src="../for-students/js/settings-logout.js"></script>
+    <script src="./js/settings-logout.js"></script>
       <script src="../for-students/js/studs-search.js"></script>
     <script src="../../assets/js/studs-main-func.js"></script>
     

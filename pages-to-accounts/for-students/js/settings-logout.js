@@ -7,7 +7,7 @@ document.getElementById("logoutBtn").addEventListener('click', function () {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                window.location.href = '../comsa/COMSA-NOW/index.html';
+                window.location.href = '/comsa/COMSA-NOW/';
             } else {
                 alert('Logout failed. Please try again.');
             }

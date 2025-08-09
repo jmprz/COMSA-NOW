@@ -1,11 +1,11 @@
 <?php
-  require_once "../../../backend/config/session.php";
+require_once "../../../backend/config/session.php";
 
-  if (!isset($_SESSION["user_id"])) {
-    // Redirect to login page if not logged in
-    header("Location: ../../index.html");
-    exit();
-  }
+if (!isset($_SESSION["user_id"])) {
+  // Redirect to login page if not logged in
+  header("Location: /comsa/COMSA-NOW/");
+  exit();
+}
 
 ?>
 
@@ -94,7 +94,7 @@
 
         <!-- Projects Column -->
         <div class="col-lg-7">
-          <div class="posts-column">
+          <div class="posts-column" id="projectFeed">
 
 
             <!-- Mobile Only Header -->
@@ -117,7 +117,7 @@
             </div>
 
             <!-- Mobile Navigation Options -->
-            <div class="d-md-none bg-white shadow-sm border-top">
+            <!-- <div class="d-md-none bg-white shadow-sm border-top">
               <div class="container-fluid py-2">
                 <div class="row text-center small">
                   <div class="col">
@@ -137,11 +137,11 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
 
             <!-- Project 1 - Game -->
-            <div class="project-container">
+            <!-- <div class="project-container">
               <div class="project-header">
                 <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
                 <div class="project-author">
@@ -179,10 +179,11 @@
                   </button>
                 </div>
               </div>
-            </div>
+            </div> -->
+
 
             <!-- Project 2 - Website -->
-            <div class="project-container">
+            <!-- <div class="project-container">
               <div class="project-header">
                 <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
                 <div class="project-author">
@@ -223,10 +224,10 @@
                   </button>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Project 3 - Console App -->
-            <div class="project-container">
+            <!-- <div class="project-container">
               <div class="project-header">
                 <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
                 <div class="project-author">
@@ -266,7 +267,27 @@
                   </button>
                 </div>
               </div>
+            </div> -->
+
+            <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalProjectHeader"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="modalPostContent" class="mb-3"></div>
+                    <div id="modalComments">Loading comments...</div>
+                  </div>
+                  <div class="d-flex parent-comment-div p-2">
+                    <input type="text" placeholder="Write a comment..." data-id="${post.id}" class="comment-input" />
+                    <button class="add-comment" data-id="${post.id}"><i class="bi bi-send"></i></button>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
 
@@ -651,23 +672,25 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- Vendor JS Files -->
-      <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="../../assets/vendor/php-email-form/validate.js"></script>
-      <script src="../../assets/vendor/aos/aos.js"></script>
-      <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
-      <script src="../../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-      <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-      <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../../assets/vendor/aos/aos.js"></script>
+  <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-      <!-- Main JS File -->
-      <script src="../../assets/js/main.js"></script>
-      <script src="../for-students/js/studs-search.js"></script>
-      <script src="../for-students/js/project-upload.js"></script>
+  <!-- Main JS File -->
+  <script src="../../assets/js/main.js"></script>
+  <script src="../for-students/js/studs-search.js"></script>
+  <script src="../for-students/js/project-upload.js" defer></script>
 
-      <!-- Main JS File -->
-      <script src="../for-students/js/project-studs.js"></script>
+  <!-- Main JS File -->
+  <script src="../for-students/js/project-studs.js"></script>
 </body>
 
 </html>
