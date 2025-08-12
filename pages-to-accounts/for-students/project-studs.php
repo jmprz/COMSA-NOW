@@ -16,6 +16,10 @@ require_once '../../../backend/middleware/student_middleware.php';
   <meta name="keywords" content="student projects, project showcase, game development, web development">
 
   <!-- Favicons -->
+
+
+
+  
   <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
@@ -40,7 +44,6 @@ require_once '../../../backend/middleware/student_middleware.php';
   <link href="../../assets/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/project-studs-design.css">
   <link rel="stylesheet" href="../../assets/css/search.css">
-  <link rel="stylesheet" href="../../assets/css/student-dash.css">
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -113,7 +116,7 @@ require_once '../../../backend/middleware/student_middleware.php';
             </div>
 
             <!-- Mobile Navigation Options -->
-            <!-- <div class="d-md-none bg-white shadow-sm border-top">
+           <div class="d-md-none bg-white shadow-sm border-top">
               <div class="container-fluid py-2">
                 <div class="row text-center small">
                   <div class="col">
@@ -133,7 +136,7 @@ require_once '../../../backend/middleware/student_middleware.php';
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div> 
 
 
             <!-- Project 1 - Game -->
@@ -294,7 +297,7 @@ require_once '../../../backend/middleware/student_middleware.php';
             <!-- Project Upload -->
             <div class="sidebar-card mb-3">
               <h2>Student Projects</h2>
-              <button class="btn btn-primary" id="uploadProjectBtn">
+              <button class="btn btn-primary" id="uploadProjectBtn" style="background: #7db832; border: none;">
                 <i class="bi bi-upload me-2"></i>Upload New Project
               </button>
             </div>
