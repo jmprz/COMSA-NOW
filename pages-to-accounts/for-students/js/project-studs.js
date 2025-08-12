@@ -24,17 +24,16 @@ techInput.addEventListener("keydown", (e) => {
     const value = techInput.value.trim();
 
     if (value !== "" && !tags.includes(value)) {
-      //inser in array
+      // Insert in array
       tags.push(value);
       console.log("Current tags:", tags);
 
-      //new element
+      // New element
       const tag = document.createElement("span");
-      tag.className =
-        "badge bg-secondary px-2 py-1 rounded-pill d-flex align-items-center";
+      tag.className = "badge bg-secondary px-2 py-1 rounded-pill d-flex align-items-center";
       tag.innerText = value;
 
-      //close button
+      // Close button
       const closeBtn = document.createElement("button");
       closeBtn.className = "btn-close btn-close-white btn-sm ms-2";
       closeBtn.type = "button";
@@ -44,7 +43,7 @@ techInput.addEventListener("keydown", (e) => {
         if (index > -1) tags.splice(index, 1);
         console.log("Updated tags:", tags);
 
-        //remove element in html
+        // Remove element in html
         tag.remove();
       };
 
@@ -61,13 +60,12 @@ projMemberInput.addEventListener("keydown", (e) => {
 
     const value = projMemberInput.value.trim();
 
-    if (value !== "" && !tags.includes(value)) {
+    if (value !== "" && !members.includes(value)) {
       members.push(value);
-      console.log("Current tags:", tags);
+      console.log("Current members:", members);
 
       const tag = document.createElement("span");
-      tag.className =
-        "badge bg-secondary px-2 py-1 rounded-pill d-flex align-items-center";
+      tag.className = "badge bg-secondary px-2 py-1 rounded-pill d-flex align-items-center";
       tag.innerText = value;
 
       const closeBtn = document.createElement("button");
@@ -77,9 +75,9 @@ projMemberInput.addEventListener("keydown", (e) => {
       closeBtn.onclick = () => {
         const index = members.indexOf(value);
         if (index > -1) members.splice(index, 1);
-        console.log("Updated tags:", members);
+        console.log("Updated members:", members);
 
-        //remove element in html
+        // Remove element in html
         tag.remove();
       };
 
@@ -105,15 +103,11 @@ uploadInput.addEventListener("change", () => {
   renderPreview();
 
   uploadInput.value = "";
-  console.log(
-    "Currently selected:",
-    selectedFiles.map((f) => f.name)
-  );
+  console.log("Currently selected:", selectedFiles.map(f => f.name));
 });
 
 function renderPreview() {
   mediaPreview.innerHTML = "";
-
   let filesProcessed = 0;
 
   selectedFiles.forEach((file, index) => {
@@ -156,7 +150,7 @@ function renderPreview() {
 
       filesProcessed++;
 
-      // ✅ Only update counter after all files processed
+      // Only update counter after all files processed
       if (filesProcessed === selectedFiles.length) {
         mediaCounter.innerText = `${selectedFiles.length}/8 images selected`;
       }
@@ -179,19 +173,14 @@ function showFieldError(fieldId) {
   let feedback = document.createElement("div");
   feedback.className = "invalid-feedback";
   feedback.innerText = "This field is required.";
-  if (
-    !input.nextElementSibling ||
-    !input.nextElementSibling.classList.contains("invalid-feedback")
-  ) {
+  if (!input.nextElementSibling || !input.nextElementSibling.classList.contains("invalid-feedback")) {
     input.parentNode.appendChild(feedback);
   }
 }
 
 function clearFieldErrors() {
-  document
-    .querySelectorAll(".is-invalid")
-    .forEach((el) => el.classList.remove("is-invalid"));
-  document.querySelectorAll(".invalid-feedback").forEach((el) => el.remove());
+  document.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
+  document.querySelectorAll(".invalid-feedback").forEach(el => el.remove());
 }
 
 closeUpload.forEach((btn) => {
@@ -220,33 +209,21 @@ uploadForm.addEventListener("submit", function (e) {
   if (this.checkValidity()) {
     const formData = new FormData();
 
-    formData.append(
-      "projectTitle",
-      document.getElementById("projectTitle").value
-    );
-    formData.append(
-      "projectType",
-      document.getElementById("projectType").value
-    );
-    formData.append(
-      "projectDescription",
-      document.getElementById("projectDescription").value
-    );
-    formData.append(
-      "downloadLink",
-      document.getElementById("downloadLink").value
-    );
+    formData.append("projectTitle", document.getElementById("projectTitle").value);
+    formData.append("projectType", document.getElementById("projectType").value);
+    formData.append("projectDescription", document.getElementById("projectDescription").value);
+    formData.append("downloadLink", document.getElementById("downloadLink").value);
     formData.append("githubLink", document.getElementById("githubLink").value);
     formData.append("liveLink", document.getElementById("liveLink").value);
 
     tags.forEach((tag, index) => {
-      formData.append("tags[]", tag);
+      formData.append('tags[]', tag);
     });
     members.forEach((member, index) => {
-      formData.append("members[]", member);
+      formData.append('members[]', member);
     });
     selectedFiles.forEach((file, index) => {
-      formData.append("selectedFiles[]", file);
+      formData.append('selectedFiles[]', file);
     });
 
     document.getElementById("uploadOverlay").classList.remove("d-none");
@@ -260,16 +237,14 @@ uploadForm.addEventListener("submit", function (e) {
       method: "POST",
       body: formData,
     })
-      .then((res) => res.json())
-      .then((response) => {
+      .then(res => res.json())
+      .then(response => {
         if (response.success) {
           document.getElementById("uploadLoader").classList.add("d-none");
           document.getElementById("uploadSuccess").classList.remove("d-none");
 
           setTimeout(() => {
-            const modal = bootstrap.Modal.getInstance(
-              document.getElementById("projectUploadModal")
-            );
+            const modal = bootstrap.Modal.getInstance(document.getElementById("projectUploadModal"));
             modal.hide();
             document.getElementById("uploadOverlay").classList.add("d-none");
 
@@ -296,49 +271,48 @@ uploadForm.addEventListener("submit", function (e) {
             }
 
             if (response.errors.empty_images) {
-              document.getElementById("generalUploadError").innerText =
-                response.errors.empty_images;
-              document
-                .getElementById("generalUploadError")
-                .classList.remove("d-none");
+              document.getElementById("generalUploadError").innerText = response.errors.empty_images;
+              document.getElementById("generalUploadError").classList.remove("d-none");
             }
 
             // Server or unknown errors
             Object.entries(response.errors).forEach(([key, msg]) => {
               if (!["empty_input", "empty_images"].includes(key)) {
                 document.getElementById("generalUploadError").innerText = msg;
-                document
-                  .getElementById("generalUploadError")
-                  .classList.remove("d-none");
+                document.getElementById("generalUploadError").classList.remove("d-none");
               }
             });
           }
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.error("Upload failed:", err);
         document.getElementById("uploadOverlay").classList.add("d-none");
-        document.getElementById("generalUploadError").innerText =
-          "An unexpected error occurred.";
-        document
-          .getElementById("generalUploadError")
-          .classList.remove("d-none");
+        document.getElementById("generalUploadError").innerText = "An unexpected error occurred.";
+        document.getElementById("generalUploadError").classList.remove("d-none");
       });
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   const socket = new WebSocket("ws://localhost:8080");
 
   const categoryClassMap = {
-    websites: "web",
-    "mobile apps": "mobile",
-    games: "game",
-    "ai/ml": "ai",
-    "console apps": "console",
-    databases: "databases",
-    others: "others",
+    'websites': 'web',
+    'mobile apps': 'mobile',
+    'games': 'game',
+    'ai/ml': 'ai',
+    'console apps': 'console',
+    'databases': 'databases',
+    'others': 'others'
   };
+
+  function getInitials(name) {
+    const parts = name.trim().split(" ").filter(Boolean);
+    return parts.length === 1
+      ? parts[0][0].toUpperCase()
+      : (parts[0][0] + parts[1][0]).toUpperCase();
+  }
 
   socket.onmessage = (event) => {
     console.log("📨 Message received:", event.data);
@@ -351,39 +325,35 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (data.type === "like") {
+    if (data.type === 'like') {
       const likeIcon = document.getElementById(`like-icon-${data.project_id}`);
 
       if (data.status) {
-        if (data.status === "liked") {
-          likeIcon.classList.remove("bi-star");
-          likeIcon.classList.add("bi-star-fill");
-        } else if (data.status === "unliked") {
-          likeIcon.classList.remove("bi-star-fill");
-          likeIcon.classList.add("bi-star");
+        if (data.status === 'liked') {
+          likeIcon.classList.remove('bi-star');
+          likeIcon.classList.add('bi-star-fill');
+        } else if (data.status === 'unliked') {
+          likeIcon.classList.remove('bi-star-fill');
+          likeIcon.classList.add('bi-star');
         }
-        const likeCountEl = document.getElementById(
-          `like-count-${data.project_id}`
-        );
+        const likeCountEl = document.getElementById(`like-count-${data.project_id}`);
 
-        if (likeCountEl && typeof data.like_count !== "undefined") {
+        if (likeCountEl && typeof data.like_count !== 'undefined') {
           likeCountEl.innerText = `${data.like_count} Likes`;
         }
       }
     }
 
-    if (data.type === "comment") {
-      const commentsEl = document.getElementById("modalComments");
-      const commentCountEl = document.getElementById(
-        `comment-count-${data.project_id}`
-      );
+    if (data.type === 'comment') {
+      const commentsEl = document.getElementById('modalComments');
+      const commentCountEl = document.getElementById(`comment-count-${data.project_id}`);
       if (!commentsEl || !commentCountEl) {
         console.warn("⚠️ 'modalComments' element not found");
         return;
       }
 
       const newEl = `<div class="mb-2"><strong>${data.name}</strong>: ${data.comment}</div>`;
-      commentsEl.insertAdjacentHTML("beforeend", newEl);
+      commentsEl.insertAdjacentHTML('beforeend', newEl);
 
       commentCountEl.textContent = `${data.comment_count} Comments`;
 
@@ -397,237 +367,174 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("❌ WebSocket error", err);
   };
 
-  const feed = document.getElementById("projectFeed");
+  const feed = document.getElementById('projectFeed');
   if (!feed) {
-    console.error("⚠️ projectField element not found!");
+    console.error('⚠️ projectField element not found!');
     return;
   }
 
-  fetch("../../../backend/api/get_project.php")
-    .then((res) => res.json())
-    .then((data) => {
+  fetch('../../../backend/api/get_project.php')
+    .then(res => res.json())
+    .then(data => {
       console.log(data);
 
-      // if there are no posts
+      // If there are no posts
       if (data.posts.length === 0) {
         feed.innerHTML = `
-    <div class="empty-state">
-      <i class="bi bi-folder-x"></i>
-      <h3>No Projects Yet</h3>
-      <p>Be the first to share your project!</p>
-      <button class="btn btn-primary" id="uploadProjectBtn">
-        <i class="bi bi-upload me-2"></i>Upload Project
-      </button>
-    </div>
-  `;
+          <div class="empty-state">
+            <i class="bi bi-folder-x"></i>
+            <h3>No Projects Yet</h3>
+            <p>Be the first to share your project!</p>
+            <button class="btn btn-primary" id="uploadProjectBtn">
+              <i class="bi bi-upload me-2"></i>Upload Project
+            </button>
+          </div>
+        `;
         return;
       }
 
       if (data.success) {
-        data.posts.forEach((post) => {
-          const postEl = document.createElement("div");
-          postEl.classList.add("post");
+        data.posts.forEach(post => {
+          const postEl = document.createElement('div');
+          postEl.classList.add('post');
 
           const categoryKey = post.project_category.toLowerCase().trim();
-          const categoryClass = categoryClassMap[categoryKey] || "all";
+          const categoryClass = categoryClassMap[categoryKey] || 'all';
+          const initials = getInitials(post.student_name);
 
-          //carousel images
+          // Carousel images
           const carouselId = `carousel-${post.id}`;
           const hasImages = post.images && post.images.length > 0;
-          const carouselControls =
-            hasImages && post.images.length > 1
-              ? `
-                        <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                        `
-              : "";
+          const carouselControls = hasImages && post.images.length > 1
+            ? `
+              <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+              </button>
+              `
+            : '';
 
           const carouselHTML = `
-                        <!-- your project header -->
-                        <div id="${carouselId}" class="carousel slide">
-                            <div class="carousel-inner">
-                                ${post.images
-                                  .map(
-                                    (img, index) => `
-                                <div class="carousel-item ${
-                                  index === 0 ? "active" : ""
-                                }">
-                                    <img src="../../../backend/${img}" class="d-block w-100" alt="Project Image ${
-                                      index + 1
-                                    }">
-                                </div>`
-                                  )
-                                  .join("")}
-                            </div>
-                        ${carouselControls}
-                        </div>`;
+            <div id="${carouselId}" class="carousel slide">
+                <div class="carousel-inner">
+                    ${post.images.map((img, index) => `
+                    <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                        <img src="../../../backend/${img}" class="d-block w-100" alt="Project Image ${index + 1}">
+                    </div>`).join('')}
+                </div>
+            ${carouselControls}
+            </div>`;
 
           postEl.innerHTML = `
-                        <div class="project-container" id="${post.id}-project">
-                            <div class="project-header">
-                                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
-                                <div class="project-author">
-                                <p class="project-username">${
-                                  post.student_name
-                                }</p>
-                                <p class="project-date">${post.created_at}</p>
-                                </div>
-                                <span class="project-badge ${categoryClass}-badge">
-                                ${post.project_category}
-                                </span>                            
-                            </div>
+            <div class="project-container" id="${post.id}-project">
+                <div class="project-header">
+                    ${post.profile_photo ? `<img src="../../../backend/${post.profile_photo}" class="project-avatar" alt="User Avatar">` : `<div class="project-avatar" id="avatar-initials">${initials}</div>`}
+                    <div class="project-author">
+                    <p class="project-username">${post.student_name}</p>
+                    <p class="project-date">${post.created_at}</p>
+                    </div>
+                    <span class="project-badge ${categoryClass}-badge">
+                    ${post.project_category}
+                    </span>                            
+                </div>
 
-                            <div class="project-content">
-                                <h3 class="project-title">${
-                                  post.project_title
-                                }</h3>
-                                <p class="project-description">
-                                ${post.project_description}
-                                </p>
-                                <p class="project-members">
-                                    <span style="font-weight: bold; font-size: 15px;">Team Members:</span>
-                                    <span style="font-size: 14px;">
-                                        ${post.team_members
-                                          .map((member) => member)
-                                          .join(", ")}
-                                    </span>
-                                </p>
-                                <div class="project-media">
-                                ${carouselHTML}
-                                    <div class="project-links">
-                                        ${
-                                          post.download_link
-                                            ? `<a href="${post.download_link}" class="project-link"><i class="bi bi-download"></i>Executable</a>`
-                                            : ""
-                                        }
-                                        ${
-                                          post.live_link
-                                            ? ` <a href="${post.live_link}" class="project-link"><i class="bi bi-globe"></i>Live</a>`
-                                            : ""
-                                        }
-                                        ${
-                                          post.github_link
-                                            ? ` <a href="${post.github_link}" class="project-link"><i class="bi bi-github"></i>Source Code</a>`
-                                            : ""
-                                        }
-
-                                    </div>
-                                </div>
-
-                                <div class="project-tech">
-                                    ${post.technologies
-                                      .map(
-                                        (tech) =>
-                                          `<span class="tech-tag">${tech}</span>`
-                                      )
-                                      .join("")}
-                                </div>
-
-                            </div>
-
-                            <div class="project-stats">
-                                <div class="stat d-flex align-items-start">
-                                <button class="post-action d-flex flex-column like-btn" data-id="${
-                                  post.id
-                                }">
-                                    <i class="bi ${
-                                      post.liked_by_user
-                                        ? "bi-star-fill"
-                                        : "bi-star"
-                                    } like-icon" id="like-icon-${post.id}"></i>
-                                    <span class="like-count" style="font-size: 13px;" id="like-count-${
-                                      post.id
-                                    }">${post.like_count} Likes</span>
-                                </button>
-                                <button class="post-action d-flex flex-column comment-btn" data-id="${
-                                  post.id
-                                }" data-post='${JSON.stringify(post).replace(
-            /'/g,
-            "&apos;"
-          )}'>
-                                    <i class="bi bi-chat-left"></i>
-                                    <span class="comment-count" style="font-size: 13px;" id="comment-count-${
-                                      post.id
-                                    }">${post.comment_count} Comments</span>
-                                </button>
-                                </div>
-                            </div>
+                <div class="project-content">
+                    <h3 class="project-title">${post.project_title}</h3>
+                    <p class="project-description">
+                    ${post.project_description}
+                    </p>
+                    <p class="project-members">
+                        <span style="font-weight: bold; font-size: 15px;">Team Members:</span>
+                        <span style="font-size: 14px;">
+                            ${post.team_members.map(member => member).join(', ')}
+                        </span>
+                    </p>
+                    <div class="project-media">
+                    ${carouselHTML}
+                        <div class="project-links">
+                            ${post.download_link ? `<a href="${post.download_link}" class="project-link"><i class="bi bi-download"></i>Executable</a>` : ''}
+                            ${post.live_link ? ` <a href="${post.live_link}" class="project-link"><i class="bi bi-globe"></i>Live</a>` : ''}
+                            ${post.github_link ? ` <a href="${post.github_link}" class="project-link"><i class="bi bi-github"></i>Source Code</a>` : ''}
                         </div>
-                    `;
+                    </div>
+
+                    <div class="project-tech">
+                        ${post.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
+                </div>
+
+                <div class="project-stats">
+                    <div class="stat d-flex align-items-start">
+                    <button class="post-action d-flex flex-column like-btn" data-id="${post.id}">
+                        <i class="bi ${post.liked_by_user ? 'bi-star-fill' : 'bi-star'} like-icon" id="like-icon-${post.id}"></i>
+                        <span class="like-count" style="font-size: 13px;" id="like-count-${post.id}">${post.like_count} Likes</span>
+                    </button>
+                    <button class="post-action d-flex flex-column comment-btn" data-id="${post.id}" data-post='${JSON.stringify(post).replace(/'/g, "&apos;")}'>
+                        <i class="bi bi-chat-left"></i>
+                        <span class="comment-count" style="font-size: 13px;" id="comment-count-${post.id}">${post.comment_count} Comments</span>
+                    </button>
+                    </div>
+                </div>
+            </div>
+          `;
 
           feed.appendChild(postEl);
           const insertedCarousel = document.getElementById(carouselId);
           if (insertedCarousel) {
-            const carouselInstance = new bootstrap.Carousel(insertedCarousel, {
+            new bootstrap.Carousel(insertedCarousel, {
               interval: false,
               ride: false,
-              wrap: true, // optional
+              wrap: true
             });
-
-            console.log(carouselInstance._config);
           }
         });
 
-        const categoryItems = document.querySelectorAll(".category-item");
-        const projectContainers =
-          document.querySelectorAll(".project-container");
+        const categoryItems = document.querySelectorAll('.category-item');
+        const projectContainers = document.querySelectorAll('.project-container');
 
-        categoryItems.forEach((item) => {
-          item.addEventListener("click", function (e) {
+        categoryItems.forEach(item => {
+          item.addEventListener('click', function (e) {
             e.preventDefault();
 
-            const categoryId = this.id.replace("category-", "");
+            const categoryId = this.id.replace('category-', '');
 
             // Remove active class from all category items
-            categoryItems.forEach((ci) => ci.classList.remove("active"));
+            categoryItems.forEach(ci => ci.classList.remove('active'));
 
             // Add active class to clicked category
-            this.classList.add("active");
+            this.classList.add('active');
 
             // Show/hide projects based on category
-            projectContainers.forEach((project) => {
-              console.log("2");
-
-              const badgeEl = project.querySelector(".project-badge");
+            projectContainers.forEach(project => {
+              const badgeEl = project.querySelector('.project-badge');
               if (!badgeEl) {
-                console.warn(
-                  "⚠️ project-badge not found for project:",
-                  project
-                );
+                console.warn("⚠️ project-badge not found for project:", project);
                 return;
               }
 
               const projectBadge = badgeEl.textContent.trim();
-              console.log("3");
 
-              if (categoryId === "all") {
-                project.style.display = "block";
+              if (categoryId === 'all') {
+                project.style.display = 'block';
               } else {
-                console.log("4");
                 const categoryMap = {
-                  games: "Games",
-                  websites: "Websites",
-                  mobile: "Mobile Apps",
-                  console: "Console Apps",
-                  ai: "AI/ML",
-                  databases: "Databases",
-                  others: "Others",
+                  'games': 'Games',
+                  'websites': 'Websites',
+                  'mobile': 'Mobile Apps',
+                  'console': 'Console Apps',
+                  'ai': 'AI/ML',
+                  'databases': 'Databases',
+                  'others': 'Others'
                 };
 
-                if (
-                  categoryMap[categoryId].toLowerCase() ===
-                  projectBadge.toLowerCase()
-                ) {
-                  console.log("5");
-                  project.style.display = "block";
+                if (categoryMap[categoryId].toLowerCase() === projectBadge.toLowerCase()) {
+                  project.style.display = 'block';
                 } else {
-                  project.style.display = "none";
+                  project.style.display = 'none';
                 }
               }
             });
@@ -635,19 +542,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Activate "All" category by default
-        const allCategory = document.getElementById("category-all");
+        const allCategory = document.getElementById('category-all');
         if (allCategory) {
-          allCategory.classList.add("active");
+          allCategory.classList.add('active');
         }
       }
     });
 
-  const projectImageViewer = new bootstrap.Modal(
-    document.getElementById("projectImageViewer")
-  );
+  const projectImageViewer = new bootstrap.Modal(document.getElementById('projectImageViewer'));
 
   // Get all project images
-  const projectImages = document.querySelectorAll(".project-image");
+  const projectImages = document.querySelectorAll('.project-image');
 
   projectImages.forEach((image, index) => {
     // Assign unique ID to each image if not already present
@@ -655,13 +560,13 @@ document.addEventListener("DOMContentLoaded", () => {
       image.id = `project-image-${index}`;
     }
 
-    image.addEventListener("click", function () {
+    image.addEventListener('click', function () {
       // Get the image source and alt text
       const imgSrc = this.src;
-      const imgAlt = this.alt || "Project Image";
+      const imgAlt = this.alt || 'Project Image';
 
       // Set the modal content
-      document.getElementById("projectImageView").src = imgSrc;
+      document.getElementById('projectImageView').src = imgSrc;
 
       // Show the modal
       projectImageViewer.show();
@@ -669,67 +574,49 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   feed.addEventListener("click", async (e) => {
-    const commentBtn = e.target.closest(".comment-btn");
-    const postComment = e.target.closest(".add-comment");
-    const likeBtn = e.target.closest(".like-btn");
+    const commentBtn = e.target.closest('.comment-btn');
+    const postComment = e.target.closest('.add-comment');
+    const likeBtn = e.target.closest('.like-btn');
 
-    //this handle the appearance of the comment modal;
+    // Handle the appearance of the comment modal
     if (commentBtn) {
-      const postData = JSON.parse(
-        commentBtn.dataset.post.replace(/&apos;/g, "'")
-      );
+      const postData = JSON.parse(commentBtn.dataset.post.replace(/&apos;/g, "'"));
 
-      const commentModal = new bootstrap.Modal(
-        document.getElementById("commentModal")
-      );
-      const modalPostEl = document.getElementById("modalPostContent");
-      const commentsEl = document.getElementById("modalComments");
-      const modalHeader = document.getElementById("modalProjectHeader");
+      const commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
+      const modalPostEl = document.getElementById('modalPostContent');
+      const commentsEl = document.getElementById('modalComments');
+      const modalHeader = document.getElementById('modalProjectHeader');
       const projectId = commentBtn.dataset.id;
 
-      document.querySelector("#commentModal .comment-input").dataset.id =
-        projectId;
-      document.querySelector("#commentModal .add-comment").dataset.id =
-        projectId;
+      document.querySelector('#commentModal .comment-input').dataset.id = projectId;
+      document.querySelector('#commentModal .add-comment').dataset.id = projectId;
 
       // Render post details
       modalPostEl.innerHTML = `
-            <div class="modal-project">
-                <h5>${postData.project_title}</h5>
-                <p class="text-muted" style="font-size: 13px;">${
-                  postData.student_name
-                } · ${postData.created_at}</p>
-                <p>${postData.project_description}</p>
-                ${postData.technologies
-                  .map(
-                    (tech) =>
-                      `<span class="badge bg-secondary me-1">${tech}</span>`
-                  )
-                  .join("")}
-            </div>
-            <hr>
-            `;
+        <div class="modal-project">
+            <h5>${postData.project_title}</h5>
+            <p class="text-muted" style="font-size: 13px;">${postData.student_name} · ${postData.created_at}</p>
+            <p>${postData.project_description}</p>
+            ${postData.technologies.map(tech => `<span class="badge bg-secondary me-1">${tech}</span>`).join('')}
+        </div>
+        <hr>
+      `;
 
       modalHeader.innerHTML = `${postData.student_name}'s Project`;
 
       commentsEl.innerHTML = `<div class="text-muted">Loading comments...</div>`;
 
       try {
-        const response = await fetch(
-          `../../../backend/api/get_comments.php?project_id=${projectId}`
-        );
+        const response = await fetch(`../../../backend/api/get_comments.php?project_id=${projectId}`);
         const data = await response.json();
         console.log(data);
 
         if (!data || data.length === 0) {
           commentsEl.innerHTML = `<div class="text-muted">No comments yet.</div>`;
         } else {
-          commentsEl.innerHTML = data
-            .map(
-              (c) =>
-                `<div class="mb-2"><strong>${c.name}</strong>: ${c.comment}</div>`
-            )
-            .join("");
+          commentsEl.innerHTML = data.map(c =>
+            `<div class="mb-2"><strong>${c.name}</strong>: ${c.comment}</div>`
+          ).join('');
         }
 
         commentModal.show();
@@ -739,26 +626,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (postComment) {
-      const parentDiv = postComment.closest(".parent-comment-div");
-      const inputEl = parentDiv.querySelector(".comment-input");
+      const parentDiv = postComment.closest('.parent-comment-div');
+      const inputEl = parentDiv.querySelector('.comment-input');
       const comment = inputEl.value;
       const projectId = postComment.dataset.id;
 
-      if (comment.trim() !== "") {
+      if (comment.trim() !== '') {
         const res = await fetch("../../../backend/api/add_comment.php", {
-          method: "POST",
+          method: 'POST',
           headers: { "Content-type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify({ project_id: projectId, comment: comment }),
+          credentials: 'include',
+          body: JSON.stringify({ project_id: projectId, comment: comment })
         });
 
         const data = await res.json();
 
         if (data.success && data.comment) {
-          inputEl.value = "";
-          const submitBtn = parentDiv.querySelector(".add-comment");
+          inputEl.value = '';
+          const submitBtn = parentDiv.querySelector('.add-comment');
           submitBtn.disabled = true;
-          setTimeout(() => (submitBtn.disabled = false), 500);
+          setTimeout(() => submitBtn.disabled = false, 500);
         }
       }
     }
@@ -766,10 +653,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (likeBtn) {
       const projectId = likeBtn.dataset.id;
       const res = await fetch(`../../../backend/api/like_project.php`, {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ project_id: projectId }),
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project_id: projectId })
       });
     }
   });
