@@ -1,11 +1,7 @@
 <?php
 require_once "../../../backend/config/session.php";
 
-if (!isset($_SESSION["user_id"])) {
-  // Redirect to login page if not logged in
-  header("Location: /comsa/COMSA-NOW/");
-  exit();
-}
+require_once '../../../backend/middleware/student_middleware.php';
 
 ?>
 
