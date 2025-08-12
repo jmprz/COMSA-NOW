@@ -1,3 +1,8 @@
+<?php
+require_once '../../../backend/middleware/admin_middleware.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +26,7 @@
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
-  
+
   <!-- Vendor CSS Files -->
   <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -36,7 +41,7 @@
   <link rel="stylesheet" href="../../assets/css/admin-dash.css">
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
+
   <style>
     .student-avatar {
       width: 40px;
@@ -44,22 +49,22 @@
       border-radius: 50%;
       object-fit: cover;
     }
-    
+
     .action-dropdown .dropdown-toggle::after {
       display: none;
     }
-    
+
     .student-details-card {
       border-radius: 8px;
       overflow: hidden;
     }
-    
+
     .student-profile-header {
       height: 120px;
       background-color: #7db832;
       position: relative;
     }
-    
+
     .student-profile-avatar {
       width: 100px;
       height: 100px;
@@ -70,35 +75,35 @@
       left: 20px;
       object-fit: cover;
     }
-    
+
     .tab-content {
       padding: 20px 0;
     }
-    
+
     .nav-tabs .nav-link.active {
       color: #7db832;
       border-bottom: 2px solid #7db832;
       background-color: transparent;
     }
-    
+
     .dark-mode .nav-tabs .nav-link {
       color: #aaa;
     }
-    
+
     .dark-mode .nav-tabs .nav-link.active {
       color: #7db832;
     }
-    
+
     .student-info-item {
       display: flex;
       margin-bottom: 15px;
     }
-    
+
     .student-info-label {
       font-weight: 600;
       width: 100px;
     }
-    
+
     .image-upload-container {
       border: 2px dashed #dee2e6;
       border-radius: 8px;
@@ -107,12 +112,12 @@
       cursor: pointer;
       transition: all 0.3s;
     }
-    
+
     .image-upload-container:hover {
       border-color: #7db832;
       background-color: rgba(125, 184, 50, 0.05);
     }
-    
+
     .upload-icon {
       font-size: 2rem;
       color: #7db832;
@@ -140,24 +145,24 @@
 
             <!-- Nav Menu -->
             <div class="side-nav-menu d-flex flex-column gap-3">
-              <a href="admin-dashboard.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="admin-dashboard.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-dashboard-line"></i> <span>Dashboard</span>
               </a>
-              <a href="account-for-students.html" class="btn text-start d-flex align-items-center gap-2 btn-active active">
+              <a href="account-for-students.php" class="btn text-start d-flex align-items-center gap-2 btn-active active">
                 <i class="ri-group-line"></i> <span>Students</span>
               </a>
-              <a href="posting-config-admin.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="posting-config-admin.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-file-text-line"></i> <span>Posts</span>
               </a>
-              <a href="project-config-admin.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="project-config-admin.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-projector-line"></i> <span>Projects</span>
               </a>
-              <a href="admin-dashboard.html#settings-section" class="btn text-start d-flex align-items-center gap-2">
+              <a href="admin-dashboard.php#settings-section" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-settings-line"></i> <span>Settings</span>
               </a>
               <a href="">
                 <br>
-                <button class="btn btn-sm btn-outline-danger">Logout</button>
+                <button class="btn btn-sm btn-outline-danger" id="logoutBtn">Logout</button>
               </a>
             </div>
           </div>
@@ -190,7 +195,7 @@
                   <button class="btn btn-success" data-bs-toggle="modal">
                     <a href="#" style="color: white;"> <i class="ri-group-2-line"></i> Bulk Create </a>
                   </button>
-                  
+
                   <!-- Add New Student Button -->
                   <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addStudentModal">
                     <i class="ri-user-add-line"></i> Add Student
@@ -199,7 +204,7 @@
               </div>
             </div>
           </div>
-          
+
           <!-- Student Management Tabs -->
           <div class="card mb-4">
             <div class="card-header">
@@ -241,7 +246,9 @@
                               <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#viewStudentModal"><i class="ri-eye-line me-2"></i>View</a></li>
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editStudentModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                  <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item text-danger" href="#"><i class="ri-delete-bin-line me-2"></i>Delete</a></li>
                               </ul>
                             </div>
@@ -264,7 +271,9 @@
                               <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#viewStudentModal"><i class="ri-eye-line me-2"></i>View</a></li>
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editStudentModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                  <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item text-danger" href="#"><i class="ri-delete-bin-line me-2"></i>Delete</a></li>
                               </ul>
                             </div>
@@ -285,19 +294,19 @@
   <!-- Bottom Navigation Bar (for md and below) -->
   <nav class="d-lg-none fixed-bottom bg-light border-top">
     <div class="d-flex justify-content-around py-2">
-      <a href="admin-dashboard.html" class="text-center mt-2">
+      <a href="admin-dashboard.php" class="text-center mt-2">
         <i class="ri-dashboard-line fs-1"></i>
       </a>
-      <a href="account-for-students.html" class="text-center mt-2 btn-active-mobile">
+      <a href="account-for-students.php" class="text-center mt-2 btn-active-mobile">
         <i class="ri-group-line fs-1"></i>
       </a>
-      <a href="posting-config-admin.html" class="text-center mt-2">
+      <a href="posting-config-admin.php" class="text-center mt-2">
         <i class="ri-file-text-line fs-1"></i>
       </a>
-      <a href="project-config-admin.html" class="text-center mt-2">
+      <a href="project-config-admin.php" class="text-center mt-2">
         <i class="ri-projector-line fs-1"></i>
       </a>
-      <a href="admin-dashboard.html#settings-section" class="text-center mt-2">
+      <a href="admin-dashboard.php#settings-section" class="text-center mt-2">
         <i class="ri-settings-line fs-1"></i>
       </a>
     </div>
@@ -326,7 +335,7 @@
                   <input type="text" class="form-control" id="studentLastName" required>
                 </div>
               </div>
-              
+
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="studentEmail" class="form-label">Email</label>
@@ -339,7 +348,7 @@
                   <input type="text" class="form-control" id="studentID" required>
                 </div>
               </div>
-              
+
               <div class="col-12">
                 <div class="mb-3">
                   <label for="studentAvatar" class="form-label">Profile Picture</label>
@@ -377,7 +386,7 @@
           <div class="text-center mb-4">
             <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle" width="120" height="120" style="object-fit: cover;" alt="Student Avatar">
           </div>
-          
+
           <div class="student-info-container">
             <div class="student-info-item">
               <div class="student-info-label">Name</div>
@@ -426,7 +435,7 @@
                   <input type="text" class="form-control" id="editLastName" value="Kun" required>
                 </div>
               </div>
-              
+
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="editEmail" class="form-label">Email</label>
@@ -439,7 +448,7 @@
                   <input type="text" class="form-control" id="editStudentID" value="STU2023001" readonly>
                 </div>
               </div>
-              
+
               <div class="col-12">
                 <div class="mb-3">
                   <label for="editAvatar" class="form-label">Profile Picture</label>
@@ -475,15 +484,17 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-  
+
   <!-- Main JS File -->
   <script src="../../assets/js/main.js"></script>
-  
+  <script src="./js/admin-logout.js"></script>
+
+
   <script>
     // Initialize DataTables
     $(document).ready(function() { // responsible for search bar and pagination
       $('#allStudentsTable').DataTable();
-      
+
       // Image preview for add student form
       $('#studentAvatar').change(function() {
         const file = this.files[0];
@@ -499,7 +510,7 @@
           reader.readAsDataURL(file);
         }
       });
-      
+
       // Image preview for edit student form
       $('#editAvatar').change(function() {
         const file = this.files[0];
@@ -518,4 +529,5 @@
     });
   </script>
 </body>
+
 </html>

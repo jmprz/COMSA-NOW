@@ -1,11 +1,7 @@
 <?php
 require_once "../../../backend/config/session.php";
+require_once '../../../backend/middleware/student_middleware.php';
 
-if (!isset($_SESSION["user_id"])) {
-  // Redirect to login page if not logged in
-  header("Location: /somsa/COMSA-NOW/");
-  exit();
-}
 
 $name = htmlspecialchars($_SESSION['user_name']);
 $email = htmlspecialchars($_SESSION['user_email']);
