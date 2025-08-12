@@ -44,7 +44,6 @@ if (!isset($_SESSION["user_id"])) {
   <link href="../../assets/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/project-studs-design.css">
   <link rel="stylesheet" href="../../assets/css/search.css">
-  <link rel="stylesheet" href="../../assets/css/student-dash.css">
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -117,7 +116,7 @@ if (!isset($_SESSION["user_id"])) {
             </div>
 
             <!-- Mobile Navigation Options -->
-            <!-- <div class="d-md-none bg-white shadow-sm border-top">
+           <div class="d-md-none bg-white shadow-sm border-top">
               <div class="container-fluid py-2">
                 <div class="row text-center small">
                   <div class="col">
@@ -137,7 +136,7 @@ if (!isset($_SESSION["user_id"])) {
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div> 
 
 
             <!-- Project 1 - Game -->
@@ -298,7 +297,7 @@ if (!isset($_SESSION["user_id"])) {
             <!-- Project Upload -->
             <div class="sidebar-card mb-3">
               <h2>Student Projects</h2>
-              <button class="btn btn-primary" id="uploadProjectBtn">
+              <button class="btn btn-primary" id="uploadProjectBtn" style="background: #7db832; border: none;">
                 <i class="bi bi-upload me-2"></i>Upload New Project
               </button>
             </div>
