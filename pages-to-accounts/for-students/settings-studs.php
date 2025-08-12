@@ -1,11 +1,11 @@
 <?php
-  require_once "../../../backend/config/session.php";
+require_once "../../../backend/config/session.php";
 
-  if (!isset($_SESSION["user_id"])) {
-    // Redirect to login page if not logged in
-    header("Location: /comsa/COMSA-NOW/");
-    exit();
-  }
+if (!isset($_SESSION["user_id"])) {
+  // Redirect to login page if not logged in
+  header("Location: /comsa/COMSA-NOW/");
+  exit();
+}
 
 ?>
 
@@ -260,8 +260,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body text-center">
-            <img id="profilePicPreview" src="../../assets/img/team/sampleTeam.jpg" class="profile-pic-preview"
-              alt="Current Profile Picture">
+            <div id="profilePicPreviewWrapper" class="d-flex justify-content-center mb-2">
+              <img id="profilePicPreview" class="profile-pic-preview d-none" alt="Profile Picture">
+              <div id="profileInitialsPreview" class="profile-avatar-initials d-none"></div>
+            </div>
             <div class="mb-3">
               <input type="file" class="form-control" id="profilePicUpload" accept="image/*">
             </div>
@@ -423,7 +425,6 @@
     </div>
 
 
-
     <!-- Vendor JS Files -->
     <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/vendor/php-email-form/validate.js"></script>
@@ -436,9 +437,10 @@
     <!-- Main JS File -->
     <script src="../../assets/js/main.js"></script>
     <script src="./js/settings-logout.js"></script>
-      <script src="../for-students/js/studs-search.js"></script>
-    <script src="../../assets/js/studs-main-func.js"></script>
-    
+    <script src="./js/settings-config.js"></script>
+    <script src="../for-students/js/studs-search.js"></script>
+    <!-- <script src="../../assets/js/studs-main-func.js"></script> -->
+
 </body>
 
 </html>

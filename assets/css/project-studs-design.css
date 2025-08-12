@@ -62,7 +62,25 @@
   flex: 1;
 }
 
-
+#avatar-initials {
+  background-color: #4CAF50;
+  /* default background color */
+  color: white;
+  /* text color */
+  font-weight: bold;
+  /* bold initials */
+  font-size: 18px;
+  /* adjust text size */
+  display: flex;
+  /* center content horizontally & vertically */
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  /* ensure initials are uppercase */
+  user-select: none;
+  /* prevent text selection */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
 
 .project-badge {
@@ -296,7 +314,8 @@
   background-color: #f8f9fa;
 }
 
-.upload-area:hover, .drag-over {
+.upload-area:hover,
+.drag-over {
   border-color: #7db832;
   background-color: #f0f7e9;
 }
@@ -442,7 +461,8 @@
   background-color: #f9f9f9;
 }
 
-.upload-area:hover, .drag-over {
+.upload-area:hover,
+.drag-over {
   border-color: #7db832;
   background-color: #f0f7e9;
 }
@@ -466,17 +486,16 @@
     flex-direction: column;
     gap: 10px;
   }
-  
+
   .project-links {
     flex-direction: column;
     gap: 8px;
   }
-  
+
   .project-link {
     justify-content: center;
   }
 }
-
 
 /* project post image styling */
 .project-container {
@@ -495,7 +514,8 @@
   height: auto;
   object-fit: cover;
   display: block;
-  max-height: 400px; /* optional, to prevent very tall images */
+  max-height: 400px;
+  /* optional, to prevent very tall images */
 }
 
 /* Carousel should stretch to container width */
@@ -507,7 +527,9 @@
   object-fit: cover;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -517,7 +539,7 @@
 }
 
 
-[class^="col-"] > * {
+[class^="col-"]>* {
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -531,4 +553,3 @@
     flex-wrap: wrap !important;
   }
 }
-

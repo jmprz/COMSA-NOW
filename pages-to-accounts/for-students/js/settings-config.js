@@ -72,101 +72,126 @@ document.addEventListener("DOMContentLoaded", function () {
   // PROFILE PICTURE MODAL FUNCTIONALITY
   // =============================================
   const initializeProfilePictureModal = () => {
+    console.log("initializesss")
+
+    function getInitials(name) {
+      const parts = name.trim().split(" ").filter(Boolean);
+      return parts.length === 1
+        ? parts[0][0].toUpperCase()
+        : (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+
+
+
     try {
-      const profilePicModal = new bootstrap.Modal("#profilePicModal");
+      const profilePicModalEl = document.getElementById("profilePicModal");
       const profilePicUpload = document.getElementById("profilePicUpload");
+
+      const profilePicInitial = document.getElementById("profileInitialsPreview")
       const profilePicPreview = document.getElementById("profilePicPreview");
+
       const removeProfilePic = document.getElementById("removeProfilePic");
       const saveProfilePic = document.getElementById("saveProfilePic");
 
-      if (!profilePicUpload || !profilePicPreview) return;
+      let hasProfileInDB = false;
+      let removePhotoFlag = false;
+
+      profilePicModalEl.addEventListener("show.bs.modal", () => {
+        console.log("working")
+        fetch("../../../backend/api/get_user_avatar.php")
+          .then(res => res.json())
+          .then(data => {
+            console.log(data)
+            if (data.success && data.filepath) {
+              console.log(data.filepath)
+              profilePicPreview.src = `../../../backend/${data.filepath}`;
+              profilePicPreview.classList.remove("d-none");
+              profilePicInitial.classList.add("d-none")
+              hasProfileInDB = true;
+            } else {
+              fetch("../../../backend/api/get_initials.php")
+                .then(res => res.json())
+                .then(data => {
+                  profilePicInitial.textContent = getInitials(data.name);
+                  profilePicPreview.classList.add("d-none");
+                  profilePicInitial.classList.remove("d-none")
+                  hasProfileInDB = false;
+                });
+            }
+          });
+      });
 
       // Preview uploaded image
-      profilePicUpload.addEventListener("change", function (e) {
+      profilePicUpload.addEventListener("change", e => {
         const file = e.target.files[0];
         if (file) {
-          // Validate file type and size
-          const validTypes = ["image/jpeg", "image/png", "image/gif"];
-          const maxSize = 5 * 1024 * 1024; // 5MB
-
-          if (!validTypes.includes(file.type)) {
+          if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
             alert("Please select a valid image file (JPEG, PNG, GIF)");
-            this.value = "";
+            e.target.value = "";
             return;
           }
-
-          if (file.size > maxSize) {
+          if (file.size > 5 * 1024 * 1024) {
             alert("Image size must be less than 5MB");
-            this.value = "";
+            e.target.value = "";
             return;
           }
-
           const reader = new FileReader();
-          reader.onloadstart = () => {
-            // Show loading indicator
-          };
-          reader.onload = (event) => {
-            profilePicPreview.src = event.target.result;
-          };
-          reader.onerror = () => {
-            alert("Error reading image file");
-            //should display the default avatar
+          reader.onload = ev => {
+            profilePicPreview.src = ev.target.result;
+            profilePicPreview.classList.remove("d-none");
+            profilePicInitial.classList.add("d-none")
+            removePhotoFlag = false;
           };
           reader.readAsDataURL(file);
         }
       });
 
       // Remove current profile picture
-      if (removeProfilePic) {
-        removeProfilePic.addEventListener("click", function () {
-          profilePicPreview.src = "../../../assets/img/default-profile.png";
-          profilePicUpload.value = "";
-        });
-      }
+      removeProfilePic.addEventListener("click", () => {
+        if (!hasProfileInDB) return; // Do nothing if already no profile photo
+        profilePicPreview.classList.add("d-none");
+        profilePicInitial.classList.remove("d-none")
+        profilePicPreview.src = "";
+        removePhotoFlag = true;
+        profilePicUpload.value = "";
+      });
 
       // Save profile picture
-      if (saveProfilePic) {
-        saveProfilePic.addEventListener("click", function () {
-          // Simulate upload delay
-          this.disabled = true;
-          this.innerHTML =
-            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...';
+      saveProfilePic.addEventListener("click", () => {
+        const formData = new FormData();
+        if (removePhotoFlag) {
+          formData.append("action", "remove");
+        } else if (profilePicUpload.files.length > 0) {
+          formData.append("action", "upload");
+          formData.append("profile_photo", profilePicUpload.files[0]);
+        } else {
+          alert("No changes made.");
+          return;
+        }
 
-          // In a real app, you would upload to server here
-          setTimeout(() => {
-            // Show success message with Toast
-            const toastHTML = `
-                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                  <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header bg-success text-white">
-                      <strong class="me-auto">Success</strong>
-                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                      Profile picture updated successfully!
-                    </div>
-                  </div>
-                </div>
-              `;
+        saveProfilePic.disabled = true;
+        saveProfilePic.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Saving...';
 
-            document.body.insertAdjacentHTML("beforeend", toastHTML);
-
-            // Remove toast after 3 seconds
-            setTimeout(() => {
-              const toast = document.querySelector(".toast");
-              if (toast) {
-                toast.classList.remove("show");
-                setTimeout(() => toast.remove(), 300);
-              }
-            }, 3000);
-
-            // Reset button and close modal
-            this.disabled = false;
-            this.textContent = "Save Changes";
-            profilePicModal.hide();
-          }, 1500);
-        });
-      }
+        fetch("../../../backend/api/update_user_avatar.php", {
+          method: "POST",
+          body: formData
+        })
+          .then(res => res.json())
+          .then(data => {
+            saveProfilePic.disabled = false;
+            saveProfilePic.textContent = "Save Changes";
+            if (data.success) {
+              alert("Profile picture updated successfully!");
+              bootstrap.Modal.getInstance(profilePicModalEl).hide();
+            } else {
+              alert("Error: " + data.message);
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            alert("An error occurred while updating profile picture.");
+          });
+      });
     } catch (error) {
       console.error("Error initializing profile picture modal:", error);
     }
