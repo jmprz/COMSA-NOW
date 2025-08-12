@@ -377,6 +377,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    function getInitials(name) {
+    const parts = name.trim().split(" ").filter(Boolean);
+    return parts.length === 1
+      ? parts[0][0].toUpperCase()
+      : (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+
     fetch('../../../backend/api/get_project.php')
         .then(res => res.json())
         .then(data => {
@@ -385,9 +392,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 data.posts.forEach(post => {
                     const postEl = document.createElement('div');
                     postEl.classList.add('post');
+                    console.log(post.profile_photo)
 
                     const categoryKey = post.project_category.toLowerCase().trim();
                     const categoryClass = categoryClassMap[categoryKey] || 'all';
+                    const initials = getInitials(post.student_name);
+
 
                     //carousel images
                     const carouselId = `carousel-${post.id}`;
@@ -421,7 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     postEl.innerHTML = `
                         <div class="project-container" id="${post.id}-project">
                             <div class="project-header">
-                                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+                                ${post.profile_photo ? `<img src="../../../backend/${post.profile_photo}" class="project-avatar" alt="User Avatar"></img>` : `<div class="project-avatar" id="avatar-initials">${initials}</div>`}
                                 <div class="project-author">
                                 <p class="project-username">${post.student_name}</p>
                                 <p class="project-date">${post.created_at}</p>
@@ -485,6 +495,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log(carouselInstance._config);
                     };
                 });
+
+
 
                 const categoryItems = document.querySelectorAll('.category-item');
                 const projectContainers = document.querySelectorAll('.project-container');

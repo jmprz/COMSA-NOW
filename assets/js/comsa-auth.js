@@ -63,7 +63,9 @@ const comsaAuthSystem = (function () {
               this.reset();
 
               //redirect
-              window.location.href = "../COMSA-NOW/pages-to-accounts/for-students/student-dashboard.php";
+              console.log(data.redirect);
+              window.location.href = data.redirect;
+
             } else {
               // const errorList = Object.values(data.errors).join("\n");
               // alert(errorList || 'Login failed');
@@ -162,9 +164,14 @@ const comsaAuthSystem = (function () {
         });
 
         const data = await res.json();
-
+        console.log(data.loggedIn)
         if (data.loggedIn) {
-          window.location.href = "../COMSA-NOW/pages-to-accounts/for-students/student-dashboard.php";
+          console.log(data.role);
+          if (data.role === 'admin') {
+            window.location.href = "../COMSA-NOW/pages-to-accounts/for-admin/admin-dashboard.php";
+          } else {
+            window.location.href = "../COMSA-NOW/pages-to-accounts/for-students/student-dashboard.php";
+          }
         } else {
           const loginModal = new bootstrap.Modal(document.getElementById('comsaLoginModal'));
           loginModal.show();

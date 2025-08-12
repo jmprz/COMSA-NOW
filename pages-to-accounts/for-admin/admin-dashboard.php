@@ -1,3 +1,8 @@
+<?php
+require_once '../../../backend/middleware/admin_middleware.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +24,7 @@
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
-  
+
   <!-- Vendor CSS Files -->
   <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -254,7 +259,6 @@
       color: #6c757d;
       font-size: 0.9rem;
     }
-
   </style>
 </head>
 
@@ -278,13 +282,13 @@
               <a href="#" class="btn text-start d-flex align-items-center gap-2 btn-active active">
                 <i class="ri-dashboard-line"></i> <span>Dashboard</span>
               </a>
-              <a href="account-for-students.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="account-for-students.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-group-line"></i> <span>Students</span>
               </a>
-              <a href="posting-config-admin.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="posting-config-admin.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-file-text-line"></i> <span>Posts</span>
               </a>
-              <a href="project-config-admin.html" class="btn text-start d-flex align-items-center gap-2 btn-active">
+              <a href="project-config-admin.php" class="btn text-start d-flex align-items-center gap-2 btn-active">
                 <i class="ri-projector-line"></i> <span>Projects</span>
               </a>
               <a href="#settings-section" class="btn text-start d-flex align-items-center gap-2">
@@ -292,11 +296,11 @@
               </a>
               <a href="">
                 <br>
-                <button class="btn btn-sm btn-outline-danger">Logout</button>
+                <button class="btn btn-sm btn-outline-danger" id="logoutBtn">Logout</button>
               </a>
             </div>
           </div>
-          
+
         </div>
       </div>
 
@@ -321,7 +325,7 @@
             <div class="col-12">
               <h2 class="fw-bold mb-4">Admin Dashboard</h2>
             </div>
-            
+
             <!-- Stats Cards -->
             <div class="col-md-3 mb-4">
               <div class="card stat-card">
@@ -342,7 +346,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="col-md-3 mb-4">
               <div class="card stat-card">
                 <div class="card-body">
@@ -362,7 +366,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="col-md-3 mb-4">
               <div class="card stat-card">
                 <div class="card-body">
@@ -382,7 +386,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="col-md-3 mb-4">
               <div class="card stat-card">
                 <div class="card-body">
@@ -429,7 +433,7 @@
                   <button class="nav-link active" id="events-tab" data-bs-toggle="tab" data-bs-target="#events-tab-pane" type="button" role="tab">Events</button>
                 </li>
               </ul>
-              
+
               <div class="tab-content" id="contentTabsContent">
                 <div class="tab-pane fade" id="links-tab-pane" role="tabpanel">
                   <div class="table-responsive">
@@ -478,7 +482,7 @@
                     </table>
                   </div>
                 </div>
-                
+
                 <div class="tab-pane fade" id="announcements-tab-pane" role="tabpanel">
                   <div class="table-responsive">
                     <table class="table table-hover">
@@ -534,7 +538,7 @@
                     </table>
                   </div>
                 </div>
-                
+
                 <div class="tab-pane fade show active" id="events-tab-pane" role="tabpanel">
                   <div class="table-responsive">
                     <table class="table table-hover" id="eventsTable">
@@ -664,7 +668,7 @@
                 <input type="text" class="form-control" id="studentLastName" required>
               </div>
             </div>
-            
+
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="studentEmail" class="form-label">Email</label>
@@ -675,12 +679,12 @@
                 <input type="text" class="form-control" id="studentID" required>
               </div>
             </div>
-            
+
             <div class="mb-3">
               <label for="studentPhoto" class="form-label">Profile Photo</label>
               <input class="form-control" type="file" id="studentPhoto">
             </div>
-            
+
             <div class="mb-3 form-check">
               <input type="checkbox" class="form-check-input" id="sendWelcomeEmail">
               <label class="form-check-label" for="sendWelcomeEmail">Send welcome email with login details</label>
@@ -709,12 +713,12 @@
               <label for="announcementTitle" class="form-label">Title</label>
               <input type="text" class="form-control" id="announcementTitle" required>
             </div>
-            
+
             <div class="mb-3">
               <label for="announcementContent" class="form-label">Content</label>
               <textarea class="form-control" id="announcementContent" rows="6" required></textarea>
             </div>
-            
+
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="announcementStartDate" class="form-label">Start Date</label>
@@ -725,7 +729,7 @@
                 <input type="date" class="form-control" id="announcementEndDate" required>
               </div>
             </div>
-            
+
             <div class="mb-3">
               <label for="announcementPriority" class="form-label">Priority</label>
               <select class="form-select" id="announcementPriority" required>
@@ -734,7 +738,7 @@
                 <option value="high">High</option>
               </select>
             </div>
-            
+
             <div class="mb-3">
               <label for="announcementStatus" class="form-label">Status</label>
               <select class="form-select" id="announcementStatus" required>
@@ -766,12 +770,12 @@
               <label for="linkTitle" class="form-label">Title</label>
               <input type="text" class="form-control" id="linkTitle" required>
             </div>
-            
+
             <div class="mb-3">
               <label for="linkUrl" class="form-label">URL</label>
               <input type="url" class="form-control" id="linkUrl" required>
             </div>
-            
+
             <div class="mb-3">
               <label for="linkCategory" class="form-label">Category</label>
               <select class="form-select" id="linkCategory" required>
@@ -782,7 +786,7 @@
                 <option value="Resource">Resource</option>
               </select>
             </div>
-            
+
             <div class="mb-3">
               <label for="linkIcon" class="form-label">Icon (Optional)</label>
               <input type="text" class="form-control" id="linkIcon" placeholder="e.g., ri-book-line">
@@ -823,8 +827,8 @@
                 </select>
               </div>
             </div>
-            
-            
+
+
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="eventStartDate" class="form-label">Start Date</label>
@@ -835,13 +839,13 @@
                 <input type="datetime-local" class="form-control" id="eventEndDate" required>
               </div>
             </div>
-            
+
             <div class="mb-3">
               <label for="eventImage" class="form-label">Event Image</label>
               <input type="file" class="form-control" id="eventImage" accept="image/*">
               <small class="text-muted">Recommended size: 1200x600px</small>
             </div>
-            
+
             <div class="mb-3">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="featureEvent">
@@ -896,7 +900,7 @@
             <h5>Admin User</h5>
             <p class="text-muted">System Administrator</p>
           </div>
-          
+
           <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action">
               <i class="ri-user-line me-2"></i> My Profile
@@ -908,7 +912,7 @@
               <i class="ri-notification-line me-2"></i> Notifications
             </a>
             <a href="#" class="list-group-item list-group-item-action text-danger">
-              <i class="ri-logout-box-line me-2"></i> Logout
+              <i class="ri-logout-box-line me-2" id="logoutBtn"></i> Logout
             </a>
           </div>
         </div>
@@ -928,29 +932,38 @@
 
   <!-- Main JS File -->
   <script src="../../assets/js/main.js"></script>
-  
+  <script src="./js/admin-logout.js"></script>
+
   <script>
     // Initialize DataTable for events
     $(document).ready(function() {
       $('#eventsTable').DataTable({
         responsive: true,
-        columnDefs: [
-          { responsivePriority: 1, targets: 0 },
-          { responsivePriority: 2, targets: 2 },
-          { responsivePriority: 3, targets: 7 }
+        columnDefs: [{
+            responsivePriority: 1,
+            targets: 0
+          },
+          {
+            responsivePriority: 2,
+            targets: 2
+          },
+          {
+            responsivePriority: 3,
+            targets: 7
+          }
         ]
       });
 
       // Event form handling
       const eventForm = document.getElementById('eventForm');
       const saveEventBtn = document.getElementById('saveEventBtn');
-      
+
       saveEventBtn.addEventListener('click', function() {
         if (eventForm.checkValidity()) {
           // Here you would typically send the data to your backend
           // For now, we'll just close the modal
           $('#addEventModal').modal('hide');
-          
+
           // Show success message
           alert('Event saved successfully!');
         } else {
@@ -965,11 +978,11 @@
           const title = row.cells[2].textContent;
           const desc = row.cells[3].textContent;
           const imgSrc = row.cells[1].querySelector('img').src;
-          
+
           // Update preview modal content
           document.querySelector('.event-preview-title').textContent = title;
           document.querySelector('.event-preview-img').src = imgSrc;
-          
+
           // Show preview modal
           $('#previewEventModal').modal('show');
         });
@@ -981,11 +994,12 @@
       darkModeToggle.innerHTML = '<i class="ri-moon-line"></i>';
       darkModeToggle.addEventListener('click', function() {
         document.body.classList.toggle('dark-mode');
-        this.innerHTML = document.body.classList.contains('dark-mode') ? 
+        this.innerHTML = document.body.classList.contains('dark-mode') ?
           '<i class="ri-sun-line"></i>' : '<i class="ri-moon-line"></i>';
       });
       document.querySelector('.card-header .d-flex').appendChild(darkModeToggle);
     });
   </script>
 </body>
+
 </html>

@@ -1,3 +1,8 @@
+<?php
+require_once '../../../backend/middleware/admin_middleware.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -170,24 +175,24 @@
 
             <!-- Nav Menu -->
             <div class="side-nav-menu d-flex flex-column gap-3">
-              <a href="admin-dashboard.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="admin-dashboard.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-dashboard-line"></i> <span>Dashboard</span>
               </a>
-              <a href="account-for-students.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="account-for-students.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-group-line"></i> <span>Students</span>
               </a>
-              <a href="posting-config-admin.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="posting-config-admin.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-file-text-line"></i> <span>Posts</span>
               </a>
-              <a href="project-config-admin.html" class="btn text-start d-flex align-items-center gap-2 btn-active active" >
+              <a href="project-config-admin.php" class="btn text-start d-flex align-items-center gap-2 btn-active active">
                 <i class="ri-projector-line"></i> <span>Projects</span>
               </a>
-              <a href="admin-dashboard.html#settings-section" class="btn text-start d-flex align-items-center gap-2">
+              <a href="admin-dashboard.php#settings-section" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-settings-line"></i> <span>Settings</span>
               </a>
               <a href="">
                 <br>
-                <button class="btn btn-sm btn-outline-danger">Logout</button>
+                <button class="btn btn-sm btn-outline-danger" id="logoutBtn">Logout</button>
               </a>
             </div>
           </div>
@@ -640,7 +645,7 @@
                 </div>
 
 
-                                <!-- Ai/ML Tab -->
+                <!-- Ai/ML Tab -->
                 <div class="tab-pane fade" id="aiml" role="tabpanel">
                   <div class="alert alert-info">
                     No Ai/ML projects found.
@@ -648,7 +653,7 @@
                 </div>
 
 
-                                <!-- database Tab -->
+                <!-- database Tab -->
                 <div class="tab-pane fade" id="database" role="tabpanel">
                   <div class="alert alert-info">
                     No Database projects found.
@@ -667,19 +672,19 @@
   <!-- Bottom Navigation Bar (for md and below) -->
   <nav class="d-lg-none fixed-bottom bg-light border-top">
     <div class="d-flex justify-content-around py-2">
-      <a href="admin-dashboard.html" class="text-center mt-2">
+      <a href="admin-dashboard.php" class="text-center mt-2">
         <i class="ri-dashboard-line fs-1"></i>
       </a>
-      <a href="admin-dashboard.html#students-section" class="text-center mt-2">
+      <a href="admin-dashboard.php#students-section" class="text-center mt-2">
         <i class="ri-group-line fs-1"></i>
       </a>
-      <a href="posting-config-admin.html" class="text-center mt-2">
+      <a href="posting-config-admin.php" class="text-center mt-2">
         <i class="ri-file-text-line fs-1"></i>
       </a>
-      <a href="project-config-admin.html" class="text-center mt-2 btn-active-mobile">
+      <a href="project-config-admin.php" class="text-center mt-2 btn-active-mobile">
         <i class="ri-projector-line fs-1"></i>
       </a>
-      <a href="admin-dashboard.html#settings-section" class="text-center mt-2">
+      <a href="admin-dashboard.php#settings-section" class="text-center mt-2">
         <i class="ri-settings-line fs-1"></i>
       </a>
     </div>
@@ -962,7 +967,7 @@
               <i class="ri-notification-line me-2"></i> Notifications
             </a>
             <a href="#" class="list-group-item list-group-item-action text-danger">
-              <i class="ri-logout-box-line me-2"></i> Logout
+              <i class="ri-logout-box-line me-2" id="logoutBtn"></i> Logout
             </a>
           </div>
         </div>
@@ -979,8 +984,13 @@
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
 
-  <script>// Project Search Functionality
-    document.addEventListener('DOMContentLoaded', function () {
+  <!-- main -->
+  <script src="./js/admin-logout.js"></script>
+
+
+  <script>
+    // Project Search Functionality
+    document.addEventListener('DOMContentLoaded', function() {
       const searchInput = document.querySelector('.input-group input[type="text"]');
       const searchButton = document.querySelector('.input-group button');
       const projectContainers = document.querySelectorAll('.project-container-admin');
@@ -989,7 +999,7 @@
       searchButton.addEventListener('click', performSearch);
 
       // Search when Enter key is pressed
-      searchInput.addEventListener('keyup', function (e) {
+      searchInput.addEventListener('keyup', function(e) {
         if (e.key === 'Enter') {
           performSearch();
         }
@@ -1014,7 +1024,7 @@
       }
 
       // Clear search when filter modal is opened (optional)
-      document.getElementById('filterProjectsModal').addEventListener('show.bs.modal', function () {
+      document.getElementById('filterProjectsModal').addEventListener('show.bs.modal', function() {
         searchInput.value = '';
         projectContainers.forEach(project => {
           project.style.display = 'block';
@@ -1028,22 +1038,22 @@
 
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
       // Handle image change in edit project modal
       const changeProjectImageBtn = document.getElementById('changeProjectImageBtn');
       const editProjectImageUpload = document.getElementById('editProjectImageUpload');
       const editProjectImagePreview = document.getElementById('editProjectImagePreview');
 
-      changeProjectImageBtn.addEventListener('click', function () {
+      changeProjectImageBtn.addEventListener('click', function() {
         editProjectImageUpload.click();
       });
 
-      editProjectImageUpload.addEventListener('change', function (e) {
+      editProjectImageUpload.addEventListener('change', function(e) {
         if (e.target.files.length > 0) {
           const file = e.target.files[0];
           const reader = new FileReader();
 
-          reader.onload = function (event) {
+          reader.onload = function(event) {
             editProjectImagePreview.src = event.target.result;
           };
 
@@ -1055,7 +1065,7 @@
       const editProjectTech = document.getElementById('editProjectTech');
       const techTagsContainer = document.getElementById('techTagsContainer');
 
-      editProjectTech.addEventListener('keydown', function (e) {
+      editProjectTech.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ',') {
           e.preventDefault();
           const tech = this.value.trim();
@@ -1074,7 +1084,7 @@
       }
 
       // Form submission
-      document.getElementById('editProjectForm').addEventListener('submit', function (e) {
+      document.getElementById('editProjectForm').addEventListener('submit', function(e) {
         e.preventDefault();
         // Here you would normally send the form data to the server
         alert('Project updated successfully!');
@@ -1085,7 +1095,7 @@
       // Dark mode toggle
       const darkModeToggle = document.getElementById('darkModeToggle');
       if (darkModeToggle) {
-        darkModeToggle.addEventListener('change', function () {
+        darkModeToggle.addEventListener('change', function() {
           document.body.classList.toggle('dark-mode');
           localStorage.setItem('darkMode', this.checked);
         });

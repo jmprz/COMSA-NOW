@@ -1,3 +1,8 @@
+<?php
+require_once '../../../backend/middleware/admin_middleware.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -169,35 +174,35 @@
     }
 
     .comments-container {
-    scrollbar-width: thin;
-    scrollbar-color: #7db832 #f1f1f1;
-  }
-  
-  .comments-container::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  .comments-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  .comments-container::-webkit-scrollbar-thumb {
-    background-color: #7db832;
-    border-radius: 6px;
-  }
-  
-  .dark-mode .comments-container::-webkit-scrollbar-track {
-    background: #2a2a2a;
-  }
-  
-  .comment-delete-btn {
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  
-  .post-comment:hover .comment-delete-btn {
-    opacity: 1;
-  }
+      scrollbar-width: thin;
+      scrollbar-color: #7db832 #f1f1f1;
+    }
+
+    .comments-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .comments-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .comments-container::-webkit-scrollbar-thumb {
+      background-color: #7db832;
+      border-radius: 6px;
+    }
+
+    .dark-mode .comments-container::-webkit-scrollbar-track {
+      background: #2a2a2a;
+    }
+
+    .comment-delete-btn {
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .post-comment:hover .comment-delete-btn {
+      opacity: 1;
+    }
   </style>
 
 
@@ -220,24 +225,24 @@
 
             <!-- Nav Menu -->
             <div class="side-nav-menu d-flex flex-column gap-3">
-              <a href="admin-dashboard.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="admin-dashboard.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-dashboard-line"></i> <span>Dashboard</span>
               </a>
-              <a href="account-for-students.html" class="btn text-start d-flex align-items-center gap-2">
+              <a href="account-for-students.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-group-line"></i> <span>Students</span>
               </a>
-              <a href="posting-config.html" class="btn text-start d-flex align-items-center gap-2 btn-active active">
+              <a href="posting-config.php" class="btn text-start d-flex align-items-center gap-2 btn-active active">
                 <i class="ri-file-text-line"></i> <span>Posts</span>
               </a>
-              <a href="project-config-admin.html" class="btn text-start d-flex align-items-center gap-2 btn-active">
+              <a href="project-config-admin.php" class="btn text-start d-flex align-items-center gap-2 btn-active">
                 <i class="ri-projector-line"></i> <span>Projects</span>
               </a>
-              <a href="admin-dashboard.html#settings-section" class="btn text-start d-flex align-items-center gap-2">
+              <a href="admin-dashboard.php#settings-section" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-settings-line"></i> <span>Settings</span>
               </a>
               <a href="">
                 <br>
-                <button class="btn btn-sm btn-outline-danger">Logout</button>
+                <button class="btn btn-sm btn-outline-danger" id="logoutBtn">Logout</button>
               </a>
             </div>
           </div>
@@ -772,19 +777,19 @@
   <!-- Bottom Navigation Bar (for md and below) -->
   <nav class="d-lg-none fixed-bottom bg-light border-top">
     <div class="d-flex justify-content-around py-2">
-      <a href="admin-dashboard.html" class="text-center mt-2">
+      <a href="admin-dashboard.php" class="text-center mt-2">
         <i class="ri-dashboard-line fs-1"></i>
       </a>
-      <a href="admin-dashboard.html#students-section" class="text-center mt-2">
+      <a href="admin-dashboard.php#students-section" class="text-center mt-2">
         <i class="ri-group-line fs-1"></i>
       </a>
-      <a href="posting-config-admin.html" class="text-center mt-2 btn-active-mobile">
+      <a href="posting-config-admin.php" class="text-center mt-2 btn-active-mobile">
         <i class="ri-file-text-line fs-1"></i>
       </a>
-      <a href="admin-dashboard.html#content-section" class="text-center mt-2">
+      <a href="admin-dashboard.php#content-section" class="text-center mt-2">
         <i class="ri-file-text-line fs-1"></i>
       </a>
-      <a href="admin-dashboard.html#settings-section" class="text-center mt-2">
+      <a href="admin-dashboard.php#settings-section" class="text-center mt-2">
         <i class="ri-settings-line fs-1"></i>
       </a>
     </div>
@@ -986,138 +991,138 @@
     </div>
   </div>
 
-<!-- View Post Modal -->
-<div class="modal fade" id="viewPostModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-xl"> <!-- Changed to modal-xl for larger size -->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">View Post</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body p-0"> <!-- Removed padding to allow full-width layout -->
-        <div class="row g-0"> <!-- Added row with no gap -->
-          <!-- Main Post Content (Left Side) -->
-          <div class="col-md-8">
-            <div class="post-preview-container h-100" style="border-radius: 0; border-right: 1px solid #dee2e6;">
-              <div class="post-preview-header">
-                <img src="../../assets/img/team/sampleTeam.jpg" class="post-preview-avatar" alt="Admin Avatar">
-                <div>
-                  <h6 class="mb-0">Admin</h6>
-                  <small class="text-muted">Posted on June 15, 2024</small>
+  <!-- View Post Modal -->
+  <div class="modal fade" id="viewPostModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl"> <!-- Changed to modal-xl for larger size -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">View Post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0"> <!-- Removed padding to allow full-width layout -->
+          <div class="row g-0"> <!-- Added row with no gap -->
+            <!-- Main Post Content (Left Side) -->
+            <div class="col-md-8">
+              <div class="post-preview-container h-100" style="border-radius: 0; border-right: 1px solid #dee2e6;">
+                <div class="post-preview-header">
+                  <img src="../../assets/img/team/sampleTeam.jpg" class="post-preview-avatar" alt="Admin Avatar">
+                  <div>
+                    <h6 class="mb-0">Admin</h6>
+                    <small class="text-muted">Posted on June 15, 2024</small>
+                  </div>
                 </div>
-              </div>
 
-              <h4 class="my-3">AI-powered campus navigation system</h4>
+                <h4 class="my-3">AI-powered campus navigation system</h4>
 
-              <img src="../../assets/img/csexpo.jpg" class="post-preview-image" alt="Post Image">
+                <img src="../../assets/img/csexpo.jpg" class="post-preview-image" alt="Post Image">
 
-              <div class="post-caption-preview">
-                <p>Just launched our AI-powered campus navigation system! 🚀 #CSExpo2024 #AI #Innovation</p>
-              </div>
+                <div class="post-caption-preview">
+                  <p>Just launched our AI-powered campus navigation system! 🚀 #CSExpo2024 #AI #Innovation</p>
+                </div>
 
-              <div class="post-actions-preview">
-                <button class="post-action-preview">
-                  <i class="ri-star-line"></i> 1,243
-                </button>
-                <button class="post-action-preview">
-                  <i class="ri-chat-3-line"></i> 56
-                </button>
-                <button class="post-action-preview">
-                  <i class="ri-share-line"></i> Share
-                </button>
-              </div>
+                <div class="post-actions-preview">
+                  <button class="post-action-preview">
+                    <i class="ri-star-line"></i> 1,243
+                  </button>
+                  <button class="post-action-preview">
+                    <i class="ri-chat-3-line"></i> 56
+                  </button>
+                  <button class="post-action-preview">
+                    <i class="ri-share-line"></i> Share
+                  </button>
+                </div>
 
-              <div class="mb-2">
-                <span class="badge bg-light text-dark tag-badge">#AI</span>
-                <span class="badge bg-light text-dark tag-badge">#Navigation</span>
-                <span class="badge bg-light text-dark tag-badge">#CSExpo</span>
+                <div class="mb-2">
+                  <span class="badge bg-light text-dark tag-badge">#AI</span>
+                  <span class="badge bg-light text-dark tag-badge">#Navigation</span>
+                  <span class="badge bg-light text-dark tag-badge">#CSExpo</span>
+                </div>
               </div>
             </div>
-          </div>
-          
-          <!-- Comments Section (Right Side) -->
-          <div class="col-md-4">
-            <div class="h-100 d-flex flex-column">
-              <div class="p-3 border-bottom">
-                <h5 class="mb-0">Comments (56)</h5>
-              </div>
-              
-              <div class="comments-container flex-grow-1 overflow-auto p-3" style="max-height: 400px;">
-                <div class="post-comment mb-3 position-relative">
-                  <div class="d-flex align-items-start">
-                    <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
-                    <div>
-                      <strong class="d-block">student1</strong>
-                      <span>This is amazing! How does the AI work?</span>
-                    </div>
-                  </div>
-                  <button class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
-                    <i class="ri-delete-bin-line"></i>
-                  </button>
+
+            <!-- Comments Section (Right Side) -->
+            <div class="col-md-4">
+              <div class="h-100 d-flex flex-column">
+                <div class="p-3 border-bottom">
+                  <h5 class="mb-0">Comments (56)</h5>
                 </div>
-                
-                <div class="post-comment mb-3 position-relative">
-                  <div class="d-flex align-items-start">
-                    <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
-                    <div>
-                      <strong class="d-block">professor_x</strong>
-                      <span>Great work team! Looking forward to seeing this in action.</span>
+
+                <div class="comments-container flex-grow-1 overflow-auto p-3" style="max-height: 400px;">
+                  <div class="post-comment mb-3 position-relative">
+                    <div class="d-flex align-items-start">
+                      <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
+                      <div>
+                        <strong class="d-block">student1</strong>
+                        <span>This is amazing! How does the AI work?</span>
+                      </div>
                     </div>
+                    <button class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
+                      <i class="ri-delete-bin-line"></i>
+                    </button>
                   </div>
-                  <button class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
-                    <i class="ri-delete-bin-line"></i>
-                  </button>
-                </div>
-                
-                <div class="post-comment mb-3 position-relative">
-                  <div class="d-flex align-items-start">
-                    <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
-                    <div>
-                      <strong class="d-block">tech_enthusiast</strong>
-                      <span>Can't wait to try this out on campus!</span>
+
+                  <div class="post-comment mb-3 position-relative">
+                    <div class="d-flex align-items-start">
+                      <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
+                      <div>
+                        <strong class="d-block">professor_x</strong>
+                        <span>Great work team! Looking forward to seeing this in action.</span>
+                      </div>
                     </div>
+                    <button class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
+                      <i class="ri-delete-bin-line"></i>
+                    </button>
                   </div>
-                  <button class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
-                    <i class="ri-delete-bin-line"></i>
-                  </button>
-                </div>
-                
-                <div class="post-comment mb-3 position-relative">
-                  <div class="d-flex align-items-start">
-                    <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
-                    <div>
-                      <strong class="d-block">anonymous_user</strong>
-                      <span class="text-danger">This is a bad comment that should be removed!</span>
+
+                  <div class="post-comment mb-3 position-relative">
+                    <div class="d-flex align-items-start">
+                      <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
+                      <div>
+                        <strong class="d-block">tech_enthusiast</strong>
+                        <span>Can't wait to try this out on campus!</span>
+                      </div>
                     </div>
+                    <button class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
+                      <i class="ri-delete-bin-line"></i>
+                    </button>
                   </div>
-                  <button class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
-                    <i class="ri-delete-bin-line"></i>
-                  </button>
+
+                  <div class="post-comment mb-3 position-relative">
+                    <div class="d-flex align-items-start">
+                      <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
+                      <div>
+                        <strong class="d-block">anonymous_user</strong>
+                        <span class="text-danger">This is a bad comment that should be removed!</span>
+                      </div>
+                    </div>
+                    <button class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
+                      <i class="ri-delete-bin-line"></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              
-              <div class="p-3 border-top">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Add a comment...">
-                  <button class="btn btn-success" type="button">
-                    <i class="ri-send-plane-line"></i>
-                  </button>
+
+                <div class="p-3 border-top">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Add a comment...">
+                    <button class="btn btn-success" type="button">
+                      <i class="ri-send-plane-line"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPostModal"
-          data-bs-dismiss="modal">
-          <i class="ri-edit-line me-1"></i> Edit Post
-        </button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPostModal"
+            data-bs-dismiss="modal">
+            <i class="ri-edit-line me-1"></i> Edit Post
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
 
@@ -1149,7 +1154,7 @@
               <i class="ri-notification-line me-2"></i> Notifications
             </a>
             <a href="#" class="list-group-item list-group-item-action text-danger">
-              <i class="ri-logout-box-line me-2"></i> Logout
+              <i class="ri-logout-box-line me-2" id="logoutBtn"></i> Logout
             </a>
           </div>
         </div>
@@ -1167,12 +1172,12 @@
 
   <!-- Main JS File -->
   <script src="../../assets/js/main.js"></script>
-    <script src="../for-admin/js/search-config-post.js"></script>
-
+  <script src="../for-admin/js/search-config-post.js"></script>
+  <script src="./js/admin-logout.js"></script>
 
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
       // Initialize DataTables
       $('#allPostsTable').DataTable({
         responsive: true,
@@ -1210,16 +1215,16 @@
       const imagePreview = document.getElementById('imagePreview');
 
       // Handle image upload
-      imageUploadContainer.addEventListener('click', function () {
+      imageUploadContainer.addEventListener('click', function() {
         imageUpload.click();
       });
 
-      imageUpload.addEventListener('change', function (e) {
+      imageUpload.addEventListener('change', function(e) {
         if (e.target.files.length > 0) {
           const file = e.target.files[0];
           const reader = new FileReader();
 
-          reader.onload = function (event) {
+          reader.onload = function(event) {
             imagePreview.src = event.target.result;
             imagePreview.style.display = 'block';
           };
@@ -1229,16 +1234,16 @@
       });
 
       // Drag and drop for image upload
-      imageUploadContainer.addEventListener('dragover', function (e) {
+      imageUploadContainer.addEventListener('dragover', function(e) {
         e.preventDefault();
         this.style.borderColor = '#7db832';
       });
 
-      imageUploadContainer.addEventListener('dragleave', function () {
+      imageUploadContainer.addEventListener('dragleave', function() {
         this.style.borderColor = '#dee2e6';
       });
 
-      imageUploadContainer.addEventListener('drop', function (e) {
+      imageUploadContainer.addEventListener('drop', function(e) {
         e.preventDefault();
         this.style.borderColor = '#dee2e6';
 
@@ -1250,8 +1255,8 @@
       });
 
       // Show/hide schedule options
-      document.querySelectorAll('input[name="publishOption"]').forEach(function (radio) {
-        radio.addEventListener('change', function () {
+      document.querySelectorAll('input[name="publishOption"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
           const scheduleOptions = document.getElementById('scheduleOptions');
           if (this.value === 'schedule') {
             scheduleOptions.style.display = 'block';
@@ -1265,7 +1270,7 @@
       const postTags = document.getElementById('postTags');
       const tagsContainer = document.getElementById('tagsContainer');
 
-      postTags.addEventListener('keydown', function (e) {
+      postTags.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ',') {
           e.preventDefault();
           const tag = this.value.trim();
@@ -1287,7 +1292,7 @@
       const previewPostBtn = document.getElementById('previewPostBtn');
       const postPreviewModal = new bootstrap.Modal(document.getElementById('postPreviewModal'));
 
-      previewPostBtn.addEventListener('click', function () {
+      previewPostBtn.addEventListener('click', function() {
         const title = document.getElementById('postTitle').value || 'Post Title';
         const content = document.getElementById('postContent').value || 'Post content will appear here...';
 
@@ -1305,7 +1310,7 @@
       });
 
       // Form submission
-      document.getElementById('postForm').addEventListener('submit', function (e) {
+      document.getElementById('postForm').addEventListener('submit', function(e) {
         e.preventDefault();
         // Here you would normally send the form data to the server
         alert('Post saved successfully!');
@@ -1319,16 +1324,16 @@
       const editImageUpload = document.getElementById('editImageUpload');
       const editImagePreview = document.getElementById('editImagePreview');
 
-      changeImageBtn.addEventListener('click', function () {
+      changeImageBtn.addEventListener('click', function() {
         editImageUpload.click();
       });
 
-      editImageUpload.addEventListener('change', function (e) {
+      editImageUpload.addEventListener('change', function(e) {
         if (e.target.files.length > 0) {
           const file = e.target.files[0];
           const reader = new FileReader();
 
-          reader.onload = function (event) {
+          reader.onload = function(event) {
             editImagePreview.src = event.target.result;
           };
 
@@ -1340,12 +1345,12 @@
       const editPreviewPostBtn = document.getElementById('editPreviewPostBtn');
       const viewPostModal = new bootstrap.Modal(document.getElementById('viewPostModal'));
 
-      editPreviewPostBtn.addEventListener('click', function () {
+      editPreviewPostBtn.addEventListener('click', function() {
         viewPostModal.show();
       });
 
       // Edit form submission
-      document.getElementById('editPostForm').addEventListener('submit', function (e) {
+      document.getElementById('editPostForm').addEventListener('submit', function(e) {
         e.preventDefault();
         alert('Post updated successfully!');
         const editPostModal = bootstrap.Modal.getInstance(document.getElementById('editPostModal'));
@@ -1357,42 +1362,42 @@
 
 
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Handle comment deletion
-    document.querySelectorAll('.comment-delete-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const comment = this.closest('.post-comment');
-        if (confirm('Are you sure you want to delete this comment?')) {
-          comment.style.transition = 'opacity 0.3s';
-          comment.style.opacity = '0';
-          setTimeout(() => {
-            comment.remove();
-            // Here you would normally send a request to the server to delete the comment
-          }, 300);
-        }
-      });
-    });
-    
-    // Dark mode support for comments section
-    const darkModeToggle = document.querySelector('.dark-mode-toggle');
-    if (darkModeToggle) {
-      darkModeToggle.addEventListener('click', function() {
-        setTimeout(() => {
-          const isDarkMode = document.body.classList.contains('dark-mode');
-          const commentsContainer = document.querySelector('.comments-container');
-          if (commentsContainer) {
-            if (isDarkMode) {
-              commentsContainer.style.scrollbarColor = '#7db832 #2a2a2a';
-            } else {
-              commentsContainer.style.scrollbarColor = '#7db832 #f1f1f1';
-            }
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle comment deletion
+      document.querySelectorAll('.comment-delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const comment = this.closest('.post-comment');
+          if (confirm('Are you sure you want to delete this comment?')) {
+            comment.style.transition = 'opacity 0.3s';
+            comment.style.opacity = '0';
+            setTimeout(() => {
+              comment.remove();
+              // Here you would normally send a request to the server to delete the comment
+            }, 300);
           }
-        }, 100);
+        });
       });
-    }
-  });
-</script>
+
+      // Dark mode support for comments section
+      const darkModeToggle = document.querySelector('.dark-mode-toggle');
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+          setTimeout(() => {
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const commentsContainer = document.querySelector('.comments-container');
+            if (commentsContainer) {
+              if (isDarkMode) {
+                commentsContainer.style.scrollbarColor = '#7db832 #2a2a2a';
+              } else {
+                commentsContainer.style.scrollbarColor = '#7db832 #f1f1f1';
+              }
+            }
+          }, 100);
+        });
+      }
+    });
+  </script>
 
 </body>
 
