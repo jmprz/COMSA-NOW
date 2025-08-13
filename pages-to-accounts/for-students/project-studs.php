@@ -19,7 +19,7 @@ require_once '../../../backend/middleware/student_middleware.php';
 
 
 
-  
+
   <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
@@ -47,6 +47,34 @@ require_once '../../../backend/middleware/student_middleware.php';
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+<style>
+  .carousel {
+    width: 100%;
+    height: 400px;
+    /* Adjust this height as needed */
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .carousel-inner {
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-item {
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* This ensures the image fits while maintaining aspect ratio */
+    background-color: #f8f9fa;
+    /* Background color for images with different aspect ratios */
+  }
+</style>
 
 <body class="index-page">
 
@@ -76,8 +104,8 @@ require_once '../../../backend/middleware/student_middleware.php';
                 <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-search-line"></i> <span>Search</span>
                 </a>
-                <a href="#" class="btn text-start d-flex align-items-center gap-2">
-                  <i class="ri-notification-3-line"></i> <span>Notification</span>
+                <a href="../../pages-to-accounts/for-students/profile-studs.php" class="btn text-start d-flex align-items-center gap-2">
+                  <i class="ri-user-line"></i> <span>Profile</span>
                 </a>
                 <a href="../../pages-to-accounts/for-students/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-settings-line"></i> <span>Settings</span>
@@ -116,7 +144,7 @@ require_once '../../../backend/middleware/student_middleware.php';
             </div>
 
             <!-- Mobile Navigation Options -->
-           <div class="d-md-none bg-white shadow-sm border-top">
+            <div class="d-md-none bg-white shadow-sm border-top">
               <div class="container-fluid py-2">
                 <div class="row text-center small">
                   <div class="col">
@@ -136,7 +164,7 @@ require_once '../../../backend/middleware/student_middleware.php';
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
 
 
             <!-- Project 1 - Game -->

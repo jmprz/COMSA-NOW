@@ -72,8 +72,8 @@ require_once '../../../backend/middleware/student_middleware.php';
               <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-search-line"></i> <span>Search</span>
               </a>
-              <a href="#" class="btn text-start d-flex align-items-center gap-2">
-                <i class="ri-notification-3-line"></i> <span>Notification</span>
+              <a href="../../pages-to-accounts/for-students/profile-studs.php" class="btn text-start d-flex align-items-center gap-2">
+                <i class="ri-user-line"></i> <span>Profile</span>
               </a>
               <a href="../../pages-to-accounts/for-students/settings-studs.php"
                 class="btn text-start d-flex align-items-center gap-2 btn-active">
