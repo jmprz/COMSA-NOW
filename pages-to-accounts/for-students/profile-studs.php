@@ -1,10 +1,86 @@
 <?php
 require_once "../../../backend/config/session.php";
+require_once "../../../backend/config/db.php";
 require_once '../../../backend/middleware/student_middleware.php';
-require_once "../../../backend/api/update_nickname_bio.php";
 
 
+$bio = "No bio yet...";
+$nickname = 'No nickname set';
+$name = '';
+$email = '';
+
+// Fetch user data including bio and nickname
+$user_id = $_SESSION['user_id'];
+$stmt = $pdo->prepare("SELECT student_number, name, email, nickname, bio FROM students WHERE id = ?");
+$stmt->execute([$user_id]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$user) {
+    die("User not found");
+}
+
+$bio = !empty($user['bio']) ? htmlspecialchars($user['bio']) : $bio;
+$nickname = !empty($user['nickname']) ? htmlspecialchars($user['nickname']) : $nickname;
+$name = htmlspecialchars($user['name']);
+$email = htmlspecialchars($user['email']);
+
+// Handle bio update
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bio'])) {
+    $new_bio = trim($_POST['bio']);
+
+    // Validate bio length (100 characters max)
+    if (strlen($new_bio) > 100) {
+        $_SESSION['error'] = "Bio must be 100 characters or less";
+        header("Location: profile-studs.php");
+        exit;
+    }
+
+    try {
+        $stmt = $pdo->prepare("UPDATE students SET bio = ? WHERE id = ?");
+        $stmt->execute([$new_bio, $user_id]);
+
+        $_SESSION['success'] = "Bio updated successfully!";
+        $bio = $new_bio;
+
+        header("Location: profile-studs.php");
+        exit;
+    } catch (PDOException $e) {
+        $_SESSION['error'] = "Database error: " . $e->getMessage();
+        header("Location: profile-studs.php");
+        exit;
+    }
+}
+
+// Handle nickname update 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nickname'])) {
+    $new_nickname = trim($_POST['nickname']);
+
+    // Validate nickname (letters only)
+    if (!preg_match('/^[A-Za-z]+$/', $new_nickname)) {
+        $_SESSION['error'] = "Nickname can only contain letters (A-Z, a-z)";
+        header("Location: profile-studs.php");
+        exit;
+    }
+
+    try {
+        $stmt = $pdo->prepare("UPDATE students SET nickname = ? WHERE id = ?");
+        $stmt->execute([$new_nickname, $user_id]);
+
+        $_SESSION['success'] = "Nickname updated successfully!";
+        $_SESSION['user_nickname'] = $new_nickname;
+        $nickname = $new_nickname;
+
+        header("Location: profile-studs.php");
+        exit;
+    } catch (PDOException $e) {
+        $_SESSION['error'] = "Database error: " . $e->getMessage();
+        header("Location: profile-studs.php");
+        exit;
+    }
+}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -234,6 +310,22 @@ require_once "../../../backend/api/update_nickname_bio.php";
             object-fit: cover;
             background-color: #f8f9fa;
         }
+
+
+
+
+.char-limit-warning {
+    color: orange;
+}
+.char-limit-exceeded {
+    color: red;
+}
+.text-danger {
+    color: red;
+}
+.is-invalid {
+    border-color: red;
+}
     </style>
 </head>
 
@@ -314,7 +406,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                 <h1 class="profile-name"><?php echo htmlspecialchars($_SESSION['user_name']); ?></h1>
                                 <div class="d-flex align-items-center">
                                     <h2 class="profile-nickname me-2" id="nicknameDisplay">
-                                        <?php echo isset($_SESSION['user_nickname']) ? htmlspecialchars($_SESSION['user_nickname']) : 'No nickname set'; ?>
+                                        <?php echo !empty($nickname) ? $nickname : 'No nickname set'; ?>
                                     </h2>
                                     <button class="edit-nickname-btn" data-bs-toggle="modal" data-bs-target="#nicknameModal">
                                         <i class="ri-edit-line"></i>
@@ -325,7 +417,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                     <p class="profile-bio mb-0">
                                         <?php echo $bio; ?>
                                     </p>
-                                    <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editBioModal">
+                                    <button class="btn" data-bs-toggle="modal" data-bs-target="#editBioModal" style="color: #7db832">
                                         <i class="ri-edit-line"></i>
                                     </button>
 
@@ -357,13 +449,17 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
 
-                                <form method="post" action="../../../backend/api/update_nickname_bio.php">
+
+         <!--                <form method="post" action="../../../backend/api/update_nickname_bio.php";>
+-->
+
+                                <form method="post" action="profile-studs.php">
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <textarea class="form-control" id="bioInput" name="bio" rows="5"
-                                                maxlength="2000"><?php echo $bio; ?></textarea>
+                                                maxlength="100"><?php echo $bio; ?></textarea>
                                             <div class="form-text text-end">
-                                                <span id="wordCount"><?php echo str_word_count($bio); ?>/100 words</span>
+                                                <span id="wordCount"><?php echo strlen($bio); ?>/100 characters</span>
                                             </div>
                                         </div>
                                     </div>
@@ -513,43 +609,31 @@ require_once "../../../backend/api/update_nickname_bio.php";
                 </div>
             </div>
 
-            <!-- Avatar Change Modal -->
-            <div class="modal fade" id="avatarModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Change Profile Picture</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="text-center mb-3">
-                                <img src="../../assets/img/team/sampleTeam.jpg" id="currentAvatar" class="rounded-circle" width="150" height="150" style="object-fit: cover;">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="avatarUpload" class="form-label">Upload New Image</label>
-                                <input class="form-control" type="file" id="avatarUpload" accept="image/*">
-                            </div>
-
-                            <p class="text-center fw-bold">OR</p>
-
-                            <p>Choose from default avatars:</p>
-                            <div class="avatar-options">
-                                <img src="../../assets/img/team/avatar1.png" class="avatar-option" data-avatar="avatar1">
-                                <img src="../../assets/img/team/avatar2.png" class="avatar-option" data-avatar="avatar2">
-                                <img src="../../assets/img/team/avatar3.png" class="avatar-option" data-avatar="avatar3">
-                                <img src="../../assets/img/team/avatar4.png" class="avatar-option" data-avatar="avatar4">
-                                <img src="../../assets/img/team/avatar5.png" class="avatar-option" data-avatar="avatar5">
-                                <img src="../../assets/img/team/avatar6.png" class="avatar-option" data-avatar="avatar6">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" id="saveAvatarBtn" style="background-color: #7db832; border: none;">Save Changes</button>
-                        </div>
-                    </div>
-                </div>
+    <!-- Profile Picture Modal -->
+    <div class="modal fade" id="profilePicModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Change Profile Picture</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <div id="profilePicPreviewWrapper" class="d-flex justify-content-center mb-2">
+              <img id="profilePicPreview" class="profile-pic-preview d-none" alt="Profile Picture">
+              <div id="profileInitialsPreview" class="profile-avatar-initials d-none"></div>
             </div>
+            <div class="mb-3">
+              <input type="file" class="form-control" id="profilePicUpload" accept="image/*">
+            </div>
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn btn-outline-secondary" id="removeProfilePic">Remove Current</button>
+              <button class="btn btn-primary" id="saveProfilePic">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
             <!-- Nickname Change Modal -->
             <div class="modal fade" id="nicknameModal" tabindex="-1" aria-hidden="true">
@@ -560,7 +644,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
-                            <form method="post" action="../../../backend/api/update_nickname_bio.php">
+                        <form method="post" action="profile-studs.php">
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="nicknameInput" class="form-label">Nickname</label>
