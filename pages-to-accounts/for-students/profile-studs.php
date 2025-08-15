@@ -242,18 +242,21 @@ require_once "../../../backend/api/update_nickname_bio.php";
 
 
 
-.char-limit-warning {
-    color: orange;
-}
-.char-limit-exceeded {
-    color: red;
-}
-.text-danger {
-    color: red;
-}
-.is-invalid {
-    border-color: red;
-}
+        .char-limit-warning {
+            color: orange;
+        }
+
+        .char-limit-exceeded {
+            color: red;
+        }
+
+        .text-danger {
+            color: red;
+        }
+
+        .is-invalid {
+            border-color: red;
+        }
     </style>
 </head>
 
@@ -353,7 +356,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
 
                                 <div class="profile-stats">
                                     <div class="stat-item">
-                                        <div class="stat-number">24</div>
+                                        <div class="stat-number">0</div>
                                         <div class="stat-label">Projects</div>
                                     </div>
                                     <div class="stat-item">
@@ -368,7 +371,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
 
 
 
-
+                    <!-- bio Content -->
                     <div class="modal fade" id="editBioModal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -377,11 +380,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
 
-
-         <!--                <form method="post" action="../../../backend/api/update_nickname_bio.php";>
--->
-
-                                <form method="post" action="../../../backend/api/update_nickname_bio.php";>
+                                <form method="post" action="../../../backend/api/update_nickname_bio.php" ;>
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <textarea class="form-control" id="bioInput" name="bio" rows="5"
@@ -410,83 +409,14 @@ require_once "../../../backend/api/update_nickname_bio.php";
                             <div class="profile-section">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h3 class="section-title mb-0">My Projects</h3>
-                                    <button class="btn btn-primary" id="uploadProjectBtn" style="background-color: #7db832; border: none;">
+                                    <button class="btn btn-primary" id="uploadProjectBtnMobile" style="background-color: #7db832; border: none;">
                                         <i class="ri-upload-line me-1"></i> Upload Project
                                     </button>
                                 </div>
 
-                                <div class="row">
-                                    <!-- Project 1 -->
-                                    <div class="col-md-6">
-                                        <div class="project-card">
-                                            <img src="../../assets/img/events/project-game-example.png" class="project-card-img" alt="Project Image">
-                                            <div class="project-card-body">
-                                                <h5 class="project-card-title">Cave Tactic RPG</h5>
-                                                <p class="project-card-desc">A tactical RPG game with pixel graphics and turn-based combat system.</p>
-                                                <div class="project-card-footer">
-                                                    <span class="project-card-type">Game</span>
-                                                    <div class="project-card-actions">
-                                                        <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                                                        <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- Project 2 -->
-                                    <div class="col-md-6">
-                                        <div class="project-card">
-                                            <img src="../../assets/img/events/project-web-example.png" class="project-card-img" alt="Project Image">
-                                            <div class="project-card-body">
-                                                <h5 class="project-card-title">Vanstastic</h5>
-                                                <p class="project-card-desc">A responsive website for a local bakery with online ordering system.</p>
-                                                <div class="project-card-footer">
-                                                    <span class="project-card-type">Website</span>
-                                                    <div class="project-card-actions">
-                                                        <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                                                        <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Project 3 -->
-                                    <div class="col-md-6">
-                                        <div class="project-card">
-                                            <img src="../../assets/img/events/project-console-example.png" class="project-card-img" alt="Project Image">
-                                            <div class="project-card-body">
-                                                <h5 class="project-card-title">Scientific Calculator</h5>
-                                                <p class="project-card-desc">A console application that performs advanced mathematical calculations.</p>
-                                                <div class="project-card-footer">
-                                                    <span class="project-card-type">Console App</span>
-                                                    <div class="project-card-actions">
-                                                        <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                                                        <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Project 4 -->
-                                    <div class="col-md-6">
-                                        <div class="project-card">
-                                            <img src="../../assets/img/events/project-mobile-example.jpg" class="project-card-img" alt="Project Image">
-                                            <div class="project-card-body">
-                                                <h5 class="project-card-title">Task Manager App</h5>
-                                                <p class="project-card-desc">A mobile application for managing daily tasks with reminders and categories.</p>
-                                                <div class="project-card-footer">
-                                                    <span class="project-card-type">Mobile App</span>
-                                                    <div class="project-card-actions">
-                                                        <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                                                        <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div id="studentProjectsContainer" class="row">
+                                    <!-- Projects will be loaded here via JavaScript -->
                                 </div>
 
                                 <div class="text-center mt-3">
@@ -494,9 +424,6 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                 </div>
                             </div>
                         </div>
-
-
-
 
 
                         <!-- About Section -->
@@ -515,10 +442,6 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                                 <span class="text-muted"><?php echo htmlspecialchars($_SESSION['user_email']); ?></span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="ri-book-line me-2"></i> Course</span>
-                                                <span class="text-muted">BS Computer Science</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span><i class="ri-calendar-line me-2"></i> Member Since</span>
                                                 <span class="text-muted">June 2023</span>
                                             </li>
@@ -528,39 +451,34 @@ require_once "../../../backend/api/update_nickname_bio.php";
                             </div>
                         </div>
 
-
-
-
-
-
                     </div>
                 </div>
             </div>
 
-    <!-- Profile Picture Modal -->
-    <div class="modal fade" id="profilePicModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Change Profile Picture</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-center">
-            <div id="profilePicPreviewWrapper" class="d-flex justify-content-center mb-2">
-              <img id="profilePicPreview" class="profile-pic-preview d-none" alt="Profile Picture">
-              <div id="profileInitialsPreview" class="profile-avatar-initials d-none"></div>
+            <!-- Profile Picture Modal unfix not working-->
+            <div class="modal fade" id="profilePicModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Change Profile Picture</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <div id="profilePicPreviewWrapper" class="d-flex justify-content-center mb-2">
+                                <img id="profilePicPreview" class="profile-pic-preview d-none" alt="Profile Picture">
+                                <div id="profileInitialsPreview" class="profile-avatar-initials d-none"></div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="file" class="form-control" id="profilePicUpload" accept="image/*">
+                            </div>
+                            <div class="d-flex justify-content-center gap-2">
+                                <button class="btn btn-outline-secondary" id="removeProfilePic">Remove Current</button>
+                                <button class="btn btn-primary" id="saveProfilePic">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-              <input type="file" class="form-control" id="profilePicUpload" accept="image/*">
-            </div>
-            <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-outline-secondary" id="removeProfilePic">Remove Current</button>
-              <button class="btn btn-primary" id="saveProfilePic">Save Changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
             <!-- Nickname Change Modal -->
@@ -572,7 +490,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
-                        <form method="post" action="../../../backend/api/update_nickname_bio.php";>
+                        <form method="post" action="../../../backend/api/update_nickname_bio.php" ;>
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="nicknameInput" class="form-label">Nickname</label>
@@ -686,7 +604,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                         <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
                         <div class="modal-footer">
                             <button type="button" class="close-uploadInfo btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: #7db832;">Upload Project</button>
+                            <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: #7db832; border: 1px solid #7db832;">Upload Project</button>
                         </div>
                     </div>
                 </div>
@@ -706,6 +624,94 @@ require_once "../../../backend/api/update_nickname_bio.php";
                 </div>
             </div>
 
+
+
+            <!-- Edit Project Modal -->
+            <div class="modal fade" id="editProjectModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Project</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="editProjectForm" class="compact-form">
+                            <div class="modal-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="editProjectTitle" class="form-label">Project Title*</label>
+                                        <input type="text" class="form-control" id="editProjectTitle" name="project_title" required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="editProjectType" class="form-label">Project Type*</label>
+                                        <select class="form-select" id="editProjectType" name="project_category" required>
+                                            <option value="">Select type</option>
+                                            <option value="Games">Game</option>
+                                            <option value="Websites">Website</option>
+                                            <option value="Mobile Apps">Mobile App</option>
+                                            <option value="Console">Console App</option>
+                                            <option value="AI/ML">AI/ML</option>
+                                            <option value="Databases">Database</option>
+                                            <option value="Others">Other</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="editProjectDescription" class="form-label">Description*</label>
+                                        <textarea class="form-control" id="editProjectDescription" name="project_description" rows="3" required></textarea>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="editProjectTechnologies" class="form-label">Technologies Used</label>
+                                        <div class="border p-2 rounded" style="min-height: 50px;">
+                                            <input type="text" class="form-control" id="editProjectTechnologies" placeholder="Add technology and press space/enter">
+                                            <div id="editTechTags" class="mt-2 d-flex flex-wrap gap-1"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="editProjectTeam" class="form-label">Team Members</label>
+                                        <div class="border p-2 rounded" style="min-height: 50px;">
+                                            <input type="text" class="form-control" id="editProjectTeam" placeholder="Add member and press space/enter">
+                                            <div id="editMemberTags" class="mt-2 d-flex flex-wrap gap-1"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Project Media</label>
+                                        <div class="border p-2 rounded">
+                                            <p class="text-muted">Current images will be kept. Upload new ones to replace.</p>
+                                            <input type="file" class="form-control" name="mediaFiles[]" multiple accept="image/*">
+                                        </div>
+                                    </div>
+
+                                    <div class="row-md-5">
+                                        <label class="form-label">Project Links</label>
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text"><i class="bi bi-download"></i></span>
+                                            <input type="url" id="editDownloadLink" class="form-control" name="download_link" placeholder="Executable Download URL">
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                                            <input type="url" id="editLiveLink" class="form-control" name="live_link" placeholder="Live Demo URL">
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-github"></i></span>
+                                            <input type="url" id="editGithubLink" class="form-control" name="github_link" placeholder="GitHub Repository">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
             <!-- Bottom Navigation Bar (for md and below) -->
             <nav class="d-lg-none fixed-bottom bg-light border-top">
                 <div class="d-flex justify-content-around py-2">
@@ -715,7 +721,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                     <a href="../../pages-to-accounts/for-students/project-studs.php" class="text-center mt-2">
                         <i class="ri-shapes-line fs-1"></i>
                     </a>
-                    <a id="uploadProjectBtn" class="text-center mt-2">
+                    <a id="uploadProjectBtn" class="text-center mt-2 ">
                         <i class="ri-add-circle-line fs-1"></i>
                     </a>
                     <a href="../../pages-to-accounts/for-students/profile-studs.php" class="text-center mt-2 btn-active-mobile">
@@ -727,7 +733,9 @@ require_once "../../../backend/api/update_nickname_bio.php";
                 </div>
             </nav>
 
-            <!-- Search modal -->
+
+
+            <!-- Search modal unfixed both id and it's design-->
             <div class="search-popup">
                 <div class="search-container">
                     <div class="search-input-container">
@@ -736,6 +744,8 @@ require_once "../../../backend/api/update_nickname_bio.php";
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 
@@ -751,12 +761,14 @@ require_once "../../../backend/api/update_nickname_bio.php";
     <!-- Main JS File -->
     <script src="../../assets/js/main.js"></script>
     <script src="../for-students/js/studs-search.js"></script>
-    <script src="../for-students/js/profile-bio-nick.js"></script>
     <script src="../for-students/js/project-upload.js" defer></script>
-    <script src="../for-students/js/project-studs.js" defer></script>
-    
+    <script src="../for-students/js/profile-bio-nick.js"></script>
+    <script src="../for-students/js/profile-project-studs.js" defer></script>
 
-
+    <script>
+        //session with disabilities haha
+        const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
+    </script>
 
 </body>
 

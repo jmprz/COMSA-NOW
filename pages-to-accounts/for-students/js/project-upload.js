@@ -6,13 +6,17 @@
 //
 document.addEventListener('DOMContentLoaded', function () {
   // Initialize project upload modal
-  const uploadBtn = document.getElementById('uploadProjectBtn');
-  if (uploadBtn) {
-    uploadBtn.addEventListener('click', function () {
-      var modal = new bootstrap.Modal(document.getElementById('projectUploadModal'));
-      modal.show();
-    });
-  }
+const uploadBtns = [
+  document.getElementById('uploadProjectBtnMain'),
+  document.getElementById('uploadProjectBtnMobile')
+].filter(Boolean); // Filter out null elements
+
+uploadBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    var modal = new bootstrap.Modal(document.getElementById('projectUploadModal'));
+    modal.show();
+  });
+});
 
   // Handle media upload with max 8 images
   const mediaUpload = document.getElementById('mediaUpload');

@@ -1,5 +1,6 @@
 console.log("SCRIPT IS LOADED ✅");
 
+
 const uploadForm = document.getElementById("projectUploadForm");
 const closeUpload = document.querySelectorAll(".close-uploadInfo");
 
