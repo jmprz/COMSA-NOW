@@ -1,5 +1,6 @@
 console.log("SCRIPT IS LOADED ✅");
 
+
 const uploadForm = document.getElementById("projectUploadForm");
 const closeUpload = document.querySelectorAll(".close-uploadInfo");
 
@@ -393,6 +394,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      
+
       if (data.success) {
         data.posts.forEach(post => {
           const postEl = document.createElement('div');
@@ -661,3 +664,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+

@@ -19,7 +19,7 @@ require_once '../../../backend/middleware/student_middleware.php';
 
 
 
-  
+
   <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
@@ -47,6 +47,34 @@ require_once '../../../backend/middleware/student_middleware.php';
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+<style>
+  .carousel {
+    width: 100%;
+    height: 400px;
+    /* Adjust this height as needed */
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .carousel-inner {
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-item {
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* This ensures the image fits while maintaining aspect ratio */
+    background-color: #f8f9fa;
+    /* Background color for images with different aspect ratios */
+  }
+</style>
 
 <body class="index-page">
 
@@ -76,13 +104,14 @@ require_once '../../../backend/middleware/student_middleware.php';
                 <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-search-line"></i> <span>Search</span>
                 </a>
-                <a href="#" class="btn text-start d-flex align-items-center gap-2">
-                  <i class="ri-notification-3-line"></i> <span>Notification</span>
+                <a href="../../pages-to-accounts/for-students/profile-studs.php" class="btn text-start d-flex align-items-center gap-2">
+                  <i class="ri-user-line"></i> <span>Profile</span>
                 </a>
                 <a href="../../pages-to-accounts/for-students/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-settings-line"></i> <span>Settings</span>
                 </a>
               </div>
+
             </div>
             <!-- Side Nav Footer -->
             <div class="text-muted small text-center mt-4">
@@ -116,7 +145,7 @@ require_once '../../../backend/middleware/student_middleware.php';
             </div>
 
             <!-- Mobile Navigation Options -->
-           <div class="d-md-none bg-white shadow-sm border-top">
+            <div class="d-md-none bg-white shadow-sm border-top">
               <div class="container-fluid py-2">
                 <div class="row text-center small">
                   <div class="col">
@@ -136,138 +165,17 @@ require_once '../../../backend/middleware/student_middleware.php';
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
 
 
-            <!-- Project 1 - Game -->
-            <!-- <div class="project-container">
-              <div class="project-header">
-                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
-                <div class="project-author">
-                  <p class="project-username">Valexore</p>
-                  <p class="project-date">2 days ago</p>
-                </div>
-                <span class="project-badge game-badge" id="game">Game</span>
-              </div>
 
-              <div class="project-content">
-                <h3 class="project-title">Cave Tactic RPG</h3>
-                <p class="project-description">
-                  Darmnn if it happens, it happens...
-                </p>
-                <div class="project-media">
-                  <img src="../../assets/img/events/project-game-example.png" class="project-image" alt="Game Screenshot">
-                  <div class="project-links">
-                    <a href="#" class="project-link"><i class="bi bi-download"></i> Executable</a>
-                    <a href="#" class="project-link"><i class="bi bi-github"></i> Source Code</a>
-                  </div>
-                </div>
+                  <!--
+                    
+                  
+                  
+                  -->
 
-                <div class="project-tech">
-                  <span class="tech-tag">Godot</span>
-                  <span class="tech-tag">Python</span>
-                  <span class="tech-tag">Pixel Graphics</span>
-                </div>
-              </div>
-
-              <div class="project-stats">
-                <div class="stat">
-                  <button class="post-action like-btn" data-post="2">
-                    <i class="bi bi-star"></i>
-                    <span style="font-size: 18px;">67 Likes</span>
-                  </button>
-                </div>
-              </div>
-            </div> -->
-
-
-            <!-- Project 2 - Website -->
-            <!-- <div class="project-container">
-              <div class="project-header">
-                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
-                <div class="project-author">
-                  <p class="project-username">Valexore</p>
-                  <p class="project-date">1 week ago</p>
-                </div>
-                <span class="project-badge web-badge" id="website">Website</span>
-              </div>
-
-              <div class="project-content">
-                <h3 class="project-title">Vanstastic</h3>
-                <p class="project-description">
-                  it was fustrating to received dos even tho you did all the best to create a fascinating website such as Vantastic.
-                </p>
-
-                <div class="project-media">
-                  <img src="../../assets/img/events/project-web-example.png" class="project-image" alt="Website Screenshot">
-                  <div class="project-links">
-                    <a href="#" class="project-link"><i class="bi bi-globe"></i> Live Demo</a>
-                    <a href="#" class="project-link"><i class="bi bi-github"></i> Source Code</a>
-                  </div>
-                </div>
-
-                <div class="project-tech">
-                  <span class="tech-tag">Php</span>
-                  <span class="tech-tag">MySql</span>
-                  <span class="tech-tag">Html</span>
-                  <span class="tech-tag">Css</span>
-                  <span class="tech-tag">Bootstrap</span>
-                </div>
-              </div>
-
-              <div class="project-stats">
-                <div class="stat">
-                  <button class="post-action like-btn" data-post="2">
-                    <i class="bi bi-star"></i>
-                    <span style="font-size: 18px;">67 Likes</span>
-                  </button>
-                </div>
-              </div>
-            </div> -->
-
-            <!-- Project 3 - Console App -->
-            <!-- <div class="project-container">
-              <div class="project-header">
-                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
-                <div class="project-author">
-                  <p class="project-username">Valexore</p>
-                  <p class="project-date">3 weeks ago</p>
-                </div>
-                <span class="project-badge console-badge" id="console">Console App</span>
-              </div>
-
-              <div class="project-content">
-                <h3 class="project-title">Scientific Calculator</h3>
-                <p class="project-description">
-                  A executable console application that performs advanced mathematical
-                  calculations with a unique spiral design.
-                </p>
-
-                <div class="project-media">
-                  <img src="../../assets/img/events/project-console-example.png" class="project-image" alt="Console Screenshot">
-                  <div class="project-links">
-                    <a href="#" class="project-link"><i class="bi bi-download"></i> Executable</a>
-                    <a href="#" class="project-link"><i class="bi bi-github"></i> Source Code</a>
-                  </div>
-                </div>
-
-                <div class="project-tech">
-                  <span class="tech-tag">Visual Basic</span>
-                  <span class="tech-tag">dotNet</span>
-                  <span class="tech-tag">Algorithms</span>
-                </div>
-              </div>
-
-              <div class="project-stats">
-                <div class="stat">
-                  <button class="post-action like-btn" data-post="2">
-                    <i class="bi bi-star"></i>
-                    <span style="font-size: 18px;">67 Likes</span>
-                  </button>
-                </div>
-              </div>
-            </div> -->
-
+                    <!-- comment modal -->
             <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -297,9 +205,7 @@ require_once '../../../backend/middleware/student_middleware.php';
             <!-- Project Upload -->
             <div class="sidebar-card mb-3">
               <h2>Student Projects</h2>
-              <button class="btn btn-primary" id="uploadProjectBtn" style="background: #7db832; border: none;">
-                <i class="bi bi-upload me-2"></i>Upload New Project
-              </button>
+               <a class="btn btn-primary" href="profile-studs.php" style="background: #7db832; border: none;">Upload New Project</a>
             </div>
 
             <!-- Accordion Starts Here -->
@@ -662,6 +568,8 @@ require_once '../../../backend/middleware/student_middleware.php';
           </div>
         </div>
       </div>
+
+      <!-- Search modal unfix, desgin-->
       <!-- Search modal -->
       <div class="search-popup">
         <div class="search-container">
