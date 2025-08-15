@@ -394,6 +394,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      
+
       if (data.success) {
         data.posts.forEach(post => {
           const postEl = document.createElement('div');

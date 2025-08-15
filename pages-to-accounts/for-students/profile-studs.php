@@ -47,6 +47,9 @@ require_once "../../../backend/api/update_nickname_bio.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+
+
+
         .profile-header {
             background-color: #f8f9fa;
             padding: 2rem;
@@ -455,30 +458,43 @@ require_once "../../../backend/api/update_nickname_bio.php";
                 </div>
             </div>
 
-            <!-- Profile Picture Modal unfix not working-->
-            <div class="modal fade" id="profilePicModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Change Profile Picture</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body text-center">
-                            <div id="profilePicPreviewWrapper" class="d-flex justify-content-center mb-2">
-                                <img id="profilePicPreview" class="profile-pic-preview d-none" alt="Profile Picture">
-                                <div id="profileInitialsPreview" class="profile-avatar-initials d-none"></div>
-                            </div>
-                            <div class="mb-3">
-                                <input type="file" class="form-control" id="profilePicUpload" accept="image/*">
-                            </div>
-                            <div class="d-flex justify-content-center gap-2">
-                                <button class="btn btn-outline-secondary" id="removeProfilePic">Remove Current</button>
-                                <button class="btn btn-primary" id="saveProfilePic">Save Changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Avatar Change Modal -->
+<div class="modal fade" id="avatarModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change Profile Picture</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <img id="currentAvatarPreview" src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                </div>
+                
+                <div class="d-flex flex-column gap-2">
+                    <button class="btn btn-primary" id="uploadNewAvatarBtn">
+                        <i class="ri-upload-line me-2"></i> Upload New Photo
+                    </button>
+                    <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+                    
+                    <button class="btn btn-outline-danger" id="removeAvatarBtn">
+                        <i class="ri-delete-bin-line me-2"></i> Remove Current Photo
+                    </button>
+                </div>
+                
+                <div class="progress mt-3 d-none" id="avatarUploadProgress">
+                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                </div>
+                
+                <div id="avatarError" class="text-danger mt-2 text-center"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" id="saveAvatarBtn" disabled>Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
             <!-- Nickname Change Modal -->
@@ -765,11 +781,19 @@ require_once "../../../backend/api/update_nickname_bio.php";
     <script src="../for-students/js/profile-bio-nick.js"></script>
     <script src="../for-students/js/profile-project-studs.js" defer></script>
 
+
+        <script src="../for-students/js/project-studs.js" defer></script>
+
+
     <script>
         //session with disabilities haha
         const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
     </script>
 
 </body>
+
+<script>
+  
+</script>
 
 </html>
