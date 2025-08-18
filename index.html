@@ -17,7 +17,9 @@
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet" />
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -31,15 +33,22 @@
   <link rel="stylesheet" href="assets/css/search.css">
   <link href="assets/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- =======================================================
-  * Template Name: Selecao
-  * Template URL: https://bootstrapmade.com/selecao-bootstrap-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <link rel="stylesheet" href="../../assets/css/student-dash.css">
+  <link rel="stylesheet" href="../../assets/css/dark-mode.css">
+
+
+  <!-- FullCalendar CSS -->
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
 </head>
 
+<style>
+  @media (min-width: 992px) {
+  .col-lg-custom-5 {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+}
+</style>
 <body class="index-page">
 
   <header id="header" class="header d-flex align-items-center fixed-top">
@@ -47,8 +56,8 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="assets/img/logo.png" alt="">
-        <h1 class="sitename">COMSA-NOW</h1>
+        <img src="assets/img/logo.png" alt="" class="img-fluid">
+        <h1 class="sitename text-dark">COMSA-NOW</h1>
       </a>
 
       
@@ -56,75 +65,24 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
-          <li class="dropdown"><a href="#about"><span>About Comsa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              
-
-              <!--About comsa>-->
-                <li class="dropdown"><a href="#"><span>About Comsa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#about">Our Services</a></li>
-                </ul></li><!--About comsa ->  end -->
-
-
-                  <!--news-->
-              <li class="dropdown"><a href="features/calendar.html"><span>News</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                  <li><a href="features/calendar.html#calendar">News</a></li>
-                  <li><a href="features/calendar.html#portfolio">History</a></li>
-                </ul></li><!-- newws ends-->
-
-
-              <!--Orginazation comsa -->
-              <li class="dropdown"><a href="features/comsa-team.html"><span>Organization</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                  <li><a href="features/comsa-team.html#executive">Who are them?</a></li>
-                  <li><a href="features/comsa-team.html#executive">Our Executives</a></li>
-                  <li><a href="features/comsa-team.html#Creatives">Our Creatives</a></li>
-                </ul></li><!--Orginazation comsa -> end  -->
-              
-
-            </ul>
+          <li><a href="#about"><span>About</span></i></a>
           </li>
           <li><a href="#portfolio">Portfolio</a></li>
           <!--<li><a href="#services">Services</a></li>-->
         
           <li><a href="#team">Team</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li class="dropdown"><a href="#"><span>Features</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-
-              <li class="dropdown"><a href="features/calendar.html"><span>Comsa Calendar</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                  <li><a href="features/calendar.html#calendar">Calendar</a></li>
-                  <li><a href="features/calendar.html#portfolio">Events haffening</a></li>
-                  
-                </ul></li>
-
-              <li><a href="#" id="loginButton"><span>Login</span></a></li>
-
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="pages-to-accounts/for-students/student-dashboard.php">student dashboard</a></li>
-                </ul></li>
-            </ul>
-          </li>
+          <li class="nav-item ms-2 mt-3 me-2">
+  <a href="#" id="loginButton" class="btn btn-primary w-100 comsa-auth-btn mb-3 d-flex align-items-center justify-content-center text-light">
+    <span class="comsa-btn-text">Login</span>
+    <span class="comsa-btn-spinner d-none ms-2">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span class="visually-hidden">Loading...</span>
+    </span>
+  </a>
+</li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-        <!-- Search bar v3.4  testing -->
-<div class="header-search">
-      <a href="#" id="search-toggle"><i class="bi bi-search"></i></a>
-      <div class="search-popup">
-        <div class="search-container">
-          <div class="search-input-container">
-            <input type="text" placeholder="Search..." class="search-input">
-            <button class="search-button"><i class="bi bi-search"></i></button>
-            <span class="search-close"><i class="bi bi-x"></i></span>
-          </div>
-        </div>
-      </div>
-    </div>   <!-- Search bar v3.4  testing end -->
 
 
   </div>
@@ -134,75 +92,60 @@
   </header>
 
   <main class="main">
+<section class="hero">
+  <div id="hero-carousel" data-bs-interval="5000" class="carousel-fade carousel" data-bs-ride="carousel" data-aos="zoom-in">
+    <div class="carousel-inner">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
+     <!-- Slide 1 -->
+<div class="carousel-item active">
+  <div class="card carousel-card rounded-4 border border-2 border-light-subtle overflow-hidden shadow-sm">
+    <img src="assets/img/carousel/qualified_candidates.jpg" class="card-img-top img-fluid object-fit-cover" alt="..." style="height: 400px;">
+    <div class="card-body">
+      <h5 class="card-title fw-bold">List of Qualified Candidates | COMSELECT 2025 - 2026</h5>
+      <p class="card-text">The moment we’ve all been waiting for is HERE! Your qualified candidates for COMSA Officers are ready to shine — and they’re bringing passion, vision, and energy to the table! 💼⚡.</p>
+           <a href="#about" class="btn btn-primary comsa-auth-btn align-items-center text-light float-end">Read More</a>
+    </div>
+  </div>
+</div>
 
-      <div id="hero-carousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
-        
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-          <div class="carousel-container">
-            <img src="assets/img/comsa.gif" alt="">
-            <div class="carousel-details first-img">
-            <h2 class="animate__animated animate__fadeInDown">Welcome to <span>COMSA-NOW</span></h2>
-            <p class="animate__animated animate__fadeInUp">This page shows the past activities Computer Science Student Association or COMSA has acheived</p>
-            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-          </div>
-        </div>
-        </div>
+      <!-- Slide 2 -->
+<div class="carousel-item">
+  <div class="card carousel-card rounded-4 border border-2 border-light-subtle overflow-hidden shadow-sm">
+    <img src="assets/img/carousel/comselect_calendar.jpg" class="card-img-top img-fluid object-fit-cover" alt="..." style="height: 400px;">
+    <div class="card-body">
+      <h5 class="card-title fw-bold">COMSELECT 2025 - 2026 Election Calendar</h5>
+      <p class="card-text">COMSA Peeps, the Organizational Electoral Board (OEB) is thrilled to launch this year’s Election Calendar—because change doesn’t just happen, we make it happen. 💥</p>
+        <a href="#about" class="btn btn-primary comsa-auth-btn align-items-center text-light float-end">Read More</a>
+    </div>
+  </div>
+</div>
 
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-          <div class="carousel-container">
-            <img src="assets/img/gawadkalinga.jpg" alt="" class="">
-            <h2 class="animate__animated animate__fadeInDown">CSS Extension: Gawad Kalinga</h2>
-            <p class="animate__animated animate__fadeInUp">The CCS extension program is a yearly event that focuses on a gift-giving initiative for the Gawad Kalinga community. It highlights the importance of generosity and engagement within the community while strengthening the connection between them and the students. The program also emphasizes the value of collaboration to uplift those in need making a deeper sense of purpose and social accountability among the participants.</p>
-            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-          </div>
-        </div>
+    <!-- Slide 3 -->
+<div class="carousel-item">
+  <div class="card carousel-card rounded-4 border border-2 border-light-subtle overflow-hidden shadow-sm">
+    <img src="assets/img/carousel/freshman_gc.jpg" class="card-img-top img-fluid object-fit-cover" alt="..." style="height: 400px;">
+    <div class="card-body">
+      <h5 class="card-title fw-bold">BSCS Freshman Community Group Chat 2025 - 2026</h5>
+      <p class="card-text">Ready to kick off your college journey? Join our FRESHMEN COMMUNITY GC and connect with your fellow newbies, upperclassmen, and the COMSA fam!  </p>
+        <a href="#about" class="btn btn-primary comsa-auth-btn align-items-center text-light float-end">Read More</a>
+    </div>
+  </div>
+</div>
 
-        <!-- Slide 3 -->
-        <div class="carousel-item">
-          <div class="carousel-container">
-            <img src="assets/img/comsayep.jpg" alt="" class="">
-            <h2 class="animate__animated animate__fadeInDown">COMSA YEP: Tech Crews, First Quest  </h2>
-            <p class="animate__animated animate__fadeInUp">The COMSA Year End Party celebrates the remarkable achievements of Computer Science Student Association leaders and imposes a deeper sense of leadership among them. It highlights the dedication of all student leaders under the program, recognizing their invaluable contributions to their respective roles. The event also focuses on strengthening the bonds within the community fostering a well connected and collaborative environment to each other.</p>
-            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-          </div>
-        </div>
 
-        <!-- Slide 4 -->
-        <div class="carousel-item">
-          <div class="carousel-container">
-            <img src="assets/img/csexpo.jpg" alt="" class="">
-            <h2 class="animate__animated animate__fadeInDown">CS Expo 2024: Unveiling New Possibilities and Creating New Realities</h2>
-            <p class="animate__animated animate__fadeInUp">The event presents an exceptional opportunity for students to present their thesis projects, which employ diverse programming languages and techniques to enhance and create technological solutions for various industries. This event is primarily overseen by the institute’s fourth-year Computer Science students, with the overarching goal of inspiring a shift from routine to innovation, promoting automation, and contributing to global sustainability through the fields of science, innovation, and engineering.</p>
-            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-          </div>
-        </div>
+    </div>
 
-         <!-- Slide 5 -->
-         <div class="carousel-item">
-          <div class="carousel-container">
-            <img src="assets/img/donationdrive.jpg" alt="" class="">
-            <h2 class="animate__animated animate__fadeInDown">Donation Drive: Typhoon Kristine</h2>
-            <p class="animate__animated animate__fadeInUp">The organization Officers and  students initiated a donation drive for the affected people of typhoon Kristine. The donated goods and clothes are delivered to the ABS CBN Foundation. The donated are goods such as sardines, noodles, and used/unused clothes.</p>
-            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-          </div>
-        </div>
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</section>
 
-        <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-        </a>
 
-        <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
-          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-        </a>
-
-      </div>
-
-    </section><!-- /Hero Section -->
 
     <!-- About Section -->
     <section id="about" class="about section">
@@ -217,10 +160,11 @@
 
         <div class="row gy-4">
 
-          <div class="col-lg-6 content justify-text" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-6 content justify-text" data-aos="slide-right"">
+           <div class="card bg-white p-4 rounded-4 shadow-sm border border-2 border-light-subtle">
             <p>
 
- The <b>Computer Science Student Association (COMSA)</b> serves as an essential bridge that connects every member to the ever-evolving world of emerging technologies. It is a dynamic and inclusive community that fosters an environment where members can not only explore and gain knowledge about cutting-edge advancements in the tech world, but also engage in meaningful discussions and share insights that broaden their understanding. The association is dedicated to creating a space where individuals feel comfortable expressing their ideas, exchanging thoughts, and learning from one another, regardless of their level of expertise.</p>
+The name "Computer Science Association" has been a thriving force for all Computer Science students at EARIST for several years. It has successfully lived up to its name by leading the community in areas of leadership, teamwork, and maintaining a high standard of education. However, we aspire to go beyond these core responsibilities. In this ever-evolving technological landscape, we are dedicated to adapting and enhancing our commitment to the community.
 <p>Through a variety of events, workshops, and collaborative projects, COMSA provides opportunities for its members to dive deep into the latest innovations, whether it's artificial intelligence, blockchain, cybersecurity, or other groundbreaking technologies. It encourages creativity and the sharing of personal works, allowing members to showcase their projects, gain feedback, and potentially collaborate on future ventures. By emphasizing both personal and collective growth, the association nurtures a sense of community and promotes a culture of continuous learning, where everyone’s voice is valued, and the love for technology is shared by all. Ultimately, COMSA aims to empower its members to not only stay up-to-date with technological trends but also to play an active role in shaping the future of technology.
             </p>
             <!-- <ul>
@@ -229,8 +173,8 @@
               <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo</span></li>
             </ul> -->
           </div>
-
-          <div class="col-6" data-aos="fade-up" data-aos-delay="200">
+</div>
+          <div class="col-6" data-aos="slide-left">
             <div class="comsa-logo-placement">
               <img src="assets/img/logo.png" alt="" class="comsa-logo-about"> 
           </div>
@@ -240,50 +184,63 @@
 
       </div>
 
-      <div class="container features-placement">
-        <div class="row g-4">
-          <div class="col-md-4">
-            <div class="card h-100 text-center rounded-3 shadow">
-              <i class="fa-solid fa-bullseye mt-3 fs-1 light-green"></i>
-              <div class="card-body rounded-3">
-                <h5 class="card-title fw-bold fs-3">OBJECTIVES</h5>
-                <p class="card-text justify-text">Our community aims to create a fun and engaging space for tech enthusiasts to connect, collaborate, and expand their knowledge. We focus on internet functionality and emerging programming platforms, helping both beginners and experienced individuals stay ahead of trends. Through hands-on experiences, discussions, and projects, members develop practical skills while enjoying the learning process. Our goal is to make technology accessible, exciting, and foster lasting connections among those passionate about the digital future.</p>  
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card h-100 text-center rounded-3 shadow">
-              <i class="fa-regular fa-star mt-3 fs-1 light-green"></i>
-              <div class="card-body">
-                <h5 class="card-title fw-bold fs-3">MISSION</h5>
-                <p class="card-text justify-text"> It aims to lead all Computer Science Students in leadership, teamwork, 
+   <section class="py-5 bg-white border border-2 border-light-subtle shadow-sm">
+  <div class="container" style="max-width: 850px;">
+
+    <div class="row gy-5" data-aos="fade-up" data-aos-delay="200">
+      <!-- Objectives -->
+      <div class="col-lg-12 d-flex align-items-start">
+        <div class="me-4">
+          <i class="ri-crosshair-2-line text-white fs-1 text-success bg-light rounded-circle p-3 shadow-sm gradient-circle2"></i>
+        </div>
+        <div>
+          <h4 class="fw-bold">Objectives</h4>
+          <p class="text-muted text-justify">
+          Our community aims to create a fun and engaging space for tech enthusiasts to connect, collaborate, and expand their knowledge. We focus on internet functionality and emerging programming platforms, helping both beginners and experienced individuals stay ahead of trends. Through hands-on experiences, discussions, and projects, members develop practical skills while enjoying the learning process. Our goal is to make technology accessible, exciting, and foster lasting connections among those passionate about the digital future.
+          </p>
+        </div>
+      </div>
+
+      <!-- Mission -->
+      <div class="col-lg-12 d-flex align-items-start">
+        <div class="me-4">
+          <i class="ri-star-fill text-white fs-1 text-success bg-light rounded-circle p-3 shadow-sm gradient-circle2"></i>
+        </div>
+        <div>
+          <h4 class="fw-bold">Mission</h4>
+          <p class="text-muted text-justify">
+           It aims to lead all Computer Science Students in leadership, teamwork, 
                   getting well known in information technology, enhancing computer literacy, and 
                   maintaining quality education by its faculty as well as in 
                   sports, arts, and spiritual activities.
-</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card h-100 text-center rounded-3 shadow">
-              <i class="fa-regular fa-eye mt-3 fs-1 light-green"></i>
-              <div class="card-body">
-                <h5 class="card-title fw-bold fs-3">VISION</h5>
-                <p class="card-text justify-text"> To unite the computer science enthusiast at the institute,
+          </p>
+        </div>
+      </div>
+
+      <!-- Vision -->
+      <div class="col-lg-12 d-flex align-items-start">
+        <div class="me-4">
+          <i class="ri-eye-fill text-white fs-1 text-success bg-light rounded-circle p-3 shadow-sm gradient-circle2"></i>
+        </div>
+        <div>
+          <h4 class="fw-bold">Vision</h4>
+          <p class="text-muted text-justify">
+           To unite the computer science enthusiast at the institute,
                   discuss the knowledge pertaining computer science technology, to bridge the gap 
                   between theoretical computer science and the real-world IT field, to intentionally act as 
                   the focal point for computer usage issues, foster a supportive environment for 
-                  our members, and contribute positively to the broader community..</p>
-              </div>
-            </div>
-          </div>
+                  our members, and contribute positively to the broader community.
+          </p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
     </section><!-- /About Section -->
 
 
-<!-- Current Events Modal Carousel -->
+<!-- Current Events Modal Carousel 
 <div id="comsaEventsModal" class="modal fade" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -293,15 +250,15 @@
       <div class="modal-body p-0">
         <div id="comsaEventsCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner rounded-0">
-            <!-- Slide 1 -->
+            <!-- Slide 1 
             <div class="carousel-item active">
               <img src="assets/img/comsayep.jpg" class="d-block w-100" alt="COMSA YEP">
             </div>
-            <!-- Slide 2 -->
+            <!-- Slide 2 
             <div class="carousel-item">
               <img src="assets/img/csexpo.jpg" class="d-block w-100" alt="CS Expo">
             </div>
-            <!-- Slide 3 -->
+            <!-- Slide 3 
             <div class="carousel-item">
               <img src="assets/img/donationdrive.jpg" class="d-block w-100" alt="Donation Drive">
             </div>
@@ -323,14 +280,14 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
       <!-- Portfolio Section -->
       <section id="portfolio" class="portfolio section">
 
         <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
+        <div class="container section-title" data-aos="fade-down">
           <h2>Portfolio</h2>
           <p>What we've done</p>
         </div><!-- End Section Title -->
@@ -427,40 +384,100 @@
       <div class="container">
 
         <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="assets/img/team/sampleTeam.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+   <div class="col-lg-custom-5 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+  <div class="team-member text-center p-3 rounded shadow-sm w-100">
+    <div class="member-img position-relative mb-3">
+      <div class="gradient-circle rounded-circle p-2 d-inline-block">
+        <img src="assets/img/team/advincula.png" class="img-fluid rounded-circle" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+      </div>
+    </div>
+    <div class="member-info">
+                <h4>Jovel Advincula</h4>
+                <span>COMSA Adviser / Project Manager</span>
               </div>
-              <div class="member-info">
-                <h4>John Bill Barangan</h4>
-                <span>Vice President Internal</span>
-              </div>
+               <div class="social-icons mt-3">
+      <a href="https://facebook.com/" target="_blank"><i class="ri-facebook-fill fs-5"></i></a>
+      <a href="mailto:example@email.com"><i class="ri-mail-fill fs-5"></i></a>
+      <a href="https://github.com/" target="_blank"><i class="ri-github-fill fs-5"></i></a>
+    </div>
             </div>
-          </div><!-- End Team Member -->
+          </div>
 
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="assets/img/team/sampleTeam.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+         <div class="col-lg-custom-5 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+  <div class="team-member text-center p-3 rounded shadow-sm w-100">
+    <div class="member-img position-relative mb-3">
+      <div class="gradient-circle rounded-circle p-2 d-inline-block">
+        <img src="assets/img/team/babida.png" class="img-fluid rounded-circle" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+      </div>
+    </div>
+    <div class="member-info">
+                <h4>Charlz Ivan John Babida</h4>
+                <span>Volunteer</span>
               </div>
-              <div class="member-info">
-                <h4>John Matthew Perez</h4>
-                <span>Creatives & Multimedia Committee</span>
+               <div class="social-icons mt-3">
+      <a href="https://facebook.com/" target="_blank"><i class="ri-facebook-fill fs-5"></i></a>
+      <a href="mailto:example@email.com"><i class="ri-mail-fill fs-5"></i></a>
+      <a href="https://github.com/" target="_blank"><i class="ri-github-fill fs-5"></i></a>
+    </div>
+            </div>
+          </div>
+
+   <div class="col-lg-custom-5 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+  <div class="team-member text-center p-3 rounded shadow-sm w-100">
+    <div class="member-img position-relative mb-3">
+      <div class="gradient-circle rounded-circle p-2 d-inline-block">
+        <img src="assets/img/team/barangan.png" class="img-fluid rounded-circle" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+      </div>
+    </div>
+    <div class="member-info">
+                <h4>John Bill Barangan</h4>
+                <span>COMSA Vice President Internal</span>
               </div>
+               <div class="social-icons mt-3">
+      <a href="https://facebook.com/" target="_blank"><i class="ri-facebook-fill fs-5"></i></a>
+      <a href="mailto:example@email.com"><i class="ri-mail-fill fs-5"></i></a>
+      <a href="https://github.com/" target="_blank"><i class="ri-github-fill fs-5"></i></a>
+    </div>
+            </div>
+        </div>
+
+       <div class="col-lg-custom-5 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+  <div class="team-member text-center p-3 rounded shadow-sm w-100">
+    <div class="member-img position-relative mb-3">
+      <div class="gradient-circle rounded-circle p-2 d-inline-block">
+        <img src="assets/img/team/perez.png" class="img-fluid rounded-circle" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+      </div>
+    </div>
+    <div class="member-info">
+      <h4>John Matthew Perez</h4>
+      <span>COMSA CSIT Committee Head</span>
+    </div>
+     <div class="social-icons mt-3">
+      <a href="https://facebook.com/" target="_blank"><i class="ri-facebook-fill fs-5"></i></a>
+      <a href="mailto:example@email.com"><i class="ri-mail-fill fs-5"></i></a>
+      <a href="https://github.com/" target="_blank"><i class="ri-github-fill fs-5"></i></a>
+    </div>
+  </div>
+</div>
+
+
+
+       <div class="col-lg-custom-5 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+  <div class="team-member text-center p-3 rounded shadow-sm w-100">
+    <div class="member-img position-relative mb-3">
+      <div class="gradient-circle rounded-circle p-2 d-inline-block">
+        <img src="assets/img/team/untalan.png" class="img-fluid rounded-circle" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+      </div>
+    </div>
+    <div class="member-info">
+                <h4>Jay-ar Untalan</h4>
+                <span>Volunteer</span>
+              </div>
+           <div class="social-icons mt-3">
+      <a href="https://facebook.com/" target="_blank"><i class="ri-facebook-fill fs-5"></i></a>
+      <a href="mailto:example@email.com"><i class="ri-mail-fill fs-5"></i></a>
+      <a href="https://github.com/" target="_blank"><i class="ri-github-fill fs-5"></i></a>
+    </div>
             </div>
         </div>
 
@@ -468,14 +485,48 @@
 
     </section><!-- /Team Section -->
 
-    <!-- Contact Section -->
+    <!-- Calendar Section 
+    <section id="calendar" class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8" data-aos="fade-up">
+
+            <div class="container section-title" data-aos="fade-up">
+            <h2>Comsa Calendar</h2>
+            <p>What Haffen?</p>
+            </div>
+
+            <div class="calendar-container">
+              <div id="calendar-events"></div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="event-details-sidebar">
+              <div id="event-details-content">
+                <div class="text-center">
+                  <i class="bi bi-calendar-event fs-1 text-muted"></i>
+                  <h4 class="mt-3">Select an event</h4>
+                  <p class="text-muted">Click on any event in the calendar to view details</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Calendar Section -->
+
+
+
+
+    <!-- Contact Section 
     <section id="contact" class="contact section">
 
-      <!-- Section Title -->
+      <!-- Section Title 
       <div class="container section-title" data-aos="fade-up">
         <h2>Contact</h2>
         <p>Contact Us</p>
-      </div><!-- End Section Title -->
+      </div><!-- End Section Title 
 
       <div class="container" data-aos="fade" data-aos-delay="100">
 
@@ -488,7 +539,7 @@
                 <h3>Address</h3>
                 <p>sa tabi tabi lang</p>
               </div>
-            </div><!-- End Info Item -->
+            </div><!-- End Info Item 
 
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-telephone flex-shrink-0"></i>
@@ -496,15 +547,14 @@
                 <h3>Call Us</h3>
                 <p>ihhh 09********</p>
               </div>
-            </div><!-- End Info Item -->
-
+            </div><!-- End Info Item 
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
               <i class="bi bi-envelope flex-shrink-0"></i>
               <div>
                 <h3>Email Us</h3>
                 <p>info@example.com</p>
               </div>
-            </div><!-- End Info Item -->
+            </div><!-- End Info Item
 
           </div>
 
@@ -538,13 +588,13 @@
 
               </div>
             </form>
-          </div><!-- End Contact Form -->
+          </div><!-- End Contact Form 
 
         </div>
 
       </div>
 
-    </section><!-- /Contact Section -->
+    </section> Contact Section -->
 
   </main>
 
@@ -737,32 +787,76 @@
 
 
 
+<footer id="footer" class="footer dark-background text-white pt-5 pb-4">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row gy-5">
 
-
-  <footer id="footer" class="footer dark-background">
-    <div class="container">
-      <h3 class="sitename">COMSA-NOW</h3>
-      <p>Computer Science Student Association</p>
-      <div class="social-links d-flex justify-content-center">
-        
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        
+  
+      <div class="col-md-4 text-md-start d-flex flex-column align-items-center text-center mb-4 mb-md-0">
+        <img src="assets/img/logo.png" alt="COMSA Logo" class="mb-3" style="width: 150px;">
+        <h3 class="fw-bold">COMSA-NOW</h3>
+        <p class="text-white-50 mb-0">Network of Wonders</p>
       </div>
-      <div class="container">
-        <div class="copyright">
-          <span>Copyright</span> <strong class="px-1 sitename">Computer Science Student Association</strong> <span>All Rights Reserved</span>
+
+      <!-- Contact Info -->
+      <div class="col-md-4">
+        <h5 class="text-uppercase fw-bold mb-4">Contact Us</h5>
+
+        <!-- Location -->
+        <div class="d-flex align-items-start mb-5">
+          <div class="me-3">
+            <i class="ri-map-pin-2-fill gradient-circle2 text-white fs-4 rounded-circle p-3 shadow-sm"></i>
+          </div>
+          <span class="text-white-50 fs-6">
+            Nagtahan St, Sampaloc, Manila, 1008
+          </span>
         </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you've purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
+        <!-- Email -->
+        <div class="d-flex align-items-start mb-3">
+          <div class="me-3">
+            <i class="ri-mail-fill gradient-circle2 text-white fs-4 rounded-circle p-3 shadow-sm"></i>
+          </div>
+          <span class="text-white-50 fs-6">
+            computersciencecomsa@gmail.com
+          </span>
+        </div>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col-md-4">
+        <h5 class="text-uppercase fw-bold mb-4">Follow Us</h5>
+
+        <!-- Facebook -->
+        <div class="d-flex align-items-start mb-5">
+          <div class="me-3">
+            <i class="ri-facebook-fill gradient-circle2 text-white fs-4 rounded-circle p-3 shadow-sm"></i>
+          </div>
+          <span class="text-white-50 fs-6">
+            Computer Science Student Association - CCS
+          </span>
+        </div>
+
+        <!-- Instagram -->
+        <div class="d-flex align-items-start mb-3">
+          <div class="me-3">
+            <i class="ri-instagram-fill gradient-circle2 text-white fs-4 rounded-circle p-3 shadow-sm"></i>
+          </div>
+          <span class="text-white-50 fs-6">
+            @comsa_ccs
+          </span>
         </div>
       </div>
     </div>
-  </footer>
+
+    <!-- Footer Bottom -->
+    <hr class="border-secondary mt-5">
+    <div class="text-center text-white-50 fs-5">
+      &copy; <strong>2025 Computer Science Student Association</strong>. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -783,10 +877,20 @@
   <script src="assets/js/main.js"></script>
   <!-- <script src="assets/js/search.js"></script> -->
   <script src="assets/js/slide-show-updates.js"></script>
-
+  <script src="../assets/js/main-calendar.js"></script>
+  
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
   <!-- currently, this handles the auth manually, -->
   <script src="assets/js/comsa-auth.js"></script>
-
+<script src="assets/vendor/aos/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,  // Animation duration in ms
+    easing: 'ease-in-out', // Default easing for AOS animations
+    once: true, // Whether animation should happen only once - while scrolling down
+    mirror: false // Whether elements should animate out while scrolling past them
+  });
+</script>
 </body>
 
 </html>

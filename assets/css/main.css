@@ -19,7 +19,7 @@
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --background-color: #fafafa; /* Background color for the entire website, including individual sections */
   --default-color: #000000; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #152e11; /* Color for headings, subheadings and title throughout the website */
   --accent-color: #7db832; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
@@ -29,7 +29,7 @@
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #ffffff;  /* The default color of the main navmenu links */
+  --nav-color: #000000;  /* The default color of the main navmenu links */
   --nav-hover-color: #09b003; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
@@ -151,10 +151,8 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: rgb(0,0,0,0);
-  --heading-color: #ffffff;
+  background-image: linear-gradient(180deg,rgba(222, 235, 218, 1) 40%, rgba(250, 250, 250, 1) 100%);;
   color: white;
-  background-color: var(--background-color);
   padding: 20px 0;
   transition: all 0.5s;
   z-index: 997;
@@ -170,7 +168,7 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 60px;
+  max-height: 100px;
   margin-right: 8px;
 }
 
@@ -597,6 +595,7 @@ h6 {
 /*--------------------------------------------------------------
 # Global Page Titles & Breadcrumbs
 --------------------------------------------------------------*/
+
 .page-title {
   color: var(--default-color);
   background-color: var(--background-color);
@@ -659,7 +658,7 @@ section,
 # Global Section Titles
 --------------------------------------------------------------*/
 .section-title {
-  padding-bottom: 60px;
+  padding-bottom: 30px;
   position: relative;
 }
 
@@ -697,14 +696,13 @@ section,
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  width: 100%;
-  position: relative;
+  margin-top: 140px;
+  min-height: 10vh; /* full screen height */
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center; /* vertical center */
   background: linear-gradient(0deg, var(--background-color) 0%, color-mix(in srgb, var(--background-color) 90%, white 10%) 100%);
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center;
 }
 
 .hero .carousel-container {
@@ -730,45 +728,29 @@ section,
 }
 
 .hero p {
-  max-width: 80%;
+  max-width: 100%;
   animation-delay: 0.4s;
-  margin: 0 auto 30px auto;
 }
 
-.hero .carousel-control-prev,
-.hero .carousel-control-next {
-  width: 10%;
-}
-
-.hero .carousel-control-next-icon,
-.hero .carousel-control-prev-icon {
-  background: none;
-  font-size: 48px;
-  line-height: 1;
+/* Move controls outside card */
+.carousel-control-prev,
+.carousel-control-next {
   width: auto;
-  height: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  z-index: 10;
 }
 
-.hero .btn-get-started {
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 12px 32px;
-  border-radius: 50px;
-  transition: 0.5s;
-  line-height: 1;
-  margin: 10px;
-  animation-delay: 0.8s;
-  color: white;
-  border: 2px solid white;
+.carousel-control-prev {
+  left: -60px; /* Adjust distance from card */
 }
 
-.hero .btn-get-started:hover {
-  background: var(--accent-color);
-  color: var(--contrast-color);
-  text-decoration: none;
+.carousel-control-next {
+  right: -60px; /* Adjust distance from card */
 }
+
+
 
 .carousel-container::after {
   content: "";
@@ -792,6 +774,7 @@ section,
   background-image:
     linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73));
 }
+
 .carousel-container video {
   position: absolute;
   top: 0;
@@ -809,7 +792,6 @@ section,
   top: 10%; /* Moves details to the top */
   left: 50%;
   transform: translateX(-50%);
-  text-align: center;
   z-index: 2;
   width: 80%;
   max-width: 1200px; /* Ensures content doesn’t get too wide on larger screens */
@@ -829,7 +811,6 @@ section,
 
 .carousel-details p {
   font-size: 18px;
-  max-width: 700px;
   margin: 0 auto 20px auto;
   color: white;
 }
@@ -852,10 +833,93 @@ section,
   margin-top: -60px; 
 }
 
+/* Center carousel and set max width */
+#hero-carousel {
+  max-width: 1000px; /* Instagram-style width */
+  width: 100%;
+}
+/* Card-like container */
+.carousel-card {
+  height: 100%; /* Let it fill carousel-item */
+  max-height: 680px; /* Optional cap */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
+.card-img-top {
+  height: 470px !important; /* Fixed height for all images */
+  object-fit: cover; /* Keep image filled and centered */
+}
+
+.card-body {
+  width: 100%;
+  padding: 1.5rem;
+  text-align: justify;
+}
+
+.carousel-item-next.carousel-item-left,
+.carousel-item-prev.carousel-item-right {
+  transform: translateX(0);
+}
+
+/* Image styling */
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ensures image fills the area without distortion */
+  flex-grow: 1;
+}
+
+/* Text area */
+.carousel-text {
+  padding: 16px;
+}
+
+.carousel-text h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #262626;
+}
+
+.carousel-text p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.carousel-text h2 span {
+  color: var(--accent-color);
+}
+
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  padding: 10px;
+  background-size: 60%;
+}
+
+
+.carousel-item {
+    position: relative;
+    display: none;
+    float: left;
+    width: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+  }
+
+
+  
 @media (min-width: 1024px) {
   .hero p {
-    max-width: 60%;
+    max-width: 100%;
   }
 
   .hero .carousel-control-prev,
@@ -865,6 +929,19 @@ section,
 }
 
 @media (max-width: 768px) {
+   #hero-carousel {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .carousel-text h2 {
+    font-size: 1.1rem;
+  }
+
+  .carousel-text p {
+    font-size: 0.85rem;
+  }
+
   .hero .carousel-container {
     min-height: 90vh;
   }
@@ -1174,7 +1251,7 @@ section,
 .portfolio .portfolio-filters li:hover,
 .portfolio .portfolio-filters li.filter-active {
   color: var(--contrast-color);
-  background-color: var(--accent-color);
+  background: linear-gradient(135deg, var(--accent-color) 0%, #5a8f29 100%);
 }
 
 .portfolio .portfolio-filters li:first-child {
@@ -1585,7 +1662,7 @@ section,
 }
 
 .team .team-member .member-info {
-  padding: 25px 15px;
+  padding: 5px 1px;
 }
 
 .team .team-member .member-info h4 {
@@ -1604,6 +1681,34 @@ section,
 .team .team-member:hover .social {
   opacity: 1;
   bottom: 15px;
+}
+
+.gradient-circle {
+background-image: linear-gradient(180deg, rgba(222, 235, 218, 1) 40%, rgb(255, 255, 255) 80%);
+}
+
+.gradient-circle2 {
+  background: linear-gradient(135deg, var(--accent-color) 0%, #5a8f29 100%);
+}
+
+.social-icons a {
+  background: linear-gradient(135deg, var(--accent-color) 0%, #5a8f29 100%);
+  padding: 12px;
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #fff;
+}
+
+.social-icons a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(125, 184, 50, 0.3);
 }
 
 /*--------------------------------------------------------------
