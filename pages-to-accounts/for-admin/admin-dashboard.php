@@ -765,38 +765,38 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="quickLinkForm">
             <div class="mb-3">
               <label for="linkTitle" class="form-label">Title</label>
-              <input type="text" class="form-control" id="linkTitle" required>
+              <input type="text" name="linkTitle" class="form-control" id="linkTitle" required>
             </div>
 
             <div class="mb-3">
               <label for="linkUrl" class="form-label">URL</label>
-              <input type="url" class="form-control" id="linkUrl" required>
+              <input type="url" name="linkUrl" class="form-control" id="linkUrl" required>
             </div>
 
             <div class="mb-3">
               <label for="linkCategory" class="form-label">Category</label>
-              <select class="form-select" id="linkCategory" required>
+              <select class="form-select" name="linkCategory" id="linkCategory" required>
                 <option value="">Select Category</option>
-                <option value="Academic">Academic</option>
-                <option value="Support">Support</option>
-                <option value="Opportunity">Opportunity</option>
-                <option value="Resource">Resource</option>
+                <option value="academic">Academic</option>
+                <option value="support">Support</option>
+                <option value="opportunity">Opportunity</option>
+                <option value="resource">Resource</option>
               </select>
             </div>
 
             <div class="mb-3">
               <label for="linkIcon" class="form-label">Icon (Optional)</label>
-              <input type="text" class="form-control" id="linkIcon" placeholder="e.g., ri-book-line">
+              <input type="text" name="linkIcon" class="form-control" id="linkIcon" placeholder="e.g., ri-book-line">
               <small class="text-muted">Use Remix Icon class names</small>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary">Add Link</button>
+          <button type="submit" form="quickLinkForm" id="quickBtn" class="btn btn-primary">Add Link</button>
         </div>
       </div>
     </div>
@@ -933,6 +933,9 @@ require_once '../../../backend/middleware/admin_middleware.php';
   <!-- Main JS File -->
   <script src="../../assets/js/main.js"></script>
   <script src="./js/admin-logout.js"></script>
+
+  <!-- js modals api-->
+  <script src="./js/quick-links.js"></script>
 
   <script>
     // Initialize DataTable for events
