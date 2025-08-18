@@ -437,8 +437,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
               <div class="tab-content" id="contentTabsContent">
                 <div class="tab-pane fade" id="links-tab-pane" role="tabpanel">
                   <div class="table-responsive">
-                    <table class="table table-hover">
-                      <thead>
+                    <table id="link-table" class="table table-hover">
+                      <thead id="link-table-head" class="">
                         <tr>
                           <th>ID</th>
                           <th>Title</th>
@@ -447,37 +447,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
                           <th>Actions</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>LINK001</td>
-                          <td>Course Materials</td>
-                          <td>/courses</td>
-                          <td><span class="badge bg-primary">Academic</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>LINK002</td>
-                          <td>Student Resources</td>
-                          <td>/resources</td>
-                          <td><span class="badge bg-success">Support</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>LINK003</td>
-                          <td>Research Opportunities</td>
-                          <td>/research</td>
-                          <td><span class="badge bg-info">Opportunity</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
+                      <tbody id="link-table-body">
+                        <!-- this is where the quick links are inserted from database -->
                       </tbody>
                     </table>
                   </div>
@@ -798,6 +769,20 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="submit" form="quickLinkForm" id="quickBtn" class="btn btn-primary">Add Link</button>
         </div>
+
+        <div id="uploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+          <div id="uploadLoader" class="text-center">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 fw-semibold">Uploading...</p>
+          </div>
+          <div id="uploadSuccess" class="text-center d-none">
+            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+            <p class="mt-2 fw-semibold">Upload Successful!</p>
+          </div>
+        </div>
+
+        <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
+
       </div>
     </div>
   </div>
