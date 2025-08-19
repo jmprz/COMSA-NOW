@@ -427,9 +427,6 @@ require_once '../../../backend/middleware/admin_middleware.php';
                   <button class="nav-link" id="links-tab" data-bs-toggle="tab" data-bs-target="#links-tab-pane" type="button" role="tab">Quick Links</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="announcements-tab" data-bs-toggle="tab" data-bs-target="#announcements-tab-pane" type="button" role="tab">Announcements</button>
-                </li>
-                <li class="nav-item" role="presentation">
                   <button class="nav-link active" id="events-tab" data-bs-toggle="tab" data-bs-target="#events-tab-pane" type="button" role="tab">Events</button>
                 </li>
               </ul>
@@ -449,62 +446,6 @@ require_once '../../../backend/middleware/admin_middleware.php';
                       </thead>
                       <tbody id="link-table-body">
                         <!-- this is where the quick links are inserted from database -->
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <div class="tab-pane fade" id="announcements-tab-pane" role="tabpanel">
-                  <div class="table-responsive">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Title</th>
-                          <th>Start Date</th>
-                          <th>End Date</th>
-                          <th>Priority</th>
-                          <th>Status</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>ANN001</td>
-                          <td>System Maintenance</td>
-                          <td>15 Jun 2024</td>
-                          <td>16 Jun 2024</td>
-                          <td><span class="badge bg-danger">High</span></td>
-                          <td><span class="badge bg-success">Active</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>ANN002</td>
-                          <td>Registration Deadline</td>
-                          <td>10 Jun 2024</td>
-                          <td>10 Jun 2024</td>
-                          <td><span class="badge bg-warning">Medium</span></td>
-                          <td><span class="badge bg-secondary">Expired</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>ANN003</td>
-                          <td>New Scholarship Opportunity</td>
-                          <td>1 Jul 2024</td>
-                          <td>31 Jul 2024</td>
-                          <td><span class="badge bg-info">Low</span></td>
-                          <td><span class="badge bg-warning">Scheduled</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -782,6 +723,67 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
 
         <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Quick Link Modal  -->
+  <div class="modal fade" id="editQuickLinkModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Quick Link</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editQuickLinkForm">
+            <input type="hidden" id="editLinkId" name="editLinkId">
+            <div class="mb-3">
+              <label for="editLinkTitle" class="form-label">Title</label>
+              <input type="text" name="editLinkTitle" class="form-control" id="editLinkTitle" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="editLinkUrl" class="form-label">URL</label>
+              <input type="url" name="editLinkUrl" class="form-control" id="editLinkUrl" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="editLinkCategory" class="form-label">Category</label>
+              <select class="form-select" name="editLinkCategory" id="editLinkCategory" required>
+                <option value="">Select Category</option>
+                <option value="academic">Academic</option>
+                <option value="support">Support</option>
+                <option value="opportunity">Opportunity</option>
+                <option value="resource">Resource</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="editLinkIcon" class="form-label">Icon (Optional)</label>
+              <input type="text" name="editLinkIcon" class="form-control" id="editLinkIcon" placeholder="e.g., ri-book-line">
+              <small class="text-muted">Use Remix Icon class names</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" form="editQuickLinkForm" id="editQuickBtn" class="btn btn-primary">Edit Link</button>
+        </div>
+
+        <div id="editUploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+          <div id="editUploadLoader" class="text-center">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 fw-semibold">Editing...</p>
+          </div>
+          <div id="editUploadSuccess" class="text-center d-none">
+            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+            <p class="mt-2 fw-semibold">Edit Successful!</p>
+          </div>
+        </div>
+
+        <div id="editGeneralUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
 
       </div>
     </div>
