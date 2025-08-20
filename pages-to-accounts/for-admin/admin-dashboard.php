@@ -427,9 +427,6 @@ require_once '../../../backend/middleware/admin_middleware.php';
                   <button class="nav-link" id="links-tab" data-bs-toggle="tab" data-bs-target="#links-tab-pane" type="button" role="tab">Quick Links</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="announcements-tab" data-bs-toggle="tab" data-bs-target="#announcements-tab-pane" type="button" role="tab">Announcements</button>
-                </li>
-                <li class="nav-item" role="presentation">
                   <button class="nav-link active" id="events-tab" data-bs-toggle="tab" data-bs-target="#events-tab-pane" type="button" role="tab">Events</button>
                 </li>
               </ul>
@@ -437,8 +434,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
               <div class="tab-content" id="contentTabsContent">
                 <div class="tab-pane fade" id="links-tab-pane" role="tabpanel">
                   <div class="table-responsive">
-                    <table class="table table-hover">
-                      <thead>
+                    <table id="link-table" class="table table-hover">
+                      <thead id="link-table-head" class="">
                         <tr>
                           <th>ID</th>
                           <th>Title</th>
@@ -447,93 +444,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
                           <th>Actions</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>LINK001</td>
-                          <td>Course Materials</td>
-                          <td>/courses</td>
-                          <td><span class="badge bg-primary">Academic</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>LINK002</td>
-                          <td>Student Resources</td>
-                          <td>/resources</td>
-                          <td><span class="badge bg-success">Support</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>LINK003</td>
-                          <td>Research Opportunities</td>
-                          <td>/research</td>
-                          <td><span class="badge bg-info">Opportunity</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <div class="tab-pane fade" id="announcements-tab-pane" role="tabpanel">
-                  <div class="table-responsive">
-                    <table class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Title</th>
-                          <th>Start Date</th>
-                          <th>End Date</th>
-                          <th>Priority</th>
-                          <th>Status</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>ANN001</td>
-                          <td>System Maintenance</td>
-                          <td>15 Jun 2024</td>
-                          <td>16 Jun 2024</td>
-                          <td><span class="badge bg-danger">High</span></td>
-                          <td><span class="badge bg-success">Active</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>ANN002</td>
-                          <td>Registration Deadline</td>
-                          <td>10 Jun 2024</td>
-                          <td>10 Jun 2024</td>
-                          <td><span class="badge bg-warning">Medium</span></td>
-                          <td><span class="badge bg-secondary">Expired</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>ANN003</td>
-                          <td>New Scholarship Opportunity</td>
-                          <td>1 Jul 2024</td>
-                          <td>31 Jul 2024</td>
-                          <td><span class="badge bg-info">Low</span></td>
-                          <td><span class="badge bg-warning">Scheduled</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                          </td>
-                        </tr>
+                      <tbody id="link-table-body">
+                        <!-- this is where the quick links are inserted from database -->
                       </tbody>
                     </table>
                   </div>
@@ -765,39 +677,114 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form id="quickLinkForm">
             <div class="mb-3">
               <label for="linkTitle" class="form-label">Title</label>
-              <input type="text" class="form-control" id="linkTitle" required>
+              <input type="text" name="linkTitle" class="form-control" id="linkTitle" required>
             </div>
 
             <div class="mb-3">
               <label for="linkUrl" class="form-label">URL</label>
-              <input type="url" class="form-control" id="linkUrl" required>
+              <input type="url" name="linkUrl" class="form-control" id="linkUrl" required>
             </div>
 
             <div class="mb-3">
               <label for="linkCategory" class="form-label">Category</label>
-              <select class="form-select" id="linkCategory" required>
+              <select class="form-select" name="linkCategory" id="linkCategory" required>
                 <option value="">Select Category</option>
-                <option value="Academic">Academic</option>
-                <option value="Support">Support</option>
-                <option value="Opportunity">Opportunity</option>
-                <option value="Resource">Resource</option>
+                <option value="academic">Academic</option>
+                <option value="support">Support</option>
+                <option value="opportunity">Opportunity</option>
+                <option value="resource">Resource</option>
               </select>
             </div>
 
             <div class="mb-3">
               <label for="linkIcon" class="form-label">Icon (Optional)</label>
-              <input type="text" class="form-control" id="linkIcon" placeholder="e.g., ri-book-line">
+              <input type="text" name="linkIcon" class="form-control" id="linkIcon" placeholder="e.g., ri-book-line">
               <small class="text-muted">Use Remix Icon class names</small>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary">Add Link</button>
+          <button type="submit" form="quickLinkForm" id="quickBtn" class="btn btn-primary">Add Link</button>
         </div>
+
+        <div id="uploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+          <div id="uploadLoader" class="text-center">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 fw-semibold">Uploading...</p>
+          </div>
+          <div id="uploadSuccess" class="text-center d-none">
+            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+            <p class="mt-2 fw-semibold">Upload Successful!</p>
+          </div>
+        </div>
+
+        <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Quick Link Modal  -->
+  <div class="modal fade" id="editQuickLinkModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Quick Link</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editQuickLinkForm">
+            <input type="hidden" id="editLinkId" name="editLinkId">
+            <div class="mb-3">
+              <label for="editLinkTitle" class="form-label">Title</label>
+              <input type="text" name="editLinkTitle" class="form-control" id="editLinkTitle" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="editLinkUrl" class="form-label">URL</label>
+              <input type="url" name="editLinkUrl" class="form-control" id="editLinkUrl" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="editLinkCategory" class="form-label">Category</label>
+              <select class="form-select" name="editLinkCategory" id="editLinkCategory" required>
+                <option value="">Select Category</option>
+                <option value="academic">Academic</option>
+                <option value="support">Support</option>
+                <option value="opportunity">Opportunity</option>
+                <option value="resource">Resource</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="editLinkIcon" class="form-label">Icon (Optional)</label>
+              <input type="text" name="editLinkIcon" class="form-control" id="editLinkIcon" placeholder="e.g., ri-book-line">
+              <small class="text-muted">Use Remix Icon class names</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" form="editQuickLinkForm" id="editQuickBtn" class="btn btn-primary">Edit Link</button>
+        </div>
+
+        <div id="editUploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+          <div id="editUploadLoader" class="text-center">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 fw-semibold">Editing...</p>
+          </div>
+          <div id="editUploadSuccess" class="text-center d-none">
+            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+            <p class="mt-2 fw-semibold">Edit Successful!</p>
+          </div>
+        </div>
+
+        <div id="editGeneralUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
+
       </div>
     </div>
   </div>
@@ -811,15 +798,15 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="eventForm">
+          <form id="eventForm" enctype="multipart/form-data">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="eventTitle" class="form-label">Event Title</label>
-                <input type="text" class="form-control" id="eventTitle" required>
+                <input name="eventTitle" type="text" class="form-control" id="eventTitle" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="eventStatus" class="form-label">Status</label>
-                <select class="form-select" id="eventStatus" required>
+                <select name="eventStatus" class="form-select" id="eventStatus" required>
                   <option value="active">Active</option>
                   <option value="upcoming">Upcoming</option>
                   <option value="ended">Ended</option>
@@ -832,23 +819,23 @@ require_once '../../../backend/middleware/admin_middleware.php';
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="eventStartDate" class="form-label">Start Date</label>
-                <input type="datetime-local" class="form-control" id="eventStartDate" required>
+                <input name="eventStartDate" type="datetime-local" class="form-control" id="eventStartDate" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="eventEndDate" class="form-label">End Date</label>
-                <input type="datetime-local" class="form-control" id="eventEndDate" required>
+                <input name="eventEndDate" type="datetime-local" class="form-control" id="eventEndDate" required>
               </div>
             </div>
 
             <div class="mb-3">
               <label for="eventImage" class="form-label">Event Image</label>
-              <input type="file" class="form-control" id="eventImage" accept="image/*">
+              <input name="eventImage" type="file" class="form-control" id="eventImage" accept="image/*">
               <small class="text-muted">Recommended size: 1200x600px</small>
             </div>
 
             <div class="mb-3">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="featureEvent">
+                <input name="featureEvent" class="form-check-input" type="checkbox" id="featureEvent">
                 <label class="form-check-label" for="featureEvent">Feature this event in carousel</label>
               </div>
             </div>
@@ -856,8 +843,21 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="saveEventBtn">Save Event</button>
+          <button type="submit" form="eventForm" class="btn btn-primary" id="saveEventBtn">Save Event</button>
         </div>
+
+        <div id="eventUploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+          <div id="eventUploadLoader" class="text-center">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 fw-semibold">Uploading...</p>
+          </div>
+          <div id="eventUploadSuccess" class="text-center d-none">
+            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+            <p class="mt-2 fw-semibold">Upload Successful!</p>
+          </div>
+        </div>
+
+        <div id="eventGeneralUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
       </div>
     </div>
   </div>
@@ -933,6 +933,11 @@ require_once '../../../backend/middleware/admin_middleware.php';
   <!-- Main JS File -->
   <script src="../../assets/js/main.js"></script>
   <script src="./js/admin-logout.js"></script>
+
+  <script src="./js/events.js"></script>
+
+  <!-- js modals api-->
+  <script src="./js/quick-links.js"></script>
 
   <script>
     // Initialize DataTable for events

@@ -41,7 +41,7 @@ require_once '../../../backend/middleware/student_middleware.php';
   <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="../../assets/css/main.css" rel="stylesheet">
+  <!-- <link href="../../assets/css/main.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="../../assets/css/project-studs-design.css">
   <link rel="stylesheet" href="../../assets/css/search.css">
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">

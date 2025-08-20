@@ -97,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
       let removePhotoFlag = false;
 
       profilePicModalEl.addEventListener("show.bs.modal", () => {
-        console.log("working")
         fetch("../../../backend/api/get_user_avatar.php")
           .then(res => res.json())
           .then(data => {
