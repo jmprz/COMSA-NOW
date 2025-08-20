@@ -167,14 +167,6 @@ require_once '../../../backend/middleware/student_middleware.php';
               </div>
             </div>
 
-
-
-                  <!--
-                    
-                  
-                  
-                  -->
-
                     <!-- comment modal -->
             <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-lg">
