@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     newEl.innerHTML = `
-                    <tr>
+                    
                         <td>${link.id}</td>
                         <td>${link.title}</td>
                         <td>${link.url}</td>
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button id="showEditBtn-${link.id}" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editQuickLinkModal"><i class="ri-edit-line"></i></button>
                             <button id="deleteLinkBtn-${link.id}" class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
                         </td>
-                    </tr>
+                    
                     `
                     tableBody.appendChild(newEl);
 
@@ -101,15 +101,15 @@ document.addEventListener('DOMContentLoaded', () => {
     editForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const linkId = document.getElementById("editLinkId").value;
-        const title = document.getElementById("editLinkTitle").value;
-        const url = document.getElementById("editLinkUrl").value;
-        const category = document.getElementById("editLinkCategory").value;
-        const icon = document.getElementById("editLinkIcon").value;
+        document.getElementById("editUploadOverlay").classList.remove("d-none");
+        document.getElementById("editUploadLoader").classList.remove("d-none");
+        document.getElementById("editUploadSuccess").classList.add("d-none");
+
+        document.getElementById("editGeneralUploadError").classList.add("d-none");
 
         const editFormdata = new FormData(editForm);
 
-        console.log(linkId, title, url, category, icon);
+        // console.log(linkId, title, url, category, icon);
         fetch("../../../backend/api/admin/edit_quick_link.php", {
             method: "POST",
             body: editFormdata

@@ -259,6 +259,17 @@ require_once '../../../backend/middleware/admin_middleware.php';
       color: #6c757d;
       font-size: 0.9rem;
     }
+
+    #uploadOverlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      display: none;
+      z-index: 1051;
+    }
   </style>
 </head>
 
@@ -454,7 +465,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <div class="tab-pane fade show active" id="events-tab-pane" role="tabpanel">
                   <div class="table-responsive">
                     <table class="table table-hover" id="eventsTable">
-                      <thead>
+                      <thead id="events-table-head">
                         <tr>
                           <th>ID</th>
                           <th>Image</th>
@@ -465,67 +476,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
                           <th>Actions</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>EVT001</td>
-                          <td>
-                            <img src="../../assets/img/comsayep.jpg" class="img-thumbnail" width="80" alt="Event Image">
-                          </td>
-                          <td>COMSA YEP</td>
-                          <td>15 May 2024</td>
-                          <td>15 May 2024</td>
-                          <td><span class="badge bg-success">Active</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                            <button class="btn btn-sm btn-outline-secondary"><i class="ri-eye-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>EVT002</td>
-                          <td>
-                            <img src="../../assets/img/csexpo.jpg" class="img-thumbnail" width="80" alt="Event Image">
-                          </td>
-                          <td>CS Expo 2024</td>
-                          <td>20 Apr 2024</td>
-                          <td>21 Apr 2024</td>
-                          <td><span class="badge bg-secondary">Ended</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                            <button class="btn btn-sm btn-outline-secondary"><i class="ri-eye-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>EVT003</td>
-                          <td>
-                            <img src="../../assets/img/donationdrive.jpg" class="img-thumbnail" width="80" alt="Event Image">
-                          </td>
-                          <td>Donation Drive</td>
-                          <td>10 Jun 2024</td>
-                          <td>30 Jun 2024</td>
-                          <td><span class="badge bg-warning">Upcoming</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                            <button class="btn btn-sm btn-outline-secondary"><i class="ri-eye-line"></i></button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>EVT004</td>
-                          <td>
-                            <img src="../../assets/img/gawadkalinga.jpg" class="img-thumbnail" width="80" alt="Event Image">
-                          </td>
-                          <td>CCS Extension</td>
-                          <td>15 Aug 2024</td>
-                          <td>15 Aug 2024</td>
-                          <td><span class="badge bg-info">Scheduled</span></td>
-                          <td>
-                            <button class="btn btn-sm btn-outline-primary"><i class="ri-edit-line"></i></button>
-                            <button class="btn btn-sm btn-outline-danger"><i class="ri-delete-bin-line"></i></button>
-                            <button class="btn btn-sm btn-outline-secondary"><i class="ri-eye-line"></i></button>
-                          </td>
-                        </tr>
+                      <tbody id="events-table-body">
+                        <!-- this is where the Events are inserted from database -->
                       </tbody>
                     </table>
                   </div>
@@ -561,7 +513,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
   </nav>
 
   <!-- Add Student Modal -->
-  <div class="modal fade" id="addStudentModal" tabindex="-1" aria-hidden="true">
+  <!-- <div class="modal fade" id="addStudentModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -609,10 +561,10 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Add Announcement Modal -->
-  <div class="modal fade" id="addAnnouncementModal" tabindex="-1" aria-hidden="true">
+  <!-- <div class="modal fade" id="addAnnouncementModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -666,7 +618,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Add Quick Link Modal -->
   <div class="modal fade" id="addQuickLinkModal" tabindex="-1" aria-hidden="true">
@@ -789,7 +741,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
     </div>
   </div>
 
-  <!-- Add/Edit Event Modal -->
+  <!-- Add Event Modal -->
   <div class="modal fade" id="addEventModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -829,7 +781,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
 
             <div class="mb-3">
               <label for="eventImage" class="form-label">Event Image</label>
-              <input name="eventImage" type="file" class="form-control" id="eventImage" accept="image/*">
+              <input name="eventImage" type="file" class="form-control" id="eventImage" accept="image/*" required>
               <small class="text-muted">Recommended size: 1200x600px</small>
             </div>
 
@@ -862,8 +814,85 @@ require_once '../../../backend/middleware/admin_middleware.php';
     </div>
   </div>
 
+  <!-- Edit Event Modal -->
+  <div class="modal fade" id="editEventModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Event</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editEventForm" enctype="multipart/form-data">
+            <input type="hidden" id="editEventId" name="editEventId">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="editEventTitle" class="form-label">Event Title</label>
+                <input name="editEventTitle" type="text" class="form-control" id="editEventTitle" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="editEventStatus" class="form-label">Status</label>
+                <select name="editEventStatus" class="form-select" id="editEventStatus" required>
+                  <option value="active">Active</option>
+                  <option value="upcoming">Upcoming</option>
+                  <option value="ended">Ended</option>
+                  <option value="draft">Draft</option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="editEventStartDate" class="form-label">Start Date</label>
+                <input name="editEventStartDate" type="datetime-local" class="form-control" id="editEventStartDate" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="editEventEndDate" class="form-label">End Date</label>
+                <input name="editEventEndDate" type="datetime-local" class="form-control" id="editEventEndDate" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="editEventImage" class="form-label">Event Image</label>
+              <input name="editEventImage" type="file" class="form-control" id="editEventImage" accept="image/*">
+              <small class="text-muted">Recommended size: 1200x600px</small>
+              <div class="mt-2">
+                <img id="editEventImagePreview" src="" alt="Current Event Image" class="img-thumbnail" width="200">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="form-check">
+                <input name="editFeatureEvent" class="form-check-input" type="checkbox" id="editFeatureEvent">
+                <label class="form-check-label" for="editFeatureEvent">Feature this event in carousel</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" form="editEventForm" class="btn btn-primary" id="editEventBtn">Save Edit</button>
+        </div>
+
+        <div id="editEventUploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+          <div id="editEventUploadLoader" class="text-center">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 fw-semibold">Editing...</p>
+          </div>
+          <div id="editEventUploadSuccess" class="text-center d-none">
+            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+            <p class="mt-2 fw-semibold">Edited Successfully!</p>
+          </div>
+        </div>
+
+        <div id="editEventGeneralUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Preview Event Modal -->
-  <div class="modal fade" id="previewEventModal" tabindex="-1" aria-hidden="true">
+  <!-- <div class="modal fade" id="previewEventModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -884,7 +913,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Admin Profile Modal for Mobile -->
   <div class="modal fade" id="adminProfileModal" tabindex="-1" aria-labelledby="adminProfileModalLabel" aria-hidden="true">
@@ -934,10 +963,9 @@ require_once '../../../backend/middleware/admin_middleware.php';
   <script src="../../assets/js/main.js"></script>
   <script src="./js/admin-logout.js"></script>
 
-  <script src="./js/events.js"></script>
-
   <!-- js modals api-->
   <script src="./js/quick-links.js"></script>
+  <script src="./js/events.js"></script>
 
   <script>
     // Initialize DataTable for events
