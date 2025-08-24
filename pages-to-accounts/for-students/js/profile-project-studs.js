@@ -6,23 +6,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const uploadBtn = document.getElementById('uploadProjectBtn');
     
     // Function to fetch and display projects
-    async function fetchStudentProjects() {
-        try {
-            const response = await fetch(`../../../backend/api/get_student_projects.php?student_id=${studentId}`);
-            const data = await response.json();
-            
-            if (data.success && data.posts.length > 0) {
-                displayProjects(data.posts);
-                updateProjectStats(data.posts.length);
-            } else {
-                displayNoProjectsMessage();
-                updateProjectStats(0);
-            }
-        } catch (error) {
-            console.error('Error fetching projects:', error);
-            displayError();
+async function fetchStudentProjects() {
+    try {
+        const response = await fetch(`../../../backend/api/get_student_projects.php?student_id=${studentId}`);
+        const data = await response.json();
+        
+        if (data.success && data.posts.length > 0) {
+            displayProjects(data.posts);
+            updateProjectStats(data.posts.length);
+            updateTotalStars(data.total_stars);
+        } else {
+            displayNoProjectsMessage();
+            updateProjectStats(0);
+            updateTotalStars(0); // Set to 0 if no projects
         }
+    } catch (error) {
+        console.error('Error fetching projects:', error);
+        displayError();
+        updateTotalStars(0); // Set to 0 on error
     }
+}
+
+// Function to update total stars
+function updateTotalStars(count) {
+    const starsCountEl = document.getElementById('totalStarsCount');
+    if (starsCountEl) {
+        starsCountEl.textContent = count;
+    }
+}
 
     // Function to update project stats in the header
     function updateProjectStats(count) {

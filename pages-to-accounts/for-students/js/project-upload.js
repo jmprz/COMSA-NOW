@@ -6,56 +6,59 @@
 //
 document.addEventListener('DOMContentLoaded', function () {
   // Initialize project upload modal
-const uploadBtns = [
-  document.getElementById('uploadProjectBtnMain'),
-  document.getElementById('uploadProjectBtnMobile')
-].filter(Boolean); // Filter out null elements
+  const uploadBtns = [
+    document.getElementById('uploadProjectBtn'),
+    document.getElementById('uploadProjectBtnEmpty'),
+    document.getElementById('uploadProjectBtnMobile')
+  ].filter(Boolean); // Filter out null elements
 
-uploadBtns.forEach(btn => {
-  btn.addEventListener('click', function() {
-    var modal = new bootstrap.Modal(document.getElementById('projectUploadModal'));
-    modal.show();
+  uploadBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      var modal = new bootstrap.Modal(document.getElementById('projectUploadModal'));
+      modal.show();
+    });
   });
-});
+
 
   // Handle media upload with max 8 images
   const mediaUpload = document.getElementById('mediaUpload');
   const mediaPreview = document.getElementById('mediaPreview');
   const mediaCounter = document.getElementById('mediaCounter');
+  const uploadArea = document.getElementById('mediaUploadArea');
+  const browseBtn = document.querySelector('.upload-browse-btn');
 
-  if (mediaUpload) {
+  if (browseBtn && mediaUpload) {
+    browseBtn.addEventListener('click', function() {
+      mediaUpload.click();
+    });
+  }
+
+  if (mediaUpload && mediaPreview && mediaCounter && uploadArea) {
     mediaUpload.addEventListener('change', function (e) {
-      const files = Array.from(e.target.files).slice(0, 8); // Limit to 8 pics/files
-      mediaPreview.innerHTML = '';
+      handleMediaFiles(e.target.files);
+    });
 
-      files.forEach((file, index) => {
-        if (file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          reader.onload = function (event) {
-            const previewItem = document.createElement('div');
-            previewItem.className = 'position-relative';
+    // Drag and drop functionality
+    ['dragover', 'dragleave', 'drop'].forEach(eventName => {
+      uploadArea.addEventListener(eventName, preventDefaults, false);
+    });
 
-            const img = document.createElement('img');
-            img.src = event.target.result;
-            img.className = 'upload-preview';
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
-            const removeBtn = document.createElement('button');
-            removeBtn.className = 'btn btn-sm btn-danger position-absolute top-0 end-0 m-1 p-1';
-            removeBtn.innerHTML = '<i class="bi bi-x"></i>';
-            removeBtn.onclick = function () {
-              previewItem.remove();
-              updateMediaCounter();
-            };
+    uploadArea.addEventListener('dragover', function () {
+      this.classList.add('drag-over');
+    });
 
-            previewItem.appendChild(img);
-            previewItem.appendChild(removeBtn);
-            mediaPreview.appendChild(previewItem);
-          };
-          reader.readAsDataURL(file);
-        }
-      });
+    uploadArea.addEventListener('dragleave', function () {
+      this.classList.remove('drag-over');
+    });
 
-      updateMediaCounter();
+    uploadArea.addEventListener('drop', function (e) {
+      this.classList.remove('drag-over');
+      handleMediaFiles(e.dataTransfer.files);
     });
 
     // Drag and drop functionality
