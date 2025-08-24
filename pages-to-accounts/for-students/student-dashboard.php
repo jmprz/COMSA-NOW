@@ -1,6 +1,10 @@
 <?php
 require_once "../../../backend/config/session.php";
+require_once "../../../backend/config/db.php";
 require_once '../../../backend/middleware/student_middleware.php';
+
+require_once "../../../backend/api/update_nickname_bio.php";
+
 
 
 $name = htmlspecialchars($_SESSION['user_name']);
@@ -236,22 +240,20 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
 
               <div class="profile-info">
                 <h4><?= $name ?></h4>
-                <p>Computer Science Student</p>
+                <p class="profile-nickname me-2" id="nicknameDisplay">
+                  <?php echo !empty($nickname) ? $nickname : 'No nickname set'; ?>
+                </p>
               </div>
             </div>
 
             <div class="profile-stats">
               <div class="stat-item">
-                <div class="stat-number">24</div>
+                <div class="stat-number">0</div>
                 <div class="stat-label">Projects</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number">156</div>
-                <div class="stat-label">Following</div>
-              </div>
-              <div class="stat-item">
-                <div class="stat-number">1.2K</div>
-                <div class="stat-label">Followers</div>
+                <div class="stat-number" id="totalStarsCount">0</div>
+                <div class="stat-label">Total Stars</div>
               </div>
             </div>
           </div>
@@ -479,8 +481,9 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
                   <img src="../../assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
                   <div class="profile-info">
                     <h4>your_username</h4>
-                    <p>Computer Science Student</p>
-                  </div>
+                <p class="profile-nickname me-2" id="nicknameDisplay">
+                  <?php echo !empty($nickname) ? $nickname : 'No nickname set'; ?>
+                </p>                  </div>
                 </div>
 
                 <div class="profile-stats">
@@ -537,8 +540,17 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
     <!-- Main JS File -->
     <script src="../../assets/js/main.js"></script>
     <script src="../for-students/js/studs-search.js"></script>
-
     <script src="../../assets/js/studs-main-func.js"></script>
+    <script src="../for-students/js/profile-bio-nick.js"></script>
+    <script src="../for-students/js/profile-project-studs.js" defer></script>
+
+    <script src="../for-students/js/project-studs.js" defer></script>
+
+        <script>
+        //session with disabilities haha
+        const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
+    </script>
+
 
 </body>
 
