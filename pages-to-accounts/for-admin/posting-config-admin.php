@@ -872,24 +872,23 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <!-- Post Content Editor -->
                 <div class="mb-3">
                   <label for="editPostTitle" class="form-label">Post Title</label>
-                  <input type="text" class="form-control" id="editPostTitle"
-                    value="AI-powered campus navigation system">
+                  <input type="text" name="editPostTile" class="form-control" id="editPostTitle">
                 </div>
 
                 <div class="mb-3">
                   <label for="editPostContent" class="form-label">Content</label>
-                  <textarea class="form-control" id="editPostContent"
-                    rows="8">Just launched our AI-powered campus navigation system! 🚀 #CSExpo2024 #AI #Innovation</textarea>
+                  <textarea name="editPostContent" class="form-control" id="editPostContent"
+                    rows="8"></textarea>
                 </div>
 
                 <!-- Image Upload -->
                 <div class="mb-3">
                   <label class="form-label">Featured Image</label>
                   <div class="image-upload-container" id="editImageUploadContainer">
-                    <img src="../../assets/img/csexpo.jpg" id="editImagePreview" class="image-preview rounded"
+                    <img src="../../assets/img/csexpo.jpg" name="editImagePreview" id="editImagePreview" class="image-preview rounded"
                       style="display: block;">
                   </div>
-                  <input type="file" id="editImageUpload" accept="image/*" style="display: none;">
+                  <input type="file" name="editImageUpload" id="editImageUpload" accept="image/*" style="display: none;">
                   <button type="button" class="btn btn-sm btn-outline-secondary mt-2" id="changeImageBtn">
                     <i class="ri-image-edit-line me-1"></i> Change Image
                   </button>
@@ -898,11 +897,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <!-- Tags -->
                 <div class="mb-3">
                   <label for="editPostTags" class="form-label">Tags</label>
-                  <input type="text" class="form-control" id="editPostTags" value="AI, Navigation, CSExpo">
+                  <input type="text" name="editPostTags" class="form-control" id="editPostTags">
                   <div class="mt-2" id="editTagsContainer">
-                    <span class="badge bg-light text-dark tag-badge me-1 mb-1">#AI</span>
-                    <span class="badge bg-light text-dark tag-badge me-1 mb-1">#Navigation</span>
-                    <span class="badge bg-light text-dark tag-badge me-1 mb-1">#CSExpo</span>
                   </div>
                 </div>
               </div>
@@ -917,23 +913,23 @@ require_once '../../../backend/middleware/admin_middleware.php';
                     <!-- Status -->
                     <div class="mb-3">
                       <label class="form-label">Status</label>
-                      <select class="form-select" id="editPostStatus">
+                      <select name="editPostStatus" class="form-select" id="editPostStatus">
                         <option value="published">Published</option>
-                        <option value="scheduled">Scheduled</option>
+                        <!-- <option value="scheduled">Scheduled</option> -->
                         <option value="draft">Draft</option>
                       </select>
                     </div>
 
                     <!-- Schedule Options -->
-                    <div class="mb-3" id="editScheduleOptions">
+                    <!-- <div class="mb-3" id="editScheduleOptions">
                       <label for="editScheduleDate" class="form-label">Schedule Date & Time</label>
                       <input type="datetime-local" class="form-control" id="editScheduleDate">
-                    </div>
+                    </div> -->
 
                     <!-- Post Preview Button -->
-                    <button type="button" class="btn btn-outline-primary w-100 mb-3" id="editPreviewPostBtn">
+                    <!-- <button type="button" class="btn btn-outline-primary w-100 mb-3" id="editPreviewPostBtn">
                       <i class="ri-eye-line me-2"></i> Preview Post
-                    </button>
+                    </button> -->
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-success w-100">
@@ -965,35 +961,32 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <div class="post-preview-header">
                   <img src="../../assets/img/team/sampleTeam.jpg" class="post-preview-avatar" alt="Admin Avatar">
                   <div>
-                    <h6 class="mb-0">Admin</h6>
-                    <small class="text-muted">Posted on June 15, 2024</small>
+                    <h6 id="adminViewName" class="mb-0">Admin</h6>
+                    <small id="adminPostDate" class="text-muted">Posted on June 15, 2024</small>
                   </div>
                 </div>
 
-                <h4 class="my-3">AI-powered campus navigation system</h4>
+                <h4 id="adminViewTitle" class="my-3">AI-powered campus navigation system</h4>
 
-                <img src="../../assets/img/csexpo.jpg" class="post-preview-image" alt="Post Image">
+                <img src="../../assets/img/csexpo.jpg" id="adminViewImage" class="post-preview-image" alt="Post Image">
 
                 <div class="post-caption-preview">
-                  <p>Just launched our AI-powered campus navigation system! 🚀 #CSExpo2024 #AI #Innovation</p>
+                  <p id="adminViewContent">Just launched our AI-powered campus navigation system! 🚀 #CSExpo2024 #AI #Innovation</p>
                 </div>
 
                 <div class="post-actions-preview">
-                  <button class="post-action-preview">
-                    <i class="ri-star-line"></i> 1,243
+                  <button id="adminViewLike" class="post-action-preview">
+                    <i class="ri-star-line"></i>
                   </button>
-                  <button class="post-action-preview">
-                    <i class="ri-chat-3-line"></i> 56
+                  <button id="adminViewComment" class="post-action-preview">
+                    <i class="ri-chat-3-line"></i>
                   </button>
-                  <button class="post-action-preview">
+                  <button id="adminViewShare" class="post-action-preview">
                     <i class="ri-share-line"></i> Share
                   </button>
                 </div>
 
-                <div class="mb-2">
-                  <span class="badge bg-light text-dark tag-badge">#AI</span>
-                  <span class="badge bg-light text-dark tag-badge">#Navigation</span>
-                  <span class="badge bg-light text-dark tag-badge">#CSExpo</span>
+                <div class="mb-2" id="adminViewTagContainer">
                 </div>
               </div>
             </div>
@@ -1002,11 +995,11 @@ require_once '../../../backend/middleware/admin_middleware.php';
             <div class="col-md-4">
               <div class="h-100 d-flex flex-column">
                 <div class="p-3 border-bottom">
-                  <h5 class="mb-0">Comments (56)</h5>
+                  <h5 class="mb-0" id="adminViewCommentCount"></h5>
                 </div>
 
-                <div class="comments-container flex-grow-1 overflow-auto p-3" style="max-height: 400px;">
-                  <div class="post-comment mb-3 position-relative">
+                <div id="viewCommentsContainer" class="comments-container flex-grow-1 overflow-auto p-3" style="max-height: 400px;">
+                  <!-- <div class="post-comment mb-3 position-relative">
                     <div class="d-flex align-items-start">
                       <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
                       <div>
@@ -1056,13 +1049,13 @@ require_once '../../../backend/middleware/admin_middleware.php';
                     <button class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
                       <i class="ri-delete-bin-line"></i>
                     </button>
-                  </div>
+                  </div> -->
                 </div>
 
                 <div class="p-3 border-top">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Add a comment...">
-                    <button class="btn btn-success" type="button">
+                    <input type="text" id="adminViewAddComment" class="form-control" placeholder="Add a comment...">
+                    <button id="adminViewSubmitComment" class="btn btn-success" type="button">
                       <i class="ri-send-plane-line"></i>
                     </button>
                   </div>
@@ -1072,8 +1065,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPostModal"
+          <button type="button" id="adminViewCloseBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="adminViewSubmitBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPostModal"
             data-bs-dismiss="modal">
             <i class="ri-edit-line me-1"></i> Edit Post
           </button>
