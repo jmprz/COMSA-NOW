@@ -40,7 +40,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
     <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Main CSS File -->
-=    <link rel="stylesheet" href="../../assets/css/search.css">
+    <link rel="stylesheet" href="../../assets/css/search.css">
     <link rel="stylesheet" href="../../assets/css/dark-mode.css">
     <link rel="stylesheet" href="../../assets/css/project-studs-design.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -522,157 +522,103 @@ require_once "../../../backend/api/update_nickname_bio.php";
                 </div>
             </div>
 
-            <!-- Project Upload Modal (Enhanced Design) -->
+            <!-- Project Upload Modal (Same as in project-studs.php) -->
             <div class="modal fade" id="projectUploadModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
-                    <div class="modal-content upload-modal-content">
-                        <div class="modal-header upload-modal-header">
-                            <div class="d-flex align-items-center">
-                                <i class="ri-upload-cloud-line me-2 upload-modal-icon"></i>
-                                <h5 class="modal-title upload-modal-title">Upload Your Project</h5>
-                            </div>
-                            <button type="button" class="close-uploadInfo btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Upload Your Project</h5>
+                            <button type="button" class="close-uploadInfo btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body upload-modal-body">
+                        <div class="modal-body">
                             <form id="projectUploadForm" class="compact-form">
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="projectTitle" class="form-label upload-form-label">
-                                                <i class="ri-text me-1"></i>Project Title<span class="text-danger">*</span>
-                                            </label>
-                                            <input type="text" class="form-control upload-form-control" id="projectTitle" required placeholder="Enter your project title">
-                                            <div class="form-text">Make it descriptive and catchy!</div>
+                                <div class="col g-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="projectTitle" class="form-label">Project Title*</label>
+                                            <input type="text" class="form-control" id="projectTitle" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="projectType" class="form-label">Project Type*</label>
+                                            <select class="form-select" id="projectType" required>
+                                                <option value="">Select type</option>
+                                                <option value="Games">Game</option>
+                                                <option value="Websites">Website</option>
+                                                <option value="Mobile Apps">Mobile App</option>
+                                                <option value="Console">Console App</option>
+                                                <option value="AI/ML">AI/ML</option>
+                                                <option value="Databases">Database</option>
+                                                <option value="Others">Other</option>
+                                            </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="projectType" class="form-label upload-form-label">
-                                                <i class="ri-folder-2-line me-1"></i>Project Type<span class="text-danger">*</span>
-                                            </label>
-                                            <div class="select-wrapper">
-                                                <select class="form-select upload-form-control" id="projectType" required>
-                                                    <option value="">Select project type</option>
-                                                    <option value="Games">Game</option>
-                                                    <option value="Websites">Website</option>
-                                                    <option value="Mobile Apps">Mobile App</option>
-                                                    <option value="Console">Console App</option>
-                                                    <option value="AI/ML">AI/ML</option>
-                                                    <option value="Databases">Database</option>
-                                                    <option value="Others">Other</option>
-                                                </select>
-                                                <i class="ri-arrow-down-s-line select-arrow"></i>
+                                    <div class="col-12">
+                                        <label for="projectDescription" class="form-label">Description*</label>
+                                        <textarea class="form-control" id="projectDescription" rows="3" required></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="projectTechnologies" class="form-label">Technologies Used</label>
+                                            <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
+                                                <input type="text" class="form-control" id="projectTechnologies" placeholder="JavaScript, React, Node.js">
+                                                <span id="tagsWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="projectTeam" class="form-label">Team Members</label>
+                                            <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
+                                                <input type="text" class="form-control" id="projectTeam" placeholder="username1, username2">
+                                                <span id="tagsMemberWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="projectDescription" class="form-label upload-form-label">
-                                                <i class="ri-file-text-line me-1"></i>Description<span class="text-danger">*</span>
-                                            </label>
-                                            <textarea class="form-control upload-form-control" id="projectDescription" rows="4" required placeholder="Describe your project, what it does, and what makes it special"></textarea>
-                                            <div class="form-text d-flex justify-content-between">
-                                                <span>Minimum 50 characters recommended</span>
-                                                <span id="descriptionCounter">0 characters</span>
-                                            </div>
+                                        <label class="form-label">Project Media (2-8 images)</label>
+                                        <div class="upload-area" id="mediaUploadArea">
+                                            <i class="bi bi-images upload-icon"></i>
+                                            <p class="mb-1">Drag & drop or click to upload</p>
+                                            <small class="text-muted">Max 8 images (800x600 recommended)</small>
+                                            <input type="file" id="mediaUpload" name="mediaFiles[]" multiple accept="image/*" style="display: none;" max="8">
                                         </div>
+                                        <div id="mediaPreview" class="d-flex flex-wrap gap-2 mt-2"></div>
+                                        <div id="mediaCounter" class="text-muted small mt-1">0/8 images selected</div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="projectTechnologies" class="form-label upload-form-label">
-                                                <i class="ri-code-s-slash-line me-1"></i>Technologies Used
-                                            </label>
-                                            <div class="tag-input-container upload-form-control">
-                                                <input type="text" class="tag-input" id="projectTechnologies" placeholder="Add technology (press Enter or Space)">
-                                                <div id="tagsWrapper" class="tags-container mt-2"></div>
-                                            </div>
-                                            <div class="form-text">Examples: JavaScript, React, Node.js, Python</div>
+                                    <div class="row-md-5">
+                                        <label class="form-label">Project Links</label>
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text"><i class="bi bi-download"></i></span>
+                                            <input type="url" id="downloadLink" class="form-control" placeholder="Executable Download URL">
                                         </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="projectTeam" class="form-label upload-form-label">
-                                                <i class="ri-team-line me-1"></i>Team Members
-                                            </label>
-                                            <div class="tag-input-container upload-form-control">
-                                                <input type="text" class="tag-input" id="projectTeam" placeholder="Add team member (press Enter or Space)">
-                                                <div id="tagsMemberWrapper" class="tags-container mt-2"></div>
-                                            </div>
-                                            <div class="form-text">Enter usernames of your collaborators</div>
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                                            <input type="url" id="liveLink" class="form-control" placeholder="Live Demo URL">
                                         </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="form-label upload-form-label">
-                                                <i class="ri-image-line me-1"></i>Project Media (2-8 images)
-                                            </label>
-                                            <div class="upload-area enhanced-upload-area" id="mediaUploadArea">
-                                                <div class="upload-content">
-                                                    <i class="ri-folder-upload-line upload-icon-main"></i>
-                                                    <h5>Drag & drop your files here</h5>
-                                                    <p class="mb-2">or</p>
-                                                    <button type="button" class="btn btn-outline-primary btn-sm upload-browse-btn">Browse Files</button>
-                                                    <small class="text-muted d-block mt-2">Max 8 images (800x600 recommended)</small>
-                                                </div>
-                                                <input type="file" id="mediaUpload" name="mediaFiles[]" multiple accept="image/*" style="display: none;">
-                                            </div>
-                                            <div id="mediaPreview" class="media-preview-grid mt-3"></div>
-                                            <div id="mediaCounter" class="media-counter text-muted small mt-2">0/8 images selected</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="form-label upload-form-label">
-                                                <i class="ri-links-line me-1"></i>Project Links
-                                            </label>
-                                            <div class="link-input-group mb-3">
-                                                <span class="link-input-icon"><i class="ri-download-line"></i></span>
-                                                <input type="url" id="downloadLink" class="form-control upload-form-control link-input" placeholder="https://... Executable Download URL">
-                                            </div>
-                                            <div class="link-input-group mb-3">
-                                                <span class="link-input-icon"><i class="ri-global-line"></i></span>
-                                                <input type="url" id="liveLink" class="form-control upload-form-control link-input" placeholder="https://... Live Demo URL">
-                                            </div>
-                                            <div class="link-input-group">
-                                                <span class="link-input-icon"><i class="ri-github-fill"></i></span>
-                                                <input type="url" id="githubLink" class="form-control upload-form-control link-input" placeholder="https://... GitHub Repository">
-                                            </div>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-github"></i></span>
+                                            <input type="url" id="githubLink" class="form-control" placeholder="GitHub Repository">
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <div id="uploadOverlay" class="upload-overlay">
-                            <div id="uploadLoader" class="upload-status">
-                                <div class="upload-spinner">
-                                    <div class="spinner-border text-success" role="status"></div>
-                                </div>
-                                <p class="mt-3 fw-semibold">Uploading your project...</p>
-                                <div class="progress mt-2 upload-progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
-                                </div>
+                        <div id="uploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+                            <div id="uploadLoader" class="text-center">
+                                <div class="spinner-border text-success" role="status"></div>
+                                <p class="mt-2 fw-semibold">Uploading...</p>
                             </div>
-                            <div id="uploadSuccess" class="upload-status d-none">
-                                <div class="upload-success-icon">
-                                    <i class="ri-checkbox-circle-fill"></i>
-                                </div>
-                                <h5 class="mt-3 fw-bold">Upload Successful!</h5>
-                                <p class="text-muted">Your project is now live</p>
-                                <button type="button" class="btn btn-success mt-2" data-bs-dismiss="modal">Continue</button>
+                            <div id="uploadSuccess" class="text-center d-none">
+                                <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                                <p class="mt-2 fw-semibold">Upload Successful!</p>
                             </div>
                         </div>
-                        <div id="generalUploadError" class="upload-error-alert alert alert-danger d-none mt-2 mx-3"></div>
-                        <div class="modal-footer upload-modal-footer">
-                            <button type="button" class="btn btn-outline-secondary cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" form="projectUploadForm" class="btn btn-primary upload-submit-btn">
-                                <i class="ri-upload-cloud-line me-1"></i>Upload Project
-                            </button>
+                        <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="close-uploadInfo btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: #7db832; border: 1px solid #7db832;">Upload Project</button>
                         </div>
                     </div>
                 </div>
@@ -704,44 +650,47 @@ require_once "../../../backend/api/update_nickname_bio.php";
                         </div>
                         <form id="editProjectForm" class="compact-form">
                             <div class="modal-body">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="editProjectTitle" class="form-label">Project Title*</label>
-                                        <input type="text" class="form-control" id="editProjectTitle" name="project_title" required>
-                                    </div>
+                                <div class="col g-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="editProjectTitle" class="form-label">Project Title*</label>
+                                            <input type="text" class="form-control" id="editProjectTitle" name="project_title" required>
+                                        </div>
 
-                                    <div class="col-md-6">
-                                        <label for="editProjectType" class="form-label">Project Type*</label>
-                                        <select class="form-select" id="editProjectType" name="project_category" required>
-                                            <option value="">Select type</option>
-                                            <option value="Games">Game</option>
-                                            <option value="Websites">Website</option>
-                                            <option value="Mobile Apps">Mobile App</option>
-                                            <option value="Console">Console App</option>
-                                            <option value="AI/ML">AI/ML</option>
-                                            <option value="Databases">Database</option>
-                                            <option value="Others">Other</option>
-                                        </select>
+                                        <div class="col-md-6">
+                                            <label for="editProjectType" class="form-label">Project Type*</label>
+                                            <select class="form-select" id="editProjectType" name="project_category" required>
+                                                <option value="">Select type</option>
+                                                <option value="Games">Game</option>
+                                                <option value="Websites">Website</option>
+                                                <option value="Mobile Apps">Mobile App</option>
+                                                <option value="Console">Console App</option>
+                                                <option value="AI/ML">AI/ML</option>
+                                                <option value="Databases">Database</option>
+                                                <option value="Others">Other</option>
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="editProjectDescription" class="form-label">Description*</label>
                                         <textarea class="form-control" id="editProjectDescription" name="project_description" rows="3" required></textarea>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <label for="editProjectTechnologies" class="form-label">Technologies Used</label>
-                                        <div class="border p-2 rounded" style="min-height: 50px;">
-                                            <input type="text" class="form-control" id="editProjectTechnologies" placeholder="Add technology and press space/enter">
-                                            <div id="editTechTags" class="mt-2 d-flex flex-wrap gap-1"></div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="editProjectTechnologies" class="form-label">Technologies Used</label>
+                                            <div class="border p-2 rounded" style="min-height: 50px;">
+                                                <input type="text" class="form-control" id="editProjectTechnologies" placeholder="Add technology and press space/enter">
+                                                <div id="editTechTags" class="mt-2 d-flex flex-wrap gap-1"></div>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-6">
-                                        <label for="editProjectTeam" class="form-label">Team Members</label>
-                                        <div class="border p-2 rounded" style="min-height: 50px;">
-                                            <input type="text" class="form-control" id="editProjectTeam" placeholder="Add member and press space/enter">
-                                            <div id="editMemberTags" class="mt-2 d-flex flex-wrap gap-1"></div>
+                                        <div class="col-md-6">
+                                            <label for="editProjectTeam" class="form-label">Team Members</label>
+                                            <div class="border p-2 rounded" style="min-height: 50px;">
+                                                <input type="text" class="form-control" id="editProjectTeam" placeholder="Add member and press space/enter">
+                                                <div id="editMemberTags" class="mt-2 d-flex flex-wrap gap-1"></div>
+                                            </div>
                                         </div>
                                     </div>
 
