@@ -325,7 +325,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <div class="tab-pane fade show active" id="all-posts" role="tabpanel">
                   <div class="table-responsive">
                     <table id="allPostsTable" class="table table-hover">
-                      <thead>
+                      <thead id="tableHeadPost">
                         <tr>
                           <th>ID</th>
                           <th>Post</th>
@@ -335,45 +335,9 @@ require_once '../../../backend/middleware/admin_middleware.php';
                           <th>Actions</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>POST001</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/csexpo.jpg" class="rounded me-2" width="40" height="40">
-                              <span>AI-powered campus navigation system</span>
-                            </div>
-                          </td>
-                          <td>15 Jun 2024</td>
-                          <td><span class="badge bg-success">Published</span></td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <i class="ri-star-fill text-success me-1"></i> 1,243
-                              <i class="ri-chat-3-fill text-info ms-3 me-1"></i> 56
-                            </div>
-                          </td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#editPostModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#viewPostModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ri-archive-line me-2"></i>Archive</a>
-                                </li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i
-                                      class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
+                      <tbody id="tableBodyPost">
+
+
                         <tr>
                           <td>POST002</td>
                           <td>
@@ -804,19 +768,19 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="postForm">
+          <form id="postForm" enctype="multipart/form-data">
             <div class="row">
               <div class="col-md-8">
                 <!-- Post Content Editor -->
                 <div class="mb-3">
                   <label for="postTitle" class="form-label">Post Title</label>
-                  <input type="text" class="form-control" id="postTitle" placeholder="Enter post title">
+                  <input name="postTitle" type="text" class="form-control" id="postTitle" placeholder="Enter post title" required>
                 </div>
 
                 <div class="mb-3">
                   <label for="postContent" class="form-label">Content</label>
-                  <textarea class="form-control" id="postContent" rows="8"
-                    placeholder="Write your post content here..."></textarea>
+                  <textarea name="postContent" class="form-control" id="postContent" rows="8"
+                    placeholder="Write your post content here..." required></textarea>
                 </div>
 
                 <!-- Image Upload -->
@@ -826,7 +790,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                     <i class="ri-image-add-line upload-icon"></i>
                     <p class="mb-1">Click to upload or drag and drop</p>
                     <p class="small text-muted mb-0">PNG, JPG up to 5MB</p>
-                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                    <input type="file" name="imageUpload" id="imageUpload" accept="image/*" required>
                   </div>
                   <img id="imagePreview" class="image-preview rounded">
                 </div>
@@ -834,9 +798,9 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <!-- Tags -->
                 <div class="mb-3">
                   <label for="postTags" class="form-label">Tags</label>
-                  <input type="text" class="form-control" id="postTags" placeholder="Add tags separated by commas">
-                  <div class="mt-2" id="tagsContainer">
-                    <!-- Tags will be added here -->
+                  <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
+                    <input name="postTags" type="text" class="form-control" id="postTags" placeholder="Add tags separated by space">
+                    <span id="tagsWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
                   </div>
                 </div>
               </div>
@@ -852,17 +816,10 @@ require_once '../../../backend/middleware/admin_middleware.php';
                     <div class="mb-3">
                       <label class="form-label">Publish Options</label>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="publishOption" id="publishNow" value="now"
+                        <input class="form-check-input" type="radio" name="publishOption" id="publishNow" value="published"
                           checked>
                         <label class="form-check-label" for="publishNow">
                           Publish Immediately
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="publishOption" id="publishSchedule"
-                          value="schedule">
-                        <label class="form-check-label" for="publishSchedule">
-                          Schedule
                         </label>
                       </div>
                       <div class="form-check">
@@ -872,18 +829,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                           Save as Draft
                         </label>
                       </div>
-
-                      <!-- Schedule Options (hidden by default) -->
-                      <div class="schedule-options mt-2" id="scheduleOptions">
-                        <label for="scheduleDate" class="form-label">Schedule Date & Time</label>
-                        <input type="datetime-local" class="form-control" id="scheduleDate">
-                      </div>
                     </div>
-
-                    <!-- Post Preview Button -->
-                    <button type="button" class="btn btn-outline-primary w-100 mb-3" id="previewPostBtn">
-                      <i class="ri-eye-line me-2"></i> Preview Post
-                    </button>
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-success w-100">
@@ -895,6 +841,18 @@ require_once '../../../backend/middleware/admin_middleware.php';
             </div>
           </form>
         </div>
+        <div id="uploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+          <div id="uploadLoader" class="text-center">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 fw-semibold">Uploading...</p>
+          </div>
+          <div id="uploadSuccess" class="text-center d-none">
+            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+            <p class="mt-2 fw-semibold">Upload Successful!</p>
+          </div>
+        </div>
+
+        <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
       </div>
     </div>
   </div>
@@ -1174,6 +1132,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
   <script src="../../assets/js/main.js"></script>
   <script src="../for-admin/js/search-config-post.js"></script>
   <script src="./js/admin-logout.js"></script>
+  <script src="./js//post.js"></script>
 
 
   <script>

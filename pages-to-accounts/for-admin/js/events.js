@@ -24,6 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
 
+            if (!data.success) {
+                console.error("Error:", data.message || "Failed to fetch events");
+                return;
+            }
+
             if (data.events.length === 0) {
                 tableHead.classList.add("d-none");
                 tableBody.classList.add("d-none");
