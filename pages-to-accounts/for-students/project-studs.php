@@ -366,7 +366,7 @@ require_once '../../../backend/middleware/student_middleware.php';
                       <span id="tagsWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
                     </div>
                   </div>
-
+ 
                   <div class="col-md-6">
                     <label for="projectTeam" class="form-label">Team Members</label>
                     <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
