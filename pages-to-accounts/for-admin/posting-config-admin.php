@@ -306,10 +306,6 @@ require_once '../../../backend/middleware/admin_middleware.php';
                     type="button" role="tab">Published</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="scheduled-tab" data-bs-toggle="tab" data-bs-target="#scheduled"
-                    type="button" role="tab">Scheduled</button>
-                </li>
-                <li class="nav-item" role="presentation">
                   <button class="nav-link" id="drafts-tab" data-bs-toggle="tab" data-bs-target="#drafts" type="button"
                     role="tab">Drafts</button>
                 </li>
@@ -587,7 +583,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 </div>
 
                 <!-- Scheduled Tab -->
-                <div class="tab-pane fade" id="scheduled" role="tabpanel">
+                <!-- <div class="tab-pane fade" id="scheduled" role="tabpanel">
                   <div class="table-responsive">
                     <table id="scheduledPostsTable" class="table table-hover">
                       <thead>
@@ -633,7 +629,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                       </tbody>
                     </table>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Drafts Tab -->
                 <div class="tab-pane fade" id="drafts" role="tabpanel">
@@ -867,12 +863,13 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
         <div class="modal-body">
           <form id="editPostForm">
+            <input type="hidden" name="postId" id="editPostId">
             <div class="row">
               <div class="col-md-8">
                 <!-- Post Content Editor -->
                 <div class="mb-3">
                   <label for="editPostTitle" class="form-label">Post Title</label>
-                  <input type="text" name="editPostTile" class="form-control" id="editPostTitle">
+                  <input type="text" name="editPostTitle" class="form-control" id="editPostTitle">
                 </div>
 
                 <div class="mb-3">
@@ -920,17 +917,6 @@ require_once '../../../backend/middleware/admin_middleware.php';
                       </select>
                     </div>
 
-                    <!-- Schedule Options -->
-                    <!-- <div class="mb-3" id="editScheduleOptions">
-                      <label for="editScheduleDate" class="form-label">Schedule Date & Time</label>
-                      <input type="datetime-local" class="form-control" id="editScheduleDate">
-                    </div> -->
-
-                    <!-- Post Preview Button -->
-                    <!-- <button type="button" class="btn btn-outline-primary w-100 mb-3" id="editPreviewPostBtn">
-                      <i class="ri-eye-line me-2"></i> Preview Post
-                    </button> -->
-
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-success w-100">
                       <i class="ri-save-line me-2"></i> Update Post
@@ -941,6 +927,18 @@ require_once '../../../backend/middleware/admin_middleware.php';
             </div>
           </form>
         </div>
+        <div id="editPostUploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+          <div id="editPostUploadLoader" class="text-center">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 fw-semibold">Editing...</p>
+          </div>
+          <div id="editPostUploadSuccess" class="text-center d-none">
+            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+            <p class="mt-2 fw-semibold">Edit Successful!</p>
+          </div>
+        </div>
+
+        <div id="editPostGeneralUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
       </div>
     </div>
   </div>

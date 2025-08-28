@@ -1,4 +1,116 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const socket = new WebSocket("ws://localhost:8080");
+
+    socket.onmessage = (event) => {
+        let data;
+        try {
+            data = JSON.parse(event.data);
+        } catch (e) {
+            console.error("❌ Failed to parse message as JSON:", e);
+            return;
+        }
+
+        console.log(data.type);
+
+        if (data.type === "addPostComment") {
+            const modal = document.getElementById("viewPostModal");
+            if (!modal.classList.contains("show")) return;
+
+            const openPostId = modal.dataset.postId;
+            if (parseInt(openPostId) !== parseInt(data.postId)) return;
+
+            // Insert comment in modal
+            const viewCommentsContainer = document.getElementById("viewCommentsContainer");
+            const newCommentEl = document.createElement("div");
+            newCommentEl.className = "post-comment mb-3 position-relative";
+            newCommentEl.innerHTML = `
+                <div class="d-flex align-items-start">
+                    <img src="${data.student_photo ? `../../../backend/${data.student_photo}` : "../../assets/img/default-pic.jpg"}"
+                        class="rounded-circle me-2" width="32" height="32" alt="User">
+                    <div>
+                        <strong class="d-block">${data.student_name}</strong>
+                        <span>${data.comment}</span>
+                    </div>
+                </div>
+                <button data-id="${data.comment_id}" class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
+                    <i class="ri-delete-bin-line"></i>
+                </button>
+            `;
+            viewCommentsContainer.prepend(newCommentEl);
+
+            // 🔹 Update modal counter
+            const commentCountEl = document.getElementById("adminViewCommentCount");
+            const countMatch = commentCountEl.innerText.match(/\d+/);
+            let count = countMatch ? parseInt(countMatch[0]) : 0;
+            commentCountEl.innerText = `Comments (${count + 1})`;
+
+            // 🔹 Update table counter directly (no global posts)
+            const tableCounter = document.querySelector(
+                `.post-stats[data-id="${data.postId}"] .comment-count`
+            );
+            if (tableCounter) {
+                tableCounter.innerText = parseInt(tableCounter.innerText) + 1;
+            }
+        }
+
+        if (data.type === "adminDeleteComment") {
+            const modal = document.getElementById("viewPostModal");
+
+            // Only update modal if it's open for the same post
+            if (modal.classList.contains("show") && modal.dataset.postId === String(data.postId)) {
+                // Remove the deleted comment element
+                const commentEl = document.querySelector(
+                    `.post-comment .comment-delete-btn[data-id="${data.commentId}"]`
+                )?.closest(".post-comment");
+
+                if (commentEl) {
+                    commentEl.remove();
+                }
+
+                // Update modal counter
+                const adminViewCommentCount = document.getElementById("adminViewCommentCount");
+                const countMatch = adminViewCommentCount.innerText.match(/\d+/);
+                let count = countMatch ? parseInt(countMatch[0]) : 0;
+                adminViewCommentCount.innerText = `Comments (${Math.max(count - 1, 0)})`;
+
+                // Update the comment button in modal
+                const commentBtn = document.getElementById("adminViewComment");
+                if (commentBtn) {
+                    commentBtn.innerHTML = `<i class="ri-chat-3-line"></i> ${Math.max(count - 1, 0)}`;
+                }
+            }
+
+            // Always update table counter
+            const tableCommentCount = document.querySelector(
+                `.post-stats[data-id="${data.postId}"] .comment-count`
+            );
+            if (tableCommentCount) {
+                tableCommentCount.innerText = Math.max(parseInt(tableCommentCount.innerText) - 1, 0);
+            }
+        }
+
+    }
+
+    socket.onerror = (err) => {
+        console.error("❌ WebSocket error", err);
+    };
+
+    document.getElementById("changeImageBtn").addEventListener("click", () => {
+        document.getElementById("editImageUpload").click(); // open hidden file input
+    });
+
+    // Show preview when file selected
+    document.getElementById("editImageUpload").addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                document.getElementById("editImagePreview").src = ev.target.result; // update preview
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
     const postForm = document.getElementById('postForm');
     const tagInput = document.getElementById("postTags")
     const tagWrapper = document.getElementById("tagsWrapper");
@@ -9,6 +121,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const tagEditInput = document.getElementById("editPostTags");
     tagArray = document.getElementById("editTagsContainer");
+
+    const editForm = document.getElementById("editPostForm");
 
 
     document.getElementById("editPostModal").addEventListener("hidden.bs.modal", function () {
@@ -133,10 +247,10 @@ document.addEventListener("DOMContentLoaded", () => {
                           <td>${formatDateTime(post.updated_at)}</td>
                           <td><span class="badge ${badgeClass}">${post.post_status}</span></td>
                           <td>
-                            <div id="tableStatus" class="d-flex align-items-center">
-                              <i class="ri-star-fill text-success me-1"></i> ${post.like_count}
-                              <i class="ri-chat-3-fill text-info ms-3 me-1"></i> ${post.comment_count}
-                            </div>
+                           <div class="post-stats d-flex align-items-center" data-id="${post.id}">
+                            <i class="ri-star-fill text-success me-1"></i> <span class="like-count">${post.like_count}</span>
+                            <i data-id="${post.id}" class="ri-chat-3-fill text-info ms-3 me-1"></i> <span class="comment-count">${post.comment_count}</span>
+                           </div>
                           </td>
                           <td>
                             ${post.post_status.toLowerCase() !== 'archived' ?
@@ -210,6 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         editPostBtn.addEventListener("click", function (e) {
                             const postId = e.target.dataset.id;
 
+                            document.getElementById("editPostId").value = postId;
                             document.getElementById("editPostTitle").value = post.title;
                             document.getElementById("editPostContent").value = post.content;
                             document.getElementById("editImagePreview").src = `../../../backend/${post.post_image}`;
@@ -231,13 +346,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (viewPostBtn) {
                         viewPostBtn.addEventListener("click", async function (e) {
                             const postId = e.target.dataset.id;
+                            document.getElementById("viewPostModal").dataset.postId = postId;
+
                             const adminViewTagContainer = document.getElementById("adminViewTagContainer");
                             const viewCommentsContainer = document.getElementById("viewCommentsContainer");
                             const addCommentInput = document.getElementById("adminViewAddComment");
                             const addCommentBtn = document.getElementById("adminViewSubmitComment");
                             const adminViewCommentCount = document.getElementById("adminViewCommentCount");
 
-                            // Populate post details
+                            // Populate post details (same as before)
                             document.getElementById("adminViewName").innerText = post.admin_username || "Admin";
                             document.getElementById("adminPostDate").innerText = formatDateTime(post.updated_at);
                             document.getElementById("adminViewTitle").innerText = post.title;
@@ -261,50 +378,53 @@ document.addEventListener("DOMContentLoaded", () => {
                                 adminViewTagContainer.appendChild(newTagEl);
                             });
 
-                            // Render comments
-                            const renderComments = () => {
-                                viewCommentsContainer.innerHTML = "";
-                                if (post.comments.length > 0) {
-                                    post.comments.forEach(comment => {
-                                        const newCommentEl = document.createElement("div");
-                                        newCommentEl.className = "post-comment mb-3 position-relative";
-                                        newCommentEl.innerHTML = `
-                                            <div class="d-flex align-items-start">
-                                                <img src="${comment.student_photo ? `../../../backend/${comment.student_photo}` : "../../assets/img/default-pic.jpg"}"
-                                                    class="rounded-circle me-2" width="32" height="32" alt="User">
-                                                <div>
-                                                    <strong class="d-block">${comment.student_name}</strong>
-                                                    <span>${comment.comment}</span>
+
+                            async function renderComments() {
+                                try {
+                                    const res = await fetch(`../../../backend/api/admin/get_post_comments.php?post_id=${postId}`);
+                                    const data = await res.json();
+
+                                    viewCommentsContainer.innerHTML = "";
+
+                                    if (data.success && data.comments.length > 0) {
+                                        data.comments.forEach(comment => {
+                                            const newCommentEl = document.createElement("div");
+                                            newCommentEl.className = "post-comment mb-3 position-relative";
+                                            newCommentEl.innerHTML = `
+                                                <div class="d-flex align-items-start">
+                                                    <img src="${comment.student_photo ? `../../../backend/${comment.student_photo}` : "../../assets/img/default-pic.jpg"}"
+                                                        class="rounded-circle me-2" width="32" height="32" alt="User">
+                                                    <div>
+                                                        <strong class="d-block">${comment.student_name}</strong>
+                                                        <span>${comment.comment}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <button data-id="${comment.id}" class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
-                                                <i class="ri-delete-bin-line"></i>
-                                            </button>
-                                        `;
-                                        viewCommentsContainer.appendChild(newCommentEl);
-                                    });
-                                } else {
-                                    viewCommentsContainer.innerHTML = `<p class="text-muted">No comments yet.</p>`;
+                                                <button data-id="${comment.id}" class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
+                                                    <i class="ri-delete-bin-line"></i>
+                                                </button>
+                                            `;
+                                            viewCommentsContainer.appendChild(newCommentEl);
+                                        });
+                                    } else {
+                                        viewCommentsContainer.innerHTML = `<p class="text-muted">No comments yet.</p>`;
+                                    }
+
+                                    // Update modal comment counter
+                                    adminViewCommentCount.innerText = `Comments (${data.comments.length})`;
+                                    commentBtn.innerHTML = `<i class="ri-chat-3-line"></i> ${data.comments.length}`;
+
+                                    attachDeleteEvents();
+                                } catch (err) {
+                                    console.error("Failed to fetch comments:", err);
+                                    viewCommentsContainer.innerHTML = `<p class="text-danger">Failed to load comments.</p>`;
                                 }
+                            }
 
-                                attachDeleteEvents();
-                            };
-
-                            // Attach delete events
-                            const attachDeleteEvents = () => {
+                            function attachDeleteEvents() {
                                 document.querySelectorAll(".comment-delete-btn").forEach(btn => {
-                                    btn.addEventListener("click", async function (e) {
-                                        e.preventDefault();
-
-                                        // Force reference to the button itself
+                                    btn.addEventListener("click", async function () {
                                         const button = this;
                                         const commentWrapper = button.closest(".post-comment");
-
-                                        if (!commentWrapper) {
-                                            console.error("No parent .post-comment found for delete button");
-                                            return;
-                                        }
-
                                         const commentId = button.dataset.id;
 
                                         if (confirm("Are you sure you want to delete this comment?")) {
@@ -312,121 +432,114 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 const res = await fetch("../../../backend/api/admin/admin_delete_comment.php", {
                                                     method: "POST",
                                                     headers: { "Content-Type": "application/json" },
-                                                    body: JSON.stringify({ id: commentId })
+                                                    body: JSON.stringify({ id: commentId, postId: postId })
                                                 });
-
                                                 const data = await res.json();
-
                                                 if (data.success) {
                                                     commentWrapper.remove();
-
-                                                    // update count
-                                                    const commentCountEl = document.getElementById("adminViewCommentCount");
-                                                    const countMatch = commentCountEl.innerText.match(/\d+/);
-                                                    let count = countMatch ? parseInt(countMatch[0]) : 0;
-                                                    commentCountEl.innerText = `Comments (${count - 1})`;
-                                                    commentBtn.innerHTML = `<i class="ri-chat-3-line"></i> ${count - 1}`;
-                                                    tableStatus.innerHTML = `
-                                                        <i class="ri-star-fill text-success me-1"></i> ${post.like_count}
-                                                        <i class="ri-chat-3-fill text-info ms-3 me-1"></i> ${count - 1}
-                                                    `
-
-                                                } else {
-                                                    alert(data.message || "Failed to delete comment");
                                                 }
                                             } catch (err) {
                                                 console.error("Error deleting comment:", err);
-                                                alert("An error occurred while deleting comment.");
                                             }
                                         }
                                     });
-
                                 });
-                            };
+                            }
 
                             // Add new comment
                             addCommentBtn.onclick = async () => {
                                 const commentText = addCommentInput.value.trim();
-                                if (!commentText) {
-                                    alert("Please enter a comment.");
-                                    return;
-                                }
+                                if (!commentText) return alert("Please enter a comment.");
 
                                 try {
                                     const res = await fetch("../../../backend/api/admin/admin_add_comment.php", {
                                         method: "POST",
-                                        body: JSON.stringify({
-                                            post_id: postId,
-                                            comment: commentText
-                                        })
+                                        headers: { "Content-Type": "application/json" },
+                                        body: JSON.stringify({ post_id: postId, comment: commentText })
                                     });
-
                                     const data = await res.json();
                                     if (data.success) {
                                         addCommentInput.value = "";
-
-                                        const newCommentEl = document.createElement("div");
-                                        newCommentEl.className = "post-comment mb-3 position-relative";
-                                        newCommentEl.innerHTML = `
-                                            <div class="d-flex align-items-start">
-                                                <img src="${data.student_photo ? `../../../backend/${data.student_photo}` : "../../assets/img/default-pic.jpg"}"
-                                                    class="rounded-circle me-2" width="32" height="32" alt="User">
-                                                <div>
-                                                    <strong class="d-block">${data.student_name}</strong>
-                                                    <span>${commentText}</span>
-                                                </div>
-                                            </div>
-                                            <button data-id="${data.comment_id}" class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
-                                                <i class="ri-delete-bin-line"></i>
-                                            </button>
-                                        `;
-
-                                        viewCommentsContainer.prepend(newCommentEl);
-                                        attachDeleteEvents();
-
-                                        // update count
-                                        const commentCountEl = document.getElementById("adminViewCommentCount");
-                                        const tableStatus = document.getElementById("tableStatus");
-                                        const countMatch = commentCountEl.innerText.match(/\d+/);
-                                        let count = countMatch ? parseInt(countMatch[0]) : 0;
-                                        commentCountEl.innerText = `Comments (${count + 1})`;
-                                        commentBtn.innerHTML = `<i class="ri-chat-3-line"></i> ${count + 1}`;
-                                        tableStatus.innerHTML = `
-                                            <i class="ri-star-fill text-success me-1"></i> ${post.like_count}
-                                            <i class="ri-chat-3-fill text-info ms-3 me-1"></i> ${count + 1}
-                                        `
-                                    } else {
-                                        alert("Failed to add comment.");
+                                        renderComments(); // 🔥 re-fetch latest after add
                                     }
                                 } catch (err) {
                                     console.error("Error adding comment:", err);
-                                    alert("An error occurred while adding comment.");
                                 }
                             };
 
-                            // Initial render
                             renderComments();
                         });
                     }
 
 
-
                     if (archivePostBtn) {
                         archivePostBtn.addEventListener("click", function (e) {
                             const postId = e.target.dataset.id;
-                            console.log("Restore clicked for post:", postId);
+
+                            if (confirm("Are you sure you want to archive this post?")) {
+                                fetch("../../../backend/api/admin/admin_archive_post.php", {
+                                    method: "POST",
+                                    headers: { "Content-type": "application/json" },
+                                    body: JSON.stringify({ postId })
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        if (data.success) {
+                                            window.location.reload();
+                                        } else {
+                                            alert("❌ Failed to archive post: " + (data.message || ""));
+                                        }
+                                    })
+                                    .catch(err => console.error("Error:", err));
+                            }
                         });
                     }
+
                     if (deletePostBtn) {
                         deletePostBtn.addEventListener("click", function (e) {
                             const postId = e.target.dataset.id;
-                            console.log("Restore clicked for post:", postId);
+
+                            if (confirm("Are you sure you want to delete this post? This cannot be undone.")) {
+                                fetch("../../../backend/api/admin/delete_post.php", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({ postId })
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        if (data.success) {
+                                            alert("✅ Post deleted successfully");
+                                            window.location.reload();
+                                        } else {
+                                            alert("❌ Failed to delete post: " + (data.message || ""));
+                                        }
+                                    })
+                                    .catch(err => console.error("Error:", err));
+                            }
                         });
                     }
+
+
                     if (restorePostBtn) {
                         restorePostBtn.addEventListener("click", function (e) {
                             const postId = e.target.dataset.id;
-                            console.log("Restore clicked for post:", postId);
+                            if (confirm("Do you really want to restore this post?")) {
+                                fetch("../../../backend/api/admin/restore_post.php", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify({ postId })
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        if (data.success) {
+                                            alert("✅ Post restored successfully");
+                                            window.location.reload();
+                                        } else {
+                                            alert("❌ Failed to restore post: " + (data.message || ""));
+                                        }
+                                    })
+                                    .catch(err => console.error("Error:", err));
+                            }
                         });
                     }
 
@@ -505,7 +618,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         document.getElementById("uploadOverlay").classList.add("d-none");
 
                         // Reset form and visuals
-                        form.reset();
+                        postForm.reset();
                         tags = [];
                         window.location.reload();
                     }, 1500);
@@ -540,5 +653,47 @@ document.addEventListener("DOMContentLoaded", () => {
             })
     })
 
+    editForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const form = new FormData(editForm);
+
+        document.getElementById("editPostUploadOverlay").classList.remove("d-none");
+        document.getElementById("editPostUploadLoader").classList.remove("d-none");
+        document.getElementById("editPostUploadSuccess").classList.add("d-none");
+
+        document.getElementById("editPostGeneralUploadError").classList.add("d-none");
+
+        editTags.forEach(tag => {
+            form.append('tags[]', tag);
+        });
+
+        fetch("../../../backend/api/admin/admin_edit_post.php", {
+            method: "POST",
+            body: form
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("✅ Post edited:", data);
+                    document.getElementById("editPostUploadLoader").classList.add("d-none");
+                    document.getElementById("editPostUploadSuccess").classList.remove("d-none");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    document.getElementById("editPostGeneralUploadError").classList.remove("d-none");
+                    document.getElementById("editPostGeneralUploadError").innerText = data.errors || "Failed to edit post.";
+                }
+            })
+            .catch(err => {
+                console.error("❌ Error:", err);
+                document.getElementById("editPostGeneralUploadError").classList.remove("d-none");
+                document.getElementById("editPostGeneralUploadError").innerText = "Unexpected error while editing post.";
+            });
+
+
+    })
 
 })
