@@ -185,6 +185,34 @@ function updateTotalStars(count) {
                         memberTagsContainer.appendChild(tag);
                     });
                 }
+
+
+                            const imagesContainer = document.getElementById('currentProjectImages');
+            imagesContainer.innerHTML = '';
+            
+            if (project.images && project.images.length > 0) {
+                project.images.forEach((imagePath, index) => {
+                    const imgWrapper = document.createElement('div');
+                    imgWrapper.className = 'position-relative';
+                    imgWrapper.style.width = '100px';
+                    imgWrapper.style.height = '100px';
+                    
+                    imgWrapper.innerHTML = `
+                        <img src="../../../backend/${imagePath}" 
+                             class="img-thumbnail w-100 h-100 object-fit-cover" 
+                             alt="Project image ${index + 1}"
+                             style="object-fit: cover;">
+                    `;
+                    imagesContainer.appendChild(imgWrapper);
+                });
+            } else {
+                imagesContainer.innerHTML = `
+                    <div class="text-center w-100 py-3">
+                        <i class="ri-image-line fs-3 text-muted"></i>
+                        <p class="small text-muted mb-0">No images available</p>
+                    </div>
+                `;
+            }
                 
                 // Store project ID for update
                 document.getElementById('editProjectForm').dataset.projectId = projectId;
@@ -269,28 +297,89 @@ function updateTotalStars(count) {
                 const result = await response.json();
                 
                 if (result.success) {
-                    // Close modal and refresh projects
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('editProjectModal'));
-                    modal.hide();
-                    fetchStudentProjects();
-                    alert('Project updated successfully');
-                } else {
-                    throw new Error(result.message || 'Failed to update project');
-                }
-            } catch (error) {
-                console.error('Error updating project:', error);
-                alert('Failed to update project: ' + error.message);
-            } finally {
-                const submitBtn = editForm.querySelector('button[type="submit"]');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Save Changes';
-            }
-        });
+            showEditProjectSuccess();
+            
+            // Wait for success animation before closing
+            setTimeout(() => {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('editProjectModal'));
+                modal.hide();
+                fetchStudentProjects();
+            }, 1500);
+        } else {
+            throw new Error(result.message || 'Failed to update project');
+        }
+    } catch (error) {
+        console.error('Error updating project:', error);
+        showEditProjectError(error.message);
+    } finally {
+        const submitBtn = editForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Save Changes';
+        
+        // Auto-hide error after 3 seconds
+        if (!document.getElementById('editProjectError').classList.contains('d-none')) {
+            setTimeout(hideEditProjectOverlay, 3000);
+        }
+    }
+});
         
         // Initialize tag functionality for edit modal
         initEditTagInput('editProjectTechnologies', 'editTechTags');
         initEditTagInput('editProjectTeam', 'editMemberTags');
     }
+
+    // Reset loader when modal is hidden
+document.getElementById('editProjectModal').addEventListener('hidden.bs.modal', function() {
+    hideEditProjectOverlay();
+    document.getElementById('editProjectLoader').classList.remove('d-none');
+    document.getElementById('editProjectSuccess').classList.add('d-none');
+    document.getElementById('editProjectError').classList.add('d-none');
+});
+
+
+// Function to show edit project loader
+function showEditProjectLoader() {
+    const overlay = document.getElementById('editProjectOverlay');
+    const loader = document.getElementById('editProjectLoader');
+    const success = document.getElementById('editProjectSuccess');
+    const error = document.getElementById('editProjectError');
+    
+    overlay.classList.remove('d-none');
+    loader.classList.remove('d-none');
+    success.classList.add('d-none');
+    error.classList.add('d-none');
+    error.textContent = '';
+}
+
+// Function to show edit project success
+function showEditProjectSuccess() {
+    const loader = document.getElementById('editProjectLoader');
+    const success = document.getElementById('editProjectSuccess');
+    
+    loader.classList.add('d-none');
+    success.classList.remove('d-none');
+    
+    
+    setTimeout(() => {
+        hideEditProjectOverlay();
+    }, 1500);
+}
+
+function showEditProjectError(message) {
+    const loader = document.getElementById('editProjectLoader');
+    const error = document.getElementById('editProjectError');
+    
+    loader.classList.add('d-none');
+    error.classList.remove('d-none');
+    error.textContent = message || 'Failed to update project';
+}
+
+function hideEditProjectOverlay() {
+    const overlay = document.getElementById('editProjectOverlay');
+    overlay.classList.add('d-none');
+}
+
+
 
     // Initialize tag input for edit modal
     function initEditTagInput(inputId, containerId) {
@@ -350,7 +439,7 @@ function updateTotalStars(count) {
     document.getElementById('projectUploadForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Your existing upload form handling code...
+
         // After successful upload/update, refresh the projects list:
         fetchStudentProjects();
     });

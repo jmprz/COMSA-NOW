@@ -46,6 +46,10 @@ require_once "../../../backend/api/update_nickname_bio.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        .object-fit-cover {
+            object-fit: cover;
+        }
+
         .profile-header {
             background-color: #f8f9fa;
             padding: 2rem;
@@ -575,17 +579,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
-                                        <label class="form-label">Project Media (2-8 images)</label>
-                                        <div class="upload-area" id="mediaUploadArea">
-                                            <i class="bi bi-images upload-icon"></i>
-                                            <p class="mb-1">Drag & drop or click to upload</p>
-                                            <small class="text-muted">Max 8 images (800x600 recommended)</small>
-                                            <input type="file" id="mediaUpload" name="mediaFiles[]" multiple accept="image/*" style="display: none;" max="8">
-                                        </div>
-                                        <div id="mediaPreview" class="d-flex flex-wrap gap-2 mt-2"></div>
-                                        <div id="mediaCounter" class="text-muted small mt-1">0/8 images selected</div>
-                                    </div>
+
 
                                     <div class="row-md-5">
                                         <label class="form-label">Project Links</label>
@@ -606,11 +600,11 @@ require_once "../../../backend/api/update_nickname_bio.php";
                             </form>
                         </div>
                         <div id="uploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
-                            <div id="uploadLoader" class="text-center">
+                            <div id="editLoader" class="text-center">
                                 <div class="spinner-border text-success" role="status"></div>
                                 <p class="mt-2 fw-semibold">Uploading...</p>
                             </div>
-                            <div id="uploadSuccess" class="text-center d-none">
+                            <div id="editSuccess" class="text-center d-none">
                                 <i class="bi bi-check-circle-fill text-success fs-1"></i>
                                 <p class="mt-2 fw-semibold">Upload Successful!</p>
                             </div>
@@ -694,11 +688,14 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                         </div>
                                     </div>
 
+
                                     <div class="col-12">
-                                        <label class="form-label">Project Media</label>
+                                        <label class="form-label">Project Images</label>
                                         <div class="border p-2 rounded">
-                                            <p class="text-muted">Current images will be kept. Upload new ones to replace.</p>
-                                            <input type="file" class="form-control" name="mediaFiles[]" multiple accept="image/*">
+                                            <p class="text-muted">Current images (cannot be changed)</p>
+                                            <div id="currentProjectImages" class="d-flex flex-wrap gap-2 mt-2">
+                                                <!-- Images will be displayed here -->
+                                            </div>
                                         </div>
                                     </div>
 
@@ -725,6 +722,19 @@ require_once "../../../backend/api/update_nickname_bio.php";
                             </div>
                         </form>
                     </div>
+
+<!-- Edit Project Loader Overlay -->
+<div id="editProjectOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051; top: 0;">
+    <div id="editProjectLoader" class="text-center">
+        <div class="spinner-border text-success" role="status"></div>
+        <p class="mt-2 fw-semibold">Updating Project...</p>
+    </div>
+    <div id="editProjectSuccess" class="text-center d-none">
+        <i class="bi bi-check-circle-fill text-success fs-1"></i>
+        <p class="mt-2 fw-semibold">Update Successful!</p>
+    </div>
+</div>
+<div id="editProjectError" class="text-danger fw-semibold text-center d-none mt-2"></div>
                 </div>
             </div>
 
