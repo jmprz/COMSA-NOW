@@ -6,24 +6,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const uploadBtn = document.getElementById('uploadProjectBtn');
     
     // Function to fetch and display projects
+// Function to fetch and display ALL projects
 async function fetchStudentProjects() {
     try {
-        const response = await fetch(`../../../backend/api/get_student_projects.php?student_id=${studentId}`);
+        const response = await fetch(`../../../backend/api/get_student_projects.php`);
         const data = await response.json();
         
-        if (data.success && data.posts.length > 0) {
+        if (data.success && data.posts && data.posts.length > 0) {
             displayProjects(data.posts);
-            updateProjectStats(data.posts.length);
-            updateTotalStars(data.total_stars);
+            updateProjectStats(data.total_projects || data.posts.length);
+            updateTotalStars(data.total_stars || 0);
         } else {
             displayNoProjectsMessage();
             updateProjectStats(0);
-            updateTotalStars(0); // Set to 0 if no projects
+            updateTotalStars(0);
         }
     } catch (error) {
         console.error('Error fetching projects:', error);
         displayError();
-        updateTotalStars(0); // Set to 0 on error
+        updateProjectStats(0);
+        updateTotalStars(0);
     }
 }
 
@@ -44,51 +46,54 @@ function updateTotalStars(count) {
     }
 
     // Function to display projects
-    function displayProjects(projects) {
-        // Clear existing content
-        projectsContainer.innerHTML = '';
+
+function displayProjects(projects) {
+    // Clear existing content
+    projectsContainer.innerHTML = '';
+    
+    // Create project cards for each project
+    projects.forEach(project => {
+        const projectCol = document.createElement('div');
+        projectCol.className = 'col-md-6 mb-4';
         
-        // Create project cards for each project
-        projects.forEach(project => {
-            const projectCol = document.createElement('div');
-            projectCol.className = 'col-md-6 mb-4';
-            
-            projectCol.innerHTML = `
-                <div class="project-card">
-                    ${project.images && project.images.length > 0 ? 
-                        `<img src="../../../backend/${project.images[0]}" class="project-card-img" alt="${project.project_title}">` : 
-                        `<div class="project-card-img bg-light d-flex align-items-center justify-content-center">
-                            <i class="ri-image-line fs-1 text-muted"></i>
-                        </div>`
-                    }
-                    <div class="project-card-body">
-                        <h5 class="project-card-title">${project.project_title}</h5>
-                        <p class="project-card-desc">${project.project_description}</p>
-                        <div class="project-card-tech">
-                            ${project.technologies.map(tech => `<span class="badge bg-secondary me-1">${tech}</span>`).join('')}
-                        </div>
-                        <div class="project-card-footer">
-                            <span class="project-card-type">${project.project_category}</span>
-                            <div class="project-card-actions">
-                                <button class="btn btn-sm btn-outline-primary edit-project" data-id="${project.id}">
-                                    <i class="ri-edit-line"></i>
-                                </button>
-                                <button class="btn btn-sm btn-outline-danger delete-project" data-id="${project.id}">
-                                    <i class="ri-delete-bin-line"></i>
-                                </button>
-                            </div>
+        projectCol.innerHTML = `
+            <div class="project-card">
+                ${project.images && project.images.length > 0 ? 
+                    `<img src="../../../backend/${project.images[0]}" class="project-card-img" alt="${project.project_title}">` : 
+                    `<div class="project-card-img bg-light d-flex align-items-center justify-content-center">
+                        <i class="ri-image-line fs-1 text-muted"></i>
+                    </div>`
+                }
+                <div class="project-card-body">
+                    <h5 class="project-card-title">${project.project_title}</h5>
+                    <p class="project-card-desc">${project.project_description}</p>
+                    <div class="project-card-tech">
+                        ${project.technologies && project.technologies.length > 0 ? 
+                            project.technologies.map(tech => `<span class="badge bg-secondary me-1">${tech}</span>`).join('') : 
+                            '<span class="text-muted">No technologies specified</span>'
+                        }
+                    </div>
+                    <div class="project-card-footer">
+                        <span class="project-card-type">${project.project_category || 'Uncategorized'}</span>
+                        <div class="project-card-actions">
+                            <button class="btn btn-sm btn-outline-primary edit-project" data-id="${project.id}">
+                                <i class="ri-edit-line"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger delete-project" data-id="${project.id}">
+                                <i class="ri-delete-bin-line"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-            `;
-            
-            projectsContainer.appendChild(projectCol);
-        });
+            </div>
+        `;
         
-        // Add event listeners for edit/delete buttons
-        addProjectActionListeners();
-    }
-
+        projectsContainer.appendChild(projectCol);
+    });
+    
+    // Add event listeners for edit/delete buttons
+    addProjectActionListeners();
+}
     // Function to display message when no projects exist
     function displayNoProjectsMessage() {
         projectsContainer.innerHTML = `
@@ -421,6 +426,7 @@ function hideEditProjectOverlay() {
     // Handle upload button click
     uploadBtn.addEventListener('click', function() {
         const uploadModal = new bootstrap.Modal(document.getElementById('projectUploadModal'));
+        
         
         // Reset the modal for new upload
         document.querySelector('#projectUploadModal .modal-title').textContent = 'Upload Your Project';

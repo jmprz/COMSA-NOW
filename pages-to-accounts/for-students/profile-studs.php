@@ -31,6 +31,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
 
+
     <!-- Vendor CSS Files -->
     <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -40,12 +41,47 @@ require_once "../../../backend/api/update_nickname_bio.php";
     <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="../../assets/css/search.css">
     <link rel="stylesheet" href="../../assets/css/dark-mode.css">
     <link rel="stylesheet" href="../../assets/css/project-studs-design.css">
+    <link rel="stylesheet" href="../../assets/css/search-profile-design.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        /* Custom scrollbar styling */
+        #studentProjectsContainer {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+            scroll-behavior: smooth;
+        }
+
+        #studentProjectsContainer::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #studentProjectsContainer::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        #studentProjectsContainer::-webkit-scrollbar-thumb {
+            background: #7db832;
+            border-radius: 10px;
+        }
+
+        #studentProjectsContainer::-webkit-scrollbar-thumb:hover {
+            background: #6aa02a;
+        }
+
+        #studentProjectsContainer {
+            scrollbar-width: thin;
+            scrollbar-color: #7db832 #f1f1f1;
+        }
+
+        /* Custom scrollbar ---END */
+
+
         .object-fit-cover {
             object-fit: cover;
         }
@@ -242,8 +278,11 @@ require_once "../../../backend/api/update_nickname_bio.php";
             background-color: #f8f9fa;
         }
 
+        /* Avatar upload modal ---END*/
 
 
+
+        /* NICKNAME */
 
         .char-limit-warning {
             color: orange;
@@ -260,6 +299,8 @@ require_once "../../../backend/api/update_nickname_bio.php";
         .is-invalid {
             border-color: red;
         }
+
+        /* NICKNAME ---END*/
     </style>
 </head>
 
@@ -316,7 +357,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
 
                         <div class="d-flex align-items-center gap-2">
                             <!-- Search Button -->
-                            <button class="btn p-2" type="button" id="search-toggle">
+                            <button class="btn p-2 search-toggle-mobile" type="button">
                                 <i class="ri-search-line fs-1"></i>
                             </button>
 
@@ -407,30 +448,8 @@ require_once "../../../backend/api/update_nickname_bio.php";
 
                     <!-- Profile Content -->
                     <div class="row">
-                        <!-- Projects Section -->
-                        <div class="col-md-8">
-                            <div class="profile-section">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h3 class="section-title mb-0">My Projects</h3>
-                                    <button class="btn btn-primary" id="uploadProjectBtnMobile" style="background-color: #7db832; border: none;">
-                                        <i class="ri-upload-line me-1"></i> Upload Project
-                                    </button>
-                                </div>
-
-
-                                <div id="studentProjectsContainer" class="row">
-                                    <!-- Projects will be loaded here via JavaScript -->
-                                </div>
-
-                                <div class="text-center mt-3">
-                                    <button class="btn btn-outline-primary">View All Projects</button>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- About Section -->
-                        <div class="col-md-4">
+                        <!-- About Section for Mobile -->
+                        <div class="col-12 d-md-none order-1">
                             <div class="profile-section">
                                 <h3 class="section-title">About</h3>
                                 <div class="card">
@@ -454,9 +473,49 @@ require_once "../../../backend/api/update_nickname_bio.php";
                             </div>
                         </div>
 
+                        <!-- Projects Section -->
+                        <div class="col-md-8 order-3 order-md-2">
+                            <div class="profile-section">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h3 class="section-title mb-0">My Projects</h3>
+                                    <button class="btn btn-primary" id="uploadProjectBtnMobile" style="background-color: #7db832; border: none;">
+                                        <i class="ri-upload-line me-1"></i> Upload Project
+                                    </button>
+                                </div>
+                                <div id="studentProjectsContainer" class="row">
+                                    <!-- Projects will be loaded here via JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- About Section for Desktop-->
+                        <div class="col-md-4 d-none d-md-block order-2 order-md-3">
+                            <div class="profile-section">
+                                <h3 class="section-title">About</h3>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span><i class="ri-user-3-line me-2"></i> Full Name</span>
+                                                <span class="text-muted"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span><i class="ri-mail-line me-2"></i> Email</span>
+                                                <span class="text-muted"><?php echo htmlspecialchars($_SESSION['user_email']); ?></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span><i class="ri-calendar-line me-2"></i> Member Since</span>
+                                                <span class="text-muted">June 2023</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Avatar Change Modal -->
             <div class="modal fade" id="avatarModal" tabindex="-1" aria-hidden="true">
@@ -579,7 +638,17 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                         </div>
                                     </div>
 
-
+                                    <div class="col-12">
+                                        <label class="form-label">Project Media (2-8 images)</label>
+                                        <div class="upload-area" id="mediaUploadArea">
+                                            <i class="bi bi-images upload-icon"></i>
+                                            <p class="mb-1">Drag & drop or click to upload</p>
+                                            <small class="text-muted">Max 8 images (800x600 recommended)</small>
+                                            <input type="file" id="mediaUpload" name="mediaFiles[]" multiple accept="image/*" style="display: none;" max="8">
+                                        </div>
+                                        <div id="mediaPreview" class="d-flex flex-wrap gap-2 mt-2"></div>
+                                        <div id="mediaCounter" class="text-muted small mt-1">0/8 images selected</div>
+                                    </div>
 
                                     <div class="row-md-5">
                                         <label class="form-label">Project Links</label>
@@ -600,11 +669,11 @@ require_once "../../../backend/api/update_nickname_bio.php";
                             </form>
                         </div>
                         <div id="uploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
-                            <div id="editLoader" class="text-center">
+                            <div id="uploadLoader" class="text-center">
                                 <div class="spinner-border text-success" role="status"></div>
                                 <p class="mt-2 fw-semibold">Uploading...</p>
                             </div>
-                            <div id="editSuccess" class="text-center d-none">
+                            <div id="uploadSuccess" class="text-center d-none">
                                 <i class="bi bi-check-circle-fill text-success fs-1"></i>
                                 <p class="mt-2 fw-semibold">Upload Successful!</p>
                             </div>
@@ -631,7 +700,6 @@ require_once "../../../backend/api/update_nickname_bio.php";
                     </div>
                 </div>
             </div>
-
 
 
             <!-- Edit Project Modal -->
@@ -723,23 +791,23 @@ require_once "../../../backend/api/update_nickname_bio.php";
                         </form>
                     </div>
 
-<!-- Edit Project Loader Overlay -->
-<div id="editProjectOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051; top: 0;">
-    <div id="editProjectLoader" class="text-center">
-        <div class="spinner-border text-success" role="status"></div>
-        <p class="mt-2 fw-semibold">Updating Project...</p>
-    </div>
-    <div id="editProjectSuccess" class="text-center d-none">
-        <i class="bi bi-check-circle-fill text-success fs-1"></i>
-        <p class="mt-2 fw-semibold">Update Successful!</p>
-    </div>
-</div>
-<div id="editProjectError" class="text-danger fw-semibold text-center d-none mt-2"></div>
+                    <!-- Edit Project Loader Overlay -->
+                    <div id="editProjectOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051; top: 0;">
+                        <div id="editProjectLoader" class="text-center">
+                            <div class="spinner-border text-success" role="status"></div>
+                            <p class="mt-2 fw-semibold">Updating Project...</p>
+                        </div>
+                        <div id="editProjectSuccess" class="text-center d-none">
+                            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                            <p class="mt-2 fw-semibold">Update Successful!</p>
+                        </div>
+                    </div>
+                    <div id="editProjectError" class="text-danger fw-semibold text-center d-none mt-2"></div>
                 </div>
             </div>
 
 
-            <!-- Bottom Navigation Bar (for md and below) -->
+            <!-- Bottom Navigation Bar (for md and below) mobile-->
             <nav class="d-lg-none fixed-bottom bg-light border-top">
                 <div class="d-flex justify-content-around py-2">
                     <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="text-center mt-2">
@@ -761,17 +829,30 @@ require_once "../../../backend/api/update_nickname_bio.php";
             </nav>
 
 
-
-            <!-- Search modal unfixed both id and it's design-->
-            <div class="search-popup">
+            <!-- Search Modal -->
+            <div class="search-popup" id="searchPopup">
                 <div class="search-container">
+                    <button class="search-close-button" id="searchCloseButton">
+                        <i class="ri-close-line"></i>
+                    </button>
                     <div class="search-input-container">
-                        <input type="text" placeholder="Search projects..." class="search-input">
-                        <button class="search-button"><i class="bi bi-search"></i></button>
+                        <input type="text" placeholder="Search students by name, nickname, or student number..."
+                            class="search-input" id="searchInput">
+                        <button class="search-button" id="searchButton">
+                            <i class="ri-search-line"></i>
+                        </button>
+                    </div>
+                    <div class="search-results-container">
+                        <div class="search-results-header">
+                            <span>Search Results</span>
+                            <span class="search-results-count">0 results</span>
+                        </div>
+                        <div class="search-results-list" id="searchResultsList">
+                            <!-- Results will be populated here -->
+                        </div>
                     </div>
                 </div>
             </div>
-
 
         </div>
     </div>
@@ -787,25 +868,30 @@ require_once "../../../backend/api/update_nickname_bio.php";
 
     <!-- Main JS File -->
     <script src="../../assets/js/main.js"></script>
-    <script src="../for-students/js/studs-search.js"></script>
     <script src="../for-students/js/project-upload.js" defer></script>
     <script src="../for-students/js/profile-bio-nick.js"></script>
     <script src="../for-students/js/profile-project-studs.js" defer></script>
-    <script src="../../assets/js/studs-main-func.js"></script>
-
 
     <script src="../for-students/js/project-studs.js" defer></script>
 
 
+    <script src="../for-students/js/profile-picture-handler.js" defer></script> <!-- For Handleling profile picture Image -->
+    <script src="../for-students/js/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
+
     <script>
         //session with disabilities haha
         const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
+        const currentStudentId = <?php echo json_encode($_SESSION['user_id']); ?>;
     </script>
+
+    <script>
+
+    </script>
+
+
 
 </body>
 
-<script>
 
-</script>
 
 </html>
