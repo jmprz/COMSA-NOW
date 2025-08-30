@@ -497,7 +497,30 @@ body {
 
 
 
+/* Edit Project Loader Styles */
+#editProjectOverlay {
+    border-radius: 8px;
+}
 
+#editProjectLoader .spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+#editProjectSuccess i {
+    animation: scaleUp 0.5s ease-in-out;
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Ensure modal content is properly layered */
+.modal-content {
+    position: relative;
+}
 
 
 
@@ -514,6 +537,7 @@ body {
   border-radius: 12px;
   overflow: hidden;
   border: none;
+
 }
 
 #uploadOverlay {

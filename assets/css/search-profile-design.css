@@ -1,0 +1,209 @@
+  /* Custom profile search */
+        .search-results-header {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .search-results-count {
+            color: #6c757d;
+            font-size: 12px;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            gap: 15px;
+        }
+
+        .search-result-item:hover,
+        .search-result-item:focus {
+            background-color: #f8f9fa;
+            outline: none;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .search-result-info h6 {
+            margin: 0 0 4px 0;
+            color: #333;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-arrow {
+            color: #6c757d;
+            font-size: 18px;
+        }
+
+        .search-message {
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        /* Loading animation */
+        @keyframes searchLoading {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .search-loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #7db832;
+            border-radius: 50%;
+            animation: searchLoading 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        .search-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 100px;
+        }
+
+        .search-popup.active {
+            display: flex;
+        }
+
+        .search-container {
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .search-close-button {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .search-input-container {
+            display: flex;
+            gap: 10px;
+            position: relative;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #7db832;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-button {
+            background: #7db832;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0 20px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background: #6aa02a;
+        }
+
+
+        .search-results-container {
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .search-result-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .search-result-info h6 {
+            margin: 0 0 5px 0;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .search-result-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .search-result-stats span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Custom profile search end */

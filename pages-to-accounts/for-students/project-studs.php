@@ -19,7 +19,6 @@ require_once '../../../backend/middleware/student_middleware.php';
 
 
 
-
   <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
@@ -43,7 +42,7 @@ require_once '../../../backend/middleware/student_middleware.php';
   <!-- Main CSS File -->
   <!-- <link href="../../assets/css/main.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="../../assets/css/project-studs-design.css">
-  <link rel="stylesheet" href="../../assets/css/search.css">
+    <link rel="stylesheet" href="../../assets/css/search-profile-design.css">
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -167,7 +166,7 @@ require_once '../../../backend/middleware/student_middleware.php';
               </div>
             </div>
 
-                    <!-- comment modal -->
+            <!-- comment modal -->
             <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -197,7 +196,7 @@ require_once '../../../backend/middleware/student_middleware.php';
             <!-- Project Upload -->
             <div class="sidebar-card mb-3">
               <h2>Student Projects</h2>
-               <a class="btn btn-primary" href="profile-studs.php" style="background: #7db832; border: none;">Upload New Project</a>
+              <a class="btn btn-primary" href="profile-studs.php" style="background: #7db832; border: none;">Upload New Project</a>
             </div>
 
             <!-- Accordion Starts Here -->
@@ -366,7 +365,7 @@ require_once '../../../backend/middleware/student_middleware.php';
                       <span id="tagsWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
                     </div>
                   </div>
- 
+
                   <div class="col-md-6">
                     <label for="projectTeam" class="form-label">Team Members</label>
                     <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
@@ -561,13 +560,27 @@ require_once '../../../backend/middleware/student_middleware.php';
         </div>
       </div>
 
-      <!-- Search modal unfix, desgin-->
-      <!-- Search modal -->
-      <div class="search-popup">
+      <!-- Search Modal -->
+      <div class="search-popup" id="searchPopup">
         <div class="search-container">
+          <button class="search-close-button" id="searchCloseButton">
+            <i class="ri-close-line"></i>
+          </button>
           <div class="search-input-container">
-            <input type="text" placeholder="Search projects..." class="search-input">
-            <button class="search-button"><i class="bi bi-search"></i></button>
+            <input type="text" placeholder="Search students by name, nickname, or student number..."
+              class="search-input" id="searchInput">
+            <button class="search-button" id="searchButton">
+              <i class="ri-search-line"></i>
+            </button>
+          </div>
+          <div class="search-results-container">
+            <div class="search-results-header">
+              <span>Search Results</span>
+              <span class="search-results-count">0 results</span>
+            </div>
+            <div class="search-results-list" id="searchResultsList">
+              <!-- Results will be populated here -->
+            </div>
           </div>
         </div>
       </div>
@@ -585,11 +598,22 @@ require_once '../../../backend/middleware/student_middleware.php';
 
   <!-- Main JS File -->
   <script src="../../assets/js/main.js"></script>
-  <script src="../for-students/js/studs-search.js"></script>
   <script src="../for-students/js/project-upload.js" defer></script>
 
   <!-- Main JS File -->
   <script src="../for-students/js/project-studs.js"></script>
+
+
+  <script src="../for-students/js/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
+
+
+  <script>
+    //session with disabilities haha
+    const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
+    const currentStudentId = <?php echo json_encode($_SESSION['user_id']); ?>;
+  </script>
+
+
 </body>
 
 </html>
