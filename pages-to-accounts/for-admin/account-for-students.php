@@ -321,31 +321,31 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="addStudentForm">
+          <form name="addStudentForm" id="addStudentForm" enctype="multipart/form-data">
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="studentFirstName" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="studentFirstName" required>
+                  <input name="studentFirstName" type="text" class="form-control" id="studentFirstName" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="studentLastName" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="studentLastName" required>
+                  <input name="studentLastName" type="text" class="form-control" id="studentLastName" required>
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="studentEmail" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="studentEmail" required>
+                  <input name="studentEmail" type="email" class="form-control" id="studentEmail" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="studentID" class="form-label">Student ID</label>
-                  <input type="text" class="form-control" id="studentID" required>
+                  <input name="studentID" type="text" class="form-control" id="studentID" required>
                 </div>
               </div>
 
@@ -356,7 +356,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                     <i class="ri-user-line upload-icon"></i>
                     <p class="mb-1">Click to upload profile picture</p>
                     <p class="small text-muted">JPG, PNG (Max 2MB)</p>
-                    <input type="file" id="studentAvatar" accept="image/*" style="display: none;">
+                    <input type="file" name="studentAvatar" id="studentAvatar" accept="image/*" style="display: none;">
                   </div>
                   <div class="text-center">
                     <img id="studentAvatarPreview" class="rounded-circle" width="100" height="100" style="display: none; object-fit: cover;">
@@ -366,6 +366,21 @@ require_once '../../../backend/middleware/admin_middleware.php';
             </div>
           </form>
         </div>
+
+
+        <div id="studentUploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+          <div id="studentUploadLoader" class="text-center">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 fw-semibold">Adding...</p>
+          </div>
+          <div id="studentUploadSuccess" class="text-center d-none">
+            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+            <p class="mt-2 fw-semibold">Add Successful!</p>
+          </div>
+        </div>
+
+        <div id="studentGeneralUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="submit" form="addStudentForm" class="btn btn-success">Add Student</button>
@@ -488,6 +503,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
   <!-- Main JS File -->
   <script src="../../assets/js/main.js"></script>
   <script src="./js/admin-logout.js"></script>
+  <script src="./js/student.js"></script>
 
 
   <script>
