@@ -1,3 +1,4 @@
+
 // profile-validation.js
 
 document.addEventListener("DOMContentLoaded", function () {
