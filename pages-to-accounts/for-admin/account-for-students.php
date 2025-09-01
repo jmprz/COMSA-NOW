@@ -217,10 +217,11 @@ require_once '../../../backend/middleware/admin_middleware.php';
             <div class="card-body">
               <div class="tab-content" id="studentManagementTabsContent">
                 <!-- All Students Tab -->
+
                 <div class="tab-pane fade show active" id="all-students" role="tabpanel">
                   <div class="table-responsive">
                     <table id="allStudentsTable" class="table table-hover">
-                      <thead>
+                      <thead id="tableHeadStudents">
                         <tr>
                           <th>ID</th>
                           <th>Student</th>
@@ -228,57 +229,10 @@ require_once '../../../backend/middleware/admin_middleware.php';
                           <th>Actions</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>STU2023001</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/team/sampleTeam.jpg" class="student-avatar me-2">
-                              <span>Valexore</span>
-                            </div>
-                          </td>
-                          <td>Valexore@wut.edu</td>
-                          <td>
-                            <div class="dropdown action-dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#viewStudentModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editStudentModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>STU2023002</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/team/sampleTeam.jpg" class="student-avatar me-2">
-                              <span>Hamburger</span>
-                            </div>
-                          </td>
-                          <td>burges@yum.edu</td>
-                          <td>
-                            <div class="dropdown action-dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#viewStudentModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editStudentModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
+                      <tbody id="studentsTableBody">
+                        
+                        <!-- this is the students tab --> 
+
                       </tbody>
                     </table>
                   </div>
@@ -387,7 +341,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
       </div>
     </div>
-  </div>
+  </div> 
 
   <!-- View Student Modal -->
   <div class="modal fade" id="viewStudentModal" tabindex="-1" aria-hidden="true">
@@ -509,7 +463,6 @@ require_once '../../../backend/middleware/admin_middleware.php';
   <script>
     // Initialize DataTables
     $(document).ready(function() { // responsible for search bar and pagination
-      $('#allStudentsTable').DataTable();
 
       // Image preview for add student form
       $('#studentAvatar').change(function() {

@@ -333,8 +333,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                       </thead>
                       <tbody id="tableBodyPost">
 
-
-                        <tr>
+                        <!-- <tr>
                           <td>POST002</td>
                           <td>
                             <div class="d-flex align-items-center">
@@ -372,118 +371,10 @@ require_once '../../../backend/middleware/admin_middleware.php';
                             </div>
                           </td>
                         </tr>
-                        <tr>
-                          <td>POST003</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/team/sampleTeam.jpg" class="rounded me-2" width="40" height="40">
-                              <span>CS Expo 2024 Announcement</span>
-                            </div>
-                          </td>
-                          <td>20 Jun 2024</td>
-                          <td><span class="badge bg-warning">Scheduled</span></td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <i class="ri-star-fill text-success me-1"></i> 0
-                              <i class="ri-chat-3-fill text-info ms-3 me-1"></i> 0
-                            </div>
-                          </td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#editPostModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#viewPostModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ri-send-plane-line me-2"></i>Publish
-                                    Now</a></li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i
-                                      class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>POST004</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/team/sampleTeam.jpg" class="rounded me-2" width="40" height="40">
-                              <span>Welcome new students!</span>
-                            </div>
-                          </td>
-                          <td>5 Jun 2024</td>
-                          <td><span class="badge bg-secondary">Draft</span></td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <i class="ri-star-fill text-success me-1"></i> 0
-                              <i class="ri-chat-3-fill text-info ms-3 me-1"></i> 0
-                            </div>
-                          </td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#editPostModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#viewPostModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ri-send-plane-line me-2"></i>Publish</a>
-                                </li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i
-                                      class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>POST005</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/team/sampleTeam.jpg" class="rounded me-2" width="40" height="40">
-                              <span>Old system maintenance notice</span>
-                            </div>
-                          </td>
-                          <td>15 May 2024</td>
-                          <td><span class="badge bg-dark">Archived</span></td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <i class="ri-star-fill text-success me-1"></i> 245
-                              <i class="ri-chat-3-fill text-info ms-3 me-1"></i> 12
-                            </div>
-                          </td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#viewPostModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#"><i
-                                      class="ri-arrow-up-circle-line me-2"></i>Restore</a></li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i
-                                      class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
+                         -->
+
+                        <!-- this is the table for ALL Post Filter -->
+
                       </tbody>
                     </table>
                   </div>
@@ -503,7 +394,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+
+                        <!-- <tr>
                           <td>POST001</td>
                           <td>
                             <div class="d-flex align-items-center">
@@ -576,7 +468,10 @@ require_once '../../../backend/middleware/admin_middleware.php';
                               </ul>
                             </div>
                           </td>
-                        </tr>
+                        </tr> -->
+
+                        <!-- this is the table for published filter -->
+
                       </tbody>
                     </table>
                   </div>
@@ -644,7 +539,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        <!-- <tr>
                           <td>POST004</td>
                           <td>
                             <div class="d-flex align-items-center">
@@ -674,7 +569,10 @@ require_once '../../../backend/middleware/admin_middleware.php';
                               </ul>
                             </div>
                           </td>
-                        </tr>
+                        </tr> -->
+
+                        <!-- this is the table for drafts filter -->
+
                       </tbody>
                     </table>
                   </div>
@@ -693,7 +591,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+
+                        <!-- <tr>
                           <td>POST005</td>
                           <td>
                             <div class="d-flex align-items-center">
@@ -721,7 +620,10 @@ require_once '../../../backend/middleware/admin_middleware.php';
                               </ul>
                             </div>
                           </td>
-                        </tr>
+                        </tr> -->
+
+                        <!-- this is the table for Archived filter -->
+
                       </tbody>
                     </table>
                   </div>
