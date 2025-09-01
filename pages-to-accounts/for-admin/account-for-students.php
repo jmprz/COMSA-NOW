@@ -230,8 +230,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </tr>
                       </thead>
                       <tbody id="studentsTableBody">
-                        
-                        <!-- this is the students tab --> 
+
+                        <!-- this is the students tab -->
 
                       </tbody>
                     </table>
@@ -341,7 +341,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 
   <!-- View Student Modal -->
   <div class="modal fade" id="viewStudentModal" tabindex="-1" aria-hidden="true">
@@ -353,27 +353,27 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
         <div class="modal-body">
           <div class="text-center mb-4">
-            <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle" width="120" height="120" style="object-fit: cover;" alt="Student Avatar">
+            <img src="../../assets/img/team/sampleTeam.jpg" id="studentImage" class="rounded-circle" width="120" height="120" style="object-fit: cover;" alt="Student Avatar">
           </div>
 
           <div class="student-info-container">
             <div class="student-info-item">
               <div class="student-info-label">Name</div>
-              <div>Valexore</div>
+              <div id="studentName"></div>
             </div>
             <div class="student-info-item">
               <div class="student-info-label">Email</div>
-              <div>Valexore@huh.edu</div>
+              <div id="viewStudentEmail"></div>
             </div>
             <div class="student-info-item">
               <div class="student-info-label">Student ID</div>
-              <div>STU2023001</div>
+              <div id="studentId"></div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editStudentModal" data-bs-dismiss="modal">
+          <button type="button" id="studentViewEditBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editStudentModal" data-bs-dismiss="modal">
             <i class="ri-edit-line me-1"></i> Edit Profile
           </button>
         </div>
@@ -390,31 +390,27 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="editStudentForm">
+          <form id="editStudentForm" enctype="multipart/form-data">
+            <input name="editStudentId" type="text" class="form-control d-none" id="editStudentId" required>
+
             <div class="row">
               <div class="col-md-6">
                 <div class="mb-3">
-                  <label for="editFirstName" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="editFirstName" value="Jay" required>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="editLastName" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="editLastName" value="Kun" required>
+                  <label for="editFirstName" class="form-label">Name</label>
+                  <input name="editFirstName" type="text" class="form-control" id="editFirstName" required>
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="editEmail" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="editEmail" value="Valexore@huh.edu" required>
+                  <input name="editEmail" type="email" class="form-control" id="editEmail" value="Valexore@huh.edu" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="editStudentID" class="form-label">Student ID</label>
-                  <input type="text" class="form-control" id="editStudentID" value="STU2023001" readonly>
+                  <input name="editStudentID" type="text" class="form-control" id="editStudentID" value="STU2023001" required>
                 </div>
               </div>
 
@@ -422,12 +418,12 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <div class="mb-3">
                   <label for="editAvatar" class="form-label">Profile Picture</label>
                   <div class="d-flex align-items-center gap-4">
-                    <img src="../../assets/img/team/sampleTeam.jpg" id="editAvatarPreview" class="rounded-circle" width="100" height="100" style="object-fit: cover;">
+                    <img src="../../assets/img/team/sampleTeam.jpg" name="editAvatarPreview" id="editAvatarPreview" class="rounded-circle" width="100" height="100" style="object-fit: cover;">
                     <div>
                       <button type="button" class="btn btn-sm btn-outline-primary mb-2" onclick="document.getElementById('editAvatar').click()">
                         <i class="ri-upload-line me-1"></i> Change Photo
                       </button>
-                      <input type="file" id="editAvatar" accept="image/*" style="display: none;">
+                      <input name="editAvatar" type="file" id="editAvatar" accept="image/*" style="display: none;">
                       <p class="small text-muted mb-0">JPG, PNG (Max 2MB)</p>
                     </div>
                   </div>
@@ -436,6 +432,18 @@ require_once '../../../backend/middleware/admin_middleware.php';
             </div>
           </form>
         </div>
+        <div id="studentEditUploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+          <div id="studentEditUploadLoader" class="text-center">
+            <div class="spinner-border text-success" role="status"></div>
+            <p class="mt-2 fw-semibold">Editing...</p>
+          </div>
+          <div id="studentEditUploadSuccess" class="text-center d-none">
+            <i class="bi bi-check-circle-fill text-success fs-1"></i>
+            <p class="mt-2 fw-semibold">Edited Successfully!</p>
+          </div>
+        </div>
+
+        <div id="studentEditGeneralUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="submit" form="editStudentForm" class="btn btn-primary">Save Changes</button>
