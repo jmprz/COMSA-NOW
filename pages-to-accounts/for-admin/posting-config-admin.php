@@ -332,47 +332,6 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </tr>
                       </thead>
                       <tbody id="tableBodyPost">
-
-                        <!-- <tr>
-                          <td>POST002</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/comsayep.jpg" class="rounded me-2" width="40" height="40">
-                              <span>Event management system update</span>
-                            </div>
-                          </td>
-                          <td>10 Jun 2024</td>
-                          <td><span class="badge bg-success">Published</span></td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <i class="ri-star-fill text-success me-1"></i> 892
-                              <i class="ri-chat-3-fill text-info ms-3 me-1"></i> 34
-                            </div>
-                          </td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#editPostModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#viewPostModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ri-archive-line me-2"></i>Archive</a>
-                                </li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i
-                                      class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
-                         -->
-
                         <!-- this is the table for ALL Post Filter -->
 
                       </tbody>
@@ -394,137 +353,11 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </tr>
                       </thead>
                       <tbody>
-
-                        <!-- <tr>
-                          <td>POST001</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/csexpo.jpg" class="rounded me-2" width="40" height="40">
-                              <span>AI-powered campus navigation system</span>
-                            </div>
-                          </td>
-                          <td>15 Jun 2024</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <i class="ri-star-fill text-warning me-1"></i> 1,243
-                              <i class="ri-chat-3-fill text-info ms-3 me-1"></i> 56
-                            </div>
-                          </td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#editPostModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#viewPostModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ri-archive-line me-2"></i>Archive</a>
-                                </li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i
-                                      class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>POST002</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/comsayep.jpg" class="rounded me-2" width="40" height="40">
-                              <span>Event management system update</span>
-                            </div>
-                          </td>
-                          <td>10 Jun 2024</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <i class="ri-star-fill text-warning me-1"></i> 892
-                              <i class="ri-chat-3-fill text-info ms-3 me-1"></i> 34
-                            </div>
-                          </td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#editPostModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#viewPostModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ri-archive-line me-2"></i>Archive</a>
-                                </li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i
-                                      class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr> -->
-
-                        <!-- this is the table for published filter -->
-
+                        <!-- Content will be populated by JavaScript -->
                       </tbody>
                     </table>
                   </div>
                 </div>
-
-                <!-- Scheduled Tab -->
-                <!-- <div class="tab-pane fade" id="scheduled" role="tabpanel">
-                  <div class="table-responsive">
-                    <table id="scheduledPostsTable" class="table table-hover">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Post</th>
-                          <th>Scheduled Date</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>POST003</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/team/sampleTeam.jpg" class="rounded me-2" width="40" height="40">
-                              <span>CS Expo 2024 Announcement</span>
-                            </div>
-                          </td>
-                          <td>20 Jun 2024</td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#editPostModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#viewPostModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ri-send-plane-line me-2"></i>Publish
-                                    Now</a></li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i
-                                      class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div> -->
 
                 <!-- Drafts Tab -->
                 <div class="tab-pane fade" id="drafts" role="tabpanel">
@@ -539,40 +372,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </tr>
                       </thead>
                       <tbody>
-                        <!-- <tr>
-                          <td>POST004</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/team/sampleTeam.jpg" class="rounded me-2" width="40" height="40">
-                              <span>Welcome new students!</span>
-                            </div>
-                          </td>
-                          <td>5 Jun 2024</td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#editPostModal"><i class="ri-edit-line me-2"></i>Edit</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#viewPostModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ri-send-plane-line me-2"></i>Publish</a>
-                                </li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i
-                                      class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr> -->
-
-                        <!-- this is the table for drafts filter -->
-
+                        <!-- Content will be populated by JavaScript -->
                       </tbody>
                     </table>
                   </div>
@@ -591,39 +391,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </tr>
                       </thead>
                       <tbody>
-
-                        <!-- <tr>
-                          <td>POST005</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../assets/img/team/sampleTeam.jpg" class="rounded me-2" width="40" height="40">
-                              <span>Old system maintenance notice</span>
-                            </div>
-                          </td>
-                          <td>15 May 2024</td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ri-more-2-fill"></i>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#viewPostModal"><i class="ri-eye-line me-2"></i>View</a></li>
-                                <li><a class="dropdown-item" href="#"><i
-                                      class="ri-arrow-up-circle-line me-2"></i>Restore</a></li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-danger" href="#"><i
-                                      class="ri-delete-bin-line me-2"></i>Delete</a></li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr> -->
-
-                        <!-- this is the table for Archived filter -->
-
+                        <!-- Content will be populated by JavaScript -->
                       </tbody>
                     </table>
                   </div>
@@ -1024,6 +792,9 @@ require_once '../../../backend/middleware/admin_middleware.php';
   <!-- Main JS File -->
   <script src="../../assets/js/main.js"></script>
   <script src="../for-admin/js/search-config-post.js"></script>
+  <script src="../js/"></script>
+  <script src="../for-admin/js/admin-comment-deletion.js"></script>
+
   <script src="./js/admin-logout.js"></script>
   <script src="./js//post.js"></script>
 
@@ -1215,41 +986,9 @@ require_once '../../../backend/middleware/admin_middleware.php';
 
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Handle comment deletion
-      document.querySelectorAll('.comment-delete-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const comment = this.closest('.post-comment');
-          if (confirm('Are you sure you want to delete this comment?')) {
-            comment.style.transition = 'opacity 0.3s';
-            comment.style.opacity = '0';
-            setTimeout(() => {
-              comment.remove();
-              // Here you would normally send a request to the server to delete the comment
-            }, 300);
-          }
-        });
-      });
-
-      // Dark mode support for comments section
-      const darkModeToggle = document.querySelector('.dark-mode-toggle');
-      if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', function() {
-          setTimeout(() => {
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            const commentsContainer = document.querySelector('.comments-container');
-            if (commentsContainer) {
-              if (isDarkMode) {
-                commentsContainer.style.scrollbarColor = '#7db832 #2a2a2a';
-              } else {
-                commentsContainer.style.scrollbarColor = '#7db832 #f1f1f1';
-              }
-            }
-          }, 100);
-        });
-      }
-    });
+   
   </script>
+  
 
 </body>
 
