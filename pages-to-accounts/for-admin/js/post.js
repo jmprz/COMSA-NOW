@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const socket = new WebSocket("ws://localhost:8080");
+    let allPosts = []; // Store all posts for filtering
 
     socket.onmessage = (event) => {
         let data;
@@ -88,8 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 tableCommentCount.innerText = Math.max(parseInt(tableCommentCount.innerText) - 1, 0);
             }
         }
-
-    }
+    };
 
     socket.onerror = (err) => {
         console.error("❌ WebSocket error", err);
@@ -112,18 +112,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const postForm = document.getElementById('postForm');
-    const tagInput = document.getElementById("postTags")
+    const tagInput = document.getElementById("postTags");
     const tagWrapper = document.getElementById("tagsWrapper");
-
-    const tableHead = document.getElementById("tableHeadPost");
-    const tableBody = document.getElementById("tableBodyPost");
-    const table = document.getElementById("allPostsTable");
-
     const tagEditInput = document.getElementById("editPostTags");
-    tagArray = document.getElementById("editTagsContainer");
-
+    const tagArray = document.getElementById("editTagsContainer");
     const editForm = document.getElementById("editPostForm");
-
 
     document.getElementById("editPostModal").addEventListener("hidden.bs.modal", function () {
         document.getElementById("editTagsContainer").innerHTML = "";
@@ -193,360 +186,437 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    fetch("../../../backend/api/admin/get_all_posts.php")
-        .then(res => res.json())
-        .then(data => {
+    // Function to filter posts based on status
+    function filterPosts(status) {
+        let filteredPosts = allPosts;
+        
+        if (status !== 'all') {
+            filteredPosts = allPosts.filter(post => 
+                post.post_status.toLowerCase() === status.toLowerCase()
+            );
+        }
+        
+        return filteredPosts;
+    }
 
-            if (!data.success) {
-                console.error("Error:", data.message || "Failed to fetch events");
-                return;
+    // Function to render posts in a table
+    function renderPostsTable(posts, tableId, showStatus = true) {
+        const table = document.getElementById(tableId);
+        const tbody = table.querySelector('tbody');
+        tbody.innerHTML = '';
+        
+        if (posts.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="${showStatus ? 6 : 5}" class="text-center py-4">
+                        <i class="bi bi-emoji-frown fs-1 mb-2 d-block text-muted"></i>
+                        <p class="text-muted">No posts found.</p>
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+        
+        posts.forEach(post => {
+            const newEl = document.createElement("tr");
+            let badgeClass = "";
+            
+            switch (post.post_status.toLowerCase()) {
+                case "archived":
+                    badgeClass = "bg-dark";
+                    break;
+                case "published":
+                    badgeClass = "bg-success";
+                    break;
+                case "draft":
+                    badgeClass = "bg-secondary";
+                    break;
+                default:
+                    badgeClass = "bg-info";
             }
 
-            if (data.posts.length === 0) {
-                tableHead.classList.add("d-none");
-                tableBody.classList.add("d-none");
-                table.innerHTML = `<div class="d-flex justify-content-center text-secondary">
-                        <div class="d-flex flex-column align-items-center">
-                          <i class="bi bi-emoji-frown fs-1 mb-2"></i>
-                          <p class="text-center">You Haven't Added Any Quick Links For Now.</p>
-                        </div>
-                      </div>`
-
-            }
-
-            if (data.success) {
-                tableHead.classList.remove('d-none');
-                tableBody.classList.remove('d-none');
-
-                data.posts.forEach(post => {
-                    const newEl = document.createElement("tr");
-
-                    let badgeClass = "";
-                    switch (post.post_status.toLowerCase()) {
-                        case "archived":
-                            badgeClass = "bg-dark";
-                            break;
-                        case "published":
-                            badgeClass = "bg-success";
-                            break;
-                        case "draft":
-                            badgeClass = "bg-secondary";
-                            break;
-                        default:
-                            badgeClass = "bg-info";
-                    }
-
-                    newEl.innerHTML = `
-                        <td>${post.id}</td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <img src="../../../backend/${post.post_image}" class="rounded me-2" width="40" height="40">
-                              <span>${post.title}</span>
-                            </div>
-                          </td>
-                          <td>${formatDateTime(post.updated_at)}</td>
-                          <td><span class="badge ${badgeClass}">${post.post_status}</span></td>
-                          <td>
-                           <div class="post-stats d-flex align-items-center" data-id="${post.id}">
-                            <i class="ri-star-fill text-success me-1"></i> <span class="like-count">${post.like_count}</span>
-                            <i data-id="${post.id}" class="ri-chat-3-fill text-info ms-3 me-1"></i> <span class="comment-count">${post.comment_count}</span>
-                           </div>
-                          </td>
-                          <td>
-                            ${post.post_status.toLowerCase() !== 'archived' ?
-                            (`<div class="dropdown">
-                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ri-more-2-fill"></i>
+            newEl.innerHTML = `
+                <td>${post.id}</td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <img src="../../../backend/${post.post_image}" class="rounded me-2" width="40" height="40">
+                        <span>${post.title}</span>
+                    </div>
+                </td>
+                <td>${formatDateTime(post.updated_at)}</td>
+                ${showStatus ? `<td><span class="badge ${badgeClass}">${post.post_status}</span></td>` : ''}
+                <td>
+                    <div class="post-stats d-flex align-items-center" data-id="${post.id}">
+                        <i class="ri-star-fill text-success me-1"></i> <span class="like-count">${post.like_count}</span>
+                        <i data-id="${post.id}" class="ri-chat-3-fill text-info ms-3 me-1"></i> <span class="comment-count">${post.comment_count}</span>
+                    </div>
+                </td>
+                <td>
+                    ${post.post_status.toLowerCase() !== 'archived' ?
+                    (`<div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="ri-more-2-fill"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <button data-id="${post.id}" class="dropdown-item editPostBtn" data-bs-toggle="modal" data-bs-target="#editPostModal">
+                                    <i class="ri-edit-line me-2"></i>Edit
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                        <button data-id="${post.id}" class="dropdown-item editPostBtn" data-bs-toggle="modal" data-bs-target="#editPostModal">
-                                            <i class="ri-edit-line me-2"></i>Edit
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button data-id="${post.id}" class="dropdown-item viewPostBtn" data-bs-toggle="modal" data-bs-target="#viewPostModal">
-                                            <i class="ri-eye-line me-2"></i>View
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button data-id="${post.id}" class="dropdown-item archivePostBtn" >
-                                            <i class="ri-archive-line me-2"></i>Archive
-                                        </button>
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <button data-id="${post.id}" class="dropdown-item text-danger deletePostBtn" >
-                                            <i class="ri-delete-bin-line me-2"></i>Delete
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>`)
-                            :
-                            (`<div class="dropdown">
-                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
-                                    id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ri-more-2-fill"></i>
+                            </li>
+                            <li>
+                                <button data-id="${post.id}" class="dropdown-item viewPostBtn" data-bs-toggle="modal" data-bs-target="#viewPostModal">
+                                    <i class="ri-eye-line me-2"></i>View
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
-                                    <li>
-                                        <button data-id="${post.id}" class="dropdown-item viewPostBtn" data-bs-toggle="modal" data-bs-target="#viewPostModal">
-                                            <i class="ri-eye-line me-2"></i>View
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button data-id="${post.id}" class="dropdown-item restorePostBtn">
-                                            <i class="ri-arrow-up-circle-line me-2"></i>Restore
-                                        </button>
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <button data-id="${post.id}" class="dropdown-item text-danger deletePostBtn">
-                                            <i class="ri-delete-bin-line me-2"></i>Delete
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>`)
+                            </li>
+                            <li>
+                                <button data-id="${post.id}" class="dropdown-item archivePostBtn">
+                                    <i class="ri-archive-line me-2"></i>Archive
+                                </button>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <button data-id="${post.id}" class="dropdown-item text-danger deletePostBtn">
+                                    <i class="ri-delete-bin-line me-2"></i>Delete
+                                </button>
+                            </li>
+                        </ul>
+                    </div>`)
+                    :
+                    (`<div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                            id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="ri-more-2-fill"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
+                            <li>
+                                <button data-id="${post.id}" class="dropdown-item viewPostBtn" data-bs-toggle="modal" data-bs-target="#viewPostModal">
+                                    <i class="ri-eye-line me-2"></i>View
+                                </button>
+                            </li>
+                            <li>
+                                <button data-id="${post.id}" class="dropdown-item restorePostBtn">
+                                    <i class="ri-arrow-up-circle-line me-2"></i>Restore
+                                </button>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <button data-id="${post.id}" class="dropdown-item text-danger deletePostBtn">
+                                    <i class="ri-delete-bin-line me-2"></i>Delete
+                                </button>
+                            </li>
+                        </ul>
+                    </div>`)
+                }
+                </td>
+            `;
+            
+            tbody.appendChild(newEl);
+            attachPostEventListeners(newEl, post);
+        });
+    }
+
+    // Function to attach event listeners to post actions
+    function attachPostEventListeners(element, post) {
+        const editPostBtn = element.querySelector(".editPostBtn");
+        const viewPostBtn = element.querySelector(".viewPostBtn");
+        const archivePostBtn = element.querySelector(".archivePostBtn");
+        const deletePostBtn = element.querySelector(".deletePostBtn");
+        const restorePostBtn = element.querySelector(".restorePostBtn");
+
+        if (editPostBtn) {
+            editPostBtn.addEventListener("click", function (e) {
+                const postId = e.target.dataset.id;
+                document.getElementById("editPostId").value = postId;
+                document.getElementById("editPostTitle").value = post.title;
+                document.getElementById("editPostContent").value = post.content;
+                document.getElementById("editImagePreview").src = `../../../backend/${post.post_image}`;
+                document.getElementById("editPostStatus").value = post.post_status;
+
+                tagArray.innerHTML = "";
+                editTags = [];
+
+                // Add post tags as badges
+                post.tags.forEach(tag => {
+                    editTags.push(tag);
+                    createTagBadge(tag);
+                });
+            });
+        }
+
+        if (viewPostBtn) {
+            viewPostBtn.addEventListener("click", async function (e) {
+                const postId = e.target.dataset.id;
+                document.getElementById("viewPostModal").dataset.postId = postId;
+
+                const adminViewTagContainer = document.getElementById("adminViewTagContainer");
+                const viewCommentsContainer = document.getElementById("viewCommentsContainer");
+                const addCommentInput = document.getElementById("adminViewAddComment");
+                const addCommentBtn = document.getElementById("adminViewSubmitComment");
+                const adminViewCommentCount = document.getElementById("adminViewCommentCount");
+
+                // Populate post details
+                document.getElementById("adminViewName").innerText = post.admin_username || "Admin";
+                document.getElementById("adminPostDate").innerText = formatDateTime(post.updated_at);
+                document.getElementById("adminViewTitle").innerText = post.title;
+                document.getElementById("adminViewImage").src = `../../../backend/${post.post_image}`;
+                document.getElementById("adminViewContent").innerText = post.content;
+                adminViewCommentCount.innerText = `Comments (${post.comment_count})`;
+
+                // Likes & comment icons
+                const likeBtn = document.getElementById("adminViewLike");
+                likeBtn.innerHTML = `<i class="ri-star-line"></i> ${post.like_count}`;
+
+                const commentBtn = document.getElementById("adminViewComment");
+                commentBtn.innerHTML = `<i class="ri-chat-3-line"></i> ${post.comment_count}`;
+
+                // Render tags
+                adminViewTagContainer.innerHTML = "";
+                post.tags.forEach(tag => {
+                    const newTagEl = document.createElement("span");
+                    newTagEl.className = "badge bg-light text-dark tag-badge";
+                    newTagEl.innerText = tag.startsWith("#") ? tag : `#${tag}`;
+                    adminViewTagContainer.appendChild(newTagEl);
+                });
+
+                async function renderComments() {
+                    try {
+                        const res = await fetch(`../../../backend/api/admin/get_post_comments.php?post_id=${postId}`);
+                        const data = await res.json();
+
+                        viewCommentsContainer.innerHTML = "";
+
+                        if (data.success && data.comments.length > 0) {
+                            data.comments.forEach(comment => {
+                                const newCommentEl = document.createElement("div");
+                                newCommentEl.className = "post-comment mb-3 position-relative";
+                                newCommentEl.innerHTML = `
+                                    <div class="d-flex align-items-start">
+                                        <img src="${comment.student_photo ? `../../../backend/${comment.student_photo}` : "../../assets/img/default-pic.jpg"}"
+                                            class="rounded-circle me-2" width="32" height="32" alt="User">
+                                        <div>
+                                            <strong class="d-block">${comment.student_name}</strong>
+                                            <span>${comment.comment}</span>
+                                        </div>
+                                    </div>
+                                    <button data-id="${comment.id}" class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
+                                        <i class="ri-delete-bin-line"></i>
+                                    </button>
+                                `;
+                                viewCommentsContainer.appendChild(newCommentEl);
+                            });
+                        } else {
+                            viewCommentsContainer.innerHTML = `<p class="text-muted">No comments yet.</p>`;
                         }
 
-                        </td>
-                    `
-                    tableBody.appendChild(newEl);
+                        // Update modal comment counter
+                        adminViewCommentCount.innerText = `Comments (${data.comments.length})`;
+                        commentBtn.innerHTML = `<i class="ri-chat-3-line"></i> ${data.comments.length}`;
 
-                    const editPostBtn = newEl.querySelector(".editPostBtn");
-                    const viewPostBtn = newEl.querySelector(".viewPostBtn");
-                    const archivePostBtn = newEl.querySelector(".archivePostBtn");
-                    const deletePostBtn = newEl.querySelector(".deletePostBtn");
-                    const restorePostBtn = newEl.querySelector(".restorePostBtn");
-
-                    if (editPostBtn) {
-                        editPostBtn.addEventListener("click", function (e) {
-                            const postId = e.target.dataset.id;
-
-                            document.getElementById("editPostId").value = postId;
-                            document.getElementById("editPostTitle").value = post.title;
-                            document.getElementById("editPostContent").value = post.content;
-                            document.getElementById("editImagePreview").src = `../../../backend/${post.post_image}`;
-                            document.getElementById("editPostStatus").value = post.post_status;
-
-
-                            tagArray.innerHTML = "";
-                            editTags = [];
-
-                            // Add post tags as badges
-                            post.tags.forEach(tag => {
-                                editTags.push(tag);
-                                createTagBadge(tag);
-                            });
-
-                        });
+                        attachDeleteEvents();
+                    } catch (err) {
+                        console.error("Failed to fetch comments:", err);
+                        viewCommentsContainer.innerHTML = `<p class="text-danger">Failed to load comments.</p>`;
                     }
+                }
 
-                    if (viewPostBtn) {
-                        viewPostBtn.addEventListener("click", async function (e) {
-                            const postId = e.target.dataset.id;
-                            document.getElementById("viewPostModal").dataset.postId = postId;
+                function attachDeleteEvents() {
+                    document.querySelectorAll(".comment-delete-btn").forEach(btn => {
+                        btn.addEventListener("click", async function () {
+                            const button = this;
+                            const commentWrapper = button.closest(".post-comment");
+                            const commentId = button.dataset.id;
 
-                            const adminViewTagContainer = document.getElementById("adminViewTagContainer");
-                            const viewCommentsContainer = document.getElementById("viewCommentsContainer");
-                            const addCommentInput = document.getElementById("adminViewAddComment");
-                            const addCommentBtn = document.getElementById("adminViewSubmitComment");
-                            const adminViewCommentCount = document.getElementById("adminViewCommentCount");
-
-                            // Populate post details (same as before)
-                            document.getElementById("adminViewName").innerText = post.admin_username || "Admin";
-                            document.getElementById("adminPostDate").innerText = formatDateTime(post.updated_at);
-                            document.getElementById("adminViewTitle").innerText = post.title;
-                            document.getElementById("adminViewImage").src = `../../../backend/${post.post_image}`;
-                            document.getElementById("adminViewContent").innerText = post.content;
-                            adminViewCommentCount.innerText = `Comments (${post.comment_count})`;
-
-                            // Likes & comment icons
-                            const likeBtn = document.getElementById("adminViewLike");
-                            likeBtn.innerHTML = `<i class="ri-star-line"></i> ${post.like_count}`;
-
-                            const commentBtn = document.getElementById("adminViewComment");
-                            commentBtn.innerHTML = `<i class="ri-chat-3-line"></i> ${post.comment_count}`;
-
-                            // Render tags
-                            adminViewTagContainer.innerHTML = "";
-                            post.tags.forEach(tag => {
-                                const newTagEl = document.createElement("span");
-                                newTagEl.className = "badge bg-light text-dark tag-badge";
-                                newTagEl.innerText = tag.startsWith("#") ? tag : `#${tag}`;
-                                adminViewTagContainer.appendChild(newTagEl);
-                            });
-
-
-                            async function renderComments() {
+                            if (confirm("Are you sure you want to delete this comment?")) {
                                 try {
-                                    const res = await fetch(`../../../backend/api/admin/get_post_comments.php?post_id=${postId}`);
-                                    const data = await res.json();
-
-                                    viewCommentsContainer.innerHTML = "";
-
-                                    if (data.success && data.comments.length > 0) {
-                                        data.comments.forEach(comment => {
-                                            const newCommentEl = document.createElement("div");
-                                            newCommentEl.className = "post-comment mb-3 position-relative";
-                                            newCommentEl.innerHTML = `
-                                                <div class="d-flex align-items-start">
-                                                    <img src="${comment.student_photo ? `../../../backend/${comment.student_photo}` : "../../assets/img/default-pic.jpg"}"
-                                                        class="rounded-circle me-2" width="32" height="32" alt="User">
-                                                    <div>
-                                                        <strong class="d-block">${comment.student_name}</strong>
-                                                        <span>${comment.comment}</span>
-                                                    </div>
-                                                </div>
-                                                <button data-id="${comment.id}" class="btn btn-sm btn-link text-danger position-absolute top-0 end-0 p-1 comment-delete-btn" title="Delete comment">
-                                                    <i class="ri-delete-bin-line"></i>
-                                                </button>
-                                            `;
-                                            viewCommentsContainer.appendChild(newCommentEl);
-                                        });
-                                    } else {
-                                        viewCommentsContainer.innerHTML = `<p class="text-muted">No comments yet.</p>`;
-                                    }
-
-                                    // Update modal comment counter
-                                    adminViewCommentCount.innerText = `Comments (${data.comments.length})`;
-                                    commentBtn.innerHTML = `<i class="ri-chat-3-line"></i> ${data.comments.length}`;
-
-                                    attachDeleteEvents();
-                                } catch (err) {
-                                    console.error("Failed to fetch comments:", err);
-                                    viewCommentsContainer.innerHTML = `<p class="text-danger">Failed to load comments.</p>`;
-                                }
-                            }
-
-                            function attachDeleteEvents() {
-                                document.querySelectorAll(".comment-delete-btn").forEach(btn => {
-                                    btn.addEventListener("click", async function () {
-                                        const button = this;
-                                        const commentWrapper = button.closest(".post-comment");
-                                        const commentId = button.dataset.id;
-
-                                        if (confirm("Are you sure you want to delete this comment?")) {
-                                            try {
-                                                const res = await fetch("../../../backend/api/admin/admin_delete_comment.php", {
-                                                    method: "POST",
-                                                    headers: { "Content-Type": "application/json" },
-                                                    body: JSON.stringify({ id: commentId, postId: postId })
-                                                });
-                                                const data = await res.json();
-                                                if (data.success) {
-                                                    commentWrapper.remove();
-                                                }
-                                            } catch (err) {
-                                                console.error("Error deleting comment:", err);
-                                            }
-                                        }
-                                    });
-                                });
-                            }
-
-                            // Add new comment
-                            addCommentBtn.onclick = async () => {
-                                const commentText = addCommentInput.value.trim();
-                                if (!commentText) return alert("Please enter a comment.");
-
-                                try {
-                                    const res = await fetch("../../../backend/api/admin/admin_add_comment.php", {
+                                    const res = await fetch("../../../backend/api/admin/admin_delete_comment.php", {
                                         method: "POST",
                                         headers: { "Content-Type": "application/json" },
-                                        body: JSON.stringify({ post_id: postId, comment: commentText })
+                                        body: JSON.stringify({ id: commentId, postId: postId })
                                     });
                                     const data = await res.json();
                                     if (data.success) {
-                                        addCommentInput.value = "";
-                                        renderComments(); // 🔥 re-fetch latest after add
+                                        commentWrapper.remove();
                                     }
                                 } catch (err) {
-                                    console.error("Error adding comment:", err);
+                                    console.error("Error deleting comment:", err);
                                 }
-                            };
-
-                            renderComments();
-                        });
-                    }
-
-
-                    if (archivePostBtn) {
-                        archivePostBtn.addEventListener("click", function (e) {
-                            const postId = e.target.dataset.id;
-
-                            if (confirm("Are you sure you want to archive this post?")) {
-                                fetch("../../../backend/api/admin/admin_archive_post.php", {
-                                    method: "POST",
-                                    headers: { "Content-type": "application/json" },
-                                    body: JSON.stringify({ postId })
-                                })
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        if (data.success) {
-                                            window.location.reload();
-                                        } else {
-                                            alert("❌ Failed to archive post: " + (data.message || ""));
-                                        }
-                                    })
-                                    .catch(err => console.error("Error:", err));
                             }
                         });
-                    }
+                    });
+                }
 
-                    if (deletePostBtn) {
-                        deletePostBtn.addEventListener("click", function (e) {
-                            const postId = e.target.dataset.id;
+                // Add new comment
+                addCommentBtn.onclick = async () => {
+                    const commentText = addCommentInput.value.trim();
+                    if (!commentText) return alert("Please enter a comment.");
 
-                            if (confirm("Are you sure you want to delete this post? This cannot be undone.")) {
-                                fetch("../../../backend/api/admin/delete_post.php", {
-                                    method: "POST",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify({ postId })
-                                })
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        if (data.success) {
-                                            alert("✅ Post deleted successfully");
-                                            window.location.reload();
-                                        } else {
-                                            alert("❌ Failed to delete post: " + (data.message || ""));
-                                        }
-                                    })
-                                    .catch(err => console.error("Error:", err));
-                            }
+                    try {
+                        const res = await fetch("../../../backend/api/admin/admin_add_comment.php", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ post_id: postId, comment: commentText })
                         });
+                        const data = await res.json();
+                        if (data.success) {
+                            addCommentInput.value = "";
+                            renderComments(); // re-fetch latest after add
+                        }
+                    } catch (err) {
+                        console.error("Error adding comment:", err);
                     }
+                };
 
+                renderComments();
+            });
+        }
 
-                    if (restorePostBtn) {
-                        restorePostBtn.addEventListener("click", function (e) {
-                            const postId = e.target.dataset.id;
-                            if (confirm("Do you really want to restore this post?")) {
-                                fetch("../../../backend/api/admin/restore_post.php", {
-                                    method: "POST",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify({ postId })
-                                })
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        if (data.success) {
-                                            alert("✅ Post restored successfully");
-                                            window.location.reload();
-                                        } else {
-                                            alert("❌ Failed to restore post: " + (data.message || ""));
-                                        }
-                                    })
-                                    .catch(err => console.error("Error:", err));
+        if (archivePostBtn) {
+            archivePostBtn.addEventListener("click", function (e) {
+                const postId = e.target.dataset.id;
+
+                if (confirm("Are you sure you want to archive this post?")) {
+                    fetch("../../../backend/api/admin/admin_archive_post.php", {
+                        method: "POST",
+                        headers: { "Content-type": "application/json" },
+                        body: JSON.stringify({ postId })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.reload();
+                            } else {
+                                alert("❌ Failed to archive post: " + (data.message || ""));
                             }
-                        });
-                    }
+                        })
+                        .catch(err => console.error("Error:", err));
+                }
+            });
+        }
+
+        if (deletePostBtn) {
+            deletePostBtn.addEventListener("click", function (e) {
+                const postId = e.target.dataset.id;
+
+                if (confirm("Are you sure you want to delete this post? This cannot be undone.")) {
+                    fetch("../../../backend/api/admin/delete_post.php", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ postId })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert("✅ Post deleted successfully");
+                                window.location.reload();
+                            } else {
+                                alert("❌ Failed to delete post: " + (data.message || ""));
+                            }
+                        })
+                        .catch(err => console.error("Error:", err));
+                }
+            });
+        }
+
+        if (restorePostBtn) {
+            restorePostBtn.addEventListener("click", function (e) {
+                const postId = e.target.dataset.id;
+                if (confirm("Do you really want to restore this post?")) {
+                    fetch("../../../backend/api/admin/restore_post.php", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ postId })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert("✅ Post restored successfully");
+                                window.location.reload();
+                            } else {
+                                alert("❌ Failed to restore post: " + (data.message || ""));
+                            }
+                        })
+                        .catch(err => console.error("Error:", err));
+                }
+            });
+        }
+    }
+
+    // Initialize DataTables
+    function initializeDataTables() {
+        $('#allPostsTable').DataTable({
+            responsive: true,
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50],
+            destroy: true // Allow reinitialization
+        });
+
+        $('#publishedPostsTable').DataTable({
+            responsive: true,
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50],
+            destroy: true
+        });
+
+        $('#draftsTable').DataTable({
+            responsive: true,
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50],
+            destroy: true
+        });
+
+        $('#archivedTable').DataTable({
+            responsive: true,
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50],
+            destroy: true
+        });
+    }
 
 
-                })
+    document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
+        tab.addEventListener('shown.bs.tab', function (e) {
+            // Reinitialize DataTables when switching tabs
+            setTimeout(() => {
+                initializeDataTables();
+            }, 100);
+        });
+    });
+
+    // Fetch all posts
+    fetch("../../../backend/api/admin/get_all_posts.php")
+        .then(res => res.json())
+        .then(data => {
+            if (!data.success) {
+                console.error("Error:", data.message || "Failed to fetch posts");
+                return;
             }
+
+            allPosts = data.posts;
+
+            // Render all posts in the All Posts tab
+            renderPostsTable(allPosts, "allPostsTable", true);
+
+            // Render published posts
+            const publishedPosts = filterPosts('published');
+            renderPostsTable(publishedPosts, "publishedPostsTable", false);
+
+            // Render draft posts
+            const draftPosts = filterPosts('draft');
+            renderPostsTable(draftPosts, "draftsTable", false);
+
+            // Render archived posts
+            const archivedPosts = filterPosts('archived');
+            renderPostsTable(archivedPosts, "archivedTable", false);
+
+            // Initialize DataTables after content is loaded
+            setTimeout(() => {
+                initializeDataTables();
+            }, 100);
         })
+        .catch(error => {
+            console.error("Error fetching posts:", error);
+        });
 
     let tags = [];
 
@@ -626,7 +696,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.getElementById("uploadOverlay").classList.add("d-none");
 
                     if (data.errors) {
-
                         if (data.errors.title) {
                             document.getElementById("generalUploadError").innerText = data.errors.title;
                             document.getElementById("generalUploadError").classList.remove("d-none");
@@ -648,10 +717,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             }
                         });
                     }
-
                 }
-            })
-    })
+            });
+    });
 
     editForm.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -692,8 +760,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("editPostGeneralUploadError").classList.remove("d-none");
                 document.getElementById("editPostGeneralUploadError").innerText = "Unexpected error while editing post.";
             });
-
-
-    })
-
-})
+    });
+});

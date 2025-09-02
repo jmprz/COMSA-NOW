@@ -53,7 +53,194 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+<style>
+  /* Event and Quick Links Styles */
+  
+  /* Event item styles */
+.event-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
 
+.event-item:last-child {
+    border-bottom: none;
+}
+
+.event-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(3px);
+}
+
+.event-date {
+    min-width: 50px;
+    text-align: center;
+    margin-right: 15px;
+    background: linear-gradient(135deg, #7db832, #6aa32a);
+    color: white;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.event-date .day {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.event-date .month {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.event-info {
+    flex: 1;
+}
+
+.event-info h5 {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    color: #2c3e50;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.event-time {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Quick link styles */
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+}
+
+.suggestion-info {
+    flex: 1;
+}
+
+.suggestion-info h5 {
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.suggestion-info small {
+    font-size: 0.75rem;
+    color: #7f8c8d;
+}
+
+/* Dark mode support */
+body.dark-mode .event-item:hover,
+body.dark-mode .suggestion-item:hover {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .event-info h5,
+body.dark-mode .suggestion-info h5 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .event-time,
+body.dark-mode .suggestion-info small {
+    color: #b0b0b0;
+}
+
+  .suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .suggestion-item:last-child {
+    border-bottom: none;
+  }
+
+  .suggestion-item:hover {
+    background-color: #f8f9fa;
+  }
+
+  .suggestion-info h5 {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    color: #333;
+  }
+
+
+
+.no-events-message, .no-links-message {
+    border-top: 1px solid #eee;
+    margin-top: 10px;
+    padding: 20px 0;
+}
+
+.no-events-message i, .no-links-message i {
+    opacity: 0.5;
+}
+
+body.dark-mode .no-events-message,
+body.dark-mode .no-links-message {
+    border-top-color: #333;
+}
+  /* Dark mode styles */
+  body.dark-mode .event-item:hover,
+  body.dark-mode .suggestion-item:hover {
+    background-color: #2a2a2a;
+  }
+
+  body.dark-mode .event-info h5,
+  body.dark-mode .suggestion-info h5 {
+    color: #e0e0e0;
+  }
+
+  body.dark-mode .event-info p,
+  body.dark-mode .event-location {
+    color: #aaa;
+  }
+
+
+  .post-tags {
+    padding: 10px 15px;
+    border-top: 1px solid #eee;
+  }
+
+  .post-tag {
+    display: inline-block;
+    background-color: #f0f8ff;
+    color: #007bff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+</style>
 
 <body class="index-page">
 
@@ -132,97 +319,7 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
             </div>
           </div>
 
-          <!-- Post 1 -->
-          <div class="post-container">
-            <div class="post-header">
-              <img src="../../assets/img/team/sampleTeam.jpg" class="post-avatar" alt="User Avatar">
-              <div class="d-flex row gy-0">
-                <p class="project-username">john_perez</p>
-                <p class="project-date">1 week ago</p>
-              </div>
-              <i class="bi bi-three-dots post-more"></i>
-            </div>
 
-            <img src="../../assets/img/csexpo.jpg" class="post-image" alt="Project Image">
-
-            <div class="post-actions">
-              <button class="post-action like-btn" data-post="1">
-                <i class="bi bi-star"></i>
-              </button>
-              <button class="post-action comment-btn" data-post="1">
-                <i class="bi bi-chat-left"></i>
-              </button>
-            </div>
-
-            <div class="post-likes">1,243 likes</div>
-
-            <div class="post-caption">
-              <span class="post-caption-username">john_perez</span>
-              Just launched our AI-powered campus navigation system! 🚀 #CSExpo2024 #AI #Innovation
-            </div>
-
-            <div class="post-comments" id="comments1">
-              <div class="post-comment">
-                <span class="post-comment-username">sarah_tech</span>
-                This is amazing! How did you train the ML model?
-              </div>
-              <div class="post-comment">
-                <span class="post-comment-username">mike_dev</span>
-                Great work team! 👏
-              </div>
-            </div>
-
-            <div class="post-time">2 DAYS AGO</div>
-
-            <div class="post-add-comment" id="addComment1">
-              <input type="text" class="comment-input" placeholder="Add a comment..." data-post="1">
-              <button class="comment-submit" data-post="1">Post</button>
-            </div>
-          </div>
-
-          <!-- Post 2 -->
-          <div class="post-container">
-            <div class="post-header">
-              <img src="../../assets/img/team/sampleTeam.jpg" class="post-avatar" alt="User Avatar">
-              <div class="d-flex row gy-0">
-                <p class="project-username">john_perez</p>
-                <p class="project-date">1 week ago</p>
-              </div>
-              <i class="bi bi-three-dots post-more"></i>
-            </div>
-
-            <img src="../../assets/img/comsayep.jpg" class="post-image" alt="Project Image">
-
-            <div class="post-actions">
-              <button class="post-action like-btn" data-post="2">
-                <i class="bi bi-star"></i>
-              </button>
-              <button class="post-action comment-btn" data-post="2">
-                <i class="bi bi-chat-left"></i>
-              </button>
-            </div>
-
-            <div class="post-likes">892 likes</div>
-
-            <div class="post-caption">
-              <span class="post-caption-username">Eren_yeagar</span>
-              Our event management system is now being used by 3 student organizations! 🎉 #WebDev #StudentProjects
-            </div>
-
-            <div class="post-comments" id="comments2">
-              <div class="post-comment">
-                <span class="post-comment-username">tech_guy</span>
-                What stack did you use for this?
-              </div>
-            </div>
-
-            <div class="post-time">1 WEEK AGO</div>
-
-            <div class="post-add-comment" id="addComment2">
-              <input type="text" class="comment-input" placeholder="Add a comment..." data-post="2">
-              <button class="comment-submit" data-post="2">Post</button>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -265,50 +362,8 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
               <a href="#">View Calendar</a>
             </div>
 
-            <div class="event-item">
-              <div class="event-date">
-                <span class="day">15</span>
-                <span class="month">Jun</span>
-              </div>
-              <div class="event-info">
-                <h5>CS Expo 2024</h5>
-                <p>10:00 AM - 4:00 PM</p>
-                <div class="event-location">
-                  <i class="bi bi-geo-alt"></i>
-                  <span>University Main Hall</span>
-                </div>
-              </div>
-            </div>
+            <!-- fetching events  here tru dbs-->
 
-            <div class="event-item">
-              <div class="event-date">
-                <span class="day">22</span>
-                <span class="month">Jun</span>
-              </div>
-              <div class="event-info">
-                <h5>Hackathon Workshop</h5>
-                <p>2:00 PM - 5:00 PM</p>
-                <div class="event-location">
-                  <i class="bi bi-geo-alt"></i>
-                  <span>Computer Lab B</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-item">
-              <div class="event-date">
-                <span class="day">30</span>
-                <span class="month">Jun</span>
-              </div>
-              <div class="event-info">
-                <h5>Tech Career Fair</h5>
-                <p>9:00 AM - 3:00 PM</p>
-                <div class="event-location">
-                  <i class="bi bi-geo-alt"></i>
-                  <span>Student Center</span>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- Quick Links Card -->
@@ -316,27 +371,7 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
             <div class="section-header">
               <h4>Quick Links</h4>
             </div>
-
-            <div class="suggestion-item" style="padding: 10px 0;">
-              <i class="bi bi-link-45deg" style="font-size: 20px; color: #7db832; margin-right: 15px;"></i>
-              <div class="suggestion-info">
-                <h5>Course Materials</h5>
-              </div>
-            </div>
-
-            <div class="suggestion-item" style="padding: 10px 0;">
-              <i class="bi bi-link-45deg" style="font-size: 20px; color: #7db832; margin-right: 15px;"></i>
-              <div class="suggestion-info">
-                <h5>Student Resources</h5>
-              </div>
-            </div>
-
-            <div class="suggestion-item" style="padding: 10px 0;">
-              <i class="bi bi-link-45deg" style="font-size: 20px; color: #7db832; margin-right: 15px;"></i>
-              <div class="suggestion-info">
-                <h5>Research Opportunities</h5>
-              </div>
-            </div>
+               <!-- fetching quick links here tru dbs -->
           </div>
         </div>
       </div>
@@ -481,9 +516,10 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
                   <img src="../../assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
                   <div class="profile-info">
                     <h4>your_username</h4>
-                <p class="profile-nickname me-2" id="nicknameDisplay">
-                  <?php echo !empty($nickname) ? $nickname : 'No nickname set'; ?>
-                </p>                  </div>
+                    <p class="profile-nickname me-2" id="nicknameDisplay">
+                      <?php echo !empty($nickname) ? $nickname : 'No nickname set'; ?>
+                    </p>
+                  </div>
                 </div>
 
                 <div class="profile-stats">
@@ -546,9 +582,18 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
 
     <script src="../for-students/js/project-studs.js" defer></script>
 
-        <script>
-        //session with disabilities haha
-        const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
+    <script src="../for-students/js/fetch-posts.js"></script>
+    <script src="../for-students/js/fetch-events-links.js"></script>
+
+    <script>
+      //session with disabilities haha
+      const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
+
+
+      // Helper function to check if element contains text
+      Element.prototype.containsText = function(text) {
+        return this.textContent.toLowerCase().includes(text.toLowerCase());
+      };
     </script>
 
 
