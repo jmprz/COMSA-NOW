@@ -281,7 +281,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <!-- All Projects Tab -->
                 <div class="tab-pane fade show active" id="all-projects" role="tabpanel">
                   <!-- Project 1 - Game -->
-                  <div class="project-container-admin">
+                  <!-- <div class="project-container-admin">
                     <div class="project-header d-flex justify-content-between align-items-start">
                       <div class="d-flex align-items-center">
                         <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
@@ -335,125 +335,9 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
-                  <!-- Project 2 - Website -->
-                  <div class="project-container-admin">
-                    <div class="project-header d-flex justify-content-between align-items-start">
-                      <div class="d-flex align-items-center">
-                        <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
-                          alt="User Avatar">
-                        <div>
-                          <h6 class="mb-0">Valexore</h6>
-                          <small class="text-muted">1 week ago</small>
-                        </div>
-                      </div>
-                      <span class="project-badge web-badge">Website</span>
-                    </div>
 
-                    <div class="project-content mt-3">
-                      <h4 class="project-title">Vanstastic</h4>
-                      <p class="project-description">
-                        it was fustrating to received dos even tho you did all the best to create a fascinating website
-                        such as Vantastic.
-                      </p>
-
-                      <img src="../../assets/img/events/project-web-example.png" class="project-image-admin"
-                        alt="Website Screenshot">
-
-                      <div class="project-links mt-2">
-                        <a href="#" class="project-link"><i class="ri-global-line"></i> Live Demo</a>
-                        <a href="#" class="project-link"><i class="ri-github-fill"></i> Source Code</a>
-                      </div>
-
-                      <div class="project-tech mt-2">
-                        <span class="tech-tag">Php</span>
-                        <span class="tech-tag">MySql</span>
-                        <span class="tech-tag">Html</span>
-                        <span class="tech-tag">Css</span>
-                        <span class="tech-tag">Bootstrap</span>
-                      </div>
-
-                      <div class="project-stats mt-2">
-                        <div class="stat">
-                          <i class="ri-star-fill text-success"></i>
-                          <span>67 Likes</span>
-                        </div>
-                      </div>
-
-                      <div class="admin-actions d-flex justify-content-end gap-2">
-                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                          data-bs-target="#viewProjectModal">
-                          <i class="ri-eye-line"></i> View
-                        </button>
-                        <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
-                          data-bs-target="#editProjectModal">
-                          <i class="ri-edit-line"></i> Edit
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger">
-                          <i class="ri-delete-bin-line"></i> Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Project 3 - Console App -->
-                  <div class="project-container-admin">
-                    <div class="project-header d-flex justify-content-between align-items-start">
-                      <div class="d-flex align-items-center">
-                        <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
-                          alt="User Avatar">
-                        <div>
-                          <h6 class="mb-0">Valexore</h6>
-                          <small class="text-muted">3 weeks ago</small>
-                        </div>
-                      </div>
-                      <span class="project-badge console-badge">Console App</span>
-                    </div>
-
-                    <div class="project-content mt-3">
-                      <h4 class="project-title">Scientific Calculator</h4>
-                      <p class="project-description">
-                        A executable console application that performs advanced mathematical
-                        calculations with a unique spiral design.
-                      </p>
-
-                      <img src="../../assets/img/events/project-console-example.png" class="project-image-admin"
-                        alt="Console Screenshot">
-
-                      <div class="project-links mt-2">
-                        <a href="#" class="project-link"><i class="ri-download-line"></i> Executable</a>
-                        <a href="#" class="project-link"><i class="ri-github-fill"></i> Source Code</a>
-                      </div>
-
-                      <div class="project-tech mt-2">
-                        <span class="tech-tag">Visual Basic</span>
-                        <span class="tech-tag">dotNet</span>
-                        <span class="tech-tag">Algorithms</span>
-                      </div>
-
-                      <div class="project-stats mt-2">
-                        <div class="stat">
-                          <i class="ri-star-fill text-success"></i>
-                          <span>67 Likes</span>
-                        </div>
-                      </div>
-
-                      <div class="admin-actions d-flex justify-content-end gap-2">
-                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                          data-bs-target="#viewProjectModal">
-                          <i class="ri-eye-line"></i> View
-                        </button>
-                        <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
-                          data-bs-target="#editProjectModal">
-                          <i class="ri-edit-line"></i> Edit
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger">
-                          <i class="ri-delete-bin-line"></i> Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 <!-- Games Tab -->
@@ -754,38 +638,43 @@ require_once '../../../backend/middleware/admin_middleware.php';
             <div class="col-md-8">
               <div class="project-header d-flex justify-content-between align-items-start mb-3">
                 <div class="d-flex align-items-center">
-                  <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
+                  <img src="../../assets/img/team/sampleTeam.jpg" id="userAvatar" class="rounded-circle me-2" width="40" height="40"
                     alt="User Avatar">
                   <div>
-                    <h6 class="mb-0">Valexore</h6>
-                    <small class="text-muted">2 days ago</small>
+                    <h6 class="mb-0" id="name">Valexore</h6>
+                    <small class="text-muted" id="datePosted">2 days ago</small>
                   </div>
                 </div>
-                <span class="project-badge game-badge">Game</span>
+                <span class="project-badge game-badge" id="category">Game</span>
               </div>
 
-              <h3>Cave Tactic RPG</h3>
+              <h3 id="title">Cave Tactic RPG</h3>
 
-              <p>Darmnn if it happens, it happens...</p>
+              <p id="description">Darmnn if it happens, it happens...</p>
 
-              <img src="../../assets/img/events/project-game-example.png" class="img-fluid rounded mb-3"
-                alt="Game Screenshot">
+              <div class="imageContainer">
+                <img id="" src="../../assets/img/events/project-game-example.png" class="img-fluid rounded mb-3"
+                  alt="Game Screenshot">
+              </div>
 
-              <div class="project-links mb-3">
+              <div class="project-links mb-3" id="projectLinks">
                 <a href="#" class="project-link"><i class="ri-download-line"></i> Executable</a>
                 <a href="#" class="project-link"><i class="ri-github-fill"></i> Source Code</a>
               </div>
 
               <h5>Technologies Used</h5>
-              <div class="mb-3">
-                <span class="tech-tag">Godot</span>
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Pixel Graphics</span>
+              <div class="mb-3" id="technologies">
               </div>
 
               <div class="project-stats mb-3">
-                <i class="ri-star-fill text-success"></i>
-                <span>67 Likes</span>
+                <div>
+                  <i class="ri-star-fill text-success"></i>
+                  <span id="viewLikeCount">67 Likes</span>
+                </div>
+                <div>
+                  <i class="bi bi-chat-left text-success"></i>
+                  <span id="viewCommentCount">67 Comments</span>
+                </div>
               </div>
             </div>
 
@@ -795,33 +684,33 @@ require_once '../../../backend/middleware/admin_middleware.php';
                   <h6 class="mb-0">Admin Actions</h6>
                 </div>
                 <div class="card-body">
-                  <button class="btn btn-outline-secondary w-100 mb-2" data-bs-toggle="modal"
+                  <button class="btn btn-outline-secondary w-100 mb-2 editViewProjectBtn" id="editViewProjectBtn" data-bs-toggle="modal"
                     data-bs-target="#editProjectModal" data-bs-dismiss="modal">
                     <i class="ri-edit-line me-1"></i> Edit Project
                   </button>
-                  <button class="btn btn-outline-danger w-100">
+                  <button class="btn btn-outline-danger w-100 deleteViewProjectBtn" id="deleteViewProjectBtn">
                     <i class="ri-delete-bin-line me-1"></i> Delete Project
                   </button>
 
                   <hr>
 
-                  <div class="mb-3">
+                  <!-- <div class="mb-3">
                     <label class="form-label">Project Visibility</label>
                     <select class="form-select">
                       <option>Public</option>
                       <option>Unlisted</option>
                       <option>Hidden</option>
                     </select>
-                  </div>
+                  </div> -->
 
-                  <div class="form-check form-switch mb-3">
+                  <!-- <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" id="featuredToggle" checked>
                     <label class="form-check-label" for="featuredToggle">Featured Project</label>
-                  </div>
+                  </div> -->
 
-                  <button class="btn btn-success w-100">
+                  <!-- <button class="btn btn-success w-100">
                     <i class="ri-save-line me-1"></i> Save Changes
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -843,52 +732,52 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="editProjectForm">
+          <form id="editProjectForm" enctype="multipart/form-data">
             <div class="row">
               <div class="col-md-8">
                 <div class="mb-3">
                   <label for="editProjectTitle" class="form-label">Project Title</label>
-                  <input type="text" class="form-control" id="editProjectTitle" value="Cave Tactic RPG">
+                  <input type="text" class="form-control" name="editProjectTitle" id="editProjectTitle" value="Cave Tactic RPG">
                 </div>
 
                 <div class="mb-3">
                   <label for="editProjectDescription" class="form-label">Description</label>
-                  <textarea class="form-control" id="editProjectDescription"
+                  <textarea class="form-control" name="editProjectDescription" id="editProjectDescription"
                     rows="3">Darmnn if it happens, it happens...</textarea>
                 </div>
 
                 <div class="mb-3">
                   <label for="editProjectType" class="form-label">Project Type</label>
-                  <select class="form-select" id="editProjectType">
-                    <option value="game" selected>Game</option>
-                    <option value="website">Website</option>
-                    <option value="mobile">Mobile App</option>
-                    <option value="console">Console App</option>
-                    <option value="ai">AI/ML</option>
-                    <option value="database">Database</option>
+                  <select class="form-select" name="editProjectType" id="editProjectType">
+                    <option value="Games">Games</option>
+                    <option value="Websites">Websites</option>
+                    <option value="Mobile">Mobile App</option>
+                    <option value="Console">Console App</option>
+                    <option value="AI/ML">AI/ML</option>
+                    <option value="Databases">Databases</option>
+                    <option value="Others">Others</option>
                   </select>
                 </div>
 
                 <div class="mb-3">
                   <label for="editProjectTech" class="form-label">Technologies Used</label>
-                  <input type="text" class="form-control" id="editProjectTech" value="Godot, Python, Pixel Graphics">
-                  <div class="mt-2" id="techTagsContainer">
-                    <span class="tech-tag">Godot</span>
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Pixel Graphics</span>
-                  </div>
+                  <input type="text" name="editProjectTech" class="form-control" id="editProjectTech">
+                  <div class="mt-2" id="techTagsContainer"><!-- JS will render here --></div>
+                  <input type="hidden" id="hiddenTechInput" name="technologies"> <!-- store comma list -->
                 </div>
 
+
                 <div class="mb-3">
-                  <label class="form-label">Project Image</label>
-                  <div class="image-upload-container mb-2">
-                    <img src="../../assets/img/events/project-game-example.png" id="editProjectImagePreview"
-                      class="img-fluid rounded" style="display: block;">
+                  <label class="form-label">Project Images</label>
+                  <div id="editImagesContainer" class="d-flex flex-wrap gap-2 mb-2">
+                    <!-- JS will insert previews here -->
                   </div>
-                  <input type="file" id="editProjectImageUpload" accept="image/*" style="display: none;">
+                  <input type="file" id="editProjectImageUpload" accept="image/*" multiple style="display: none;">
                   <button type="button" class="btn btn-sm btn-outline-secondary" id="changeProjectImageBtn">
-                    <i class="ri-image-edit-line me-1"></i> Change Image
+                    <i class="ri-image-edit-line me-1"></i> Add Images
                   </button>
+                  <small class="text-muted d-block">Max 8 images allowed</small>
+                  <input type="hidden" id="hiddenImagesInput" name="project_images">
                 </div>
               </div>
 
@@ -900,15 +789,14 @@ require_once '../../../backend/middleware/admin_middleware.php';
                   <div class="card-body">
                     <div class="mb-3">
                       <label class="form-label">Visibility</label>
-                      <select class="form-select">
-                        <option>Public</option>
-                        <option>Unlisted</option>
-                        <option>Hidden</option>
+                      <select id="editVisibility" name="editVisibility" class="form-select">
+                        <option value="public">Public</option>
+                        <option value="hidden">Hidden</option>
                       </select>
                     </div>
 
                     <div class="form-check form-switch mb-3">
-                      <input class="form-check-input" type="checkbox" id="editFeaturedToggle">
+                      <input class="form-check-input" name="editFeaturedToggle" type="checkbox" id="editFeaturedToggle">
                       <label class="form-check-label" for="editFeaturedToggle">Featured Project</label>
                     </div>
 
@@ -916,13 +804,18 @@ require_once '../../../backend/middleware/admin_middleware.php';
                       <label class="form-label">Project Links</label>
                       <div class="input-group mb-2">
                         <span class="input-group-text"><i class="ri-download-line"></i></span>
-                        <input type="url" class="form-control" placeholder="Executable URL"
+                        <input name="editDownload" id="editDownload" type="url" class="form-control" placeholder="Executable URL"
                           value="https://example.com/download">
                       </div>
                       <div class="input-group">
                         <span class="input-group-text"><i class="ri-github-fill"></i></span>
-                        <input type="url" class="form-control" placeholder="Source Code URL"
+                        <input name="editGithub" id="editGithub" type="url" class="form-control" placeholder="Source Code URL"
                           value="https://github.com/example">
+                      </div>
+                      <div class="input-group mb-2">
+                        <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                        <input name="editLive" id="editLive" type="url" class="form-control" placeholder="Executable URL"
+                          value="https://example.com/download">
                       </div>
                     </div>
 
@@ -986,6 +879,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
 
   <!-- main -->
   <script src="./js/admin-logout.js"></script>
+  <script src="./js/project.js"></script>
 
 
   <script>
@@ -1033,10 +927,6 @@ require_once '../../../backend/middleware/admin_middleware.php';
     });
   </script>
 
-
-
-
-
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Handle image change in edit project modal
@@ -1044,9 +934,6 @@ require_once '../../../backend/middleware/admin_middleware.php';
       const editProjectImageUpload = document.getElementById('editProjectImageUpload');
       const editProjectImagePreview = document.getElementById('editProjectImagePreview');
 
-      changeProjectImageBtn.addEventListener('click', function() {
-        editProjectImageUpload.click();
-      });
 
       editProjectImageUpload.addEventListener('change', function(e) {
         if (e.target.files.length > 0) {

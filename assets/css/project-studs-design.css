@@ -219,6 +219,7 @@ body {
 }
 
 .game-badge { background-color: #6f42c1; }
+.others-badge { background-color: #665454; }
 .web-badge { background-color: #20c997; }
 .console-badge { background-color: #fd7e14; }
 .mobile-badge { background-color: #0dcaf0; }
@@ -308,6 +309,13 @@ body {
   gap: 20px;
   padding: 12px 16px;
   border-top: 1px solid #f0f0f0;
+}
+
+button.post-action {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .project-stats .stat, .post-action {

@@ -738,15 +738,6 @@ section,
   z-index: 10;
 }
 
-.carousel-control-prev {
-  left: -60px; /* Adjust distance from card */
-}
-
-.carousel-control-next {
-  right: -60px; /* Adjust distance from card */
-}
-
-
 
 .carousel-container::after {
   content: "";
