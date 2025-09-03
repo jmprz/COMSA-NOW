@@ -591,7 +591,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error:", data.message || "Failed to fetch posts");
                 return;
             }
-
+ 
             allPosts = data.posts;
 
             // Render all posts in the All Posts tab
