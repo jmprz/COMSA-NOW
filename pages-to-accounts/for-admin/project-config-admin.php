@@ -732,7 +732,20 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <div id="editProjectUploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+            <div id="editProjectUploadLoader" class="text-center">
+              <div class="spinner-border text-success" role="status"></div>
+              <p class="mt-2 fw-semibold">Editing...</p>
+            </div>
+            <div id="editProjectUploadSuccess" class="text-center d-none">
+              <i class="bi bi-check-circle-fill text-success fs-1"></i>
+              <p class="mt-2 fw-semibold">Edit Successful!</p>
+            </div>
+          </div>
+
+          <div id="editProjectGeneralUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
           <form id="editProjectForm" enctype="multipart/form-data">
+            <input type="hidden" name="projectId" id="editprojectId">
             <div class="row">
               <div class="col-md-8">
                 <div class="mb-3">
@@ -822,11 +835,13 @@ require_once '../../../backend/middleware/admin_middleware.php';
                     <button type="submit" class="btn btn-success w-100">
                       <i class="ri-save-line me-2"></i> Save Changes
                     </button>
+
                   </div>
                 </div>
               </div>
             </div>
           </form>
+
         </div>
       </div>
     </div>
@@ -882,7 +897,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
   <script src="./js/project.js"></script>
 
 
-  <script>
+  <!-- <script>
     // Project Search Functionality
     document.addEventListener('DOMContentLoaded', function() {
       const searchInput = document.querySelector('.input-group input[type="text"]');
@@ -925,9 +940,9 @@ require_once '../../../backend/middleware/admin_middleware.php';
         });
       });
     });
-  </script>
+  </script> -->
 
-  <script>
+  <!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Handle image change in edit project modal
       const changeProjectImageBtn = document.getElementById('changeProjectImageBtn');
@@ -994,7 +1009,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
         }
       }
     });
-  </script>
+  </script> -->
 </body>
 
 </html>
