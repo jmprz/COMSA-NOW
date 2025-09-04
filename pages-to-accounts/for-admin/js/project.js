@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", function (e) {
 
+  const editForm = document.getElementById("editProjectForm");
+
   let allProjects = [];
+
+  let newImages = [];
+  let currentImages = [];
 
   const categoryClassMap = {
     'websites': 'web',
@@ -243,6 +248,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
         document.getElementById("editProjectType").value = project.project_category;
         document.getElementById("editVisibility").value = project.visibility;
         document.getElementById("editFeaturedToggle").checked = !!project.featured;
+        document.getElementById("editProjectForm").dataset.id = project.id;
+        document.getElementById("editprojectId").value = project.id;
+
 
         //links
         document.getElementById("editDownload").value = project.download_link;
@@ -301,8 +309,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
         const imageInput = document.getElementById("editProjectImageUpload");
         const addImageBtn = document.getElementById("changeProjectImageBtn");
 
-        let currentImages = [...(project.images || [])]; // DB paths
-        let newImages = []; // new File objects
+        currentImages = [...(project.images || [])];
+        newImages = [];
 
         function renderImages() {
           imagesContainer.innerHTML = "";
@@ -389,6 +397,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
   }
 
 
+
+
   fetch("../../../backend/api/get_project.php")
     .then(res => res.json())
     .then(data => {
@@ -401,8 +411,60 @@ document.addEventListener("DOMContentLoaded", function (e) {
       allProjects = data.posts;
       renderProjectsTable(allProjects, "all-projects");
 
-
-
     })
+
+  editForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const dataForm = new FormData(editForm);
+
+    const projectId = editForm.getAttribute("data-id");
+    dataForm.append("projectId", projectId);
+
+    newImages.forEach((file) => {
+      dataForm.append("new_images[]", file);
+    });
+
+    // Keep DB images
+    dataForm.append("existing_images", currentImages.join(","));
+
+    document.getElementById("editProjectUploadOverlay").classList.remove("d-none");
+    document.getElementById("editProjectUploadLoader").classList.remove("d-none");
+    document.getElementById("editProjectUploadSuccess").classList.add("d-none");
+
+    document.getElementById("editProjectGeneralUploadError").classList.add("d-none");
+
+    console.log([...dataForm.entries()]);
+
+    fetch("../../../backend/api/edit_student_project.php", {
+      method: "POST",
+      body: dataForm,
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          console.log("✅ project edited:", data);
+          document.getElementById("editProjectUploadLoader").classList.add("d-none");
+          document.getElementById("editProjectUploadSuccess").classList.remove("d-none");
+
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          document.getElementById("editProjectUploadLoader").classList.add("d-none");
+          document.getElementById("editProjectUploadOverlay").classList.add("d-none");
+          document.getElementById("editProjectGeneralUploadError").classList.remove("d-none");
+          document.getElementById("editProjectGeneralUploadError").innerText = data.errors || "Failed to edit post.";
+        }
+      })
+      .catch(err => {
+        console.error("❌ Error:", err);
+        document.getElementById("editProjectGeneralUploadError").classList.remove("d-none");
+        document.getElementById("editProjectGeneralUploadError").innerText = "Unexpected error while editing post.";
+      });
+
+  })
 })
 
