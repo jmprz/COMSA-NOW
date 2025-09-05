@@ -278,6 +278,19 @@ require_once '../../../backend/middleware/admin_middleware.php';
             </div>
             <div class="card-body">
               <div class="tab-content" id="projectManagementTabsContent">
+
+                <div id="editProjectDashUploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+                  <div id="editProjectDashUploadLoader" class="text-center">
+                    <div class="spinner-border text-success" role="status"></div>
+                    <p class="mt-2 fw-semibold">Editing...</p>
+                  </div>
+                  <div id="editProjectDashUploadSuccess" class="text-center d-none">
+                    <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                    <p class="mt-2 fw-semibold">Edit Successful!</p>
+                  </div>
+                </div>
+
+                <div id="editProjectDashGeneralUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
                 <!-- All Projects Tab -->
                 <div class="tab-pane fade show active" id="all-projects" role="tabpanel">
                   <!-- Project 1 - Game -->
@@ -336,13 +349,11 @@ require_once '../../../backend/middleware/admin_middleware.php';
                       </div>
                     </div>
                   </div> -->
-
-
                 </div>
 
                 <!-- Games Tab -->
                 <div class="tab-pane fade" id="games" role="tabpanel">
-                  <div class="project-container-admin">
+                  <!-- <div class="project-container-admin">
                     <div class="project-header d-flex justify-content-between align-items-start">
                       <div class="d-flex align-items-center">
                         <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
@@ -396,12 +407,12 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
 
                 <!-- Websites Tab -->
                 <div class="tab-pane fade" id="websites" role="tabpanel">
-                  <div class="project-container-admin">
+                  <!-- <div class="project-container-admin">
                     <div class="project-header d-flex justify-content-between align-items-start">
                       <div class="d-flex align-items-center">
                         <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
@@ -458,19 +469,19 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
 
                 <!-- Mobile Apps Tab -->
                 <div class="tab-pane fade" id="mobile" role="tabpanel">
-                  <div class="alert alert-info">
+                  <!-- <div class="alert alert-info">
                     No mobile app projects found.
-                  </div>
+                  </div> -->
                 </div>
 
                 <!-- Console Apps Tab -->
                 <div class="tab-pane fade" id="console" role="tabpanel">
-                  <div class="project-container-admin">
+                  <!-- <div class="project-container-admin">
                     <div class="project-header d-flex justify-content-between align-items-start">
                       <div class="d-flex align-items-center">
                         <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
@@ -525,23 +536,23 @@ require_once '../../../backend/middleware/admin_middleware.php';
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
 
 
                 <!-- Ai/ML Tab -->
                 <div class="tab-pane fade" id="aiml" role="tabpanel">
-                  <div class="alert alert-info">
+                  <!-- <div class="alert alert-info">
                     No Ai/ML projects found.
-                  </div>
+                  </div> -->
                 </div>
 
 
                 <!-- database Tab -->
                 <div class="tab-pane fade" id="database" role="tabpanel">
-                  <div class="alert alert-info">
+                  <!-- <div class="alert alert-info">
                     No Database projects found.
-                  </div>
+                  </div> -->
                 </div>
 
 
