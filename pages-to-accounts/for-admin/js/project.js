@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         `;
 
       newEl.innerHTML = `
+
             <div class="project-header d-flex justify-content-between align-items-start">
               <div class="d-flex align-items-center">
                 <img src="${project.profile_photo ? `../../../backend/${project.profile_photo}` : "../../assets/img/default-pic.jpg"}" 
@@ -147,15 +148,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
           wrap: true
         });
       }
-
-
-
     });
   }
 
   function attachEventListener(element, project) {
     const viewPostBtn = element.querySelector(".viewProjectBtn");
     const editPostBtn = element.querySelector(".editProjectBtn");
+    const deletePostBtn = element.querySelector(".deleteProjectBtn");
 
     if (viewPostBtn) {
       viewPostBtn.addEventListener("click", function (e) {
@@ -394,9 +393,73 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
       });
     }
+
+    if (deletePostBtn) {
+      deletePostBtn.addEventListener("click", function (e) {
+        const id = e.target.dataset.id;
+
+        if (confirm("Are you sure you want to delete this post?")) {
+
+
+          document.getElementById("editProjectDashUploadOverlay").classList.remove("d-none");
+          document.getElementById("editProjectDashUploadLoader").classList.remove("d-none");
+          document.getElementById("editProjectDashUploadSuccess").classList.add("d-none");
+
+          document.getElementById("editProjectDashGeneralUploadError").classList.add("d-none");
+
+          fetch("../../../backend/api/admin/admin_delete_project.php", {
+            method: "DELETE",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({id})
+          })
+            .then(res => res.json())
+            .then(data => {
+              if (data.success) {
+                console.log("✅ project Deleted:", data);
+                document.getElementById("editProjectDashUploadLoader").classList.add("d-none");
+                document.getElementById("editProjectDashUploadSuccess").classList.remove("d-none");
+
+                setTimeout(() => {
+                  window.location.reload();
+                }, 1000);
+              } else {
+                document.getElementById("editProjectDashUploadLoader").classList.add("d-none");
+                document.getElementById("editProjectDashUploadOverlay").classList.add("d-none");
+                document.getElementById("editProjectDashGeneralUploadError").classList.remove("d-none");
+                document.getElementById("editProjectDashGeneralUploadError").innerText = data.message || "Failed to delete project.";
+
+                setTimeout(() => {
+                  document.getElementById("editProjectDashGeneralUploadError").classList.add("d-none");
+                }, 5000);
+              }
+            })
+            .catch(err => {
+              console.error("❌ Error:", err);
+              document.getElementById("editProjectDashGeneralUploadError").classList.remove("d-none");
+              document.getElementById("editProjectDashUploadLoader").classList.add("d-none");
+              document.getElementById("editProjectDashUploadOverlay").classList.add("d-none");
+              document.getElementById("editProjectDashGeneralUploadError").innerText = "Unexpected error while Deleting Project.";
+
+              setTimeout(() => {
+                  document.getElementById("editProjectDashGeneralUploadError").classList.add("d-none");
+                }, 5000);
+            });
+        }
+      })
+    }
   }
 
-
+  function filterPosts(status, projects) {
+        let filteredPosts = projects;
+        
+        if (status !== 'all') {
+            filteredPosts = projects.filter(post => 
+                post.project_category.toLowerCase() === status.toLowerCase()
+            );
+        }
+        
+        return filteredPosts;
+    }
 
 
   fetch("../../../backend/api/get_project.php")
@@ -410,6 +473,24 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
       allProjects = data.posts;
       renderProjectsTable(allProjects, "all-projects");
+
+      const games = filterPosts("Games", allProjects);
+      renderProjectsTable(games, "games");
+
+      const websites = filterPosts("Websites", allProjects);
+      renderProjectsTable(websites, "websites");
+
+      const mobile = filterPosts("Mobile Apps", allProjects);
+      renderProjectsTable(mobile, "mobile");
+
+      const consoleApp = filterPosts("Console Apps", allProjects);
+      renderProjectsTable(consoleApp, "console");
+
+      const ai = filterPosts("AI/ML", allProjects);
+      renderProjectsTable(ai, "aiml");
+
+      const database = filterPosts("Databases", allProjects);
+      renderProjectsTable(database, "database");
 
     })
 
