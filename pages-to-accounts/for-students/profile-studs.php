@@ -329,6 +329,9 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                 <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
                                     <i class="ri-shapes-line"></i> <span>Projects</span>
                                 </a>
+                                <a href="../../pages-to-accounts/for-students/studs-chat.php" class="btn text-start d-flex align-items-center gap-2">
+                                    <i class="ri-chat-smile-3-line"></i> <span>Chat</span>
+                                </a>
                                 <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
                                     <i class="ri-search-line"></i> <span>Search</span>
                                 </a>
