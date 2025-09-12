@@ -44,7 +44,10 @@ require_once '../../../backend/middleware/student_middleware.php';
   <link href="../../assets/css/main.css" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/css/login-form.css">
   <link rel="stylesheet" href="../../assets/css/student-dash.css">
+    <link rel="stylesheet" href="../../assets/css/project-studs-design.css">  <!-- Also responsible for nav design-->
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">
+    <link rel="stylesheet" href="../../assets/css/search-profile-design.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
@@ -68,6 +71,9 @@ require_once '../../../backend/middleware/student_middleware.php';
               </a>
               <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-shapes-line"></i> <span>Projects</span>
+              </a>
+              <a href="../../pages-to-accounts/for-students/studs-chat.php" class="btn text-start d-flex align-items-center gap-2">
+                <i class="ri-chat-smile-3-line"></i> <span>Chat</span>
               </a>
               <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-search-line"></i> <span>Search</span>
@@ -421,6 +427,31 @@ require_once '../../../backend/middleware/student_middleware.php';
       </div>
     </div>
 
+          <!-- Search Modal -->
+      <div class="search-popup" id="searchPopup">
+        <div class="search-container">
+          <button class="search-close-button" id="searchCloseButton">
+            <i class="ri-close-line"></i>
+          </button>
+          <div class="search-input-container">
+            <input type="text" placeholder="Search students by name, nickname, or student number..."
+              class="search-input" id="searchInput">
+            <button class="search-button" id="searchButton">
+              <i class="ri-search-line"></i>
+            </button>
+          </div>
+          <div class="search-results-container">
+            <div class="search-results-header">
+              <span>Search Results</span>
+              <span class="search-results-count">0 results</span>
+            </div>
+            <div class="search-results-list" id="searchResultsList">
+              <!-- Results will be populated here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
 
     <!-- Vendor JS Files -->
     <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -435,7 +466,10 @@ require_once '../../../backend/middleware/student_middleware.php';
     <script src="../../assets/js/main.js"></script>
     <script src="./js/settings-logout.js"></script>
     <script src="./js/settings-config.js"></script>
-    <script src="../for-students/js/studs-search.js"></script>
+
+
+  <script src="../for-students/js/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
+
     <!-- <script src="../../assets/js/studs-main-func.js"></script> -->
 
 </body>

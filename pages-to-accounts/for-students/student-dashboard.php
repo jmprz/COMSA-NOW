@@ -50,32 +50,33 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
   <link rel="stylesheet" href="../../assets/css/login-form.css">
   <link rel="stylesheet" href="../../assets/css/search.css">
   <link rel="stylesheet" href="../../assets/css/student-dash.css">
+    <link rel="stylesheet" href="../../assets/css/project-studs-design.css">  <!-- Also responsible for nav design-->
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <style>
   /* Event and Quick Links Styles */
-  
+
   /* Event item styles */
-.event-item {
+  .event-item {
     display: flex;
     align-items: flex-start;
     padding: 12px 0;
     border-bottom: 1px solid #eee;
     cursor: pointer;
     transition: all 0.2s ease;
-}
+  }
 
-.event-item:last-child {
+  .event-item:last-child {
     border-bottom: none;
-}
+  }
 
-.event-item:hover {
+  .event-item:hover {
     background-color: #f8f9fa;
     transform: translateX(3px);
-}
+  }
 
-.event-date {
+  .event-date {
     min-width: 50px;
     text-align: center;
     margin-right: 15px;
@@ -83,91 +84,91 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
     color: white;
     border-radius: 8px;
     padding: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-.event-date .day {
+  .event-date .day {
     display: block;
     font-size: 1.2rem;
     font-weight: bold;
     line-height: 1;
-}
+  }
 
-.event-date .month {
+  .event-date .month {
     display: block;
     font-size: 0.8rem;
     text-transform: uppercase;
     font-weight: 600;
-}
+  }
 
-.event-info {
+  .event-info {
     flex: 1;
-}
+  }
 
-.event-info h5 {
+  .event-info h5 {
     font-size: 0.95rem;
     margin-bottom: 4px;
     color: #2c3e50;
     font-weight: 600;
     line-height: 1.3;
-}
+  }
 
-.event-time {
+  .event-time {
     font-size: 0.85rem;
     color: #666;
     margin-bottom: 0;
-}
+  }
 
-/* Quick link styles */
-.suggestion-item {
+  /* Quick link styles */
+  .suggestion-item {
     display: flex;
     align-items: center;
     padding: 12px 0;
     border-bottom: 1px solid #eee;
     cursor: pointer;
     transition: all 0.2s ease;
-}
+  }
 
-.suggestion-item:last-child {
+  .suggestion-item:last-child {
     border-bottom: none;
-}
+  }
 
-.suggestion-item:hover {
+  .suggestion-item:hover {
     background-color: #f8f9fa;
     transform: translateX(5px);
-}
+  }
 
-.suggestion-info {
+  .suggestion-info {
     flex: 1;
-}
+  }
 
-.suggestion-info h5 {
+  .suggestion-info h5 {
     font-size: 0.9rem;
     margin-bottom: 2px;
     color: #2c3e50;
     font-weight: 600;
-}
+  }
 
-.suggestion-info small {
+  .suggestion-info small {
     font-size: 0.75rem;
     color: #7f8c8d;
-}
+  }
 
-/* Dark mode support */
-body.dark-mode .event-item:hover,
-body.dark-mode .suggestion-item:hover {
+  /* Dark mode support */
+  body.dark-mode .event-item:hover,
+  body.dark-mode .suggestion-item:hover {
     background-color: #2a2a2a;
-}
+  }
 
-body.dark-mode .event-info h5,
-body.dark-mode .suggestion-info h5 {
+  body.dark-mode .event-info h5,
+  body.dark-mode .suggestion-info h5 {
     color: #e0e0e0;
-}
+  }
 
-body.dark-mode .event-time,
-body.dark-mode .suggestion-info small {
+  body.dark-mode .event-time,
+  body.dark-mode .suggestion-info small {
     color: #b0b0b0;
-}
+  }
 
   .suggestion-item {
     display: flex;
@@ -194,20 +195,23 @@ body.dark-mode .suggestion-info small {
 
 
 
-.no-events-message, .no-links-message {
+  .no-events-message,
+  .no-links-message {
     border-top: 1px solid #eee;
     margin-top: 10px;
     padding: 20px 0;
-}
+  }
 
-.no-events-message i, .no-links-message i {
+  .no-events-message i,
+  .no-links-message i {
     opacity: 0.5;
-}
+  }
 
-body.dark-mode .no-events-message,
-body.dark-mode .no-links-message {
+  body.dark-mode .no-events-message,
+  body.dark-mode .no-links-message {
     border-top-color: #333;
-}
+  }
+
   /* Dark mode styles */
   body.dark-mode .event-item:hover,
   body.dark-mode .suggestion-item:hover {
@@ -278,6 +282,9 @@ body.dark-mode .no-links-message {
               </a>
               <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-shapes-line"></i> <span>Projects</span>
+              </a>
+              <a href="../../pages-to-accounts/for-students/studs-chat.php" class="btn text-start d-flex align-items-center gap-2">
+                <i class="ri-chat-smile-3-line"></i> <span>Chat</span>
               </a>
               <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
                 <i class="ri-search-line"></i> <span>Search</span>
@@ -371,7 +378,7 @@ body.dark-mode .no-links-message {
             <div class="section-header">
               <h4>Quick Links</h4>
             </div>
-               <!-- fetching quick links here tru dbs -->
+            <!-- fetching quick links here tru dbs -->
           </div>
         </div>
       </div>

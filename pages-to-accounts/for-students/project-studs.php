@@ -41,8 +41,9 @@ require_once '../../../backend/middleware/student_middleware.php';
 
   <!-- Main CSS File -->
   <!-- <link href="../../assets/css/main.css" rel="stylesheet"> -->
+   
   <link rel="stylesheet" href="../../assets/css/project-studs-design.css">
-    <link rel="stylesheet" href="../../assets/css/search-profile-design.css">
+  <link rel="stylesheet" href="../../assets/css/search-profile-design.css">
   <link rel="stylesheet" href="../../assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -99,6 +100,9 @@ require_once '../../../backend/middleware/student_middleware.php';
                 </a>
                 <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2 btn-active">
                   <i class="ri-shapes-line"></i> <span>Projects</span>
+                </a>
+                <a href="../../pages-to-accounts/for-students/studs-chat.php" class="btn text-start d-flex align-items-center gap-2">
+                  <i class="ri-chat-smile-3-line"></i> <span>Chat</span>
                 </a>
                 <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-search-line"></i> <span>Search</span>
