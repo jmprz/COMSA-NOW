@@ -692,13 +692,32 @@ section,
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  margin-top: 140px;
-  min-height: 10vh; /* full screen height */
+  margin-top: 100px;
+  position: relative;
+  min-height: 10vh;
   display: flex;
-  justify-content: center; /* horizontal center */
-  align-items: center; /* vertical center */
-  background: linear-gradient(0deg, var(--background-color) 0%, color-mix(in srgb, var(--background-color) 90%, white 10%) 100%);
-  padding: 0;
+  justify-content: center;
+  align-items: center;
+  background: #fafafa; /* dark techy base */
+  overflow: hidden;
+}
+
+/* Grid lines */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+     linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+}
+
+
+#hero-carousel {
+  position: relative;
+  z-index: 1; /* content above background */
 }
 
 .hero .carousel-container {
@@ -967,6 +986,48 @@ section,
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
+
+.about {
+  position: relative;
+  background: #fafafa;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+.about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-radial-gradient(
+    circle at center,
+    rgba(0,0,0,0.1) 0,
+    rgba(0,0,0,0.1) 1px,
+    transparent 2px,
+    transparent 40px
+  );
+}
+
+/* Optional glowing diagonal accent */
+.about::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(99,102,241,0.2), transparent 70%);
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: 0;
+}
+
+/* Keep actual content above background */
+.about > * {
+  position: relative;
+  z-index: 1;
+}
+
+
 .about ul {
   list-style: none;
   padding: 0;
@@ -1214,6 +1275,31 @@ section,
 /*--------------------------------------------------------------
 # Portfolio Section
 --------------------------------------------------------------*/
+
+.portfolio {
+  position: relative;
+  background: #fafafa;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.portfolio::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.07) 1px, transparent 1px);
+  background-size: 12px 12px;
+  z-index: 0;
+}
+
+.portfolio > * {
+  position: relative;
+  z-index: 1;
+}
+
+
 .portfolio .portfolio-filters {
   padding: 0;
   margin: 0 auto 20px auto;
@@ -1602,6 +1688,33 @@ section,
 /*--------------------------------------------------------------
 # Team Section
 --------------------------------------------------------------*/
+
+.team {
+  position: relative;
+  background: #fafafa;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.team::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.07) 0px,
+    rgba(0,0,0,0.07) 1px,
+    transparent 20px
+  );
+  transform: skewY(-5deg);
+  z-index: 0;
+}
+
+.team > * {
+  position: relative;
+  z-index: 1;
+}
+
 .team .team-member {
   background-color: var(--surface-color);
   overflow: hidden;
