@@ -106,13 +106,13 @@ body {
 }
 
 .btn-active, .btn-active-mobile {
-  background-color: var(--primary-light);
-  color: var(--primary-dark);
+  background: linear-gradient(135deg, #7db832, #6aa32a);
+  color: #fff !important;
 }
 
 .btn-active:hover {
-  background-color: var(--primary-light);
-  color: var(--primary-dark);
+  background: linear-gradient(135deg, #6aa32a, #7db832);
+  color: #fff !important;
 }
 
 .side-nav-footer {
@@ -127,7 +127,6 @@ body {
 /* ===== Main Content Area ===== */
 .posts-column {
   padding: 20px;
-  background-color: white;
 }
 
 /* Mobile Header */
@@ -255,7 +254,7 @@ body {
   box-shadow: 0 3px 10px var(--shadow-color);
   cursor: pointer;
   transition: transform 0.2s ease;
-  max-height: 400px;
+  max-height: 500px;
   object-fit: cover;
 }
 
@@ -842,7 +841,7 @@ body.dark-mode .compact-form .form-select {
   }
   
   .posts-column {
-    padding: 15px;
+    padding: 1px;
   }
   
   .project-title, .post-caption-username {

@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', function () {
       const isLiked = icon.classList.contains('bi-star-fill');
 
       if (isLiked) {
-        icon.classList.remove('bi-star-fill');
-        icon.classList.add('bi-star');
+        icon.classList.remove('ri-heart-3-fill');
+        icon.classList.add('ri-heart-3-line');
         this.classList.remove('active');
       } else {
-        icon.classList.remove('bi-star');
-        icon.classList.add('bi-star-fill');
+        icon.classList.remove('ri-heart-3-line');
+        icon.classList.add('ri-heart-3-fill');
         this.classList.add('active');
       }
     });
@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const icon = likeBtn.querySelector('i');
 
       // Only trigger if not already liked
-      if (!icon.classList.contains('bi-star-fill')) {
-        icon.classList.remove('bi-star');
-        icon.classList.add('bi-star-fill');
+      if (!icon.classList.contains('ri-heart-3-fill')) {
+        icon.classList.remove('ri-heart-3-line');
+        icon.classList.add('ri-heart-3-fill');
         likeBtn.classList.add('active');
       }
     });

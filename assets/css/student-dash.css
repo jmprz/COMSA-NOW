@@ -30,7 +30,6 @@ body {
 
 
 
-
 .side-nav-menu a {
   display: flex;
   align-items: center;
@@ -42,16 +41,19 @@ body {
 }
 
 .btn-active {
-  background-color: rgba(126, 184, 50, 0.199);
+   background: linear-gradient(135deg, #7db832, #6aa32a);
+  color: #fff !important;
 }
 
-.btn-active:hover {
-  background-color: rgba(126, 184, 50, 0.199);
-  color: #055a0f;
+.btn-light:hover {
+   background-color: var(--primary-light);
+  color: var(--primary-dark);
+  border: none;
+  
 }
 
 .btn-active-mobile {
-  background-color: rgba(126, 184, 50, 0.199);
+  background: linear-gradient(135deg, #7db832, #6aa32a);
   border-radius: 10px;
   width: 70px;
   height: 50px;
@@ -327,7 +329,9 @@ body {
   border: 2px solid #7db832;
 }
 
-
+.like-count-color{
+  color: #7db832;
+}
 
 .post-more {
   margin-left: auto;

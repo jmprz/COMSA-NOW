@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
               <div class="project-stats">
                     <div class="stat d-flex align-items-start">
                     <button class="post-action d-flex flex-column like-btn" data-id="${project.id}">
-                        <i class="bi ${project.liked_by_user ? 'bi-star-fill' : 'bi-star'} like-icon" id="like-icon-${project.id}"></i>
+                        <i class="bi ${project.liked_by_user ? 'ri-heart-3-fill' : 'ri-heart-3-line'} like-icon" id="like-icon-${project.id}"></i>
                         <span class="like-count" style="font-size: 13px;" id="like-count-${project.id}">${project.like_count} Likes</span>
                     </button>
                     <button class="post-action d-flex flex-column comment-btn" data-id="${project.id}" data-post='${JSON.stringify(project).replace(/'/g, "&apos;")}'>

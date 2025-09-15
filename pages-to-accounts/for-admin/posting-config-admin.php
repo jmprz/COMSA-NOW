@@ -261,7 +261,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <div class="d-flex align-items-center gap-2">
             <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal"
               data-bs-target="#adminProfileModal">
-              <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle" alt="Profile"
+              <img src="../../assets/img/team/default_user.png" class="rounded-circle" alt="Profile"
                 style="width: 40px; height: 40px;">
             </button>
           </div>
@@ -627,7 +627,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
             <div class="col-md-8">
               <div class="post-preview-container h-100" style="border-radius: 0; border-right: 1px solid #dee2e6;">
                 <div class="post-preview-header">
-                  <img src="../../assets/img/team/sampleTeam.jpg" class="post-preview-avatar" alt="Admin Avatar">
+                  <img src="../../assets/img/team/default_user.png" class="post-preview-avatar" alt="Admin Avatar">
                   <div>
                     <h6 id="adminViewName" class="mb-0">Admin</h6>
                     <small id="adminPostDate" class="text-muted">Posted on June 15, 2024</small>
@@ -669,7 +669,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <div id="viewCommentsContainer" class="comments-container flex-grow-1 overflow-auto p-3" style="max-height: 400px;">
                   <!-- <div class="post-comment mb-3 position-relative">
                     <div class="d-flex align-items-start">
-                      <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
+                      <img src="../../assets/img/team/default_user.png" class="rounded-circle me-2" width="32" height="32" alt="User">
                       <div>
                         <strong class="d-block">student1</strong>
                         <span>This is amazing! How does the AI work?</span>
@@ -682,7 +682,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
 
                   <div class="post-comment mb-3 position-relative">
                     <div class="d-flex align-items-start">
-                      <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
+                      <img src="../../assets/img/team/default_user.png" class="rounded-circle me-2" width="32" height="32" alt="User">
                       <div>
                         <strong class="d-block">professor_x</strong>
                         <span>Great work team! Looking forward to seeing this in action.</span>
@@ -695,7 +695,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
 
                   <div class="post-comment mb-3 position-relative">
                     <div class="d-flex align-items-start">
-                      <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
+                      <img src="../../assets/img/team/default_user.png" class="rounded-circle me-2" width="32" height="32" alt="User">
                       <div>
                         <strong class="d-block">tech_enthusiast</strong>
                         <span>Can't wait to try this out on campus!</span>
@@ -708,7 +708,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
 
                   <div class="post-comment mb-3 position-relative">
                     <div class="d-flex align-items-start">
-                      <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="32" height="32" alt="User">
+                      <img src="../../assets/img/team/default_user.png" class="rounded-circle me-2" width="32" height="32" alt="User">
                       <div>
                         <strong class="d-block">anonymous_user</strong>
                         <span class="text-danger">This is a bad comment that should be removed!</span>
@@ -756,7 +756,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
         <div class="modal-body">
           <div class="text-center mb-4">
-            <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle mb-3" width="100" height="100"
+            <img src="../../assets/img/team/default_user.png" class="rounded-circle mb-3" width="100" height="100"
               alt="Admin Profile">
             <h5>Admin User</h5>
             <p class="text-muted">System Administrator</p>

@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
     students.forEach((student) => {
       const profileImage = student.profile_picture
         ? `../../../backend/${student.profile_picture}`
-        : "../../assets/img/team/sampleTeam.jpg";
+        : "../../assets/img/team/default_user.png";
 
       const nickname = student.nickname || "No nickname";
       const totalStars = student.total_stars || 0;
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <img src="${profileImage}" 
                          alt="${student.username}" 
                          class="search-result-avatar"
-                         onerror="this.src='../../assets/img/team/sampleTeam.jpg'">
+                         onerror="this.src='../../assets/img/team/default_user.png'">
                     <div class="search-result-info">
                         <h6>${escapeHtml(student.username)}</h6>
                         <p class="mb-0 text-muted">${escapeHtml(nickname)}</p>

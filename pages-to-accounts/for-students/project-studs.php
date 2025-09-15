@@ -142,7 +142,7 @@ require_once '../../../backend/middleware/student_middleware.php';
 
                 <!-- Profile Icon Button -->
                 <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#profileModal">
-                  <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
+                  <img src="../../assets/img/team/default_user.png" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
                 </button>
               </div>
             </div>
@@ -269,7 +269,7 @@ require_once '../../../backend/middleware/student_middleware.php';
                           <span><i class="bi bi-star-fill"></i> 187</span>
                         </div>
                       </div>
-                      <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+                      <img src="../../assets/img/team/default_user.png" class="project-avatar" alt="User Avatar">
                     </div>
                     <div class="trending-project">
                       <div class="trending-project-info">
@@ -279,7 +279,7 @@ require_once '../../../backend/middleware/student_middleware.php';
                           <span><i class="bi bi-star-fill"></i> 156</span>
                         </div>
                       </div>
-                      <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar" alt="User Avatar">
+                      <img src="../../assets/img/team/default_user.png" class="project-avatar" alt="User Avatar">
                     </div>
                   </div>
                 </div>
@@ -509,7 +509,7 @@ require_once '../../../backend/middleware/student_middleware.php';
                 </div>
               </div>
               <div class="trending-project d-flex mb-3">
-                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar me-2" alt="User Avatar">
+                <img src="../../assets/img/team/default_user.png" class="project-avatar me-2" alt="User Avatar">
                 <div>
                   <h6 class="mb-0">Code Collab Platform</h6>
                   <small>by team_coders</small><br>
@@ -517,7 +517,7 @@ require_once '../../../backend/middleware/student_middleware.php';
                 </div>
               </div>
               <div class="trending-project d-flex mb-3">
-                <img src="../../assets/img/team/sampleTeam.jpg" class="project-avatar me-2" alt="User Avatar">
+                <img src="../../assets/img/team/default_user.png" class="project-avatar me-2" alt="User Avatar">
                 <div>
                   <h6 class="mb-0">AR Chemistry Lab</h6>
                   <small>by science_tech</small><br>

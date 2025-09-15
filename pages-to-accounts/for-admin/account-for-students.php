@@ -178,7 +178,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
           </div>
           <div class="d-flex align-items-center gap-2">
             <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#adminProfileModal">
-              <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
+              <img src="../../assets/img/team/default_user.png" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
             </button>
           </div>
         </div>
@@ -353,7 +353,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
         <div class="modal-body">
           <div class="text-center mb-4">
-            <img src="../../assets/img/team/sampleTeam.jpg" id="studentImage" class="rounded-circle" width="120" height="120" style="object-fit: cover;" alt="Student Avatar">
+            <img src="../../assets/img/team/default_user.png" id="studentImage" class="rounded-circle" width="120" height="120" style="object-fit: cover;" alt="Student Avatar">
           </div>
 
           <div class="student-info-container">
@@ -418,7 +418,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <div class="mb-3">
                   <label for="editAvatar" class="form-label">Profile Picture</label>
                   <div class="d-flex align-items-center gap-4">
-                    <img src="../../assets/img/team/sampleTeam.jpg" name="editAvatarPreview" id="editAvatarPreview" class="rounded-circle" width="100" height="100" style="object-fit: cover;">
+                    <img src="../../assets/img/team/default_user.png" name="editAvatarPreview" id="editAvatarPreview" class="rounded-circle" width="100" height="100" style="object-fit: cover;">
                     <div>
                       <button type="button" class="btn btn-sm btn-outline-primary mb-2" onclick="document.getElementById('editAvatar').click()">
                         <i class="ri-upload-line me-1"></i> Change Photo

@@ -331,11 +331,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (data.status) {
         if (data.status === 'liked') {
-          likeIcon.classList.remove('bi-star');
-          likeIcon.classList.add('bi-star-fill');
+          likeIcon.classList.remove('ri-heart-3-line');
+          likeIcon.classList.add('ri-heart-3-fill');
         } else if (data.status === 'unliked') {
-          likeIcon.classList.remove('bi-star-fill');
-          likeIcon.classList.add('bi-star');
+          likeIcon.classList.remove('ri-heart-3-fill');
+          likeIcon.classList.add('ri-heart-3-line');
         }
         const likeCountEl = document.getElementById(`like-count-${data.project_id}`);
 
@@ -473,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="project-stats">
                     <div class="stat d-flex align-items-start">
                     <button class="post-action d-flex flex-column like-btn" data-id="${post.id}">
-                        <i class="bi ${post.liked_by_user ? 'bi-star-fill' : 'bi-star'} like-icon" id="like-icon-${post.id}"></i>
+                        <i class="bi ${post.liked_by_user ? 'ri-heart-3-fill' : 'ri-heart-3-line'} like-icon" id="like-icon-${post.id}"></i>
                         <span class="like-count" style="font-size: 13px;" id="like-count-${post.id}">${post.like_count} Likes</span>
                     </button>
                     <button class="post-action d-flex flex-column comment-btn" data-id="${post.id}" data-post='${JSON.stringify(post).replace(/'/g, "&apos;")}'>

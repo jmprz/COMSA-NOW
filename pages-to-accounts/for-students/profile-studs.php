@@ -366,7 +366,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
 
                             <!-- Profile Icon Button -->
                             <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#profileModal">
-                                <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
+                                <img src="../../assets/img/team/default_user.png" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
                             </button>
                         </div>
                     </div>
@@ -375,7 +375,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                     <div class="profile-header">
                         <div class="row align-items-center">
                             <div class="col-md-2 position-relative">
-                                <img src="../../assets/img/team/sampleTeam.jpg" class="profile-avatar d-none" alt="Profile Picture" id="user-avatar" style="border-color: #7db832;">
+                                <img src="../../assets/img/team/default_user.png" class="profile-avatar d-none" alt="Profile Picture" id="user-avatar" style="border-color: #7db832;">
                                 <div class="profile-avatar-edit" data-bs-toggle="modal" data-bs-target="#avatarModal">
                                     <i class="ri-camera-line"></i>
                                 </div>
@@ -530,7 +530,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                         </div>
                         <div class="modal-body">
                             <div class="text-center mb-4">
-                                <img id="currentAvatarPreview" src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                                <img id="currentAvatarPreview" src="../../assets/img/team/default_user.png" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
                             </div>
 
                             <div class="d-flex flex-column gap-2">

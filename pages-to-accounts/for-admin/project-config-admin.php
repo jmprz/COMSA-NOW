@@ -209,7 +209,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <div class="d-flex align-items-center gap-2">
             <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal"
               data-bs-target="#adminProfileModal">
-              <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle" alt="Profile"
+              <img src="../../assets/img/team/default_user.png" class="rounded-circle" alt="Profile"
                 style="width: 40px; height: 40px;">
             </button>
           </div>
@@ -297,7 +297,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                   <!-- <div class="project-container-admin">
                     <div class="project-header d-flex justify-content-between align-items-start">
                       <div class="d-flex align-items-center">
-                        <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
+                        <img src="../../assets/img/team/default_user.png" class="rounded-circle me-2" width="40" height="40"
                           alt="User Avatar">
                         <div>
                           <h6 class="mb-0">Valexore</h6>
@@ -356,7 +356,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                   <!-- <div class="project-container-admin">
                     <div class="project-header d-flex justify-content-between align-items-start">
                       <div class="d-flex align-items-center">
-                        <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
+                        <img src="../../assets/img/team/default_user.png" class="rounded-circle me-2" width="40" height="40"
                           alt="User Avatar">
                         <div>
                           <h6 class="mb-0">Valexore</h6>
@@ -415,7 +415,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                   <!-- <div class="project-container-admin">
                     <div class="project-header d-flex justify-content-between align-items-start">
                       <div class="d-flex align-items-center">
-                        <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
+                        <img src="../../assets/img/team/default_user.png" class="rounded-circle me-2" width="40" height="40"
                           alt="User Avatar">
                         <div>
                           <h6 class="mb-0">Valexore</h6>
@@ -484,7 +484,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
                   <!-- <div class="project-container-admin">
                     <div class="project-header d-flex justify-content-between align-items-start">
                       <div class="d-flex align-items-center">
-                        <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle me-2" width="40" height="40"
+                        <img src="../../assets/img/team/default_user.png" class="rounded-circle me-2" width="40" height="40"
                           alt="User Avatar">
                         <div>
                           <h6 class="mb-0">Valexore</h6>
@@ -649,7 +649,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
             <div class="col-md-8">
               <div class="project-header d-flex justify-content-between align-items-start mb-3">
                 <div class="d-flex align-items-center">
-                  <img src="../../assets/img/team/sampleTeam.jpg" id="userAvatar" class="rounded-circle me-2" width="40" height="40"
+                  <img src="../../assets/img/team/default_user.png" id="userAvatar" class="rounded-circle me-2" width="40" height="40"
                     alt="User Avatar">
                   <div>
                     <h6 class="mb-0" id="name">Valexore</h6>
@@ -869,7 +869,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
         </div>
         <div class="modal-body">
           <div class="text-center mb-4">
-            <img src="../../assets/img/team/sampleTeam.jpg" class="rounded-circle mb-3" width="100" height="100"
+            <img src="../../assets/img/team/default_user.png" class="rounded-circle mb-3" width="100" height="100"
               alt="Admin Profile">
             <h5>Admin User</h5>
             <p class="text-muted">System Administrator</p>

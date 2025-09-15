@@ -248,327 +248,223 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
 
 <body class="index-page">
 
-
-  <!-- Search modal -->
-  </div>
+  <!-- 🔎 Search Modal -->
   <div class="search-popup">
     <div class="search-container">
-      <div class="search-input-container">
-        <input type="text" placeholder="Search..." class="search-input">
-        <button class="search-button"><i class="bi bi-search"></i></button>
+      <div class="search-input-container d-flex">
+        <input type="text" placeholder="Search..." class="form-control">
+        <button class="btn btn-success"><i class="bi bi-search"></i></button>
       </div>
     </div>
-  </div> <!-- search modal end -->
+  </div>
+  <!-- /Search Modal -->
 
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-white shadow-sm fixed-top">
+  <div class="container-xxl d-flex align-items-center justify-content-between">
+
+    <!-- Left: Logo -->
+    <a class="navbar-brand fs-2 fw-bold d-flex align-items-center gap-2" href="#">
+      <img src="../../assets/img/logo.png" alt="COMSA Logo" class="img-fluid" style="height:60px;">
+      <span class="d-lg-inline">COMSA-NOW</span>
+    </a>
+
+    <!-- Center: Search (desktop only) -->
+    <form class="mx-3 flex-grow-1 d-none d-lg-block" style="max-width: 600px;">
+      <div class="input-group">
+        <input type="text" class="form-control bg-light rounded-start-3" placeholder="Search...">
+        <button class="btn btn-active rounded-end-3 px-4" type="submit">
+          <i class="ri-search-line"></i>
+        </button>
+      </div>
+    </form>
+
+      <!-- Right: Icon buttons -->
+    <div class="d-flex align-items-center gap-3 d-none d-lg-flex">
+
+      <a href="#" class="btn btn-active rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;">
+        <i class="ri-home-9-line fs-4"></i>
+      </a>
+
+      <a href="../../pages-to-accounts/for-students/project-studs.php"
+         class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;">
+        <i class="ri-shapes-line fs-4"></i>
+      </a>
+
+      <a href="../../pages-to-accounts/for-students/studs-chat.php"
+         class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;">
+        <i class="ri-chat-smile-3-line fs-4"></i>
+      </a>
+
+      <a href="../../pages-to-accounts/for-students/settings-studs.php"
+         class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;">
+        <i class="ri-settings-line fs-4"></i>
+      </a>
+
+      <!-- Profile (no dropdown) -->
+      <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
+        <img src="../../assets/img/team/default_user.png" alt="Profile"
+             class="rounded-circle border" width="45" height="45">
+      </a>
+
+  </div>
+  <div class="d-flex align-items-center gap-3 d-lg-none d-md-flex me-2">
+      <!-- Profile (no dropdown) -->
+      <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
+        <img src="../../assets/img/team/default_user.png" alt="Profile"
+             class="rounded-circle border" width="45" height="45">
+      </a>
+    </div>
+</nav>
+
+<!-- /Navbar -->
 
   <!-- Main Content -->
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Side Navigation -->
-      <div class="col-md-2 d-none d-lg-block bg-light min-vh-100">
-        <div class="side-nav py-4 px-3 d-flex flex-column justify-content-between h-100">
-
-          <!-- Side Nav Header -->
-          <div>
-            <div class="text-center mb-5 side-nav-header">
-              <img src="../../assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
-              <h3 class="fw-bold">COMSA-NOW</h3>
-            </div>
-
-            <!-- Nav Menu -->
-            <div class="side-nav-menu d-flex flex-column gap-3">
-              <a href="#" class="btn text-start d-flex align-items-center gap-2 btn-active">
-                <i class="ri-home-9-line"></i> <span>Home</span>
-              </a>
-              <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
-                <i class="ri-shapes-line"></i> <span>Projects</span>
-              </a>
-              <a href="../../pages-to-accounts/for-students/studs-chat.php" class="btn text-start d-flex align-items-center gap-2">
-                <i class="ri-chat-smile-3-line"></i> <span>Chat</span>
-              </a>
-              <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
-                <i class="ri-search-line"></i> <span>Search</span>
-              </a>
-              <a href="../../pages-to-accounts/for-students/profile-studs.php" class="btn text-start d-flex align-items-center gap-2">
-                <i class="ri-user-line"></i> <span>Profile</span>
-              </a>
-              <a href="../../pages-to-accounts/for-students/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
-                <i class="ri-settings-line"></i> <span>Settings</span>
-              </a>
-            </div>
-          </div>
-          <!-- Side Nav Footer -->
-          <div class="text-muted small text-center mt-4">
-            Experimental Nav
-          </div>
-        </div>
-      </div>
-
+  <main class="container-fluid" style="margin-top: 80px;">
+    <div class="row justify-content-center g-4">
+      
       <!-- Posts Column -->
-      <div class="col-lg-7">
-        <div class="posts-column">
-          <!-- Mobile Only Header -->
-          <div class="d-lg-none d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
-            <div class="d-flex align-items-center">
-              <h5 class="ms-2 mb-0 fw-bold">COMSA-NOW</h5>
-            </div>
+      <div class="col-lg-5">
+        <!-- Accordion (mobile only) -->
+<div class="accordion d-lg-none my-3" id="mobileSidebar">
 
-            <div class="d-flex align-items-center gap-2">
-              <!-- Search Button -->
-              <button class="btn p-2" type="button" id="search-toggle">
-                <i class="ri-search-line fs-1"></i>
-              </button>
+  <!-- Events Accordion -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingEvents">
+      <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEvents" aria-expanded="false" aria-controls="collapseEvents">
+        <i class="ri-calendar-event-line me-2"></i> Upcoming Events
+      </button>
+    </h2>
+    <div id="collapseEvents" class="accordion-collapse collapse" aria-labelledby="headingEvents" data-bs-parent="#mobileSidebar">
+      <div class="accordion-body">
+        <!-- fetch events -->
+        <ul class="list-unstyled mb-0">
+          <li><strong>Event 1</strong> <small class="text-muted">Sept 20</small></li>
+          <li><strong>Event 2</strong> <small class="text-muted">Sept 25</small></li>
+        </ul>
+        <a href="#" class="small d-block mt-2">View Calendar</a>
+      </div>
+    </div>
+  </div>
 
-              <!-- Profile Icon Button -->
-              <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#profileModal">
-                <img src="../assets/img/team/sampleTeam.jpg" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
-              </button>
-            </div>
-          </div>
+  <!-- Quick Links Accordion -->
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingLinks">
+      <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLinks" aria-expanded="false" aria-controls="collapseLinks">
+        <i class="ri-link-m me-2"></i> Quick Links
+      </button>
+    </h2>
+    <div id="collapseLinks" class="accordion-collapse collapse" aria-labelledby="headingLinks" data-bs-parent="#mobileSidebar">
+      <div class="accordion-body">
+        <!-- fetch quick links -->
+        <ul class="list-unstyled mb-0">
+          <li><a href="#" class="d-flex align-items-center"><i class="ri-book-open-line me-2"></i> Library</a></li>
+          <li><a href="#" class="d-flex align-items-center"><i class="ri-graduation-cap-line me-2"></i> Courses</a></li>
+          <li><a href="#" class="d-flex align-items-center"><i class="ri-global-line me-2"></i> Website</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-
-        </div>
+</div>
+        <div class="posts-column mb-5"><!-- fetch posts here --></div>
       </div>
 
-      <!-- Right Sidebar -->
-      <div class="col-lg-3 d-none d-sm-block">
+      <!-- Right Sidebar (hidden on xs/sm) -->
+      <aside class="col-lg-3 d-none d-lg-block">
         <div class="right-sidebar">
+          
           <!-- Profile Card -->
-          <div class="sidebar-card">
-            <div class="profile-card">
-              <!-- Avatar Image -->
-              <img src="../../assets/img/team/sampleTeam.jpg" class="profile-avatar d-none" id="user-avatar" alt="Profile Avatar">
-
-              <!-- Initials Fallback -->
-              <div class="profile-avatar-initials d-none" id="avatar-initials"></div>
-
-              <div class="profile-info">
-                <h4><?= $name ?></h4>
-                <p class="profile-nickname me-2" id="nicknameDisplay">
-                  <?php echo !empty($nickname) ? $nickname : 'No nickname set'; ?>
-                </p>
-              </div>
-            </div>
-
-            <div class="profile-stats">
-              <div class="stat-item">
-                <div class="stat-number">0</div>
-                <div class="stat-label">Projects</div>
-              </div>
-              <div class="stat-item">
-                <div class="stat-number" id="totalStarsCount">0</div>
-                <div class="stat-label">Total Stars</div>
-              </div>
+          <div class="card shadow-sm mb-4 border-0 text-center">
+            <div class="card-body text-center">
+              <img src="../../assets/img/team/default_user.png" class="rounded-circle mb-2" width="60" height="60">
+              <h5 class="fw-bold mb-0"><?= $name ?></h5>
+              <small class="text-muted">
+                <?= !empty($nickname) ? $nickname : 'No nickname set' ?>
+              </small>
             </div>
           </div>
 
           <!-- Events Card -->
-          <div class="sidebar-card">
-            <div class="section-header">
-              <h4>Upcoming Events</h4>
-              <a href="#">View Calendar</a>
+          <div class="card shadow-sm mb-4 border-0">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="fw-bold mb-0">Upcoming Events</h6>
+                <a href="#" class="small">View Calendar</a>
+              </div>
+              <!-- fetch events -->
             </div>
-
-            <!-- fetching events  here tru dbs-->
-
           </div>
 
           <!-- Quick Links Card -->
-          <div class="sidebar-card">
-            <div class="section-header">
-              <h4>Quick Links</h4>
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <h6 class="fw-bold mb-3">Quick Links</h6>
+              <!-- fetch quick links -->
             </div>
-            <!-- fetching quick links here tru dbs -->
           </div>
+
         </div>
-      </div>
+      </aside>
+
     </div>
+  </main>
 
+ <!-- 📌 Bottom Navigation (mobile only) -->
+<nav class="d-lg-none fixed-bottom bg-white border-top shadow-sm">
+  <div class="d-flex justify-content-around py-2 mt-2">
+    <a href="#" class="btn btn-active rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;"><i class="ri-home-9-line fs-1"></i></a>
+    <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;"><i class="ri-shapes-line fs-1"></i></a>
+    <a href="../../pages-to-accounts/for-students/studs-chat.php" class="btn d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;"><i class="ri-chat-smile-3-line fs-1"></i></a>
+    <a href="#" class="btn d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;" id="search-toggle"><i class="ri-search-line fs-1"></i></a>
+    <a href="../../pages-to-accounts/for-students/settings-studs.php" class="btn d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;"><i class="ri-settings-line fs-1"></i></a>
+  </div>
+</nav>
 
-    <div class="modal fade" id="postTypeModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0" style="overflow: hidden; border-radius: 16px;">
-          <!-- Elegant Modal Header -->
-          <div class="modal-header border-0 py-4 position-relative"
-            style="background: linear-gradient(135deg, var(--accent-color) 0%, #5a9e2a 100%);">
-            <div class="position-absolute top-0 end-0 me-3 mt-2">
-              <button type="button" class="btn-close btn-close-white btn-close-white-fade" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="text-center w-100">
-              <h5 class="modal-title text-white mb-0 fw-semibold"
-                style="font-family: var(--heading-font); letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                <i class="bi bi-plus-circle-fill me-2"></i>Create New Post
-              </h5>
-              <div class="d-flex justify-content-center mt-2">
-                <div style="width: 40px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 3px;"></div>
+  <!-- 📌 Profile Modal (Mobile sidebar) -->
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-slideout modal-sm m-0 ms-auto">
+      <div class="modal-content vh-100">
+        <div class="modal-header">
+          <h5 class="modal-title">Your Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Sidebar cloned content for mobile -->
+          <div class="right-sidebar">
+            <div class="card border-0 text-center mb-3">
+              <div class="card-body">
+                <img src="../../assets/img/team/default_user.png" class="rounded-circle mb-2" width="60" height="60">
+                <h5 class="fw-bold mb-0">your_username</h5>
+                <small class="text-muted"><?= !empty($nickname) ? $nickname : 'No nickname set' ?></small>
               </div>
             </div>
-          </div>
-
-          <!-- Modal Body with Beautiful Cards -->
-          <div class="modal-body px-4 py-4" style="background-color: #f9fbf7;">
-            <h6 class="text-center mb-4"
-              style="color: var(--heading-color); font-family: var(--default-font); font-weight: 500; letter-spacing: 0.3px;">
-              Select your post type to continue
-            </h6>
-
-            <div class="row g-4 justify-content-center">
-              <!-- Normal Post Card -->
-              <div class="col-md-6">
-                <a href="normal-post.html" class="text-decoration-none">
-                  <div class="card border-0 h-100 post-type-option"
-                    style="border-radius: 12px; background-color: var(--surface-color);">
-                    <div class="card-body text-center p-4 position-relative">
-                      <div class="position-absolute top-0 start-0 p-3">
-                        <div class="rounded-circle"
-                          style="width: 8px; height: 8px; background-color: var(--accent-color);"></div>
-                      </div>
-                      <div class="icon-wrapper mb-3"
-                        style="background: linear-gradient(135deg, rgba(125, 184, 50, 0.1) 0%, rgba(125, 184, 50, 0.05) 100%); width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transform: rotate(45deg);">
-                        <i class="bi bi-file-earmark-text fs-2"
-                          style="color: var(--accent-color); transform: rotate(-45deg);"></i>
-                      </div>
-                      <h6 class="mb-2"
-                        style="color: var(--heading-color); font-family: var(--heading-font); font-weight: 600;">Normal
-                        Post</h6>
-                      <p class="small text-muted mb-0 px-2" style="font-family: var(--default-font); line-height: 1.5;">
-                        Share updates, thoughts, or general information with your audience
-                      </p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0 py-3 text-center">
-                      <span class="select-badge">
-                        Choose this style
-                        <i class="bi bi-arrow-right-short ms-1"></i>
-                      </span>
-                    </div>
-                  </div>
-                </a>
+            <div class="card border-0 mb-3">
+              <div class="card-body">
+                <h6 class="fw-bold">Upcoming Events</h6>
+                <!-- same event items -->
               </div>
-
-              <!-- Project Post Card -->
-              <div class="col-md-6">
-                <a href="project-post.html" class="text-decoration-none">
-                  <div class="card border-0 h-100 post-type-option"
-                    style="border-radius: 12px; background-color: var(--surface-color);">
-                    <div class="card-body text-center p-4 position-relative">
-                      <div class="position-absolute top-0 start-0 p-3">
-                        <div class="rounded-circle"
-                          style="width: 8px; height: 8px; background-color: var(--accent-color);"></div>
-                      </div>
-                      <div class="icon-wrapper mb-3"
-                        style="background: linear-gradient(135deg, rgba(125, 184, 50, 0.1) 0%, rgba(125, 184, 50, 0.05) 100%); width: 80px; height: 80px; border-radius: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto; transform: rotate(45deg);">
-                        <i class="bi bi-file-earmark-ppt fs-2"
-                          style="color: var(--accent-color); transform: rotate(-45deg);"></i>
-                      </div>
-                      <h6 class="mb-2"
-                        style="color: var(--heading-color); font-family: var(--heading-font); font-weight: 600;">Project
-                        Post</h6>
-                      <p class="small text-muted mb-0 px-2" style="font-family: var(--default-font); line-height: 1.5;">
-                        Showcase your work with detailed descriptions, media, and progress
-                      </p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0 py-3 text-center">
-                      <span class="select-badge">
-                        Choose this style
-                        <i class="bi bi-arrow-right-short ms-1"></i>
-                      </span>
-                    </div>
-                  </div>
-                </a>
+            </div>
+            <div class="card border-0">
+              <div class="card-body">
+                <h6 class="fw-bold">Quick Links</h6>
+                <!-- same quick links -->
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
-    <!-- Bottom Navigation Bar (for md and below) -->
-    <nav class="d-lg-none fixed-bottom bg-light border-top">
-      <div class="d-flex justify-content-around py-2">
-        <a href="#" class="text-center mt-2 btn-active-mobile">
-          <i class="ri-home-9-line fs-1"></i>
-        </a>
-        <a href="../../pages-to-accounts/project-studs.php" class="text-center mt-2">
-          <i class="ri-shapes-line fs-1"></i>
-        </a>
-        <a href="#" class="text-center mt-2">
-          <i class="ri-add-circle-line fs-1"></i>
-        </a>
-        <a href="#" id="createPostTrigger" class="text-center mt-2">
-          <i class="ri-notification-3-line fs-1"></i>
-        </a>
-        <a href="../pages-to-accounts/for-students/settings-studs.php" class="text-center mt-2">
-          <i class="ri-settings-line fs-1"></i>
-        </a>
-      </div>
-    </nav>
-
-    <!-- Profile Modal for Mobile -->
-    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-slideout modal-sm m-0 ms-auto">
-        <div class="modal-content vh-100">
-          <div class="modal-header">
-            <h5 class="modal-title" id="profileModalLabel">Your Profile</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <!-- Clone of Right Sidebar -->
-            <div class="right-sidebar">
-
-              <!-- Profile Card -->
-              <div class="sidebar-card">
-                <div class="profile-card">
-                  <img src="../../assets/img/team/sampleTeam.jpg" class="profile-avatar" alt="Profile Avatar">
-                  <div class="profile-info">
-                    <h4>your_username</h4>
-                    <p class="profile-nickname me-2" id="nicknameDisplay">
-                      <?php echo !empty($nickname) ? $nickname : 'No nickname set'; ?>
-                    </p>
-                  </div>
-                </div>
-
-                <div class="profile-stats">
-                  <div class="stat-item">
-                    <div class="stat-number">24</div>
-                    <div class="stat-label">Projects</div>
-                  </div>
-                  <div class="stat-item">
-                    <div class="stat-number">156</div>
-                    <div class="stat-label">Following</div>
-                  </div>
-                  <div class="stat-item">
-                    <div class="stat-number">1.2K</div>
-                    <div class="stat-label">Followers</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Events Card -->
-              <div class="sidebar-card">
-                <div class="section-header">
-                  <h4>Upcoming Events</h4>
-                  <a href="#">View Calendar</a>
-                </div>
-
-                <!-- ... same event items ... -->
-              </div>
-
-              <!-- Quick Links Card -->
-              <div class="sidebar-card">
-                <div class="section-header">
-                  <h4>Quick Links</h4>
-                </div>
-
-                <!-- ... same suggestion items ... -->
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
 
 
     <!-- Vendor JS Files -->

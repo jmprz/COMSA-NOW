@@ -119,32 +119,29 @@ document.addEventListener("DOMContentLoaded", function() {
         const postDate = formatPostDate(post.created_at);
         
         postElement.innerHTML = `
-            <div class="post-header">
-                <img src="../../assets/img/team/sampleTeam.jpg" class="post-avatar" alt="Admin Avatar">
-                <div class="d-flex row gy-0">
-                    <p class="project-username">${post.admin_username || 'admin'}</p>
-                    <p class="project-date">${postDate}</p>
-                </div>
-                <i class="bi bi-three-dots post-more"></i>
+        <div class="post-header d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <img src="../../assets/img/logo.png" class="post-avatar me-2" alt="Admin Avatar">
+        <div class="d-flex flex-column">
+             <p class="mb-0 fw-bold project-username">Computer Science Student Association</p>
+            <small class="text-muted project-date">${postDate}</small>
             </div>
+        </div>
+       <div class="d-flex flex-column align-items-center">
+        <button class="post-action like-btn fs-3" data-post="${post.id}" onclick="toggleLike(${post.id})">
+            <i class="${post.user_liked ? 'ri-heart-3-fill like-count-color' : 'ri-heart-3-line'}"></i>
+         </button>
+     <div class="post-likes small me-3 text-center">
+        ${post.like_count || 0}
+    </div>
+    </div>
+        </div>  
             
             ${post.post_image ? `
                 <img src="../../../backend/${post.post_image}" class="post-image" alt="Post Image" onerror="this.style.display='none'">
             ` : ''}
-            
-            <div class="post-actions">
-                <button class="post-action like-btn" data-post="${post.id}" onclick="toggleLike(${post.id})">
-                    <i class="bi bi-star${post.user_liked ? '-fill text-warning' : ''}"></i>
-                </button>
-                <button class="post-action comment-btn" data-post="${post.id}" onclick="focusCommentInput(${post.id})">
-                    <i class="bi bi-chat-left"></i> ${post.comment_count || 0}
-                </button>
-            </div>
-            
-            <div class="post-likes">${post.like_count || 0} likes</div>
-            
             <div class="post-caption">
-                <span class="post-caption-username">${post.admin_username || 'admin'}</span>
+                <span class="fs-6 fw-semibold">Computer Science Student Association</span>
                 ${post.content}
             </div>
             
@@ -193,18 +190,36 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     
-    // Function to format time ago
-    function formatTimeAgo(dateString) {
-        const date = new Date(dateString);
-        const now = new Date();
-        const diffInSeconds = Math.floor((now - date) / 1000);
-        
-        if (diffInSeconds < 60) return 'Just now';
-        if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
-        if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-        if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 86400)} days ago`;
-        
-        return formatPostDate(dateString);
+   // Function to format time ago
+function formatTimeAgo(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+
+    if (diffInSeconds < 60) return 'Just now';
+
+    const minutes = Math.floor(diffInSeconds / 60);
+    if (minutes < 60) {
+        return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+    }
+
+    const hours = Math.floor(diffInSeconds / 3600);
+    if (hours < 24) {
+        return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+    }
+
+    const days = Math.floor(diffInSeconds / 86400);
+    if (days < 30) {
+        return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+    }
+
+    const months = Math.floor(diffInSeconds / 2592000); // 30 days approx
+    if (months < 12) {
+        return `${months} ${months === 1 ? 'month' : 'months'} ago`;
+    }
+
+    const years = Math.floor(diffInSeconds / 31536000); // 365 days
+    return `${years} ${years === 1 ? 'year' : 'years'} ago`;
     }
 });
 
@@ -224,9 +239,10 @@ function toggleLike(postId) {
             const likeBtn = document.querySelector(`[data-post="${postId}"].like-btn`);
             const likeCount = document.querySelector(`[data-post-id="${postId}"] .post-likes`);
             
-            if (likeBtn && likeCount) {
-                likeBtn.innerHTML = `<i class="bi bi-star${data.liked ? '-fill text-warning' : ''}"></i>`;
-                likeCount.textContent = `${data.like_count} likes`;
+           if (likeBtn && likeCount) {
+            likeBtn.innerHTML = `
+            <i class="${data.liked ? 'ri-heart-3-fill like-count-color' : 'ri-heart-3-line'}"></i>`;
+            likeCount.textContent = `${data.like_count} likes`;
             }
         }
     })
