@@ -269,15 +269,7 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
       <span class="d-lg-inline">COMSA-NOW</span>
     </a>
 
-    <!-- Center: Search (desktop only) -->
-    <form class="mx-3 flex-grow-1 d-none d-lg-block" style="max-width: 600px;">
-      <div class="input-group">
-        <input type="text" class="form-control bg-light rounded-start-3" placeholder="Search...">
-        <button class="btn btn-active rounded-end-3 px-4" type="submit">
-          <i class="ri-search-line"></i>
-        </button>
-      </div>
-    </form>
+
 
       <!-- Right: Icon buttons -->
     <div class="d-flex align-items-center gap-3 d-none d-lg-flex">
@@ -293,178 +285,99 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
         <i class="ri-shapes-line fs-4"></i>
       </a>
 
-      <a href="../../pages-to-accounts/for-students/studs-chat.php"
-         class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
-         style="width:50px; height:50px;">
-        <i class="ri-chat-smile-3-line fs-4"></i>
-      </a>
-
       <a href="../../pages-to-accounts/for-students/settings-studs.php"
          class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
          style="width:50px; height:50px;">
         <i class="ri-settings-line fs-4"></i>
       </a>
 
-      <!-- Profile (no dropdown) -->
+      <!-- Profile -->
       <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
         <img src="../../assets/img/team/default_user.png" alt="Profile"
              class="rounded-circle border" width="45" height="45">
       </a>
 
   </div>
-  <div class="d-flex align-items-center gap-3 d-lg-none d-md-flex me-2">
-      <!-- Profile (no dropdown) -->
-      <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
-        <img src="../../assets/img/team/default_user.png" alt="Profile"
-             class="rounded-circle border" width="45" height="45">
-      </a>
-    </div>
 </nav>
 
 <!-- /Navbar -->
 
-  <!-- Main Content -->
-  <main class="container-fluid" style="margin-top: 80px;">
-    <div class="row justify-content-center g-4">
-      
-      <!-- Posts Column -->
-      <div class="col-lg-5">
-        <!-- Accordion (mobile only) -->
-<div class="accordion d-lg-none my-3" id="mobileSidebar">
+<!-- Main Content -->
+<main class="container-fluid" style="margin-top: 80px;">
+  <div class="row g-4 justify-content-center">
 
-  <!-- Events Accordion -->
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingEvents">
-      <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEvents" aria-expanded="false" aria-controls="collapseEvents">
-        <i class="ri-calendar-event-line me-2"></i> Upcoming Events
-      </button>
-    </h2>
-    <div id="collapseEvents" class="accordion-collapse collapse" aria-labelledby="headingEvents" data-bs-parent="#mobileSidebar">
-      <div class="accordion-body">
-        <!-- fetch events -->
-        <ul class="list-unstyled mb-0">
-          <li><strong>Event 1</strong> <small class="text-muted">Sept 20</small></li>
-          <li><strong>Event 2</strong> <small class="text-muted">Sept 25</small></li>
-        </ul>
-        <a href="#" class="small d-block mt-2">View Calendar</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Quick Links Accordion -->
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingLinks">
-      <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLinks" aria-expanded="false" aria-controls="collapseLinks">
-        <i class="ri-link-m me-2"></i> Quick Links
-      </button>
-    </h2>
-    <div id="collapseLinks" class="accordion-collapse collapse" aria-labelledby="headingLinks" data-bs-parent="#mobileSidebar">
-      <div class="accordion-body">
-        <!-- fetch quick links -->
-        <ul class="list-unstyled mb-0">
-          <li><a href="#" class="d-flex align-items-center"><i class="ri-book-open-line me-2"></i> Library</a></li>
-          <li><a href="#" class="d-flex align-items-center"><i class="ri-graduation-cap-line me-2"></i> Courses</a></li>
-          <li><a href="#" class="d-flex align-items-center"><i class="ri-global-line me-2"></i> Website</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-</div>
-        <div class="posts-column mb-5"><!-- fetch posts here --></div>
-      </div>
-
-      <!-- Right Sidebar (hidden on xs/sm) -->
-      <aside class="col-lg-3 d-none d-lg-block">
-        <div class="right-sidebar">
-          
-          <!-- Profile Card -->
-          <div class="card shadow-sm mb-4 border-0 text-center">
-            <div class="card-body text-center">
-              <img src="../../assets/img/team/default_user.png" class="rounded-circle mb-2" width="60" height="60">
-              <h5 class="fw-bold mb-0"><?= $name ?></h5>
-              <small class="text-muted">
-                <?= !empty($nickname) ? $nickname : 'No nickname set' ?>
-              </small>
+    <!-- Left Sidebar (Events + Quick Links stacked) -->
+    <aside class="col-lg-3 d-none d-lg-block">
+      <div class="left-sidebar sticky-top" style="top: 120px;">
+        
+        <!-- Events Card -->
+        <div class="card shadow-sm mb-4 border-0 rounded-3">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="fw-bold mb-0">Upcoming Events</h6>
+              <a href="#" class="small">View Calendar</a>
             </div>
+            <!-- fetch events -->
           </div>
-
-          <!-- Events Card -->
-          <div class="card shadow-sm mb-4 border-0">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-bold mb-0">Upcoming Events</h6>
-                <a href="#" class="small">View Calendar</a>
-              </div>
-              <!-- fetch events -->
-            </div>
-          </div>
-
-          <!-- Quick Links Card -->
-          <div class="card shadow-sm border-0">
-            <div class="card-body">
-              <h6 class="fw-bold mb-3">Quick Links</h6>
-              <!-- fetch quick links -->
-            </div>
-          </div>
-
         </div>
-      </aside>
 
+        <!-- Quick Links Card -->
+        <div class="card shadow-sm border-0 rounded-3">
+          <div class="card-body">
+            <h6 class="fw-bold mb-3">Quick Links</h6>
+            <!-- fetch quick links -->
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- Right Column (Posts Feed) -->
+    <div class="col-lg-7">
+      <div class="posts-column mb-5 mt-3">
+
+      </div>
     </div>
-  </main>
 
- <!-- 📌 Bottom Navigation (mobile only) -->
+  </div>
+</main>
+
+
+<!-- 📌 Bottom Navigation (mobile only) -->
 <nav class="d-lg-none fixed-bottom bg-white border-top shadow-sm">
   <div class="d-flex justify-content-around py-2 mt-2">
+
     <a href="#" class="btn btn-active rounded-3 d-flex align-items-center justify-content-center"
-         style="width:50px; height:50px;"><i class="ri-home-9-line fs-1"></i></a>
-    <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn d-flex align-items-center justify-content-center"
-         style="width:50px; height:50px;"><i class="ri-shapes-line fs-1"></i></a>
-    <a href="../../pages-to-accounts/for-students/studs-chat.php" class="btn d-flex align-items-center justify-content-center"
-         style="width:50px; height:50px;"><i class="ri-chat-smile-3-line fs-1"></i></a>
-    <a href="#" class="btn d-flex align-items-center justify-content-center"
-         style="width:50px; height:50px;" id="search-toggle"><i class="ri-search-line fs-1"></i></a>
-    <a href="../../pages-to-accounts/for-students/settings-studs.php" class="btn d-flex align-items-center justify-content-center"
-         style="width:50px; height:50px;"><i class="ri-settings-line fs-1"></i></a>
+       style="width:50px; height:50px;">
+       <i class="ri-home-9-line fs-1"></i>
+    </a>
+
+    <a href="../../pages-to-accounts/for-students/project-studs.php" 
+       class="btn d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <i class="ri-shapes-line fs-1"></i>
+    </a>
+
+    <a href="../../pages-to-accounts/for-students/settings-studs.php" 
+       class="btn d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <i class="ri-settings-line fs-1"></i>
+    </a>
+
+    <a href="../../pages-to-accounts/for-students/profile-studs.php" 
+       class="btn d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <img src="../../assets/img/team/default_user.png" 
+            alt="Profile"
+            class="rounded-circle border"
+            width="40" height="40">
+    </a>
+
   </div>
 </nav>
 
-  <!-- 📌 Profile Modal (Mobile sidebar) -->
-  <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-slideout modal-sm m-0 ms-auto">
-      <div class="modal-content vh-100">
-        <div class="modal-header">
-          <h5 class="modal-title">Your Profile</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Sidebar cloned content for mobile -->
-          <div class="right-sidebar">
-            <div class="card border-0 text-center mb-3">
-              <div class="card-body">
-                <img src="../../assets/img/team/default_user.png" class="rounded-circle mb-2" width="60" height="60">
-                <h5 class="fw-bold mb-0">your_username</h5>
-                <small class="text-muted"><?= !empty($nickname) ? $nickname : 'No nickname set' ?></small>
-              </div>
-            </div>
-            <div class="card border-0 mb-3">
-              <div class="card-body">
-                <h6 class="fw-bold">Upcoming Events</h6>
-                <!-- same event items -->
-              </div>
-            </div>
-            <div class="card border-0">
-              <div class="card-body">
-                <h6 class="fw-bold">Quick Links</h6>
-                <!-- same quick links -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+ 
 
 
     <!-- Vendor JS Files -->

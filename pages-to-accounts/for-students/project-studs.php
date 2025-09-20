@@ -77,144 +77,72 @@ require_once '../../../backend/middleware/student_middleware.php';
 </style>
 
 <body class="index-page">
+  <!-- Navbar -->
+<nav class="navbar navbar-light bg-white shadow-sm fixed-top">
+  <div class="container-xxl d-flex align-items-center justify-content-between">
 
-  <!-- Main Content -->
-  <div class="main-content d-flex justify-content-center">
-    <div class="container-fluid">
-      <div class="row">
-        <!-- Side Navigation -->
-        <div class="col-md-2 d-none d-lg-block bg-light min-vh-100">
-          <div class="side-nav py-4 px-3 d-flex flex-column justify-content-between h-100">
+    <!-- Left: Logo -->
+    <a class="navbar-brand fs-2 fw-bold d-flex align-items-center gap-2" href="#">
+      <img src="../../assets/img/logo.png" alt="COMSA Logo" class="img-fluid" style="height:60px;">
+      <span class="d-lg-inline">COMSA-NOW</span>
+    </a>
 
-            <!-- Side Nav Header -->
-            <div>
-              <div class="text-center mb-5 side-nav-header">
-                <img src="../../assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
-                <h3 class="fw-bold">COMSA-NOW</h3>
-              </div>
 
-              <!-- Nav Menu -->
-              <div class="side-nav-menu d-flex flex-column gap-3">
-                <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="btn text-start d-flex align-items-center gap-2">
-                  <i class="ri-home-9-line"></i> <span>Home</span>
-                </a>
-                <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2 btn-active">
-                  <i class="ri-shapes-line"></i> <span>Projects</span>
-                </a>
-                <a href="../../pages-to-accounts/for-students/studs-chat.php" class="btn text-start d-flex align-items-center gap-2">
-                  <i class="ri-chat-smile-3-line"></i> <span>Chat</span>
-                </a>
-                <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
-                  <i class="ri-search-line"></i> <span>Search</span>
-                </a>
-                <a href="../../pages-to-accounts/for-students/profile-studs.php" class="btn text-start d-flex align-items-center gap-2">
-                  <i class="ri-user-line"></i> <span>Profile</span>
-                </a>
-                <a href="../../pages-to-accounts/for-students/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
-                  <i class="ri-settings-line"></i> <span>Settings</span>
-                </a>
-              </div>
 
-            </div>
-            <!-- Side Nav Footer -->
-            <div class="text-muted small text-center mt-4">
-              Experimental Nav
-            </div>
-          </div>
+      <!-- Right: Icon buttons -->
+    <div class="d-flex align-items-center gap-3 d-none d-lg-flex">
+
+      <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;">
+        <i class="ri-home-9-line fs-4"></i>
+      </a>
+
+      <a href="../../pages-to-accounts/for-students/project-studs.php"
+         class="btn btn-active rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;">
+        <i class="ri-shapes-line fs-4"></i>
+      </a>
+
+      <a href="../../pages-to-accounts/for-students/settings-studs.php"
+         class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;">
+        <i class="ri-settings-line fs-4"></i>
+      </a>
+
+      <!-- Profile -->
+      <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
+        <img src="../../assets/img/team/default_user.png" alt="Profile"
+             class="rounded-circle border" width="45" height="45">
+      </a>
+
+  </div>
+</nav>
+
+<!-- /Navbar -->
+
+ <!-- Main Content -->
+<main class="container-fluid" style="margin-top: 80px;">
+  <div class="row g-4 justify-content-center">
+    
+    <!-- Left Sidebar (Cards) -->
+    <aside class="col-lg-3 order-lg-1" style="margin-top: 50px;">
+      
+      <!-- Project Upload -->
+      <div class="card shadow-sm mb-3 border-0">
+        <div class="card-body">
+          <h5 class="fw-bold">Student Projects</h5>
+          <a class="btn btn-primary mt-2 w-100" href="profile-studs.php" 
+             style="background: #7db832; border: none;">
+            Upload New Project
+          </a>
         </div>
+      </div>
 
-        <!-- Projects Column -->
-        <div class="col-lg-7">
-          <div class="posts-column" id="projectFeed">
-
-
-            <!-- Mobile Only Header -->
-            <div class="d-lg-none d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
-              <div class="d-flex align-items-center">
-                <h5 class="ms-2 mb-0 fw-bold">COMSA-NOW</h5>
-              </div>
-
-              <div class="d-flex align-items-center gap-2">
-                <!-- Search Button -->
-                <button class="btn p-2" type="button" id="search-toggle">
-                  <i class="ri-search-line fs-1"></i>
-                </button>
-
-                <!-- Profile Icon Button -->
-                <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#profileModal">
-                  <img src="../../assets/img/team/default_user.png" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
-                </button>
-              </div>
-            </div>
-
-            <!-- Mobile Navigation Options -->
-            <div class="d-md-none bg-white shadow-sm border-top">
-              <div class="container-fluid py-2">
-                <div class="row text-center small">
-                  <div class="col">
-                    <a href="#" class="text-decoration-none text-dark d-block" data-bs-toggle="modal" data-bs-target="#categoriesModal">
-                      <i class="bi bi-tags fs-4 mb-1"></i><br>Categories
-                    </a>
-                  </div>
-                  <div class="col">
-                    <a href="#" class="text-decoration-none text-dark d-block" data-bs-toggle="modal" data-bs-target="#trendingModal">
-                      <i class="bi bi-fire fs-4 mb-1"></i><br>Trending
-                    </a>
-                  </div>
-                  <div class="col">
-                    <a href="#" class="text-decoration-none text-dark d-block" data-bs-toggle="modal" data-bs-target="#resourcesModal">
-                      <i class="bi bi-folder2-open fs-4 mb-1"></i><br>Resources
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- comment modal -->
-            <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modalProjectHeader"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div id="modalPostContent" class="mb-3"></div>
-                    <div id="modalComments">Loading comments...</div>
-                  </div>
-                  <div class="d-flex parent-comment-div p-2">
-                    <input type="text" placeholder="Write a comment..." data-id="${post.id}" class="comment-input" />
-                    <button class="add-comment" data-id="${post.id}"><i class="bi bi-send"></i></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Right Sidebar -->
-        <div class="col-lg-3 d-none d-sm-block">
-          <div class="right-sidebar">
-
-            <!-- Project Upload -->
-            <div class="sidebar-card mb-3">
-              <h2>Student Projects</h2>
-              <a class="btn btn-primary" href="profile-studs.php" style="background: #7db832; border: none;">Upload New Project</a>
-            </div>
-
-            <!-- Accordion Starts Here -->
-            <div class="accordion" id="rightSidebarAccordion">
-
-              <!-- Project Categories Accordion -->
-              <div class="accordion-item sidebar-card">
-                <h2 class="accordion-header" id="headingCategories">
-                  <button class="accordion-button custom-accordion collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
-                    Project Categories
-                  </button>
-                </h2>
-                <div id="collapseCategories" class="accordion-collapse collapse" aria-labelledby="headingCategories" data-bs-parent="#rightSidebarAccordion">
-                  <div class="accordion-body category-list">
+      <!-- Categories Card -->
+      <div class="card shadow-sm mb-3 border-0">
+        <div class="card-body">
+          <h6 class="fw-bold mb-3">Project Categories</h6>
+     <div class="accordion-body category-list">
                     <!-- Category items -->
                     <a href="#" class="category-item" id="category-all">
                       <i class="bi bi-recycle category-icon" style="color: green;"></i> <span>All</span> <span class="category-count">99+</span>
@@ -238,95 +166,74 @@ require_once '../../../backend/middleware/student_middleware.php';
                       <i class="bi bi-database category-icon db-icon"></i> <span>Databases</span> <span class="category-count">23</span>
                     </a>
                   </div>
-                </div>
-              </div>
-
-              <!-- Trending Projects Accordion -->
-              <div class="accordion-item sidebar-card">
-                <h2 class="accordion-header" id="headingTrending">
-                  <button class="accordion-button custom-accordion collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTrending" aria-expanded="false" aria-controls="collapseTrending">
-                    Top 3 Trending Projects
-                  </button>
-                </h2>
-                <div id="collapseTrending" class="accordion-collapse collapse" aria-labelledby="headingTrending" data-bs-parent="#rightSidebarAccordion">
-                  <div class="accordion-body">
-                    <!-- Trending project items -->
-                    <div class="trending-project">
-                      <div class="trending-project-info">
-                        <h5>Virtual Campus Tour</h5>
-                        <p class="trending-project-author">by vr_enthusiast</p>
-                        <div class="trending-project-stats">
-                          <span><i class="bi bi-star-fill"></i> 210</span>
-                        </div>
-                      </div>
-                      <img src="../../assets/img/team/tung-tung-tung-sahur.png" alt="Trending Project" class="project-avatar">
-                    </div>
-                    <div class="trending-project">
-                      <div class="trending-project-info">
-                        <h5>Code Collab Platform</h5>
-                        <p class="trending-project-author">by team_coders</p>
-                        <div class="trending-project-stats">
-                          <span><i class="bi bi-star-fill"></i> 187</span>
-                        </div>
-                      </div>
-                      <img src="../../assets/img/team/default_user.png" class="project-avatar" alt="User Avatar">
-                    </div>
-                    <div class="trending-project">
-                      <div class="trending-project-info">
-                        <h5>AR Chemistry Lab</h5>
-                        <p class="trending-project-author">by science_tech</p>
-                        <div class="trending-project-stats">
-                          <span><i class="bi bi-star-fill"></i> 156</span>
-                        </div>
-                      </div>
-                      <img src="../../assets/img/team/default_user.png" class="project-avatar" alt="User Avatar">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Resources Accordion -->
-              <div class="accordion-item sidebar-card">
-                <h2 class="accordion-header" id="headingResources">
-                  <button class="accordion-button custom-accordion fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseResources" aria-expanded="false" aria-controls="collapseResources">
-                    Project Resources
-                  </button>
-                </h2>
-                <div id="collapseResources" class="accordion-collapse collapse" aria-labelledby="headingResources" data-bs-parent="#rightSidebarAccordion">
-                  <div class="accordion-body">
-                    <!-- Resource items -->
-                    <div class="resource-item">
-                      <i class="bi bi-book resource-icon"></i>
-                      <div class="resource-info">
-                        <h5>Project Guidelines</h5>
-                        <p>How to structure your student project</p>
-                      </div>
-                    </div>
-                    <div class="resource-item">
-                      <i class="bi bi-tools resource-icon"></i>
-                      <div class="resource-info">
-                        <h5>Development Tools</h5>
-                        <p>Recommended tools for students</p>
-                      </div>
-                    </div>
-                    <div class="resource-item">
-                      <i class="bi bi-lightbulb resource-icon"></i>
-                      <div class="resource-info">
-                        <h5>Project Ideas</h5>
-                        <p>Inspiration for your next project</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div> <!-- End Accordion -->
-
-          </div>
         </div>
-
       </div>
 
+      <!-- Trending Projects Card -->
+      <div class="card shadow-sm mb-3 border-0">
+        <div class="card-body">
+          <h6 class="fw-bold mb-3">Top 3 Trending Projects</h6>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+              <h6 class="mb-0">Virtual Campus Tour</h6>
+              <small class="text-muted">by vr_enthusiast</small>
+            </div>
+            <span class="badge bg-warning"><i class="bi bi-star-fill"></i> 210</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+              <h6 class="mb-0">Code Collab Platform</h6>
+              <small class="text-muted">by team_coders</small>
+            </div>
+            <span class="badge bg-warning"><i class="bi bi-star-fill"></i> 187</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h6 class="mb-0">AR Chemistry Lab</h6>
+              <small class="text-muted">by science_tech</small>
+            </div>
+            <span class="badge bg-warning"><i class="bi bi-star-fill"></i> 156</span>
+          </div>
+        </div>
+      </div>
+
+
+
+    </aside>
+
+    <!-- Main Feed (Posts Section) -->
+    <section class="col-lg-7 order-lg-2">
+      <div id="projectFeed" class="posts-column">
+        <!-- posts dynamically loaded here -->
+
+           <!-- comment modal -->
+            <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalProjectHeader"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div id="modalPostContent" class="mb-3"></div>
+                    <div id="modalComments">Loading comments...</div>
+                  </div>
+                  <div class="d-flex parent-comment-div p-2">
+                    <input type="text" placeholder="Write a comment..." data-id="${post.id}" class="comment-input" />
+                    <button class="add-comment" data-id="${post.id}"><i class="bi bi-send"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+
+
+            
       <!-- Project Upload Modal -->
       <div class="modal fade" id="projectUploadModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -447,26 +354,39 @@ require_once '../../../backend/middleware/student_middleware.php';
         </div>
       </div>
 
-      <!-- Bottom Navigation Bar (for md and below) -->
-      <nav class="d-lg-none fixed-bottom bg-light border-top">
-        <div class="d-flex justify-content-around py-2">
-          <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="text-center mt-2">
-            <i class="ri-home-9-line fs-1"></i>
-          </a>
-          <a href="../../pages-to-accounts/for-students/project-studs.php" class="text-center mt-2 btn-active-mobile">
-            <i class="ri-shapes-line fs-1"></i>
-          </a>
-          <a id="uploadProjectBtn" class="text-center mt-2">
-            <i class="ri-add-circle-line fs-1"></i>
-          </a>
-          <a href="#" id="createPostTrigger" class="text-center mt-2">
-            <i class="ri-notification-3-line fs-1"></i>
-          </a>
-          <a href="../../pages-to-accounts/for-students/settings-studs.php" class="text-center mt-2">
-            <i class="ri-settings-line fs-1"></i>
-          </a>
-        </div>
-      </nav>
+  <!-- 📌 Bottom Navigation (mobile only) -->
+<nav class="d-lg-none fixed-bottom bg-white border-top shadow-sm">
+  <div class="d-flex justify-content-around py-2 mt-2">
+
+    <a href="#" class="btn btn-active rounded-3 d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <i class="ri-home-9-line fs-1"></i>
+    </a>
+
+    <a href="../../pages-to-accounts/for-students/project-studs.php" 
+       class="btn d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <i class="ri-shapes-line fs-1"></i>
+    </a>
+
+    <a href="../../pages-to-accounts/for-students/settings-studs.php" 
+       class="btn d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <i class="ri-settings-line fs-1"></i>
+    </a>
+
+    <a href="../../pages-to-accounts/for-students/profile-studs.php" 
+       class="btn d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <img src="../../assets/img/team/default_user.png" 
+            alt="Profile"
+            class="rounded-circle border"
+            width="40" height="40">
+    </a>
+
+  </div>
+</nav>
+
 
       <!-- Mobile Categories Modal -->
       <div class="modal fade" id="categoriesModal" tabindex="-1" aria-labelledby="categoriesModalLabel" aria-hidden="true">

@@ -1007,19 +1007,6 @@ section,
   );
 }
 
-/* Optional glowing diagonal accent */
-.about::after {
-  content: "";
-  position: absolute;
-  top: 20%;
-  left: 10%;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(99,102,241,0.2), transparent 70%);
-  border-radius: 50%;
-  filter: blur(50px);
-  z-index: 0;
-}
 
 /* Keep actual content above background */
 .about > * {
