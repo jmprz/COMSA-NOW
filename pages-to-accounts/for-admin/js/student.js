@@ -107,6 +107,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         document.getElementById("editEmail").value = data.student.email;
                         document.getElementById("editStudentID").value = data.student.student_number;
                         document.getElementById("editAvatarPreview").src = data.student.profile_photo ? `../../../backend/${data.student.profile_photo}` : '../../assets/img/default-pic.jpg';
+                        document.getElementById("editYearLevel").value = data.student.year_level;
+                        document.getElementById("editSection").value = data.student.section;
                     }
                 });
 

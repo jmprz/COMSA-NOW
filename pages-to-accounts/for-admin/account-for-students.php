@@ -290,6 +290,31 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 </div>
               </div>
 
+            <div class="col-md-6">
+               <div class="mb-3">
+                <label for="yearLevel" class="form-label">Year Level</label>
+                  <select name="yearLevel" class="form-select" id="yearLevel" required>
+                    <option value="" disabled selected></option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                  </select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+               <label for="section" class="form-label">Section</label>
+                <select name="section" class="form-select" id="section" required>
+                  <option value="" disabled selected></option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select>
+               </div>
+            </div>
+
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="studentEmail" class="form-label">Email</label>
@@ -407,6 +432,31 @@ require_once '../../../backend/middleware/admin_middleware.php';
                   <input name="editEmail" type="email" class="form-control" id="editEmail" value="Valexore@huh.edu" required>
                 </div>
               </div>
+                 <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="editYearLevel" class="form-label">Year Level</label>
+                  <select name="editYearLevel" class="form-select" id="editYearLevel" required>
+                    <option value="" disabled selected></option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                  </select>
+                </div>
+              </div>
+
+                 <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="editSection" class="form-label">Section</label>
+                  <select name="editSection" class="form-select" id="editSection" required>
+                    <option value="" disabled selected></option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                  </select>
+                </div>
+              </div>
+              
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="editStudentID" class="form-label">Student ID</label>
