@@ -432,58 +432,65 @@ document.addEventListener('DOMContentLoaded', () => {
             ${carouselControls}
             </div>`;
 
-          postEl.innerHTML = `
-            <div class="project-container" id="${post.id}-project">
-                <div class="project-header">
-                    ${post.profile_photo ? `<img src="../../../backend/${post.profile_photo}" class="project-avatar" alt="User Avatar">` : `<div class="project-avatar" id="avatar-initials">${initials}</div>`}
-                    <div class="project-author">
-                    <p class="project-username">${post.student_name}</p>
-                    <p class="project-date">${post.created_at}</p>
-                    </div>
-                    <span class="project-badge ${categoryClass}-badge">
-                    ${post.project_category}
-                    </span>                            
-                </div>
 
-                <div class="project-content">
-                    <h3 class="project-title">${post.project_title}</h3>
-                    <p class="project-description">
-                    ${post.project_description}
-                    </p>
-                    <p class="project-members">
-                        <span style="font-weight: bold; font-size: 15px;">Team Members:</span>
-                        <span style="font-size: 14px;">
-                            ${post.team_members.map(member => member).join(', ')}
-                        </span>
-                    </p>
-                    <div class="project-media">
-                    ${carouselHTML}
-                        <div class="project-links">
-                            ${post.download_link ? `<a href="${post.download_link}" class="project-link"><i class="bi bi-download"></i>Executable</a>` : ''}
-                            ${post.live_link ? ` <a href="${post.live_link}" class="project-link"><i class="bi bi-globe"></i>Live</a>` : ''}
-                            ${post.github_link ? ` <a href="${post.github_link}" class="project-link"><i class="bi bi-github"></i>Source Code</a>` : ''}
-                        </div>
-                    </div>
+   postEl.innerHTML = `
+  <div class="project-container" id="${post.id}-project">
+      
+      <!-- IMAGE CAROUSEL ON TOP -->
+      <div class="project-media">
+          ${carouselHTML}
+      </div>
 
-                    <div class="project-tech">
-                        ${post.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                    </div>
-                </div>
+      <!-- CONTENT -->
+      <div class="project-content">
+          
+          <!-- TITLE + DESCRIPTION -->
+          <h3 class="project-title mt-3">${post.project_title}</h3>
+          <p class="project-description mb-3">${post.project_description}</p>
 
-                <div class="project-stats">
-                    <div class="stat d-flex align-items-start">
-                    <button class="post-action d-flex flex-column like-btn" data-id="${post.id}">
-                        <i class="bi ${post.liked_by_user ? 'ri-heart-3-fill' : 'ri-heart-3-line'} like-icon" id="like-icon-${post.id}"></i>
-                        <span class="like-count" style="font-size: 13px;" id="like-count-${post.id}">${post.like_count} Likes</span>
-                    </button>
-                    <button class="post-action d-flex flex-column comment-btn" data-id="${post.id}" data-post='${JSON.stringify(post).replace(/'/g, "&apos;")}'>
-                        <i class="bi bi-chat-left"></i>
-                        <span class="comment-count" style="font-size: 13px;" id="comment-count-${post.id}">${post.comment_count} Comments</span>
-                    </button>
-                    </div>
-                </div>
-            </div>
-          `;
+          <!-- TECHNOLOGIES -->
+          <div class="project-tech mb-3">
+              ${post.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+          </div>
+
+          <!-- AUTHOR + DATE -->
+          <div class="project-header mb-3">
+              ${post.profile_photo 
+                ? `<img src="../../../backend/${post.profile_photo}" class="project-avatar" alt="User Avatar">` 
+                : `<div class="project-avatar">${initials}</div>`}
+              
+              <div class="project-author">
+                  <p class="project-username">${post.student_name}</p>
+                  <p class="project-date">${post.created_at}</p>
+              </div>
+              <span class="project-badge ${categoryClass}-badge">${post.project_category}</span>
+          </div>
+      <!-- FOOTER: STATS + LINKS -->
+<div class="project-footer d-flex flex-column flex-md-row justify-content-between align-items-center mt-3 gap-3">
+
+    <!-- LEFT: Likes + Comments -->
+    <div class="project-stats d-flex gap-3">
+        <button class="post-action like-btn" data-id="${post.id}">
+            <i class="${post.liked_by_user ? 'ri-heart-3-fill' : 'ri-heart-3-line'} like-icon" id="like-icon-${post.id}"></i>
+            <span class="like-count" id="like-count-${post.id}">${post.like_count} Likes</span>
+        </button>
+        <button class="post-action comment-btn" data-id="${post.id}" data-post='${JSON.stringify(post).replace(/'/g, "&apos;")}' >
+            <i class="ri-chat-3-line"></i>
+            <span class="comment-count" id="comment-count-${post.id}">${post.comment_count} Comments</span>
+        </button>
+    </div>
+
+    <!-- RIGHT: Project Links -->
+    <div class="project-links d-flex flex-row flex-nowrap justify-content-center gap-3 w-100 w-md-auto">
+        ${post.download_link ? `<a href="${post.download_link}" class="project-link"><i class="ri-download-2-line"></i> Executable</a>` : ''}
+        ${post.live_link ? `<a href="${post.live_link}" class="project-link"><i class="ri-global-line"></i> Live</a>` : ''}
+        ${post.github_link ? `<a href="${post.github_link}" class="project-link"><i class="ri-github-fill"></i> GitHub</a>` : ''}
+    </div>
+</div>
+
+`;
+
+
 
           feed.appendChild(postEl);
           const insertedCarousel = document.getElementById(carouselId);
