@@ -306,76 +306,60 @@ require_once "../../../backend/api/update_nickname_bio.php";
 
 <body class="index-page">
 
+
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-white shadow-sm fixed-top">
+  <div class="container-xxl d-flex align-items-center justify-content-between">
+
+    <!-- Left: Logo -->
+    <a class="navbar-brand fs-2 fw-bold d-flex align-items-center gap-2" href="#">
+      <img src="../../assets/img/logo.png" alt="COMSA Logo" class="img-fluid" style="height:60px;">
+      <span class="d-lg-inline">COMSA-NOW</span>
+    </a>
+
+
+
+      <!-- Right: Icon buttons -->
+    <div class="d-flex align-items-center gap-3 d-none d-lg-flex">
+
+      <a href="#" class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;">
+        <i class="ri-home-9-line fs-4"></i>
+      </a>
+
+      <a href="../../pages-to-accounts/for-students/project-studs.php"
+         class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;">
+        <i class="ri-shapes-line fs-4"></i>
+      </a>
+
+      <a href="../../pages-to-accounts/for-students/settings-studs.php"
+         class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
+         style="width:50px; height:50px;">
+        <i class="ri-settings-line fs-4"></i>
+      </a>
+
+      <!-- Profile -->
+      <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
+        <img src="../../assets/img/team/default_user.png" alt="Profile"
+             class="user-avatar rounded-circle border-color" style="border-color: #7db832;" width="45" height="45">
+      </a>
+
+  </div>
+</nav>
+
+<!-- /Navbar -->
+
     <!-- Main Content -->
-    <div class="main-content d-flex justify-content-center">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Side Navigation -->
-                <div class="col-md-2 d-none d-lg-block bg-light min-vh-100">
-                    <div class="side-nav py-4 px-3 d-flex flex-column justify-content-between h-100">
-
-                        <!-- Side Nav Header -->
-                        <div>
-                            <div class="text-center mb-5 side-nav-header">
-                                <img src="../../assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
-                                <h3 class="fw-bold">COMSA-NOW</h3>
-                            </div>
-
-                            <!-- Nav Menu -->
-                            <div class="side-nav-menu d-flex flex-column gap-3">
-                                <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="btn text-start d-flex align-items-center gap-2">
-                                    <i class="ri-home-9-line"></i> <span>Home</span>
-                                </a>
-                                <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
-                                    <i class="ri-shapes-line"></i> <span>Projects</span>
-                                </a>
-                                <a href="../../pages-to-accounts/for-students/studs-chat.php" class="btn text-start d-flex align-items-center gap-2">
-                                    <i class="ri-chat-smile-3-line"></i> <span>Chat</span>
-                                </a>
-                                <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
-                                    <i class="ri-search-line"></i> <span>Search</span>
-                                </a>
-                                <a href="../../pages-to-accounts/for-students/profile-studs.php" class="btn text-start d-flex align-items-center gap-2 btn-active">
-                                    <i class="ri-user-line"></i> <span>Profile</span>
-                                </a>
-                                <a href="../../pages-to-accounts/for-students/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
-                                    <i class="ri-settings-line"></i> <span>Settings</span>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Side Nav Footer -->
-                        <div class="text-muted small text-center mt-4">
-                            Experimental Nav
-                        </div>
-                    </div>
-                </div>
-
+<main class="container-fluid" style="margin-top: 80px;">
+         <div class="row g-4 justify-content-center">
                 <!-- Main Profile Content -->
                 <div class="col-lg-10">
-                    <!-- Mobile Only Header -->
-                    <div class="d-lg-none d-flex justify-content-between align-items-center p-3 bg-light border-bottom">
-                        <div class="d-flex align-items-center">
-                            <h5 class="ms-2 mb-0 fw-bold">COMSA-NOW</h5>
-                        </div>
-
-                        <div class="d-flex align-items-center gap-2">
-                            <!-- Search Button -->
-                            <button class="btn p-2 search-toggle-mobile" type="button">
-                                <i class="ri-search-line fs-1"></i>
-                            </button>
-
-                            <!-- Profile Icon Button -->
-                            <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#profileModal">
-                                <img src="../../assets/img/team/default_user.png" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
-                            </button>
-                        </div>
-                    </div>
-
                     <!-- Profile Header Section -->
                     <div class="profile-header">
                         <div class="row align-items-center">
                             <div class="col-md-2 position-relative">
-                                <img src="../../assets/img/team/default_user.png" class="profile-avatar d-none" alt="Profile Picture" id="user-avatar" style="border-color: #7db832;">
+                                <img src="../../assets/img/team/default_user.png" class="profile-avatar d-none user-avatar" alt="Profile Picture" style="border-color: #7db832;">
                                 <div class="profile-avatar-edit" data-bs-toggle="modal" data-bs-target="#avatarModal">
                                     <i class="ri-camera-line"></i>
                                 </div>
@@ -519,6 +503,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                 </div>
             </div>
 
+            
 
             <!-- Avatar Change Modal -->
             <div class="modal fade" id="avatarModal" tabindex="-1" aria-hidden="true">
@@ -585,8 +570,8 @@ require_once "../../../backend/api/update_nickname_bio.php";
                         </form>
 
                     </div>
-                </div>
-            </div>
+         
+    </main>
 
             <!-- Project Upload Modal (Same as in project-studs.php) -->
             <div class="modal fade" id="projectUploadModal" tabindex="-1" aria-hidden="true">
@@ -810,27 +795,38 @@ require_once "../../../backend/api/update_nickname_bio.php";
             </div>
 
 
-            <!-- Bottom Navigation Bar (for md and below) mobile-->
-            <nav class="d-lg-none fixed-bottom bg-light border-top">
-                <div class="d-flex justify-content-around py-2">
-                    <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="text-center mt-2">
-                        <i class="ri-home-9-line fs-1"></i>
-                    </a>
-                    <a href="../../pages-to-accounts/for-students/project-studs.php" class="text-center mt-2">
-                        <i class="ri-shapes-line fs-1"></i>
-                    </a>
-                    <a id="uploadProjectBtn" class="text-center mt-2 ">
-                        <i class="ri-add-circle-line fs-1"></i>
-                    </a>
-                    <a href="../../pages-to-accounts/for-students/profile-studs.php" class="text-center mt-2 btn-active-mobile">
-                        <i class="ri-user-line fs-1"></i>
-                    </a>
-                    <a href="../../pages-to-accounts/for-students/settings-studs.php" class="text-center mt-2">
-                        <i class="ri-settings-line fs-1"></i>
-                    </a>
-                </div>
-            </nav>
+        <!-- 📌 Bottom Navigation (mobile only) -->
+<nav class="d-lg-none fixed-bottom bg-white border-top shadow-sm">
+  <div class="d-flex justify-content-around py-2 mt-2">
 
+    <a href="#" class="btn rounded-3 d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <i class="ri-home-9-line fs-1"></i>
+    </a>
+
+    <a href="../../pages-to-accounts/for-students/project-studs.php" 
+       class="btn btn-light d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <i class="ri-shapes-line fs-1"></i>
+    </a>
+
+    <a href="../../pages-to-accounts/for-students/settings-studs.php" 
+       class="btn d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <i class="ri-settings-line fs-1"></i>
+    </a>
+
+    <a href="../../pages-to-accounts/for-students/profile-studs.php" 
+       class="btn d-flex align-items-center justify-content-center"
+       style="width:50px; height:50px;">
+       <img src="../../assets/img/team/default_user.png"
+            alt="Profile"
+            class="user-avatar rounded-circle border"
+            width="40" height="40">
+    </a>
+
+  </div>
+</nav>
 
             <!-- Search Modal -->
             <div class="search-popup" id="searchPopup">

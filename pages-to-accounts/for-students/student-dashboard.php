@@ -294,7 +294,7 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
       <!-- Profile -->
       <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
         <img src="../../assets/img/team/default_user.png" alt="Profile"
-             class="rounded-circle border" width="45" height="45">
+             class="user-avatar rounded-circle border" width="45" height="45">
       </a>
 
   </div>
@@ -369,7 +369,7 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
        style="width:50px; height:50px;">
        <img src="../../assets/img/team/default_user.png" 
             alt="Profile"
-            class="rounded-circle border"
+            class="user-avatar rounded-circle border"
             width="40" height="40">
     </a>
 
@@ -400,7 +400,8 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
 
     <script src="../for-students/js/fetch-posts.js"></script>
     <script src="../for-students/js/fetch-events-links.js"></script>
-
+    <script src="../for-students/js/profile-picture-handler.js" defer></script> <!-- For Handleling profile picture Image -->
+    <script src="../for-students/js/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
     <script>
       //session with disabilities haha
       const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;

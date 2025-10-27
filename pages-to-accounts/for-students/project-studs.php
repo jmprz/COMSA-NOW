@@ -74,6 +74,54 @@ require_once '../../../backend/middleware/student_middleware.php';
     background-color: #f8f9fa;
     /* Background color for images with different aspect ratios */
   }
+
+  .sticky-sidebar {
+  position: sticky;
+  top: 120px; /* Adjust depending on navbar height */
+  z-index: 100;
+}
+
+.posts-column {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 10px;
+  padding-top: 10px;
+  scroll-behavior: smooth;
+}
+
+/* Fix for overlapping content behind navbar */
+body {
+  padding-top: 90px; /* Adjust to match the height of your navbar */
+}
+
+/* Optional: make sure sections have consistent spacing */
+main {
+  margin-top: 0 !important;
+}
+
+.category-item {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.category-item:hover {
+  background-color: #f1f1f1;
+}
+
+.category-item.active {
+  background-color: #7db832; /* Your green color */
+  color: white;
+}
+
+.category-item.active .category-icon {
+  color: white !important;
+}
+
+
 </style>
 
 <body class="index-page">
@@ -112,7 +160,7 @@ require_once '../../../backend/middleware/student_middleware.php';
       <!-- Profile -->
       <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
         <img src="../../assets/img/team/default_user.png" alt="Profile"
-             class="rounded-circle border" width="45" height="45">
+             class="user-avatar rounded-circle border" width="45" height="45">
       </a>
 
   </div>
@@ -124,220 +172,263 @@ require_once '../../../backend/middleware/student_middleware.php';
 <main class="container-fluid" style="margin-top: 80px;">
   <div class="row g-4 justify-content-center">
     
-    <!-- Left Sidebar (Cards) -->
+    <!-- Left Sidebar (Sticky Sidebar) -->
     <aside class="col-lg-3 order-lg-1" style="margin-top: 50px;">
-      
-      <!-- Project Upload -->
-      <div class="card shadow-sm mb-3 border-0">
-        <div class="card-body">
-          <h5 class="fw-bold">Student Projects</h5>
-          <a class="btn btn-primary mt-2 w-100" href="profile-studs.php" 
-             style="background: #7db832; border: none;">
-            Upload New Project
+      <div class="sticky-sidebar" style="position: sticky; top: 100px;">
+        
+        <!-- Project Upload -->
+         <div class="d-lg-block d-none">
+        <div class="shadow-sm mb-3 border-0">
+          <div class="card-body">
+            <button class="btn btn-primary mt-2 w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#projectUploadModal"
+               style="background: #7db832; border: none;"> <i class="ri-upload-cloud-2-line me-2"></i>
+              Upload New Project
+</button>
+          </div>
+          </div>
+        </div>
+
+        <!-- Categories Card -->
+     <div class="d-lg-block d-none">
+          <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body">
+            <h6 class="fw-bold mb-3">Project Categories</h6>
+            <div class="accordion-body category-list">
+             <a href="#" class="category-item" id="category-all">
+            <i class="ri-recycle-line category-icon" style="color: green;"></i> 
+            <span>All</span>
+          </a>
+          <a href="#" class="category-item" id="category-games">
+            <i class="ri-gamepad-line category-icon" style="color: green;"></i> 
+            <span>Games</span>
+          </a>
+          <a href="#" class="category-item" id="category-websites">
+            <i class="ri-earth-line category-icon" style="color: green;"></i> 
+            <span>Websites</span>
+          </a>
+          <a href="#" class="category-item" id="category-mobile">
+            <i class="ri-smartphone-line category-icon" style="color: green;"></i> 
+            <span>Mobile Apps</span>
+          </a>
+          <a href="#" class="category-item" id="category-console">
+            <i class="ri-terminal-line category-icon" style="color: green;"></i> 
+            <span>Console Apps</span>
+          </a>
+          <a href="#" class="category-item" id="category-ai">
+            <i class="ri-robot-line category-icon" style="color: green;"></i> 
+            <span>AI/ML</span>
+          </a>
+          <a href="#" class="category-item" id="category-databases">
+            <i class="ri-database-2-line category-icon" style="color: green;"></i> 
+            <span>Databases</span>
+          </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </aside>
+
+    
+
+    <!-- Main Feed -->
+    <section class="col-lg-7 order-lg-2">
+      <div id="projectFeed" class="posts-column">
+        <!-- Upload for Mobile -->
+           <div class="d-lg-none mb-3">
+         <div class="shadow-sm mb-3 border-0">
+          <div class="card-body">
+            <button class="btn btn-primary mt-2 w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#projectUploadModal"
+               style="background: #7db832; border: none;"> <i class="ri-upload-cloud-2-line me-2"></i>
+              Upload New Project
+            </button>
+          </div>
+          </div>
+          </div>
+        <!-- Accordion for Mobile -->
+<div class="accordion d-lg-none mb-3" id="categoriesAccordion">
+  <div class="accordion-item border-0 shadow-sm">
+    <h2 class="accordion-header">
+      <button 
+        class="accordion-button collapsed bg-white text-dark fw-semibold" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#collapseCategories"
+        aria-expanded="false" 
+        aria-controls="collapseCategories"
+      >
+        Project Categories
+      </button>
+    </h2>
+    <div 
+      id="collapseCategories" 
+      class="accordion-collapse collapse" 
+      data-bs-parent="#categoriesAccordion"
+    >
+      <div class="accordion-body bg-white">
+        <div class="list-group">
+          <a href="#" class="category-item" id="category-all">
+            <i class="ri-recycle-line category-icon" style="color: green;"></i> 
+            <span>All</span>
+          </a>
+          <a href="#" class="category-item" id="category-games">
+            <i class="ri-gamepad-line category-icon" style="color: green;"></i> 
+            <span>Games</span>
+          </a>
+          <a href="#" class="category-item" id="category-websites">
+            <i class="ri-earth-line category-icon" style="color: green;"></i> 
+            <span>Websites</span>
+          </a>
+          <a href="#" class="category-item" id="category-mobile">
+            <i class="ri-smartphone-line category-icon" style="color: green;"></i> 
+            <span>Mobile Apps</span>
+          </a>
+          <a href="#" class="category-item" id="category-console">
+            <i class="ri-terminal-line category-icon" style="color: green;"></i> 
+            <span>Console Apps</span>
+          </a>
+          <a href="#" class="category-item" id="category-ai">
+            <i class="ri-robot-line category-icon" style="color: green;"></i> 
+            <span>AI/ML</span>
+          </a>
+          <a href="#" class="category-item" id="category-databases">
+            <i class="ri-database-2-line category-icon" style="color: green;"></i> 
+            <span>Databases</span>
           </a>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
-      <!-- Categories Card -->
-      <div class="card shadow-sm mb-3 border-0">
-        <div class="card-body">
-          <h6 class="fw-bold mb-3">Project Categories</h6>
-     <div class="accordion-body category-list">
-                    <!-- Category items -->
-                    <a href="#" class="category-item" id="category-all">
-                      <i class="bi bi-recycle category-icon" style="color: green;"></i> <span>All</span> <span class="category-count">99+</span>
-                    </a>
-                    <a href="#" class="category-item" id="category-games">
-                      <i class="bi bi-controller category-icon game-icon"></i> <span>Games</span> <span class="category-count">42</span>
-                    </a>
-                    <a href="#" class="category-item" id="category-websites">
-                      <i class="bi bi-globe category-icon web-icon"></i> <span>Websites</span> <span class="category-count">76</span>
-                    </a>
-                    <a href="#" class="category-item" id="category-mobile">
-                      <i class="bi bi-phone category-icon mobile-icon"></i> <span>Mobile Apps</span> <span class="category-count">35</span>
-                    </a>
-                    <a href="#" class="category-item" id="category-console">
-                      <i class="bi bi-terminal category-icon console-icon"></i> <span>Console Apps</span> <span class="category-count">28</span>
-                    </a>
-                    <a href="#" class="category-item" id="category-ai">
-                      <i class="bi bi-robot category-icon ai-icon"></i> <span>AI/ML</span> <span class="category-count">19</span>
-                    </a>
-                    <a href="#" class="category-item" id="category-databases">
-                      <i class="bi bi-database category-icon db-icon"></i> <span>Databases</span> <span class="category-count">23</span>
-                    </a>
-                  </div>
-        </div>
-      </div>
-
-      <!-- Trending Projects Card -->
-      <div class="card shadow-sm mb-3 border-0">
-        <div class="card-body">
-          <h6 class="fw-bold mb-3">Top 3 Trending Projects</h6>
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <div>
-              <h6 class="mb-0">Virtual Campus Tour</h6>
-              <small class="text-muted">by vr_enthusiast</small>
-            </div>
-            <span class="badge bg-warning"><i class="bi bi-star-fill"></i> 210</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <div>
-              <h6 class="mb-0">Code Collab Platform</h6>
-              <small class="text-muted">by team_coders</small>
-            </div>
-            <span class="badge bg-warning"><i class="bi bi-star-fill"></i> 187</span>
-          </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <h6 class="mb-0">AR Chemistry Lab</h6>
-              <small class="text-muted">by science_tech</small>
-            </div>
-            <span class="badge bg-warning"><i class="bi bi-star-fill"></i> 156</span>
-          </div>
-        </div>
-      </div>
-
-
-
-    </aside>
-
-    <!-- Main Feed (Posts Section) -->
-    <section class="col-lg-7 order-lg-2">
-      <div id="projectFeed" class="posts-column">
-        <!-- posts dynamically loaded here -->
-
-           <!-- comment modal -->
-            <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modalProjectHeader"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div id="modalPostContent" class="mb-3"></div>
-                    <div id="modalComments">Loading comments...</div>
-                  </div>
-                  <div class="d-flex parent-comment-div p-2">
-                    <input type="text" placeholder="Write a comment..." data-id="${post.id}" class="comment-input" />
-                    <button class="add-comment" data-id="${post.id}"><i class="bi bi-send"></i></button>
-                  </div>
-                </div>
+        <!-- Posts dynamically loaded here -->
+        
+        <!-- Comment Modal -->
+        <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalProjectHeader"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                <div id="modalPostContent" class="mb-3"></div>
+                <div id="modalComments">Loading comments...</div>
+              </div>
+              <div class="d-flex parent-comment-div p-2">
+                <input type="text" placeholder="Write a comment..." data-id="${post.id}" class="comment-input" />
+                <button class="add-comment" data-id="${post.id}"><i class="ri-send-plane-2-line"></i></button>
               </div>
             </div>
+          </div>
+        </div>
 
       </div>
     </section>
-
   </div>
 </main>
 
+    <!-- Project Upload Modal (Same as in project-studs.php) -->
+            <div class="modal fade" id="projectUploadModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Upload Your Project</h5>
+                            <button type="button" class="close-uploadInfo btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="projectUploadForm" class="compact-form">
+                                <div class="col g-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="projectTitle" class="form-label">Project Title*</label>
+                                            <input type="text" class="form-control" id="projectTitle" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="projectType" class="form-label">Project Type*</label>
+                                            <select class="form-select" id="projectType" required>
+                                                <option value="">Select type</option>
+                                                <option value="Games">Game</option>
+                                                <option value="Websites">Website</option>
+                                                <option value="Mobile Apps">Mobile App</option>
+                                                <option value="Console">Console App</option>
+                                                <option value="AI/ML">AI/ML</option>
+                                                <option value="Databases">Database</option>
+                                                <option value="Others">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
-            
-      <!-- Project Upload Modal -->
-      <div class="modal fade" id="projectUploadModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Upload Your Project</h5>
-              <button type="button" class="close-uploadInfo btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form id="projectUploadForm" class="compact-form">
-                <div class="row g-3">
-                  <div class="col-md-6">
-                    <label for="projectTitle" class="form-label">Project Title*</label>
-                    <input type="text" class="form-control" id="projectTitle" required>
-                  </div>
+                                    <div class="col-12">
+                                        <label for="projectDescription" class="form-label">Description*</label>
+                                        <textarea class="form-control" id="projectDescription" rows="3" required></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="projectTechnologies" class="form-label">Technologies Used</label>
+                                            <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
+                                                <input type="text" class="form-control" id="projectTechnologies" placeholder="JavaScript, React, Node.js">
+                                                <span id="tagsWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
+                                            </div>
+                                        </div>
 
-                  <div class="col-md-6">
-                    <label for="projectType" class="form-label">Project Type*</label>
-                    <select class="form-select" id="projectType" required>
-                      <option value="">Select type</option>
-                      <option value="Games">Game</option>
-                      <option value="Websites">Website</option>
-                      <option value="Mobile Apps">Mobile App</option>
-                      <option value="Console">Console App</option>
-                      <option value="AI/ML">AI/ML</option>
-                      <option value="Databases">Database</option>
-                      <option value="Others">Other</option>
-                    </select>
-                  </div>
+                                        <div class="col-md-6">
+                                            <label for="projectTeam" class="form-label">Team Members</label>
+                                            <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
+                                                <input type="text" class="form-control" id="projectTeam" placeholder="username1, username2">
+                                                <span id="tagsMemberWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                  <div class="col-12">
-                    <label for="projectDescription" class="form-label">Description*</label>
-                    <textarea class="form-control" id="projectDescription" rows="3" required></textarea>
-                  </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Project Media (2-8 images)</label>
+                                        <div class="upload-area" id="mediaUploadArea">
+                                            <i class="bi bi-images upload-icon"></i>
+                                            <p class="mb-1">Drag & drop or click to upload</p>
+                                            <small class="text-muted">Max 8 images (800x600 recommended)</small>
+                                            <input type="file" id="mediaUpload" name="mediaFiles[]" multiple accept="image/*" style="display: none;" max="8">
+                                        </div>
+                                        <div id="mediaPreview" class="d-flex flex-wrap gap-2 mt-2"></div>
+                                        <div id="mediaCounter" class="text-muted small mt-1">0/8 images selected</div>
+                                    </div>
 
-                  <div class="col-md-6">
-                    <label for="projectTechnologies" class="form-label">Technologies Used</label>
-                    <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
-                      <input type="text" class="form-control" id="projectTechnologies" placeholder="JavaScript, React, Node.js">
-                      <span id="tagsWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
+                                    <div class="row-md-5">
+                                        <label class="form-label">Project Links</label>
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text"><i class="bi bi-download"></i></span>
+                                            <input type="url" id="downloadLink" class="form-control" placeholder="Executable Download URL">
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                                            <input type="url" id="liveLink" class="form-control" placeholder="Live Demo URL">
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-github"></i></span>
+                                            <input type="url" id="githubLink" class="form-control" placeholder="GitHub Repository">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="uploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
+                            <div id="uploadLoader" class="text-center">
+                                <div class="spinner-border text-success" role="status"></div>
+                                <p class="mt-2 fw-semibold">Uploading...</p>
+                            </div>
+                            <div id="uploadSuccess" class="text-center d-none">
+                                <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                                <p class="mt-2 fw-semibold">Upload Successful!</p>
+                            </div>
+                        </div>
+                        <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="close-uploadInfo btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: #7db832; border: 1px solid #7db832;">Upload Project</button>
+                        </div>
                     </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="projectTeam" class="form-label">Team Members</label>
-                    <div class="border p-2 rounded" id="tagInputContainer" style="min-height: 50px;">
-                      <input type="text" class="form-control" id="projectTeam" placeholder="username1, username2">
-                      <span id="tagsMemberWrapper" class="mt-2 d-flex flex-wrap gap-1"></span>
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                    <label class="form-label">Project Media (2-8 images)</label>
-                    <div class="upload-area" id="mediaUploadArea">
-                      <i class="bi bi-images upload-icon"></i>
-                      <p class="mb-1">Drag & drop or click to upload</p>
-                      <small class="text-muted">Max 8 images (800x600 recommended)</small>
-                      <input type="file" id="mediaUpload" name="mediaFiles[]" multiple accept="image/*" style="display: none;" max="8">
-                    </div>
-                    <div id="mediaPreview" class="d-flex flex-wrap gap-2 mt-2"></div>
-                    <div id="mediaCounter" class="text-muted small mt-1">0/8 images selected</div>
-                  </div>
-
-                  <div class="row-md-5">
-                    <label class="form-label">Project Links</label>
-                    <div class="input-group mb-2">
-                      <span class="input-group-text"><i class="bi bi-download"></i></span>
-                      <input type="url" id="downloadLink" class="form-control" placeholder="Executable Download URL">
-                    </div>
-                    <div class="input-group mb-2">
-                      <span class="input-group-text"><i class="bi bi-globe"></i></span>
-                      <input type="url" id="liveLink" class="form-control" placeholder="Live Demo URL">
-                    </div>
-                    <div class="input-group">
-                      <span class="input-group-text"><i class="bi bi-github"></i></span>
-                      <input type="url" id="githubLink" class="form-control" placeholder="GitHub Repository">
-                    </div>
-                  </div>
-
                 </div>
-              </form>
-
-
             </div>
-            <div id="uploadOverlay" class="position-absolute d-flex flex-column justify-content-center start-0 w-100 h-100 bg-light bg-opacity-75 d-none justify-content-center align-items-center" style="z-index: 1051;">
-              <div id="uploadLoader" class="text-center">
-                <div class="spinner-border text-success" role="status"></div>
-                <p class="mt-2 fw-semibold">Uploading...</p>
-              </div>
-              <div id="uploadSuccess" class="text-center d-none">
-                <i class="bi bi-check-circle-fill text-success fs-1"></i>
-                <p class="mt-2 fw-semibold">Upload Successful!</p>
-              </div>
-            </div>
-
-            <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
-
-            <div class="modal-footer">
-              <button type="button" class="close-uploadInfo btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: green;">Upload Project</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
 
       <!-- Project viewer Modal -->
@@ -358,13 +449,13 @@ require_once '../../../backend/middleware/student_middleware.php';
 <nav class="d-lg-none fixed-bottom bg-white border-top shadow-sm">
   <div class="d-flex justify-content-around py-2 mt-2">
 
-    <a href="#" class="btn btn-active rounded-3 d-flex align-items-center justify-content-center"
+    <a href="#" class="btn rounded-3 d-flex align-items-center justify-content-center"
        style="width:50px; height:50px;">
        <i class="ri-home-9-line fs-1"></i>
     </a>
 
     <a href="../../pages-to-accounts/for-students/project-studs.php" 
-       class="btn d-flex align-items-center justify-content-center"
+       class="btn  btn-active d-flex align-items-center justify-content-center"
        style="width:50px; height:50px;">
        <i class="ri-shapes-line fs-1"></i>
     </a>
@@ -378,111 +469,14 @@ require_once '../../../backend/middleware/student_middleware.php';
     <a href="../../pages-to-accounts/for-students/profile-studs.php" 
        class="btn d-flex align-items-center justify-content-center"
        style="width:50px; height:50px;">
-       <img src="../../assets/img/team/default_user.png" 
+       <img src="../../assets/img/team/default_user.png"
             alt="Profile"
-            class="rounded-circle border"
+            class="user-avatar rounded-circle border"
             width="40" height="40">
     </a>
 
   </div>
 </nav>
-
-
-      <!-- Mobile Categories Modal -->
-      <div class="modal fade" id="categoriesModal" tabindex="-1" aria-labelledby="categoriesModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content p-3">
-            <div class="modal-header border-0">
-              <h5 class="modal-title" id="categoriesModalLabel">Project Categories</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body category-list">
-              <!-- Paste your categories content here -->
-              <a href="#" class="category-item"><i class="bi bi-recycle category-icon" style="color: green;"></i> All <span class="category-count">99+</span></a>
-              <a href="#" class="category-item"><i class="bi bi-controller"></i> Games <span class="category-count">42</span></a>
-              <a href="#" class="category-item"><i class="bi bi-globe"></i> Websites <span class="category-count">76</span></a>
-              <a href="#" class="category-item"><i class="bi bi-phone"></i> Mobile Apps <span class="category-count">35</span></a>
-              <a href="#" class="category-item"><i class="bi bi-terminal"></i> Console Apps <span class="category-count">28</span></a>
-              <a href="#" class="category-item"><i class="bi bi-robot"></i> AI/ML <span class="category-count">19</span></a>
-              <a href="#" class="category-item"><i class="bi bi-database"></i> Databases <span class="category-count">23</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile Trending Modal -->
-      <div class="modal fade" id="trendingModal" tabindex="-1" aria-labelledby="trendingModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content p-3">
-            <div class="modal-header border-0">
-              <h5 class="modal-title" id="trendingModalLabel">Top 3 Trending Projects</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-              <!-- Paste trending project cards here -->
-              <div class="trending-project d-flex mb-3">
-                <img src="../../assets/img/team/tung-tung-tung-sahur.png" alt="Trending Project" class="project-avatar me-2">
-                <div>
-                  <h6 class="mb-0">Virtual Campus Tour</h6>
-                  <small>by vr_enthusiast</small><br>
-                  <i class="bi bi-star-fill text-warning"></i> 210
-                </div>
-              </div>
-              <div class="trending-project d-flex mb-3">
-                <img src="../../assets/img/team/default_user.png" class="project-avatar me-2" alt="User Avatar">
-                <div>
-                  <h6 class="mb-0">Code Collab Platform</h6>
-                  <small>by team_coders</small><br>
-                  <i class="bi bi-star-fill text-warning"></i> 187
-                </div>
-              </div>
-              <div class="trending-project d-flex mb-3">
-                <img src="../../assets/img/team/default_user.png" class="project-avatar me-2" alt="User Avatar">
-                <div>
-                  <h6 class="mb-0">AR Chemistry Lab</h6>
-                  <small>by science_tech</small><br>
-                  <i class="bi bi-star-fill text-warning"></i> 156
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile Resources Modal -->
-      <div class="modal fade" id="resourcesModal" tabindex="-1" aria-labelledby="resourcesModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-          <div class="modal-content p-3">
-            <div class="modal-header border-0">
-              <h5 class="modal-title" id="resourcesModalLabel">Project Resources</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-              <div class="resource-item d-flex mb-3">
-                <i class="bi bi-book fs-4 me-3 text-primary"></i>
-                <div>
-                  <h6>Project Guidelines</h6>
-                  <p class="small text-muted mb-0">How to structure your student project</p>
-                </div>
-              </div>
-              <div class="resource-item d-flex mb-3">
-                <i class="bi bi-tools fs-4 me-3 text-success"></i>
-                <div>
-                  <h6>Development Tools</h6>
-                  <p class="small text-muted mb-0">Recommended tools for students</p>
-                </div>
-              </div>
-              <div class="resource-item d-flex mb-3">
-                <i class="bi bi-lightbulb fs-4 me-3 text-warning"></i>
-                <div>
-                  <h6>Project Ideas</h6>
-                  <p class="small text-muted mb-0">Inspiration for your next project</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Search Modal -->
       <div class="search-popup" id="searchPopup">
@@ -528,14 +522,31 @@ require_once '../../../backend/middleware/student_middleware.php';
   <script src="../for-students/js/project-studs.js"></script>
 
 
-  <script src="../for-students/js/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
-
+ 
+    <script src="../for-students/js/profile-picture-handler.js" defer></script> <!-- For Handleling profile picture Image -->
+    <script src="../for-students/js/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
 
   <script>
     //session with disabilities haha
     const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
     const currentStudentId = <?php echo json_encode($_SESSION['user_id']); ?>;
   </script>
+
+<script>
+  document.querySelectorAll('.category-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault(); // prevent page reload if href="#"
+      
+      // remove active class from all
+      document.querySelectorAll('.category-item').forEach(btn => 
+        btn.classList.remove('active')
+      );
+
+      // add active class to clicked one
+      this.classList.add('active');
+    });
+  });
+</script>
 
 
 </body>

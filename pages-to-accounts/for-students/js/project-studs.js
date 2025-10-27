@@ -604,15 +604,13 @@ document.addEventListener('DOMContentLoaded', () => {
       // Render post details
       modalPostEl.innerHTML = `
         <div class="modal-project">
-            <h5>${postData.project_title}</h5>
-            <p class="text-muted" style="font-size: 13px;">${postData.student_name} · ${postData.created_at}</p>
             <p>${postData.project_description}</p>
             ${postData.technologies.map(tech => `<span class="badge bg-secondary me-1">${tech}</span>`).join('')}
         </div>
         <hr>
       `;
 
-      modalHeader.innerHTML = `${postData.student_name}'s Project`;
+      modalHeader.innerHTML = `${postData.project_title}`;
 
       commentsEl.innerHTML = `<div class="text-muted">Loading comments...</div>`;
 
