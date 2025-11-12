@@ -66,7 +66,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
         }
 
         #studentProjectsContainer::-webkit-scrollbar-thumb {
-            background: #7db832;
+            background: #007a00;
             border-radius: 10px;
         }
 
@@ -76,7 +76,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
 
         #studentProjectsContainer {
             scrollbar-width: thin;
-            scrollbar-color: #7db832 #f1f1f1;
+            scrollbar-color: #007a00 #f1f1f1;
         }
 
         /* Custom scrollbar ---END */
@@ -107,7 +107,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
             position: absolute;
             bottom: 20px;
             left: 140px;
-            background: #7db832;
+            background: #007a00;
             color: white;
             border-radius: 50%;
             width: 40px;
@@ -164,7 +164,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
             font-weight: bold;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid #7db832;
+            border-bottom: 2px solid #007a00;
         }
 
         .project-card {
@@ -225,7 +225,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
         .edit-nickname-btn {
             background: none;
             border: none;
-            color: #7db832;
+            color: #007a00;
             cursor: pointer;
         }
 
@@ -247,11 +247,11 @@ require_once "../../../backend/api/update_nickname_bio.php";
         }
 
         .avatar-option:hover {
-            border-color: #7db832;
+            border-color: #007a00;
         }
 
         .avatar-option.selected {
-            border-color: #7db832;
+            border-color: #007a00;
         }
 
         .carousel {
@@ -342,7 +342,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
       <!-- Profile -->
       <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
         <img src="../../assets/img/team/default_user.png" alt="Profile"
-             class="user-avatar rounded-circle border-color" style="border-color: #7db832;" width="45" height="45">
+             class="user-avatar rounded-circle border-color" style="border-color: #007a00;" width="45" height="45">
       </a>
 
   </div>
@@ -359,7 +359,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                     <div class="profile-header">
                         <div class="row align-items-center">
                             <div class="col-md-2 position-relative">
-                                <img src="../../assets/img/team/default_user.png" class="profile-avatar d-none user-avatar" alt="Profile Picture" style="border-color: #7db832;">
+                                <img src="../../assets/img/team/default_user.png" class="profile-avatar d-none user-avatar" alt="Profile Picture" style="border-color: #007a00;">
                                 <div class="profile-avatar-edit" data-bs-toggle="modal" data-bs-target="#avatarModal">
                                     <i class="ri-camera-line"></i>
                                 </div>
@@ -379,7 +379,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                     <p class="profile-bio mb-0">
                                         <?php echo $bio; ?>
                                     </p>
-                                    <button class="btn" data-bs-toggle="modal" data-bs-target="#editBioModal" style="color: #7db832">
+                                    <button class="btn" data-bs-toggle="modal" data-bs-target="#editBioModal" style="color: #007a00">
                                         <i class="ri-edit-line"></i>
                                     </button>
 
@@ -465,7 +465,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                             <div class="profile-section">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h3 class="section-title mb-0">My Projects</h3>
-                                    <button class="btn btn-primary" id="uploadProjectBtnMobile" style="background-color: #7db832; border: none;">
+                                    <button class="btn btn-primary" id="uploadProjectBtnMobile" style="background-color: #007a00; border: none;">
                                         <i class="ri-upload-line me-1"></i> Upload Project
                                     </button>
                                 </div>
@@ -669,7 +669,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
                         <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
                         <div class="modal-footer">
                             <button type="button" class="close-uploadInfo btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: #7db832; border: 1px solid #7db832;">Upload Project</button>
+                            <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: #007a00; border: 1px solid #007a00;">Upload Project</button>
                         </div>
                     </div>
                 </div>

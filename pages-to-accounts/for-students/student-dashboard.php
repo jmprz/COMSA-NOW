@@ -80,7 +80,7 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
     min-width: 50px;
     text-align: center;
     margin-right: 15px;
-    background: linear-gradient(135deg, #7db832, #6aa32a);
+    background: linear-gradient(135deg, #007a00, #6aa32a);
     color: white;
     border-radius: 8px;
     padding: 8px;

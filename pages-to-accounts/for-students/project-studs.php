@@ -113,7 +113,7 @@ main {
 }
 
 .category-item.active {
-  background-color: #7db832; /* Your green color */
+  background-color: #007a00; /* Your green color */
   color: white;
 }
 
@@ -181,7 +181,7 @@ main {
         <div class="shadow-sm mb-3 border-0">
           <div class="card-body">
             <button class="btn btn-primary mt-2 w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#projectUploadModal"
-               style="background: #7db832; border: none;"> <i class="ri-upload-cloud-2-line me-2"></i>
+               style="background: #007a00; border: none;"> <i class="ri-upload-cloud-2-line me-2"></i>
               Upload New Project
 </button>
           </div>
@@ -239,7 +239,7 @@ main {
          <div class="shadow-sm mb-3 border-0">
           <div class="card-body">
             <button class="btn btn-primary mt-2 w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#projectUploadModal"
-               style="background: #7db832; border: none;"> <i class="ri-upload-cloud-2-line me-2"></i>
+               style="background: #007a00; border: none;"> <i class="ri-upload-cloud-2-line me-2"></i>
               Upload New Project
             </button>
           </div>
@@ -424,7 +424,7 @@ main {
                         <div id="generalUploadError" class="text-danger fw-semibold text-center d-none mt-2"></div>
                         <div class="modal-footer">
                             <button type="button" class="close-uploadInfo btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: #7db832; border: 1px solid #7db832;">Upload Project</button>
+                            <button type="submit" form="projectUploadForm" class="btn btn-primary" style="background-color: #007a00; border: 1px solid #007a00;">Upload Project</button>
                         </div>
                     </div>
                 </div>

@@ -136,8 +136,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
     }
 
     .nav-tabs .nav-link.active {
-      color: #7db832;
-      border-bottom: 2px solid #7db832;
+      color: #007a00;
+      border-bottom: 2px solid #007a00;
       background-color: transparent;
     }
 
@@ -202,7 +202,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
     }
 
     body.dark-mode .nav-tabs .nav-link.active {
-      color: #7db832;
+      color: #007a00;
     }
 
     body.dark-mode .activity-item {

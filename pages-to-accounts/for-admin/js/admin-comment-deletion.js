@@ -23,9 +23,9 @@
             const commentsContainer = document.querySelector('.comments-container');
             if (commentsContainer) {
               if (isDarkMode) {
-                commentsContainer.style.scrollbarColor = '#7db832 #2a2a2a';
+                commentsContainer.style.scrollbarColor = '#007a00 #2a2a2a';
               } else {
-                commentsContainer.style.scrollbarColor = '#7db832 #f1f1f1';
+                commentsContainer.style.scrollbarColor = '#007a00 #f1f1f1';
               }
             }
           }, 100);

@@ -11,7 +11,7 @@ body.dark-mode {
 body.dark-mode .side-nav {
   background-color: #1e1e1e;
   box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
-  color: #7db832;
+  color: #007a00;
 }
 
 body.dark-mode .side-nav-header {
@@ -31,7 +31,7 @@ body.dark-mode .side-nav-menu li.active {
 }
 
 body.dark-mode .side-nav-menu i {
-  color: #7db832;
+  color: #007a00;
 }
 
 /* Main Content - Dark */

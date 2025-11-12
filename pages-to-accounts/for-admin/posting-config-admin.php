@@ -134,12 +134,12 @@ require_once '../../../backend/middleware/admin_middleware.php';
     }
 
     .image-upload-container:hover {
-      border-color: #7db832;
+      border-color: #007a00;
     }
 
     .upload-icon {
       font-size: 2rem;
-      color: #7db832;
+      color: #007a00;
       margin-bottom: 10px;
     }
 
@@ -160,8 +160,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
     }
 
     .nav-tabs .nav-link.active {
-      color: #7db832;
-      border-bottom: 2px solid #7db832;
+      color: #007a00;
+      border-bottom: 2px solid #007a00;
       background-color: transparent;
     }
 
@@ -170,12 +170,12 @@ require_once '../../../backend/middleware/admin_middleware.php';
     }
 
     .dark-mode .nav-tabs .nav-link.active {
-      color: #7db832;
+      color: #007a00;
     }
 
     .comments-container {
       scrollbar-width: thin;
-      scrollbar-color: #7db832 #f1f1f1;
+      scrollbar-color: #007a00 #f1f1f1;
     }
 
     .comments-container::-webkit-scrollbar {
@@ -187,7 +187,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
     }
 
     .comments-container::-webkit-scrollbar-thumb {
-      background-color: #7db832;
+      background-color: #007a00;
       border-radius: 6px;
     }
 
@@ -859,7 +859,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
       // Drag and drop for image upload
       imageUploadContainer.addEventListener('dragover', function(e) {
         e.preventDefault();
-        this.style.borderColor = '#7db832';
+        this.style.borderColor = '#007a00';
       });
 
       imageUploadContainer.addEventListener('dragleave', function() {

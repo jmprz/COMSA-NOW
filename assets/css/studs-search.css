@@ -135,7 +135,7 @@
 
 /* Contextual icons for different result types */
 .student-search-result-item[data-type="project"] .student-search-result-icon {
-  color: #7db832;
+  color: #007a00;
 }
 
 .student-search-result-item[data-type="chat"] .student-search-result-icon {

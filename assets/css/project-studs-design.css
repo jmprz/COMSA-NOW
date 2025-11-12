@@ -1,9 +1,9 @@
 /* ===== Base Styles ===== */
 :root {
-  --primary-color: #7db832;
+  --primary-color: #007a00;
   --primary-dark: #055a0f;
-  --primary-light: rgba(126, 184, 50, 0.2);
-  --accent-color: #7db832;
+  --primary-light: rgba(52, 184, 50, 0.2);
+  --accent-color: #007a00;
   --text-dark: #333;
   --text-light: #f8f9fa;
   --bg-light: #f8f9fa;
@@ -106,14 +106,22 @@ body {
 }
 
 .btn-active, .btn-active-mobile {
-  background: linear-gradient(135deg, #7db832, #6aa32a);
+  background: linear-gradient(135deg, #007a00, #6aa32a);
   color: #fff !important;
 }
 
 .btn-active:hover {
-  background: linear-gradient(135deg, #6aa32a, #7db832);
+  background: linear-gradient(135deg, #6aa32a, #007a00);
   color: #fff !important;
 }
+
+.btn-light:hover {
+   background-color: var(--primary-light);
+  color: var(--primary-dark);
+  border: none;
+  
+}
+
 
 .side-nav-footer {
   padding: 20px;
@@ -666,7 +674,7 @@ button.post-action {
   z-index: 1030;
 .upload-area:hover,
 .drag-over {
-  border-color: #7db832;
+  border-color: #007a00;
   background-color: #f0f7e9;
 }}
 

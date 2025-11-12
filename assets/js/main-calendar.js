@@ -287,11 +287,11 @@
       //
       function getEventColor(type) {
         switch(type) {
-          case 'workshop': return '#7db832'; // green
+          case 'workshop': return '#007a00'; // green
           case 'webinar': return '#3498db'; // blue
           case 'social': return '#e74c3c'; // red
           case 'meeting': return '#9b59b6'; // purple
-          default: return '#7db832'; // default green
+          default: return '#007a00'; // default green
         }
       }
       

@@ -175,7 +175,7 @@ require_once "../../../backend/api/view-profile.php";
                                     </a>
                                 </div>
                                 <img src="../../../backend/<?php echo !empty($profile['profile_picture']) ? $profile['profile_picture'] : 'assets/img/team/default_user.png'; ?>"
-                                    class="profile-avatar" alt="Profile Picture" id="user-avatar" style="border-color: #7db832;">
+                                    class="profile-avatar" alt="Profile Picture" id="user-avatar" style="border-color: #007a00;">
                                 <span class="view-only-badge position-absolute" style="bottom: 20px; left: 100px; background-color: rgba(125, 184, 50, 0.8);">
                                     View Only
                                 </span>

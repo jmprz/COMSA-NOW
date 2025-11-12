@@ -61,7 +61,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
 
     .student-profile-header {
       height: 120px;
-      background-color: #7db832;
+      background-color: #007a00;
       position: relative;
     }
 
@@ -81,8 +81,8 @@ require_once '../../../backend/middleware/admin_middleware.php';
     }
 
     .nav-tabs .nav-link.active {
-      color: #7db832;
-      border-bottom: 2px solid #7db832;
+      color: #007a00;
+      border-bottom: 2px solid #007a00;
       background-color: transparent;
     }
 
@@ -91,7 +91,7 @@ require_once '../../../backend/middleware/admin_middleware.php';
     }
 
     .dark-mode .nav-tabs .nav-link.active {
-      color: #7db832;
+      color: #007a00;
     }
 
     .student-info-item {
@@ -114,13 +114,13 @@ require_once '../../../backend/middleware/admin_middleware.php';
     }
 
     .image-upload-container:hover {
-      border-color: #7db832;
+      border-color: #007a00;
       background-color: rgba(125, 184, 50, 0.05);
     }
 
     .upload-icon {
       font-size: 2rem;
-      color: #7db832;
+      color: #007a00;
       margin-bottom: 10px;
     }
   </style>

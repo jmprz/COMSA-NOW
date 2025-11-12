@@ -41,7 +41,7 @@ body {
 }
 
 .btn-active {
-   background: linear-gradient(135deg, #7db832, #6aa32a);
+     background: linear-gradient(135deg, var(--accent-color) 0%, #007a00 100%);
   color: #fff !important;
 }
 
@@ -53,7 +53,7 @@ body {
 }
 
 .btn-active-mobile {
-  background: linear-gradient(135deg, #7db832, #6aa32a);
+  background: linear-gradient(135deg, #007a00, #6aa32a);
   border-radius: 10px;
   width: 70px;
   height: 50px;
@@ -64,7 +64,7 @@ body {
 .side-nav-menu i {
   font-size:2rem;
   text-align: center;
-  color: #7db832;
+  color: #007a00;
 }
 
 
@@ -113,7 +113,7 @@ body {
   border-radius: 50%;
   margin-right: 15px;
   object-fit: cover;
-  border: 3px solid #7db832;
+  border: 3px solid #007a00;
   box-shadow: 0 3px 10px rgba(125, 184, 50, 0.3);
 }
 
@@ -125,7 +125,7 @@ body {
 
 .profile-info p {
   margin: 5px 0 0;
-  color: #7db832;
+  color: #007a00;
   font-size: 14px;
   font-weight: 500;
 }
@@ -141,7 +141,7 @@ body {
   height: 70px;
   border-radius: 50%;
   margin-right: 15px;
-  background-color: #7db832;
+  background-color: #007a00;
   color: white;
   font-size: 24px;
   font-weight: bold;
@@ -183,7 +183,7 @@ body {
 }
 
 .section-header a {
-  color: #7db832;
+  color: #007a00;
   font-size: 13px;
   font-weight: 500;
   text-decoration: none;
@@ -223,18 +223,18 @@ body {
 }
 
 .suggestion-follow {
-  color: #7db832;
+  color: #007a00;
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   padding: 5px 10px;
   border-radius: 5px;
-  border: 1px solid #7db832;
+  border: 1px solid #007a00;
   transition: all 0.3s;
 }
 
 .suggestion-follow:hover {
-  background-color: #7db832;
+  background-color: #007a00;
   color: white;
 }
 
@@ -253,7 +253,7 @@ body {
 }
 
 .event-date {
-  background: linear-gradient(135deg, #7db832 0%, #055a0f 100%);
+  background: linear-gradient(135deg, #007a00 0%, #055a0f 100%);
   color: white;
   border-radius: 8px;
   padding: 10px;
@@ -297,7 +297,7 @@ body {
   align-items: center;
   margin-top: 5px;
   font-size: 12px;
-  color: #7db832;
+  color: #007a00;
 }
 
 .event-info .event-location i {
@@ -326,11 +326,11 @@ body {
   border-radius: 50%;
   margin-right: 12px;
   object-fit: cover;
-  border: 2px solid #7db832;
+  border: 2px solid #007a00;
 }
 
 .like-count-color{
-  color: #7db832;
+  color: #007a00;
 }
 
 .post-more {
@@ -451,7 +451,7 @@ body {
 .comment-submit {
   background: none;
   border: none;
-  color: #7db832;
+  color: #007a00;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -607,7 +607,7 @@ body {
     
     .settings-section h3 i {
       margin-right: 10px;
-      color: #7db832;
+      color: #007a00;
     }
     
     .settings-item {
@@ -643,7 +643,7 @@ body {
     }
     
     .btn-settings {
-      background-color: #7db832;
+      background-color: #007a00;
       color: white;
       border: none;
       padding: 6px 12px;
@@ -659,8 +659,8 @@ body {
     
     .btn-settings-outline {
       background-color: transparent;
-      border: 1px solid #7db832;
-      color: #7db832;
+      border: 1px solid #007a00;
+      color: #007a00;
       padding: 6px 12px;
       border-radius: 4px;
       font-size: 0.85rem;
@@ -668,7 +668,7 @@ body {
     }
     
     .btn-settings-outline:hover {
-      background-color: #7db832;
+      background-color: #007a00;
       color: white;
     }
     
@@ -710,7 +710,7 @@ body {
     }
     
     input:checked + .toggle-slider {
-      background-color: #7db832;
+      background-color: #007a00;
     }
     
     input:checked + .toggle-slider:before {
@@ -725,7 +725,7 @@ body {
     }
     
     .about-comsa h4 {
-      color: #7db832;
+      color: #007a00;
       margin-bottom: 15px;
     }
     
@@ -800,7 +800,7 @@ body {
       object-fit: cover;
       margin: 0 auto 20px;
       display: block;
-      border: 3px solid #7db832;
+      border: 3px solid #007a00;
     }
 
     /* Account activity table */
