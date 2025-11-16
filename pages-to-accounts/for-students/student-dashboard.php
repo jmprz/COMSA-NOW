@@ -304,6 +304,22 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
 
 <!-- Main Content -->
 <main class="container-fluid" style="margin-top: 80px;">
+<div class="container my-4"> <!-- Add container to limit width -->
+  <div class="content-header container py-4 mb-4 rounded-4 shadow-sm position-relative overflow-hidden"
+       style="background: linear-gradient(13deg, #007a00, #7db832); color: white;">
+
+    <!-- Abstract shapes (low opacity circles) -->
+    <div style="position: absolute; top: -20px; right: -50px; width: 200px; height: 200px; background-color: #ffffff; border-radius: 50%; opacity: 0.1;"></div>
+    <div style="position: absolute; bottom: -60px; left: -40px; width: 150px; height: 150px; background-color: #ffffff; border-radius: 50%; opacity: 0.1;"></div>
+    <div style="position: absolute; top: 10px; left: 20px; width: 100px; height: 100px; background-color: #ffffff; border-radius: 50%; opacity: 0.05;"></div>
+    <div style="position: absolute; bottom: 40px; right: 100px; width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; opacity: 0.05;"></div>
+        <div class="ms-3">
+          <h1 class="fw-bold mb-1 text-white">Announcements</h1>
+   <p class="mb-1 text-white" style="opacity: 0.9;">Stay informed about upcoming events and important news for students.</p>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row g-4 justify-content-center">
 
     <!-- Left Sidebar (Events + Quick Links stacked) -->

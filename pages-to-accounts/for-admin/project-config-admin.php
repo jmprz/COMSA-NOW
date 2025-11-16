@@ -245,36 +245,37 @@ require_once '../../../backend/middleware/admin_middleware.php';
           <!-- Project Management Tabs -->
           <div class="card mb-4">
             <div class="card-header">
-              <ul class="nav nav-tabs card-header-tabs" id="projectManagementTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="all-projects-tab" data-bs-toggle="tab"
-                    data-bs-target="#all-projects" type="button" role="tab">All Projects</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="games-tab" data-bs-toggle="tab" data-bs-target="#games" type="button"
-                    role="tab">Games</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="websites-tab" data-bs-toggle="tab" data-bs-target="#websites"
-                    type="button" role="tab">Websites</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="mobile-tab" data-bs-toggle="tab" data-bs-target="#mobile" type="button"
-                    role="tab">Mobile Apps</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="console-tab" data-bs-toggle="tab" data-bs-target="#console" type="button"
-                    role="tab">Console Apps</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="console-tab" data-bs-toggle="tab" data-bs-target="#aiml" type="button"
-                    role="tab">Ai/ML</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="console-tab" data-bs-toggle="tab" data-bs-target="#database" type="button"
-                    role="tab">Database</button>
-                </li>
-              </ul>
+            <ul class="nav nav-tabs card-header-tabs" id="projectManagementTabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="all-projects-tab" data-bs-toggle="tab"
+      data-bs-target="#all-projects" type="button" role="tab">All Projects</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="aiml-tab" data-bs-toggle="tab" data-bs-target="#aiml" type="button" role="tab">AI/ML</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="console-tab" data-bs-toggle="tab" data-bs-target="#console" type="button" role="tab">Console Apps</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="databases-tab" data-bs-toggle="tab" data-bs-target="#databases" type="button" role="tab">Databases</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="desktop-tab" data-bs-toggle="tab" data-bs-target="#desktop" type="button" role="tab">Desktop Apps</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="games-tab" data-bs-toggle="tab" data-bs-target="#games" type="button" role="tab">Games</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="mobile-tab" data-bs-toggle="tab" data-bs-target="#mobile" type="button" role="tab">Mobile Apps</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="uiux-tab" data-bs-toggle="tab" data-bs-target="#uiux" type="button" role="tab">UI/UX Design</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="web-tab" data-bs-toggle="tab" data-bs-target="#web" type="button" role="tab">Web Development</button>
+  </li>
+</ul>
+
             </div>
             <div class="card-body">
               <div class="tab-content" id="projectManagementTabsContent">
@@ -773,13 +774,14 @@ require_once '../../../backend/middleware/admin_middleware.php';
                 <div class="mb-3">
                   <label for="editProjectType" class="form-label">Project Type</label>
                   <select class="form-select" name="editProjectType" id="editProjectType">
-                    <option value="Games">Games</option>
-                    <option value="Websites">Websites</option>
-                    <option value="Mobile">Mobile App</option>
-                    <option value="Console">Console App</option>
                     <option value="AI/ML">AI/ML</option>
+                    <option value="Console Apps">Console Apps</option>
                     <option value="Databases">Databases</option>
-                    <option value="Others">Others</option>
+                    <option value="Desktop Apps">Desktop Apps</option>
+                    <option value="Games">Games</option>
+                    <option value="Mobile Apps">Mobile Apps</option>
+                    <option value="UI/UX Design">UI/UX Design</option>
+                    <option value="Web Development">Web Development</option>
                   </select>
                 </div>
 

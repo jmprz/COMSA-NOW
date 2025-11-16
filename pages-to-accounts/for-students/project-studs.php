@@ -82,8 +82,8 @@ require_once '../../../backend/middleware/student_middleware.php';
 }
 
 .posts-column {
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
+  max-height: none;
+  overflow-y: visible;
   padding-right: 10px;
   padding-top: 10px;
   scroll-behavior: smooth;
@@ -102,24 +102,37 @@ main {
 .category-item {
   display: block;
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: 8px;
   text-decoration: none;
   color: #333;
-  transition: all 0.2s ease;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .category-item:hover {
-  background-color: #f1f1f1;
+  background-color: var(--primary-light);
+  color: #007a00;
+}
+
+.category-item:hover .category-icon {
+  color: #007a00; /* icon color matches hover text */
 }
 
 .category-item.active {
-  background-color: #007a00; /* Your green color */
+  /* Gradient background for active category */
+  background: linear-gradient(10deg, #007a00, #7db832);
   color: white;
 }
 
 .category-item.active .category-icon {
   color: white !important;
 }
+
+
+
 
 
 </style>
@@ -170,6 +183,22 @@ main {
 
  <!-- Main Content -->
 <main class="container-fluid" style="margin-top: 80px;">
+ <div class="container my-4"> <!-- Add container to limit width -->
+  <div class="content-header container py-4 mb-4 rounded-4 shadow-sm position-relative overflow-hidden"
+       style="background: linear-gradient(1deg, #007a00, #7db832); color: white;">
+
+    <!-- Abstract shapes (low opacity circles) -->
+    <div style="position: absolute; top: -20px; right: -50px; width: 200px; height: 200px; background-color: #ffffff; border-radius: 50%; opacity: 0.1;"></div>
+    <div style="position: absolute; bottom: -60px; left: -40px; width: 150px; height: 150px; background-color: #ffffff; border-radius: 50%; opacity: 0.1;"></div>
+    <div style="position: absolute; top: 10px; left: 20px; width: 100px; height: 100px; background-color: #ffffff; border-radius: 50%; opacity: 0.05;"></div>
+    <div style="position: absolute; bottom: 40px; right: 100px; width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; opacity: 0.05;"></div>
+        <div class="ms-3">
+          <h1 class="fw-bold mb-1 text-white">Projects</h1>
+   <p class="mb-1 text-white" style="opacity: 0.9;">Showcasing creative and innovative work by our students in various fields.</p>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row g-4 justify-content-center">
     
     <!-- Left Sidebar (Sticky Sidebar) -->
@@ -181,11 +210,15 @@ main {
         <div class="shadow-sm mb-3 border-0">
           <div class="card-body">
             <button class="btn btn-primary mt-2 w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#projectUploadModal"
-               style="background: #007a00; border: none;"> <i class="ri-upload-cloud-2-line me-2"></i>
+               style="background: linear-gradient(5deg, #007a00, #7db832); border: none;"> <i class="ri-upload-cloud-2-line me-2"></i>
               Upload New Project
 </button>
           </div>
           </div>
+          <div class="mb-3 d-lg-block d-none position-relative">
+  <input type="text" id="projectSearch" class="form-control ps-5 shadow-sm border-0 rounded-3" placeholder="Search projects...">
+  <i class="ri-search-line position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%); color: #6c757d;"></i>
+</div>
         </div>
 
         <!-- Categories Card -->
@@ -194,34 +227,43 @@ main {
           <div class="card-body">
             <h6 class="fw-bold mb-3">Project Categories</h6>
             <div class="accordion-body category-list">
-             <a href="#" class="category-item" id="category-all">
-            <i class="ri-recycle-line category-icon" style="color: green;"></i> 
-            <span>All</span>
-          </a>
-          <a href="#" class="category-item" id="category-games">
-            <i class="ri-gamepad-line category-icon" style="color: green;"></i> 
-            <span>Games</span>
-          </a>
-          <a href="#" class="category-item" id="category-websites">
-            <i class="ri-earth-line category-icon" style="color: green;"></i> 
-            <span>Websites</span>
-          </a>
-          <a href="#" class="category-item" id="category-mobile">
-            <i class="ri-smartphone-line category-icon" style="color: green;"></i> 
-            <span>Mobile Apps</span>
-          </a>
-          <a href="#" class="category-item" id="category-console">
-            <i class="ri-terminal-line category-icon" style="color: green;"></i> 
-            <span>Console Apps</span>
-          </a>
-          <a href="#" class="category-item" id="category-ai">
-            <i class="ri-robot-line category-icon" style="color: green;"></i> 
-            <span>AI/ML</span>
-          </a>
-          <a href="#" class="category-item" id="category-databases">
-            <i class="ri-database-2-line category-icon" style="color: green;"></i> 
-            <span>Databases</span>
-          </a>
+           <a href="#" class="category-item" id="category-all">
+  <i class="ri-recycle-line category-icon" style="color: #6c757d;"></i>
+  <span>All</span>
+</a>
+<a href="#" class="category-item" id="category-aiml">
+  <i class="ri-robot-line category-icon" style="color: #6c757d;"></i>
+  <span>AI/ML</span>
+</a>
+<a href="#" class="category-item" id="category-console">
+  <i class="ri-terminal-line category-icon" style="color: #6c757d;"></i>
+  <span>Console Apps</span>
+</a>
+<a href="#" class="category-item" id="category-databases">
+  <i class="ri-database-2-line category-icon" style="color: #6c757d;"></i>
+  <span>Databases</span>
+</a>
+<a href="#" class="category-item" id="category-desktop">
+  <i class="ri-computer-line category-icon" style="color: #6c757d;"></i>
+  <span>Desktop Apps</span>
+</a>
+<a href="#" class="category-item" id="category-games">
+  <i class="ri-gamepad-line category-icon" style="color: #6c757d;"></i>
+  <span>Games</span>
+</a>
+<a href="#" class="category-item" id="category-mobile">
+  <i class="ri-smartphone-line category-icon" style="color: #6c757d;"></i>
+  <span>Mobile Apps</span>
+</a>
+<a href="#" class="category-item" id="category-uiux">
+  <i class="ri-brush-line category-icon" style="color: #6c757d;"></i>
+  <span>UI/UX Design</span>
+</a>
+<a href="#" class="category-item" id="category-web">
+  <i class="ri-earth-line category-icon" style="color: #6c757d;"></i>
+  <span>Web Development</span>
+</a>
+
             </div>
           </div>
         </div>
@@ -234,15 +276,20 @@ main {
     <!-- Main Feed -->
     <section class="col-lg-7 order-lg-2">
       <div id="projectFeed" class="posts-column">
+        
         <!-- Upload for Mobile -->
            <div class="d-lg-none mb-3">
          <div class="shadow-sm mb-3 border-0">
           <div class="card-body">
             <button class="btn btn-primary mt-2 w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#projectUploadModal"
-               style="background: #007a00; border: none;"> <i class="ri-upload-cloud-2-line me-2"></i>
+               style="background: linear-gradient(5deg, #007a00, #7db832); border: none;"> <i class="ri-upload-cloud-2-line me-2"></i>
               Upload New Project
             </button>
           </div>
+           <div class="mb-3 mt-4 d-lg-none position-relative">
+  <input type="text" id="projectSearch" class="form-control ps-5 shadow-sm border-0 rounded-3" placeholder="Search projects...">
+  <i class="ri-search-line position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%); color: #6c757d;"></i>
+</div>
           </div>
           </div>
         <!-- Accordion for Mobile -->
@@ -267,40 +314,47 @@ main {
     >
       <div class="accordion-body bg-white">
         <div class="list-group">
-          <a href="#" class="category-item" id="category-all">
-            <i class="ri-recycle-line category-icon" style="color: green;"></i> 
-            <span>All</span>
-          </a>
-          <a href="#" class="category-item" id="category-games">
-            <i class="ri-gamepad-line category-icon" style="color: green;"></i> 
-            <span>Games</span>
-          </a>
-          <a href="#" class="category-item" id="category-websites">
-            <i class="ri-earth-line category-icon" style="color: green;"></i> 
-            <span>Websites</span>
-          </a>
-          <a href="#" class="category-item" id="category-mobile">
-            <i class="ri-smartphone-line category-icon" style="color: green;"></i> 
-            <span>Mobile Apps</span>
-          </a>
-          <a href="#" class="category-item" id="category-console">
-            <i class="ri-terminal-line category-icon" style="color: green;"></i> 
-            <span>Console Apps</span>
-          </a>
-          <a href="#" class="category-item" id="category-ai">
-            <i class="ri-robot-line category-icon" style="color: green;"></i> 
-            <span>AI/ML</span>
-          </a>
-          <a href="#" class="category-item" id="category-databases">
-            <i class="ri-database-2-line category-icon" style="color: green;"></i> 
-            <span>Databases</span>
-          </a>
+           <a href="#" class="category-item" id="category-all">
+  <i class="ri-recycle-line category-icon" style="color: #6c757d;"></i>
+  <span>All</span>
+</a>
+           <a href="#" class="category-item" id="category-aiml">
+    <i class="ri-robot-line category-icon" style="color: green;"></i> 
+    <span>AI/ML</span>
+  </a>
+  <a href="#" class="category-item" id="category-console">
+    <i class="ri-terminal-line category-icon" style="color: green;"></i> 
+    <span>Console Apps</span>
+  </a>
+  <a href="#" class="category-item" id="category-databases">
+    <i class="ri-database-2-line category-icon" style="color: green;"></i> 
+    <span>Databases</span>
+  </a>
+  <a href="#" class="category-item" id="category-desktop">
+    <i class="ri-computer-line category-icon" style="color: green;"></i> 
+    <span>Desktop Apps</span>
+  </a>
+  <a href="#" class="category-item" id="category-games">
+    <i class="ri-gamepad-line category-icon" style="color: green;"></i> 
+    <span>Games</span>
+  </a>
+  <a href="#" class="category-item" id="category-mobile">
+    <i class="ri-smartphone-line category-icon" style="color: green;"></i> 
+    <span>Mobile Apps</span>
+  </a>
+  <a href="#" class="category-item" id="category-uiux">
+    <i class="ri-brush-line category-icon" style="color: green;"></i> 
+    <span>UI/UX Design</span>
+  </a>
+  <a href="#" class="category-item" id="category-web">
+    <i class="ri-earth-line category-icon" style="color: green;"></i> 
+    <span>Web Development</span>
+  </a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
         <!-- Posts dynamically loaded here -->
         
         <!-- Comment Modal -->
@@ -348,13 +402,14 @@ main {
                                             <label for="projectType" class="form-label">Project Type*</label>
                                             <select class="form-select" id="projectType" required>
                                                 <option value="">Select type</option>
-                                                <option value="Games">Game</option>
-                                                <option value="Websites">Website</option>
-                                                <option value="Mobile Apps">Mobile App</option>
-                                                <option value="Console">Console App</option>
                                                 <option value="AI/ML">AI/ML</option>
-                                                <option value="Databases">Database</option>
-                                                <option value="Others">Other</option>
+                                                <option value="Console Apps">Console Apps</option>
+                                                <option value="Databases">Databases</option>
+                                                <option value="Desktop Apps">Desktop Apps</option>
+                                                <option value="Games">Games</option>
+                                                <option value="Mobile Apps">Mobile Apps</option>
+                                                <option value="UI/UX Design">UI/UX Design</option>
+                                                <option value="Web Development">Web Development</option>
                                             </select>
                                         </div>
                                     </div>
@@ -449,7 +504,7 @@ main {
 <nav class="d-lg-none fixed-bottom bg-white border-top shadow-sm">
   <div class="d-flex justify-content-around py-2 mt-2">
 
-    <a href="#" class="btn rounded-3 d-flex align-items-center justify-content-center"
+    <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="btn rounded-3 d-flex align-items-center justify-content-center"
        style="width:50px; height:50px;">
        <i class="ri-home-9-line fs-1"></i>
     </a>
@@ -546,6 +601,29 @@ main {
       this.classList.add('active');
     });
   });
+
+
+  // Handle all search inputs (desktop + mobile)
+document.querySelectorAll('#projectSearch').forEach(searchInput => {
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase().trim();
+    const projects = document.querySelectorAll('.project-container');
+
+    projects.forEach(project => {
+      const title = project.querySelector('.project-title')?.innerText.toLowerCase() || '';
+      const description = project.querySelector('.project-description')?.innerText.toLowerCase() || '';
+      const techs = Array.from(project.querySelectorAll('.tech-tag')).map(t => t.innerText.toLowerCase()).join(' ');
+      const student = project.querySelector('.project-username')?.innerText.toLowerCase() || '';
+
+      if (title.includes(query) || description.includes(query) || techs.includes(query) || student.includes(query)) {
+        project.style.display = 'block';
+      } else {
+        project.style.display = 'none';
+      }
+    });
+  });
+});
+
 </script>
 
 

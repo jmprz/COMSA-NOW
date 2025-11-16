@@ -50,10 +50,9 @@ require_once "../../../backend/api/update_nickname_bio.php";
     <style>
         /* Custom scrollbar styling */
         #studentProjectsContainer {
-            max-height: 500px;
-            overflow-y: auto;
-            padding-right: 10px;
-            scroll-behavior: smooth;
+           display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+             gap: 2rem;
         }
 
         #studentProjectsContainer::-webkit-scrollbar {
@@ -78,6 +77,16 @@ require_once "../../../backend/api/update_nickname_bio.php";
             scrollbar-width: thin;
             scrollbar-color: #007a00 #f1f1f1;
         }
+
+
+
+
+        .content-header {
+    background: linear-gradient(135deg, #007a00, #8bc34a);
+    color: white;
+    border-radius: 22px !important;
+    padding: 3rem 2rem !important;
+}
 
         /* Custom scrollbar ---END */
 
@@ -301,6 +310,28 @@ require_once "../../../backend/api/update_nickname_bio.php";
         }
 
         /* NICKNAME ---END*/
+
+        /* Stats Section */
+.profile-stats-modern {
+    display: flex;
+    gap: 3rem;
+    margin-top: 1.5rem;
+}
+
+.profile-stat {
+    text-align: center;
+}
+
+.profile-stat .number {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.profile-stat .label {
+    font-size: 1rem;
+    opacity: 0.85;
+}
     </style>
 </head>
 
@@ -322,7 +353,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
       <!-- Right: Icon buttons -->
     <div class="d-flex align-items-center gap-3 d-none d-lg-flex">
 
-      <a href="#" class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
+      <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
          style="width:50px; height:50px;">
         <i class="ri-home-9-line fs-4"></i>
       </a>
@@ -342,7 +373,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
       <!-- Profile -->
       <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
         <img src="../../assets/img/team/default_user.png" alt="Profile"
-             class="user-avatar rounded-circle border-color" style="border-color: #007a00;" width="45" height="45">
+             class="user-avatar rounded-circle btn-user-comsa-border" style="width: 45px; height: 45px;">
       </a>
 
   </div>
@@ -352,226 +383,84 @@ require_once "../../../backend/api/update_nickname_bio.php";
 
     <!-- Main Content -->
 <main class="container-fluid" style="margin-top: 80px;">
-         <div class="row g-4 justify-content-center">
-                <!-- Main Profile Content -->
-                <div class="col-lg-10">
-                    <!-- Profile Header Section -->
-                    <div class="profile-header">
-                        <div class="row align-items-center">
-                            <div class="col-md-2 position-relative">
-                                <img src="../../assets/img/team/default_user.png" class="profile-avatar d-none user-avatar" alt="Profile Picture" style="border-color: #007a00;">
-                                <div class="profile-avatar-edit" data-bs-toggle="modal" data-bs-target="#avatarModal">
-                                    <i class="ri-camera-line"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <h1 class="profile-name"><?php echo htmlspecialchars($_SESSION['user_name']); ?></h1>
-                                <div class="d-flex align-items-center">
-                                    <h2 class="profile-nickname me-2" id="nicknameDisplay">
-                                        <?php echo !empty($nickname) ? $nickname : 'No nickname set'; ?>
-                                    </h2>
-                                    <button class="edit-nickname-btn" data-bs-toggle="modal" data-bs-target="#nicknameModal">
-                                        <i class="ri-edit-line"></i>
-                                    </button>
-                                </div>
 
-                                <div class="d-flex align-items-center gap-2">
-                                    <p class="profile-bio mb-0">
-                                        <?php echo $bio; ?>
-                                    </p>
-                                    <button class="btn" data-bs-toggle="modal" data-bs-target="#editBioModal" style="color: #007a00">
-                                        <i class="ri-edit-line"></i>
-                                    </button>
+    <!-- =======================
+         PROFILE HERO HEADER
+    ======================== -->
+    <div class="container my-4">
+        <div class="content-header container py-5 mb-4 rounded-4 shadow-sm position-relative overflow-hidden "
+             style="background: linear-gradient(1deg, #007a00, #7db832); color: white;">
 
-                                </div>
+            <!-- Abstract circles -->
+            <div style="position: absolute; top: -20px; right: -50px; width: 200px; height: 200px; background-color: #ffffff; border-radius: 50%; opacity: 0.1;"></div>
+            <div style="position: absolute; bottom: -60px; left: -40px; width: 150px; height: 150px; background-color: #ffffff; border-radius: 50%; opacity: 0.1;"></div>
+            <div style="position: absolute; top: 10px; left: 20px; width: 100px; height: 100px; background-color: #ffffff; border-radius: 50%; opacity: 0.05;"></div>
+            <div style="position: absolute; bottom: 40px; right: 100px; width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; opacity: 0.05;"></div>
 
-                                <div class="profile-stats">
-                                    <div class="stat-item">
-                                        <div class="stat-number">0</div>
-                                        <div class="stat-label">Projects</div>
-                                    </div>
-                                    <div class="stat-item">
-                                        <div class="stat-number" id="totalStarsCount">0</div>
-                                        <div class="stat-label">Total Stars</div>
-                                    </div>
-                                </div>
-                            </div>
+        <!-- PROFILE INFO -->
+            <div class="d-flex justify-content-center">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start gap-4">
+
+                    <!-- Avatar -->
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <img src="../../assets/img/team/default_user.png"
+                             class="rounded-circle shadow user-avatar"
+                             width="180" height="180">
+                    </div>
+
+                    <!-- User Info -->
+                    <div class="flex-grow-1 text-center text-md-start">
+                        <h1 class="fw-bold mb-1">
+                            <?php echo htmlspecialchars($_SESSION['user_name']); ?>
+                        </h1>
+
+                        <h4 class="mb-2 opacity-75">
+                            <?php echo htmlspecialchars($_SESSION['user_email']); ?>
+                        </h4>
+
+                        <p class="opacity-75 mb-0"><?php echo $bio; ?></p>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="profile-stats-modern">
+                        <div class="profile-stat">
+                            <div class="number">0</div>
+                            <div class="label">Projects</div>
+                        </div>
+
+                        <div class="profile-stat">
+                            <div class="number" id="totalStarsCount">0</div>
+                            <div class="label">Total Stars</div>
                         </div>
                     </div>
 
-
-
-
-                    <!-- bio Content -->
-                    <div class="modal fade" id="editBioModal" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Edit Bio</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-
-                                <form method="post" action="../../../backend/api/update_nickname_bio.php" ;>
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <textarea class="form-control" id="bioInput" name="bio" rows="5"
-                                                maxlength="100"><?php echo $bio; ?></textarea>
-                                            <div class="form-text text-end">
-                                                <span id="wordCount"><?php echo strlen($bio); ?>/100 characters</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <!-- Profile Content -->
-                    <div class="row">
-                        <!-- About Section for Mobile -->
-                        <div class="col-12 d-md-none order-1">
-                            <div class="profile-section">
-                                <h3 class="section-title">About</h3>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="ri-user-3-line me-2"></i> Full Name</span>
-                                                <span class="text-muted"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="ri-mail-line me-2"></i> Email</span>
-                                                <span class="text-muted"><?php echo htmlspecialchars($_SESSION['user_email']); ?></span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="ri-calendar-line me-2"></i> Member Since</span>
-                                                <span class="text-muted">June 2023</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Projects Section -->
-                        <div class="col-md-8 order-3 order-md-2">
-                            <div class="profile-section">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h3 class="section-title mb-0">My Projects</h3>
-                                    <button class="btn btn-primary" id="uploadProjectBtnMobile" style="background-color: #007a00; border: none;">
-                                        <i class="ri-upload-line me-1"></i> Upload Project
-                                    </button>
-                                </div>
-                                <div id="studentProjectsContainer" class="row">
-                                    <!-- Projects will be loaded here via JavaScript -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- About Section for Desktop-->
-                        <div class="col-md-4 d-none d-md-block order-2 order-md-3">
-                            <div class="profile-section">
-                                <h3 class="section-title">About</h3>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="ri-user-3-line me-2"></i> Full Name</span>
-                                                <span class="text-muted"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="ri-mail-line me-2"></i> Email</span>
-                                                <span class="text-muted"><?php echo htmlspecialchars($_SESSION['user_email']); ?></span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="ri-calendar-line me-2"></i> Member Since</span>
-                                                <span class="text-muted">June 2023</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            
+        </div>
+    </div>
 
-            <!-- Avatar Change Modal -->
-            <div class="modal fade" id="avatarModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Change Profile Picture</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="text-center mb-4">
-                                <img id="currentAvatarPreview" src="../../assets/img/team/default_user.png" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
-                            </div>
+    <!-- =======================
+         PROJECTS ONLY
+    ======================== -->
+    <div class="container mb-5">
 
-                            <div class="d-flex flex-column gap-2">
-                                <button class="btn btn-primary" id="uploadNewAvatarBtn">
-                                    <i class="ri-upload-line me-2"></i> Upload New Photo
-                                </button>
-                                <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="section-title mb-0">My Projects</h3>
+            <button class="btn btn-primary" id="uploadProjectBtnMobile"
+                    style="background: #007a00; border: none;">
+                <i class="ri-upload-line me-1"></i> Upload Project
+            </button>
+        </div>
 
-                                <button class="btn btn-outline-danger" id="removeAvatarBtn">
-                                    <i class="ri-delete-bin-line me-2"></i> Remove Current Photo
-                                </button>
-                            </div>
+        <!-- Project Grid -->
+        <div id="studentProjectsContainer" class="row mt-4">
+            <!-- JS will insert project cards here -->
+        </div>
 
-                            <div class="progress mt-3 d-none" id="avatarUploadProgress">
-                                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
-                            </div>
+    </div>
+</main>
 
-                            <div id="avatarError" class="text-danger mt-2 text-center"></div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-success" id="saveAvatarBtn" disabled>Save Changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Nickname Change Modal -->
-            <div class="modal fade" id="nicknameModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Edit Nickname</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <form method="post" action="../../../backend/api/update_nickname_bio.php" ;>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="nicknameInput" class="form-label">Nickname</label>
-                                    <input type="text" class="form-control" id="nicknameInput" name="nickname"
-                                        value="<?php echo isset($_SESSION['user_nickname']) ? htmlspecialchars($_SESSION['user_nickname']) : ''; ?>"
-                                        pattern="[A-Za-z]+" title="Only letters (A-Z, a-z) allowed">
-                                    <div class="form-text">Letters only, no spaces or special characters</div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
-                            </div>
-                        </form>
-
-                    </div>
-         
-    </main>
 
             <!-- Project Upload Modal (Same as in project-studs.php) -->
             <div class="modal fade" id="projectUploadModal" tabindex="-1" aria-hidden="true">
@@ -593,13 +482,14 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                             <label for="projectType" class="form-label">Project Type*</label>
                                             <select class="form-select" id="projectType" required>
                                                 <option value="">Select type</option>
-                                                <option value="Games">Game</option>
-                                                <option value="Websites">Website</option>
-                                                <option value="Mobile Apps">Mobile App</option>
-                                                <option value="Console">Console App</option>
                                                 <option value="AI/ML">AI/ML</option>
-                                                <option value="Databases">Database</option>
-                                                <option value="Others">Other</option>
+                                                <option value="Console Apps">Console Apps</option>
+                                                <option value="Databases">Databases</option>
+                                                <option value="Desktop Apps">Desktop Apps</option>
+                                                <option value="Games">Games</option>
+                                                <option value="Mobile Apps">Mobile Apps</option>
+                                                <option value="UI/UX Design">UI/UX Design</option>
+                                                <option value="Web Development">Web Development</option>
                                             </select>
                                         </div>
                                     </div>
@@ -711,13 +601,14 @@ require_once "../../../backend/api/update_nickname_bio.php";
                                             <label for="editProjectType" class="form-label">Project Type*</label>
                                             <select class="form-select" id="editProjectType" name="project_category" required>
                                                 <option value="">Select type</option>
-                                                <option value="Games">Game</option>
-                                                <option value="Websites">Website</option>
-                                                <option value="Mobile Apps">Mobile App</option>
-                                                <option value="Console">Console App</option>
                                                 <option value="AI/ML">AI/ML</option>
-                                                <option value="Databases">Database</option>
-                                                <option value="Others">Other</option>
+                                                <option value="Console Apps">Console Apps</option>
+                                                <option value="Databases">Databases</option>
+                                                <option value="Desktop Apps">Desktop Apps</option>
+                                                <option value="Games">Games</option>
+                                                <option value="Mobile Apps">Mobile Apps</option>
+                                                <option value="UI/UX Design">UI/UX Design</option>
+                                                <option value="Web Development">Web Development</option>
                                             </select>
                                         </div>
                                     </div>
@@ -799,7 +690,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
 <nav class="d-lg-none fixed-bottom bg-white border-top shadow-sm">
   <div class="d-flex justify-content-around py-2 mt-2">
 
-    <a href="#" class="btn rounded-3 d-flex align-items-center justify-content-center"
+    <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="btn rounded-3 d-flex align-items-center justify-content-center"
        style="width:50px; height:50px;">
        <i class="ri-home-9-line fs-1"></i>
     </a>
@@ -821,7 +712,7 @@ require_once "../../../backend/api/update_nickname_bio.php";
        style="width:50px; height:50px;">
        <img src="../../assets/img/team/default_user.png"
             alt="Profile"
-            class="user-avatar rounded-circle border"
+            class="user-avatar rounded-circle btn-user-comsa-border"
             width="40" height="40">
     </a>
 

@@ -4,7 +4,7 @@
 body {
   display: flex;
   min-height: 100vh;
-  background-color: #fafafa;
+  background-color: #f5f7fa;
   font-family: "Poppins", sans-serif;
 }
 
@@ -444,7 +444,7 @@ body {
   outline: none;
   font-size: 14px;
   padding: 8px 12px;
-  background: #fafafa;
+  background: #f5f7fa;
   border-radius: 20px;
 }
 

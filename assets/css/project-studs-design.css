@@ -2,7 +2,7 @@
 :root {
   --primary-color: #007a00;
   --primary-dark: #055a0f;
-  --primary-light: rgba(52, 184, 50, 0.2);
+  --primary-light: rgb(230, 237, 217);
   --accent-color: #007a00;
   --text-dark: #333;
   --text-light: #f8f9fa;
@@ -14,7 +14,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #fafafa;
+  background-color: #f5f7fa;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -116,7 +116,7 @@ body {
 }
 
 .btn-light:hover {
-   background-color: var(--primary-light);
+  background-color: var(--primary-light);
   color: var(--primary-dark);
   border: none;
   
@@ -167,8 +167,8 @@ body {
 }
 
 .project-avatar, .post-avatar {
-  width: 40px;
-  height: 40px;
+  width: 5vh;
+  height: 5vh;
   border-radius: 50%;
   margin-right: 12px;
   object-fit: cover;
@@ -225,13 +225,15 @@ body {
   margin-left: 10px;
 }
 
-.game-badge { background-color: #6f42c1; }
-.others-badge { background-color: #665454; }
-.web-badge { background-color: #20c997; }
-.console-badge { background-color: #fd7e14; }
-.mobile-badge { background-color: #0dcaf0; }
-.ai-badge { background-color: #d63384; }
-.databases-badge { background-color: #ffc107; color: #212529; }
+.game-badge { background-color: #7f5af0; color: #ffffff; }       
+.web-badge { background-color: #4ade80; color: #ffffff; }       
+.console-badge { background-color: #ff922b; color: #ffffff; }    
+.mobile-badge { background-color: #38bdf8; color: #ffffff; }    
+.ai-badge { background-color: #f472b6; color: #ffffff; }          
+.databases-badge { background-color: #facc15; color: #ffffff; }  
+.desktop-badge { background-color: #22d3ee; color: #ffffff; }    
+.uiux-badge { background-color: #a5b4fc; color: #ffffff; }      
+
 
 .project-content {
   padding: 0 16px 16px;
@@ -665,6 +667,19 @@ button.post-action {
   font-size: 1.2rem;
   margin-left: 10px;
   cursor: pointer;
+}
+
+.text-comsa-highlight {
+  color: #007a00;
+}
+
+.btn-user-comsa-border{
+  border: 2px solid #007a00;
+  color: #007a00 !important;
+}
+.btn-comsa-gradient:hover{
+  background: linear-gradient(135deg, #007a00, #6aa32a);
+  color: #fff !important;
 }
 
 /* ===== Bottom Navigation (Mobile) ===== */

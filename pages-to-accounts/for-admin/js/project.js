@@ -8,14 +8,16 @@ document.addEventListener("DOMContentLoaded", function (e) {
   let currentImages = [];
 
   const categoryClassMap = {
-    'websites': 'web',
-    'mobile apps': 'mobile',
-    'games': 'game',
-    'ai/ml': 'ai',
-    'console apps': 'console',
-    'databases': 'databases',
-    'others': 'others'
-  };
+  'ai/ml': 'ai',
+  'console apps': 'console',
+  'databases': 'databases',
+  'desktop apps': 'desktop',
+  'games': 'game',
+  'mobile apps': 'mobile',
+  'ui/ux design': 'uiux',
+  'web development': 'web'
+};
+
 
   function renderProjectsTable(projects, tableId) {
     const table = document.getElementById(tableId);
@@ -471,27 +473,32 @@ document.addEventListener("DOMContentLoaded", function (e) {
         return;
       }
 
-      allProjects = data.posts;
-      renderProjectsTable(allProjects, "all-projects");
+     allProjects = data.posts;
+    renderProjectsTable(allProjects, "all-projects");
 
-      const games = filterPosts("Games", allProjects);
-      renderProjectsTable(games, "games");
+    const ai = filterPosts("AI/ML", allProjects);
+    renderProjectsTable(ai, "aiml");
 
-      const websites = filterPosts("Websites", allProjects);
-      renderProjectsTable(websites, "websites");
+    const consoleApp = filterPosts("Console Apps", allProjects);
+    renderProjectsTable(consoleApp, "console");
 
-      const mobile = filterPosts("Mobile Apps", allProjects);
-      renderProjectsTable(mobile, "mobile");
+    const databases = filterPosts("Databases", allProjects);
+    renderProjectsTable(databases, "databases");
 
-      const consoleApp = filterPosts("Console Apps", allProjects);
-      renderProjectsTable(consoleApp, "console");
+    const desktop = filterPosts("Desktop Apps", allProjects);
+    renderProjectsTable(desktop, "desktop");
 
-      const ai = filterPosts("AI/ML", allProjects);
-      renderProjectsTable(ai, "aiml");
+    const games = filterPosts("Games", allProjects);
+    renderProjectsTable(games, "games");
 
-      const database = filterPosts("Databases", allProjects);
-      renderProjectsTable(database, "database");
+    const mobile = filterPosts("Mobile Apps", allProjects);
+    renderProjectsTable(mobile, "mobile");
 
+    const uiux = filterPosts("UI/UX Design", allProjects);
+    renderProjectsTable(uiux, "uiux");
+
+    const web = filterPosts("Web Development", allProjects);
+    renderProjectsTable(web, "web");
     })
 
   editForm.addEventListener("submit", function (e) {

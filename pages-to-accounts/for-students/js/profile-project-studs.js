@@ -44,56 +44,85 @@ function updateTotalStars(count) {
             projectCountEl.textContent = count;
         }
     }
+    
+const categoryClassMap = {
+  'ai/ml': 'ai',
+  'console apps': 'console',
+  'databases': 'databases',
+  'desktop apps': 'desktop',
+  'games': 'game',
+  'mobile apps': 'mobile',
+  'ui/ux design': 'uiux',
+  'web development': 'web'
+};
+
 
     // Function to display projects
-
 function displayProjects(projects) {
-    // Clear existing content
     projectsContainer.innerHTML = '';
-    
-    // Create project cards for each project
+
     projects.forEach(project => {
         const projectCol = document.createElement('div');
-        projectCol.className = 'col-md-6 mb-4';
-        
+         projectCol.className = 'col-12 col-md-12 col-lg-12 mb-2';
+
+        // Get category CSS class
+        const categoryKey = project.project_category.toLowerCase().trim();
+        const categoryClass = categoryClassMap[categoryKey] || 'all';
+
         projectCol.innerHTML = `
-            <div class="project-card">
+            <div class="project-card shadow-sm h-100 position-relative overflow-hidden">
+
+                <!-- CATEGORY BADGE (always visible) -->
+                <span class="project-badge ${categoryClass}-badge position-absolute top-0 end-0 m-2">
+                    ${project.project_category}
+                </span>
+
+                <!-- IMAGE -->
                 ${project.images && project.images.length > 0 ? 
-                    `<img src="../../../backend/${project.images[0]}" class="project-card-img" alt="${project.project_title}">` : 
-                    `<div class="project-card-img bg-light d-flex align-items-center justify-content-center">
+                    `<img src="../../../backend/${project.images[0]}" class="project-card-img w-100" alt="${project.project_title}">` :
+                    `<div class="project-card-img placeholder d-flex align-items-center justify-content-center">
                         <i class="ri-image-line fs-1 text-muted"></i>
                     </div>`
                 }
-                <div class="project-card-body">
-                    <h5 class="project-card-title">${project.project_title}</h5>
-                    <p class="project-card-desc">${project.project_description}</p>
-                    <div class="project-card-tech">
-                        ${project.technologies && project.technologies.length > 0 ? 
-                            project.technologies.map(tech => `<span class="badge bg-secondary me-1">${tech}</span>`).join('') : 
-                            '<span class="text-muted">No technologies specified</span>'
+
+                <div class="project-card-body p-3">
+                    <!-- TITLE -->
+                    <h5 class="project-title mt-3 mb-2">${project.project_title}</h5>
+
+                    <!-- DESCRIPTION -->
+                    <p class="project-description mb-3">${project.project_description}</p>
+
+                    <!-- TECHNOLOGY BADGES -->
+                    <div class="project-card-tech mb-3">
+                        ${project.technologies && project.technologies.length > 0 ?
+                            project.technologies
+                                .map(tech => `<span class="tech-tag me-1 mb-1">${tech}</span>`)
+                                .join('') :
+                            `<span class="text-muted">No technologies listed</span>`
                         }
                     </div>
-                    <div class="project-card-footer">
-                        <span class="project-card-type">${project.project_category || 'Uncategorized'}</span>
-                        <div class="project-card-actions">
-                            <button class="btn btn-sm btn-outline-primary edit-project" data-id="${project.id}">
-                                <i class="ri-edit-line"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger delete-project" data-id="${project.id}">
-                                <i class="ri-delete-bin-line"></i>
-                            </button>
-                        </div>
+
+                    <!-- FOOTER -->
+                    <div class="project-card-footer d-flex justify-content-end gap-2 mt-2">
+                        <button class="btn btn-primary btn-sm rounded-pill d-flex align-items-center gap-1 edit-project" data-id="${project.id}">
+                            <i class="ri-edit-line"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm rounded-pill d-flex align-items-center gap-1 delete-project" data-id="${project.id}">
+                            <i class="ri-delete-bin-line"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         `;
-        
+
         projectsContainer.appendChild(projectCol);
     });
-    
-    // Add event listeners for edit/delete buttons
+
     addProjectActionListeners();
 }
+
+
+
     // Function to display message when no projects exist
     function displayNoProjectsMessage() {
         projectsContainer.innerHTML = `
