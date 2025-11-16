@@ -216,7 +216,7 @@ main {
           </div>
           </div>
           <div class="mb-3 d-lg-block d-none position-relative">
-  <input type="text" id="projectSearch" class="form-control ps-5 shadow-sm border-0 rounded-3" placeholder="Search projects...">
+  <input type="text" class="form-control ps-5 shadow-sm border-0 rounded-3 project-search-input" placeholder="Search projects...">
   <i class="ri-search-line position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%); color: #6c757d;"></i>
 </div>
         </div>
@@ -287,7 +287,7 @@ main {
             </button>
           </div>
            <div class="mb-3 mt-4 d-lg-none position-relative">
-  <input type="text" id="projectSearch" class="form-control ps-5 shadow-sm border-0 rounded-3" placeholder="Search projects...">
+  <input type="text" class="form-control ps-5 shadow-sm border-0 rounded-3 project-search-input" placeholder="Search projects...">
   <i class="ri-search-line position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%); color: #6c757d;"></i>
 </div>
           </div>
@@ -533,32 +533,6 @@ main {
   </div>
 </nav>
 
-      <!-- Search Modal -->
-      <div class="search-popup" id="searchPopup">
-        <div class="search-container">
-          <button class="search-close-button" id="searchCloseButton">
-            <i class="ri-close-line"></i>
-          </button>
-          <div class="search-input-container">
-            <input type="text" placeholder="Search students by name, nickname, or student number..."
-              class="search-input" id="searchInput">
-            <button class="search-button" id="searchButton">
-              <i class="ri-search-line"></i>
-            </button>
-          </div>
-          <div class="search-results-container">
-            <div class="search-results-header">
-              <span>Search Results</span>
-              <span class="search-results-count">0 results</span>
-            </div>
-            <div class="search-results-list" id="searchResultsList">
-              <!-- Results will be populated here -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Vendor JS Files -->
   <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -582,49 +556,11 @@ main {
     <script src="../for-students/js/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
 
   <script>
-    //session with disabilities haha
+    //session
     const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
     const currentStudentId = <?php echo json_encode($_SESSION['user_id']); ?>;
   </script>
 
-<script>
-  document.querySelectorAll('.category-item').forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.preventDefault(); // prevent page reload if href="#"
-      
-      // remove active class from all
-      document.querySelectorAll('.category-item').forEach(btn => 
-        btn.classList.remove('active')
-      );
-
-      // add active class to clicked one
-      this.classList.add('active');
-    });
-  });
-
-
-  // Handle all search inputs (desktop + mobile)
-document.querySelectorAll('#projectSearch').forEach(searchInput => {
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase().trim();
-    const projects = document.querySelectorAll('.project-container');
-
-    projects.forEach(project => {
-      const title = project.querySelector('.project-title')?.innerText.toLowerCase() || '';
-      const description = project.querySelector('.project-description')?.innerText.toLowerCase() || '';
-      const techs = Array.from(project.querySelectorAll('.tech-tag')).map(t => t.innerText.toLowerCase()).join(' ');
-      const student = project.querySelector('.project-username')?.innerText.toLowerCase() || '';
-
-      if (title.includes(query) || description.includes(query) || techs.includes(query) || student.includes(query)) {
-        project.style.display = 'block';
-      } else {
-        project.style.display = 'none';
-      }
-    });
-  });
-});
-
-</script>
 
 
 </body>

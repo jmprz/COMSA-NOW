@@ -1,8 +1,6 @@
 console.log("SCRIPT IS LOADED ✅");
 
-// =======================
-// PROJECT UPLOAD HANDLING
-// =======================
+// -------------------- FORM HANDLING --------------------
 const uploadForm = document.getElementById("projectUploadForm");
 const closeUpload = document.querySelectorAll(".close-uploadInfo");
 
@@ -21,15 +19,16 @@ let members = [];
 let tags = [];
 let selectedFiles = [];
 
-// =======================
-// TAG HANDLING
-// =======================
+// ----- TECH TAGS -----
 techInput.addEventListener("keydown", (e) => {
   if (e.key === " " || e.key === "Enter") {
     e.preventDefault();
     const value = techInput.value.trim();
+
     if (value !== "" && !tags.includes(value)) {
       tags.push(value);
+      console.log("Current tags:", tags);
+
       const tag = document.createElement("span");
       tag.className = "badge bg-secondary px-2 py-1 rounded-pill d-flex align-items-center";
       tag.innerText = value;
@@ -40,6 +39,7 @@ techInput.addEventListener("keydown", (e) => {
       closeBtn.innerHTML = "&times;";
       closeBtn.onclick = () => {
         tags.splice(tags.indexOf(value), 1);
+        console.log("Updated tags:", tags);
         tag.remove();
       };
 
@@ -50,12 +50,16 @@ techInput.addEventListener("keydown", (e) => {
   }
 });
 
+// ----- MEMBERS -----
 projMemberInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     const value = projMemberInput.value.trim();
+
     if (value !== "" && !members.includes(value)) {
       members.push(value);
+      console.log("Current members:", members);
+
       const tag = document.createElement("span");
       tag.className = "badge bg-secondary px-2 py-1 rounded-pill d-flex align-items-center";
       tag.innerText = value;
@@ -66,6 +70,7 @@ projMemberInput.addEventListener("keydown", (e) => {
       closeBtn.innerHTML = "&times;";
       closeBtn.onclick = () => {
         members.splice(members.indexOf(value), 1);
+        console.log("Updated members:", members);
         tag.remove();
       };
 
@@ -76,26 +81,29 @@ projMemberInput.addEventListener("keydown", (e) => {
   }
 });
 
-// =======================
-// MEDIA UPLOAD PREVIEW
-// =======================
+// ----- MEDIA UPLOAD -----
 uploadArea.addEventListener("click", () => uploadInput.click());
 
 uploadInput.addEventListener("change", () => {
   const newFiles = Array.from(uploadInput.files);
   const availableSlots = 8 - selectedFiles.length;
-  selectedFiles = [...selectedFiles, ...newFiles.slice(0, availableSlots)];
+  const filesToAdd = newFiles.slice(0, availableSlots);
+  selectedFiles = [...selectedFiles, ...filesToAdd];
   renderPreview();
   uploadInput.value = "";
+  console.log("Currently selected:", selectedFiles.map(f => f.name));
 });
 
 function renderPreview() {
   mediaPreview.innerHTML = "";
+  let filesProcessed = 0;
+
   selectedFiles.forEach((file, index) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const wrapper = document.createElement("div");
       wrapper.style.position = "relative";
+
       const img = document.createElement("img");
       img.src = e.target.result;
       img.className = "rounded";
@@ -105,39 +113,61 @@ function renderPreview() {
       const removeBtn = document.createElement("button");
       removeBtn.innerHTML = "✖";
       removeBtn.type = "button";
-      Object.assign(removeBtn.style, {
-        position: "absolute",
-        top: "0",
-        right: "0",
-        background: "rgba(0,0,0,0.5)",
-        color: "white",
-        border: "none",
-        borderRadius: "50%",
-        cursor: "pointer",
-        width: "20px",
-        height: "20px",
-        fontSize: "12px",
-      });
+      removeBtn.style.position = "absolute";
+      removeBtn.style.top = "0";
+      removeBtn.style.right = "0";
+      removeBtn.style.background = "rgba(0,0,0,0.5)";
+      removeBtn.style.color = "white";
+      removeBtn.style.border = "none";
+      removeBtn.style.borderRadius = "50%";
+      removeBtn.style.cursor = "pointer";
+      removeBtn.style.width = "20px";
+      removeBtn.style.height = "20px";
+      removeBtn.style.fontSize = "12px";
       removeBtn.title = "Remove";
-      removeBtn.onclick = () => {
+
+      removeBtn.addEventListener("click", () => {
         selectedFiles.splice(index, 1);
         renderPreview();
-      };
+      });
 
       wrapper.appendChild(img);
       wrapper.appendChild(removeBtn);
       mediaPreview.appendChild(wrapper);
-      mediaCounter.innerText = `${selectedFiles.length}/8 images selected`;
+
+      filesProcessed++;
+      if (filesProcessed === selectedFiles.length) {
+        mediaCounter.innerText = `${selectedFiles.length}/8 images selected`;
+      }
     };
     reader.readAsDataURL(file);
   });
+
   if (selectedFiles.length === 0) mediaCounter.innerText = "0/8 images selected";
 }
 
-// =======================
-// FORM RESET
-// =======================
-closeUpload.forEach((btn) =>
+// ----- FORM ERROR HANDLING -----
+function showFieldError(fieldId) {
+  const input = document.getElementById(fieldId);
+  if (!input) return;
+
+  input.classList.add("is-invalid");
+
+  let feedback = document.createElement("div");
+  feedback.className = "invalid-feedback";
+  feedback.innerText = "This field is required.";
+  if (!input.nextElementSibling || !input.nextElementSibling.classList.contains("invalid-feedback")) {
+    input.parentNode.appendChild(feedback);
+  }
+}
+
+function clearFieldErrors() {
+  document.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
+  document.querySelectorAll(".invalid-feedback").forEach(el => el.remove());
+}
+
+// ----- RESET FORM -----
+closeUpload.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     uploadForm.reset();
@@ -148,201 +178,218 @@ closeUpload.forEach((btn) =>
     tagMemberWrapper.innerHTML = "";
     mediaPreview.innerHTML = "";
     mediaCounter.textContent = "0/8 images selected";
-  })
-);
+    console.log("Form and arrays cleared");
+  });
+});
 
-// =======================
-// FORM SUBMIT
-// =======================
+// ----- FORM SUBMISSION -----
 uploadForm.addEventListener("submit", function (e) {
   e.preventDefault();
   e.stopPropagation();
-  if (!this.checkValidity()) return;
 
-  const formData = new FormData(uploadForm);
-  tags.forEach(tag => formData.append('tags[]', tag));
-  members.forEach(member => formData.append('members[]', member));
-  selectedFiles.forEach(file => formData.append('selectedFiles[]', file));
+  if (this.checkValidity()) {
+    const formData = new FormData();
 
-  document.getElementById("uploadOverlay").classList.remove("d-none");
-  document.getElementById("uploadLoader").classList.remove("d-none");
-  document.getElementById("uploadSuccess").classList.add("d-none");
-  fetch("../../../backend/api/student_upload_proj.php", { method: "POST", body: formData })
-    .then(res => res.json())
-    .then(response => {
-      if (response.success) {
-        document.getElementById("uploadLoader").classList.add("d-none");
-        document.getElementById("uploadSuccess").classList.remove("d-none");
-        setTimeout(() => {
-          const modal = bootstrap.Modal.getInstance(document.getElementById("projectUploadModal"));
-          modal.hide();
+    formData.append("projectTitle", document.getElementById("projectTitle").value);
+    formData.append("projectType", document.getElementById("projectType").value);
+    formData.append("projectDescription", document.getElementById("projectDescription").value);
+    formData.append("downloadLink", document.getElementById("downloadLink").value);
+    formData.append("githubLink", document.getElementById("githubLink").value);
+    formData.append("liveLink", document.getElementById("liveLink").value);
+
+    tags.forEach(tag => formData.append('tags[]', tag));
+    members.forEach(member => formData.append('members[]', member));
+    selectedFiles.forEach(file => formData.append('selectedFiles[]', file));
+
+    document.getElementById("uploadOverlay").classList.remove("d-none");
+    document.getElementById("uploadLoader").classList.remove("d-none");
+    document.getElementById("uploadSuccess").classList.add("d-none");
+    clearFieldErrors();
+    document.getElementById("generalUploadError").classList.add("d-none");
+
+    fetch("../../../backend/api/student_upload_proj.php", { method: "POST", body: formData })
+      .then(res => res.json())
+      .then(response => {
+        if (response.success) {
+          document.getElementById("uploadLoader").classList.add("d-none");
+          document.getElementById("uploadSuccess").classList.remove("d-none");
+
+          setTimeout(() => {
+            const modal = bootstrap.Modal.getInstance(document.getElementById("projectUploadModal"));
+            modal.hide();
+            document.getElementById("uploadOverlay").classList.add("d-none");
+            uploadForm.reset();
+            selectedFiles = [];
+            tags = [];
+            members = [];
+            tagWrapper.innerHTML = "";
+            tagMemberWrapper.innerHTML = "";
+            mediaPreview.innerHTML = "";
+            mediaCounter.innerText = "0/8 images selected";
+            window.location.reload();
+          }, 1500);
+        } else {
           document.getElementById("uploadOverlay").classList.add("d-none");
-          uploadForm.reset();
-          tags = [];
-          members = [];
-          selectedFiles = [];
-          tagWrapper.innerHTML = "";
-          tagMemberWrapper.innerHTML = "";
-          mediaPreview.innerHTML = "";
-          mediaCounter.innerText = "0/8 images selected";
-          window.location.reload();
-        }, 1500);
-      } else {
+          if (response.errors) {
+            if (response.errors.empty_input) {
+              showFieldError("projectTitle");
+              showFieldError("projectType");
+              showFieldError("projectDescription");
+            }
+            if (response.errors.empty_images) {
+              document.getElementById("generalUploadError").innerText = response.errors.empty_images;
+              document.getElementById("generalUploadError").classList.remove("d-none");
+            }
+            Object.entries(response.errors).forEach(([key, msg]) => {
+              if (!["empty_input", "empty_images"].includes(key)) {
+                document.getElementById("generalUploadError").innerText = msg;
+                document.getElementById("generalUploadError").classList.remove("d-none");
+              }
+            });
+          }
+        }
+      })
+      .catch(err => {
+        console.error("Upload failed:", err);
         document.getElementById("uploadOverlay").classList.add("d-none");
-        console.error(response.errors);
-      }
-    })
-    .catch(err => {
-      console.error("Upload failed:", err);
-      document.getElementById("uploadOverlay").classList.add("d-none");
-    });
+        document.getElementById("generalUploadError").innerText = "An unexpected error occurred.";
+        document.getElementById("generalUploadError").classList.remove("d-none");
+      });
+  }
 });
 
-// =======================
-// PROJECT FEED + SEARCH + CATEGORY FILTER
-// =======================
+// -------------------- DOM CONTENT LOADED --------------------
 document.addEventListener('DOMContentLoaded', () => {
-  const feed = document.getElementById('projectFeed');
-  const searchInput = document.getElementById('projectSearch');
-  const categoryItems = document.querySelectorAll('.category-item');
 
-  let selectedCategory = 'all';
+  const socket = new WebSocket("ws://localhost:8080");
+  const feed = document.getElementById('projectFeed');
+  if (!feed) {
+    console.error('⚠️ projectFeed element not found!');
+    return;
+  }
 
   const categoryClassMap = {
-      'ai/ml': 'ai',
-  'console apps': 'console',
-  'databases': 'databases',
-  'desktop apps': 'desktop',
-  'games': 'game',
-  'mobile apps': 'mobile',
-  'ui/ux design': 'uiux',
-  'web development': 'web'
+    'ai/ml': 'ai',
+    'console apps': 'console',
+    'databases': 'databases',
+    'desktop apps': 'desktop',
+    'games': 'game',
+    'mobile apps': 'mobile',
+    'ui/ux design': 'uiux',
+    'web development': 'web'
   };
 
   function getInitials(name) {
     const parts = name.trim().split(" ").filter(Boolean);
-    return parts.length === 1 ? parts[0][0].toUpperCase() : (parts[0][0] + parts[1][0]).toUpperCase();
+    return parts.length === 1
+      ? parts[0][0].toUpperCase()
+      : (parts[0][0] + parts[1][0]).toUpperCase();
   }
 
-  function formatPostDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-  }
+  // -------------------- WEBSOCKET --------------------
+  socket.onmessage = (event) => {
+    let data;
+    try { data = JSON.parse(event.data); } 
+    catch(e){ console.error("Failed to parse WS message", e); return; }
 
+    if (data.type === 'like') {
+      const likeIcon = document.getElementById(`like-icon-${data.project_id}`);
+      if (likeIcon) {
+        if (data.status === 'liked') { likeIcon.classList.replace('ri-heart-3-line','ri-heart-3-fill'); }
+        else if (data.status === 'unliked') { likeIcon.classList.replace('ri-heart-3-fill','ri-heart-3-line'); }
+      }
+      const likeCountEl = document.getElementById(`like-count-${data.project_id}`);
+      if (likeCountEl && typeof data.like_count !== 'undefined') likeCountEl.innerText = `${data.like_count} Likes`;
+    }
+
+    if (data.type === 'comment') {
+      const commentsEl = document.getElementById('modalComments');
+      const commentCountEl = document.getElementById(`comment-count-${data.project_id}`);
+      if (!commentsEl || !commentCountEl) return;
+      const newEl = `<div class="mb-2"><strong>${data.name}</strong>: ${data.comment}</div>`;
+      commentsEl.insertAdjacentHTML('beforeend', newEl);
+      commentCountEl.textContent = `${data.comment_count} Comments`;
+    }
+  };
+
+  socket.onerror = (err) => console.error("WS error", err);
+
+  // -------------------- FETCH PROJECTS --------------------
   fetch('../../../backend/api/get_project.php')
     .then(res => res.json())
     .then(data => {
-      if (!data.success || !data.posts.length) {
-        feed.innerHTML = `<div class="empty-state text-center py-5"><h3>No Projects Yet</h3><p>Be the first to share your project!</p></div>`;
+      if (!data.success || !data.posts || data.posts.length === 0) {
+        feed.innerHTML = `<div class="empty-state"><h3>No Projects Yet</h3><p>Be the first to share your project!</p></div>`;
         return;
       }
 
-    data.posts.forEach(post => {
-  const postEl = document.createElement('div');
-  postEl.classList.add('project-container');
-  postEl.dataset.category = post.project_category.toLowerCase();
-  const categoryClass = categoryClassMap[post.project_category.toLowerCase()] || 'all';
-  const initials = getInitials(post.student_name);
-  const postDate = formatPostDate(post.created_at);
-  const studentProfileUrl = `view-profile-func.php?id=${post.student_id}`; // Adjust as needed
-  const carouselId = `carousel-${post.id}`;
-  const hasImages = post.images && post.images.length > 0;
-  const carouselControls = hasImages && post.images.length > 1 ? `
-    <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-      <span class="visually-hidden">Next</span>
-    </button>` : '';
+      data.posts.forEach(post => {
+        const postEl = document.createElement('div');
+        postEl.classList.add('project-container');
 
-  const carouselHTML = `<div id="${carouselId}" class="carousel slide"><div class="carousel-inner">
-    ${post.images.map((img, index) => `<div class="carousel-item ${index === 0 ? 'active' : ''}">
-      <img src="../../../backend/${img}" class="d-block w-100" alt="Project Image">
-    </div>`).join('')}
-  </div>${carouselControls}</div>`;
+        const categoryKey = post.project_category.toLowerCase().trim();
+        const categoryClass = categoryClassMap[categoryKey] || 'all';
+        const initials = getInitials(post.student_name);
+        const studentProfileUrl = `view-profile-func.php?id=${post.student_id}`;
+        const postDate = formatPostDate(post.created_at);
+        const carouselId = `carousel-${post.id}`;
+        const hasImages = post.images && post.images.length > 0;
+        const carouselControls = hasImages && post.images.length > 1
+          ? `<button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+             <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>`
+          : '';
+        const carouselHTML = `<div id="${carouselId}" class="carousel slide"><div class="carousel-inner">${post.images.map((img,index)=>`<div class="carousel-item ${index===0?'active':''}"><img src="../../../backend/${img}" class="d-block w-100" alt="Project Image ${index+1}"></div>`).join('')}</div>${carouselControls}</div>`;
 
-  postEl.innerHTML = `
-    <div class="project-media position-relative">
-      ${carouselHTML}
-      <span class="project-badge ${categoryClass}-badge position-absolute top-0 end-0 m-2">${post.project_category}</span>
-    </div>
-
-    <div class="project-content">
-      <h3 class="project-title mt-3">${post.project_title}</h3>
-      <p class="project-description mb-3">${post.project_description}</p>
-
-      <div class="project-tech mb-3">
-        ${post.technologies.map(t => `<span class="tech-tag">${t}</span>`).join('')}
-      </div>
-
-      <div class="project-header d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3">
-        <div class="d-flex align-items-center gap-3 mb-2 mb-sm-0">
-          ${post.profile_photo 
-              ? `<a href="${studentProfileUrl}"><img src="../../../backend/${post.profile_photo}" class="project-avatar"></a>` 
-              : `<a href="${studentProfileUrl}"><div class="project-avatar">${initials}</div></a>`}
-          <div>
-            <p class="project-username mb-0">${post.student_name}</p>
-            <p class="project-date mb-0">${postDate}</p>
+        postEl.innerHTML = `
+        <div class="project-media position-relative">
+          ${carouselHTML}
+          <span class="project-badge ${categoryClass}-badge position-absolute top-0 end-0 m-2">${post.project_category}</span>
+        </div>
+        <div class="project-content">
+          <h3 class="project-title mt-3">${post.project_title}</h3>
+          <p class="project-description mb-3">${post.project_description}</p>
+          <div class="project-tech mb-3">${post.technologies.map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div>
+          <div class="project-header d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3">
+            <div class="d-flex align-items-center gap-3 mb-2 mb-sm-0">
+              ${post.profile_photo ? `<a href="${studentProfileUrl}"><img src="../../../backend/${post.profile_photo}" class="project-avatar" alt="User Avatar"></a>` : `<a href="${studentProfileUrl}"><div class="project-avatar">${initials}</div></a>`}
+              <div><p class="project-username mb-0">${post.student_name}</p><p class="project-date mb-0">${postDate}</p></div>
+            </div>
+            <div class="d-flex gap-2 flex-wrap d-none d-sm-flex">
+              <button class="btn btn-light rounded-pill shadow-sm d-flex align-items-center gap-2 like-btn px-3" data-id="${post.id}">
+                <i class="${post.liked_by_user ? 'ri-heart-3-fill text-comsa-highlight' : 'ri-heart-3-line'} fs-6 like-icon" id="like-icon-${post.id}"></i>
+                <span id="like-count-${post.id}" class="fw-semibold">${post.like_count}</span>
+              </button>
+              <button class="btn btn-light rounded-pill shadow-sm d-flex align-items-center gap-2 comment-btn px-3" data-id="${post.id}" data-post='${JSON.stringify(post).replace(/'/g,"&apos;")}'>
+                <i class="ri-chat-3-line fs-6"></i>
+                <span id="comment-count-${post.id}" class="fw-semibold">${post.comment_count}</span>
+              </button>
+            </div>
           </div>
-        </div>
+          <div class="project-links d-flex flex-row flex-wrap justify-content-center gap-2">
+            ${post.download_link ? `<a href="${post.download_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-download-2-line fs-5"></i> Download</a>` : ''}
+            ${post.live_link ? `<a href="${post.live_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-global-line fs-5"></i> Live Demo</a>` : ''}
+            ${post.github_link ? `<a href="${post.github_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-github-fill fs-5"></i> GitHub</a>` : ''}
+          </div>
+        </div>`;
 
-        <div class="d-flex gap-2 flex-wrap d-none d-sm-flex">
-          <button class="btn btn-light rounded-pill shadow-sm d-flex align-items-center gap-2 like-btn px-3" data-id="${post.id}">
-            <i class="${post.liked_by_user ? 'ri-heart-3-fill text-comsa-highlight' : 'ri-heart-3-line'} fs-6 like-icon" id="like-icon-${post.id}"></i>
-            <span id="like-count-${post.id}" class="fw-semibold">${post.like_count}</span>
-          </button>
+        feed.appendChild(postEl);
+        if (hasImages) new bootstrap.Carousel(document.getElementById(carouselId), {interval:false,ride:false,wrap:true});
+      });
 
-          <button class="btn btn-light rounded-pill shadow-sm d-flex align-items-center gap-2 comment-btn px-3"
-                  data-id="${post.id}"
-                  data-post='${JSON.stringify(post).replace(/'/g, "&apos;")}'>
-            <i class="ri-chat-3-line fs-6"></i>
-            <span id="comment-count-${post.id}" class="fw-semibold">${post.comment_count}</span>
-          </button>
-        </div>
-      </div>
+      // -------------------- SEARCH + CATEGORY FILTER --------------------
+ const searchInputs = document.querySelectorAll('.project-search-input');
+const categoryItems = document.querySelectorAll('.category-item');
+let activeCategory = 'all';
 
-      <!-- Mobile Likes + Comments -->
-      <div class="d-flex gap-2 justify-content-center flex-wrap my-3 d-flex d-sm-none">
-        <button class="btn btn-light rounded-pill shadow-sm d-flex align-items-center gap-2 like-btn px-3" data-id="${post.id}">
-          <i class="${post.liked_by_user ? 'ri-heart-3-fill text-comsa-highlight' : 'ri-heart-3-line'} fs-6 like-icon" id="like-icon-mobile-${post.id}"></i>
-          <span id="like-count-mobile-${post.id}" class="fw-semibold">${post.like_count}</span>
-        </button>
+function filterProjects(query = null) {
+  // If a query is provided, sync it to all inputs
+  if (query !== null) {
+    searchInputs.forEach(input => input.value = query);
+  } else {
+    // Otherwise, take value from the first input
+    query = searchInputs[0].value.toLowerCase().trim();
+  }
 
-        <button class="btn btn-light rounded-pill shadow-sm d-flex align-items-center gap-2 comment-btn px-3"
-                data-id="${post.id}"
-                data-post='${JSON.stringify(post).replace(/'/g, "&apos;")}'>
-          <i class="ri-chat-3-line fs-6"></i>
-          <span id="comment-count-mobile-${post.id}" class="fw-semibold">${post.comment_count}</span>
-        </button>
-      </div>
-
-      <!-- Project Links -->
-      <div class="project-links d-flex flex-row flex-wrap justify-content-center gap-2">
-        ${post.download_link ? `<a href="${post.download_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2">
-          <i class="ri-download-2-line fs-5"></i> Download
-        </a>` : ''}
-        ${post.live_link ? `<a href="${post.live_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2">
-          <i class="ri-global-line fs-5"></i> Live Demo
-        </a>` : ''}
-        ${post.github_link ? `<a href="${post.github_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2">
-          <i class="ri-github-fill fs-5"></i> GitHub
-        </a>` : ''}
-      </div>
-    </div>
-  `;
-
-  feed.appendChild(postEl);
-
-  // Initialize carousel
-  const insertedCarousel = document.getElementById(carouselId);
-  if (insertedCarousel) new bootstrap.Carousel(insertedCarousel, { interval: false, ride: false, wrap: true });
-});
-
-
-function filterProjects() {
-  const query = document.querySelector('#projectSearch').value.toLowerCase().trim();
   const projects = document.querySelectorAll('.project-container');
 
   projects.forEach(project => {
@@ -350,40 +397,57 @@ function filterProjects() {
     const description = project.querySelector('.project-description')?.innerText.toLowerCase() || '';
     const techs = Array.from(project.querySelectorAll('.tech-tag')).map(t => t.innerText.toLowerCase()).join(' ');
     const student = project.querySelector('.project-username')?.innerText.toLowerCase() || '';
-    const type = project.dataset.category?.toLowerCase() || 'all';
+    const projectBadge = project.querySelector('.project-badge')?.innerText.toLowerCase() || '';
 
     const matchesSearch = title.includes(query) || description.includes(query) || techs.includes(query) || student.includes(query);
-    const matchesCategory = (activeCategory === 'all') || (type === activeCategory);
+    const matchesCategory = (activeCategory === 'all') || (projectBadge === activeCategory);
 
     project.style.display = (matchesSearch && matchesCategory) ? 'block' : 'none';
   });
 }
 
-// Search input listener
-document.querySelectorAll('#projectSearch').forEach(input => {
-  input.addEventListener('input', filterProjects);
+// Attach event listener to all search inputs
+searchInputs.forEach(input => {
+  input.addEventListener('input', () => filterProjects(input.value.toLowerCase().trim()));
 });
 
-// Category click listener
-document.querySelectorAll('.category-item').forEach(item => {
-  item.addEventListener('click', e => {
+// Category clicks
+categoryItems.forEach(item => {
+  item.addEventListener('click', function (e) {
     e.preventDefault();
 
-    // remove active class
-    document.querySelectorAll('.category-item').forEach(btn => btn.classList.remove('active'));
+    categoryItems.forEach(ci => ci.classList.remove('active'));
+    this.classList.add('active');
 
-    // set active class
-    item.classList.add('active');
+    const categoryMap = {
+      'all': 'all',
+      'aiml': 'ai/ml',
+      'console': 'console apps',
+      'databases': 'databases',
+      'desktop': 'desktop apps',
+      'games': 'games',
+      'mobile': 'mobile apps',
+      'uiux': 'ui/ux design',
+      'web': 'web development'
+    };
 
-    // set active category
-    activeCategory = item.dataset.category;
+    activeCategory = categoryMap[this.id.replace('category-', '').toLowerCase()] || 'all';
+
+    // Re-filter projects whenever category changes
     filterProjects();
   });
 });
 
+// Activate "All" by default
+const allCategory = document.getElementById('category-all');
+if (allCategory) allCategory.classList.add('active');
 
-      // Activate all by default
-      const allCategory = document.getElementById('category-all');
-      if (allCategory) allCategory.classList.add('active');
-    });
+    })
+    .catch(err => console.error("Failed to fetch projects:", err));
+
+  function formatPostDate(datetimeStr) {
+    const date = new Date(datetimeStr);
+    return date.toLocaleDateString(undefined, {year:'numeric',month:'short',day:'numeric'});
+  }
+
 });
