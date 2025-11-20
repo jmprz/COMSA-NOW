@@ -456,11 +456,67 @@ require_once "../../../backend/api/update_nickname_bio.php";
         <!-- Project Grid -->
         <div id="studentProjectsContainer" class="row mt-4">
             <!-- JS will insert project cards here -->
+
         </div>
 
     </div>
 </main>
 
+<!-- View Project Modal -->
+<div class="modal fade" id="viewProjectModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewProjectModalTitle"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Images Carousel -->
+        <div id="viewProjectModalCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+          <div class="carousel-inner" id="viewProjectModalImages"></div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#viewProjectModalCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#viewProjectModalCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+        <!-- Description -->
+        <p id="viewProjectModalDescription"></p>
+
+        <!-- Technologies -->
+        <div id="viewProjectModalTech" class="mb-3"></div>
+
+        <!-- Like & Comment -->
+        <div class="d-flex gap-2 align-items-center mb-3">
+          <button class="btn btn-light d-flex align-items-center gap-2 like-btn" id="modalLikeBtn">
+            <i class="ri-heart-3-line fs-6" id="modalLikeIcon"></i>
+            <span id="modalLikeCount" class="fw-semibold">0</span>
+          </button>
+          <button class="btn btn-light d-flex align-items-center gap-2" id="modalCommentBtn">
+            <i class="ri-chat-3-line fs-6"></i>
+            <span id="modalCommentCount" class="fw-semibold">0</span>
+          </button>
+        </div>
+
+        <!-- Links -->
+        <div id="viewProjectModalLinks" class="d-flex gap-2 flex-wrap mb-3"></div>
+
+        <!-- Comments Section -->
+        <div id="modalComments" class="border-top pt-3"></div>
+        <div class="mt-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Add a comment..." id="modalCommentInput">
+            <button class="btn btn-primary" id="modalAddCommentBtn">Comment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
             <!-- Project Upload Modal (Same as in project-studs.php) -->
             <div class="modal fade" id="projectUploadModal" tabindex="-1" aria-hidden="true">
@@ -579,6 +635,20 @@ require_once "../../../backend/api/update_nickname_bio.php";
                 </div>
             </div>
 
+<!-- View Project Modal -->
+<div class="modal fade" id="viewProjectModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewProjectTitle"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="viewProjectBody">
+        <!-- Project description, technologies, images will go here -->
+      </div>
+    </div>
+  </div>
+</div>
 
             <!-- Edit Project Modal -->
             <div class="modal fade" id="editProjectModal" tabindex="-1" aria-hidden="true">

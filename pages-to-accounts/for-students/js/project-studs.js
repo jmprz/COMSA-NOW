@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (data.status === 'unliked') { likeIcon.classList.replace('ri-heart-3-fill','ri-heart-3-line'); }
       }
       const likeCountEl = document.getElementById(`like-count-${data.project_id}`);
-      if (likeCountEl && typeof data.like_count !== 'undefined') likeCountEl.innerText = `${data.like_count} Likes`;
+      if (likeCountEl && typeof data.like_count !== 'undefined') likeCountEl.innerText = `${data.like_count}`;
     }
 
     if (data.type === 'comment') {
@@ -339,6 +339,14 @@ document.addEventListener('DOMContentLoaded', () => {
              <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>`
           : '';
         const carouselHTML = `<div id="${carouselId}" class="carousel slide"><div class="carousel-inner">${post.images.map((img,index)=>`<div class="carousel-item ${index===0?'active':''}"><img src="../../../backend/${img}" class="d-block w-100" alt="Project Image ${index+1}"></div>`).join('')}</div>${carouselControls}</div>`;
+ // ------------------ DESCRIPTION TRUNCATE ------------------
+      const maxLength = 150; // characters to show on card
+      let shortDesc = post.project_description;
+      let isTruncated = false;
+      if (shortDesc.length > maxLength) {
+        shortDesc = shortDesc.substring(0, maxLength) + '... ';
+        isTruncated = true;
+      }
 
         postEl.innerHTML = `
         <div class="project-media position-relative">
@@ -347,7 +355,10 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="project-content">
           <h3 class="project-title mt-3">${post.project_title}</h3>
-          <p class="project-description mb-3">${post.project_description}</p>
+           <p class="project-description mb-3">
+            ${shortDesc}
+            ${isTruncated ? `<a href="#" class="read-more-link" data-id="${post.id}" data-post='${JSON.stringify(post).replace(/'/g,"&apos;")}'>Read more</a>` : ''}
+          </p>
           <div class="project-tech mb-3">${post.technologies.map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div>
           <div class="project-header d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3">
             <div class="d-flex align-items-center gap-3 mb-2 mb-sm-0">
@@ -375,6 +386,111 @@ document.addEventListener('DOMContentLoaded', () => {
         feed.appendChild(postEl);
         if (hasImages) new bootstrap.Carousel(document.getElementById(carouselId), {interval:false,ride:false,wrap:true});
       });
+
+      // ---------------- GLOBAL EVENT LISTENER FOR LIKE + COMMENT ----------------
+feed.addEventListener("click", async (e) => {
+  const commentBtn = e.target.closest('.comment-btn');
+  const postComment = e.target.closest('.add-comment');
+  const likeBtn = e.target.closest('.like-btn');
+  const readMore = e.target.closest('.read-more-link'); 
+
+ // ---------------- READ MORE / COMMENT MODAL ----------------
+  if (readMore || commentBtn) {
+    if (readMore) e.preventDefault(); // prevent # jump
+
+    const postData = readMore 
+      ? JSON.parse(readMore.dataset.post.replace(/&apos;/g, "'"))
+      : JSON.parse(commentBtn.dataset.post.replace(/&apos;/g, "'"));
+    const projectId = readMore ? readMore.dataset.id : commentBtn.dataset.id;
+
+    const commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
+    const modalPostEl = document.getElementById('modalPostContent');
+    const commentsEl = document.getElementById('modalComments');
+    const modalHeader = document.getElementById('modalProjectHeader');
+
+    document.querySelector('#commentModal .comment-input').dataset.id = projectId;
+    document.querySelector('#commentModal .add-comment').dataset.id = projectId;
+
+    modalHeader.innerHTML = postData.project_title;
+    modalPostEl.innerHTML = `
+      <p>${postData.project_description}</p>
+      ${postData.technologies.map(t => `<span class="badge bg-secondary me-1">${t}</span>`).join('')}
+      <hr>
+    `;
+
+    commentsEl.innerHTML = `<div class="text-muted">Loading comments...</div>`;
+
+    try {
+      const response = await fetch(`../../../backend/api/get_comments.php?project_id=${projectId}`);
+      const data = await response.json();
+      commentsEl.innerHTML = data.length
+        ? data.map(c => `<div class="mb-2"><strong>${c.name}</strong>: ${c.comment}</div>`).join('')
+        : `<div class="text-muted">No comments yet.</div>`;
+    } catch (err) {
+      commentsEl.innerHTML = `<div class="text-danger">Failed to load comments.</div>`;
+    }
+
+    commentModal.show();
+    return;
+  }
+
+  // ---------------- POST A COMMENT ----------------
+  if (postComment) {
+    const parentDiv = postComment.closest('.parent-comment-div');
+    const inputEl = parentDiv.querySelector('.comment-input');
+    const comment = inputEl.value;
+    const projectId = postComment.dataset.id;
+
+    if (comment.trim() !== '') {
+      const res = await fetch("../../../backend/api/add_comment.php", {
+        method: 'POST',
+        headers: { "Content-type": "application/json" },
+        credentials: 'include',
+        body: JSON.stringify({ project_id: projectId, comment })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        inputEl.value = '';
+        postComment.disabled = true;
+        setTimeout(() => postComment.disabled = false, 500);
+      }
+    }
+    return;
+  }
+
+  // ---------------- LIKE BUTTON ----------------
+  if (likeBtn) {
+    const projectId = likeBtn.dataset.id;
+    const icon = document.getElementById(`like-icon-${projectId}`);
+    const countEl = document.getElementById(`like-count-${projectId}`);
+
+    // Optimistic UI update
+    const liked = icon.classList.contains('ri-heart-3-fill');
+
+    if (liked) {
+      icon.classList.remove('ri-heart-3-fill', 'text-comsa-highlight');
+      icon.classList.add('ri-heart-3-line');
+      countEl.textContent = Number(countEl.textContent) - 1;
+    } else {
+      icon.classList.remove('ri-heart-3-line');
+      icon.classList.add('ri-heart-3-fill', 'text-comsa-highlight');
+      countEl.textContent = Number(countEl.textContent) + 1;
+    }
+
+    // Backend update
+    await fetch("../../../backend/api/like_project.php", {
+      method: 'POST',
+      headers: { "Content-type": "application/json" },
+      credentials: 'include',
+      body: JSON.stringify({ project_id: projectId })
+    });
+
+    return;
+  }
+});
+
+      
 
       // -------------------- SEARCH + CATEGORY FILTER --------------------
  const searchInputs = document.querySelectorAll('.project-search-input');
@@ -451,3 +567,5 @@ if (allCategory) allCategory.classList.add('active');
   }
 
 });
+
+
