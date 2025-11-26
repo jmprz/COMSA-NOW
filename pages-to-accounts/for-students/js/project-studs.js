@@ -263,6 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const socket = new WebSocket("ws://localhost:8080");
   const feed = document.getElementById('projectFeed');
+
   if (!feed) {
     console.error('⚠️ projectFeed element not found!');
     return;
@@ -286,31 +287,56 @@ document.addEventListener('DOMContentLoaded', () => {
       : (parts[0][0] + parts[1][0]).toUpperCase();
   }
 
-  // -------------------- WEBSOCKET --------------------
-  socket.onmessage = (event) => {
-    let data;
-    try { data = JSON.parse(event.data); } 
-    catch(e){ console.error("Failed to parse WS message", e); return; }
+ // -------------------- WEBSOCKET --------------------
+  socket.onmessage = (event) => {
+    let data;
+    try { data = JSON.parse(event.data); } 
+    catch(e){ console.error("Failed to parse WS message", e); return; }
 
-    if (data.type === 'like') {
-      const likeIcon = document.getElementById(`like-icon-${data.project_id}`);
-      if (likeIcon) {
-        if (data.status === 'liked') { likeIcon.classList.replace('ri-heart-3-line','ri-heart-3-fill'); }
-        else if (data.status === 'unliked') { likeIcon.classList.replace('ri-heart-3-fill','ri-heart-3-line'); }
-      }
-      const likeCountEl = document.getElementById(`like-count-${data.project_id}`);
-      if (likeCountEl && typeof data.like_count !== 'undefined') likeCountEl.innerText = `${data.like_count}`;
+    // Helper function (moved into scope for use by 'comment' type)
+    function getInitials(name) {
+        const parts = name.trim().split(" ").filter(Boolean);
+        if (parts.length === 0) return '';
+        if (parts.length === 1) return parts[0][0].toUpperCase();
+        return (parts[0][0] + parts[1][0]).toUpperCase();
     }
 
-    if (data.type === 'comment') {
-      const commentsEl = document.getElementById('modalComments');
-      const commentCountEl = document.getElementById(`comment-count-${data.project_id}`);
-      if (!commentsEl || !commentCountEl) return;
-      const newEl = `<div class="mb-2"><strong>${data.name}</strong>: ${data.comment}</div>`;
-      commentsEl.insertAdjacentHTML('beforeend', newEl);
-      commentCountEl.textContent = `${data.comment_count} Comments`;
-    }
-  };
+    if (data.type === 'like') {
+      const likeIcon = document.getElementById(`like-icon-${data.project_id}`);
+      if (likeIcon) {
+        if (data.status === 'liked') { likeIcon.classList.replace('ri-heart-3-line','ri-heart-3-fill'); }
+        else if (data.status === 'unliked') { likeIcon.classList.replace('ri-heart-3-fill','ri-heart-3-line'); }
+      }
+      const likeCountEl = document.getElementById(`like-count-${data.project_id}`);
+      if (likeCountEl && typeof data.like_count !== 'undefined') likeCountEl.innerText = `${data.like_count}`;
+    }
+
+    if (data.type === 'comment') {
+      const commentsEl = document.getElementById('modalComments');
+      const commentCountEl = document.getElementById(`comment-count-${data.project_id}`);
+      
+      if (!commentsEl || !commentCountEl) return;
+      
+        // 🌟 FIX: Generate the avatar HTML just like the initial loading block
+        const commentInitials = getInitials(data.name);
+        const commentAvatar = data.profile_photo 
+            ? `<img src="../../../backend/${data.profile_photo}" class="comment-avatar me-2" alt="Commenter Avatar">`
+            : `<div class="comment-avatar me-2">${commentInitials}</div>`;
+        
+        // Use the same formatted HTML structure as when initially loading comments
+        const newEl = `
+            <div class="d-flex align-items-start mb-3">
+                ${commentAvatar}
+                <div>
+                    <strong>${data.name}</strong> <span class="text-muted small">Just now</span>
+                    <p class="mb-0">${data.comment}</p>
+                </div>
+            </div>`;
+
+      commentsEl.insertAdjacentHTML('beforeend', newEl);
+      commentCountEl.textContent = `${data.comment_count} Comments`;
+    }
+  };
 
   socket.onerror = (err) => console.error("WS error", err);
 
@@ -322,6 +348,8 @@ document.addEventListener('DOMContentLoaded', () => {
         feed.innerHTML = `<div class="empty-state"><h3>No Projects Yet</h3><p>Be the first to share your project!</p></div>`;
         return;
       }
+      const noResultsMessage = document.getElementById('noResultsMessage');
+      if (noResultsMessage) noResultsMessage.classList.add('d-none'); 
 
       data.posts.forEach(post => {
         const postEl = document.createElement('div');
@@ -365,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
               ${post.profile_photo ? `<a href="${studentProfileUrl}"><img src="../../../backend/${post.profile_photo}" class="project-avatar" alt="User Avatar"></a>` : `<a href="${studentProfileUrl}"><div class="project-avatar">${initials}</div></a>`}
               <div><p class="project-username mb-0">${post.student_name}</p><p class="project-date mb-0">${postDate}</p></div>
             </div>
-            <div class="d-flex gap-2 flex-wrap d-none d-sm-flex">
+            <div class="d-flex gap-2 flex-wrap post-actions">
               <button class="btn btn-light rounded-pill shadow-sm d-flex align-items-center gap-2 like-btn px-3" data-id="${post.id}">
                 <i class="${post.liked_by_user ? 'ri-heart-3-fill text-comsa-highlight' : 'ri-heart-3-line'} fs-6 like-icon" id="like-icon-${post.id}"></i>
                 <span id="like-count-${post.id}" class="fw-semibold">${post.like_count}</span>
@@ -396,43 +424,103 @@ feed.addEventListener("click", async (e) => {
 
  // ---------------- READ MORE / COMMENT MODAL ----------------
   if (readMore || commentBtn) {
-    if (readMore) e.preventDefault(); // prevent # jump
+    if (readMore) e.preventDefault(); // prevent # jump
 
-    const postData = readMore 
-      ? JSON.parse(readMore.dataset.post.replace(/&apos;/g, "'"))
-      : JSON.parse(commentBtn.dataset.post.replace(/&apos;/g, "'"));
-    const projectId = readMore ? readMore.dataset.id : commentBtn.dataset.id;
+    const postData = readMore 
+      ? JSON.parse(readMore.dataset.post.replace(/&apos;/g, "'"))
+      : JSON.parse(commentBtn.dataset.post.replace(/&apos;/g, "'"));
+    const projectId = readMore ? readMore.dataset.id : commentBtn.dataset.id;
+    
+    // Helper values for the HTML generation
+    const postDate = formatPostDate(postData.created_at);
+    const initials = getInitials(postData.student_name);
+    const studentProfileUrl = `view-profile-func.php?id=${postData.student_id}`;
+    const modalCarouselId = `modal-carousel-${projectId}`; // Unique ID for modal carousel
+    const hasImages = postData.images && postData.images.length > 0;
 
-    const commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
-    const modalPostEl = document.getElementById('modalPostContent');
-    const commentsEl = document.getElementById('modalComments');
-    const modalHeader = document.getElementById('modalProjectHeader');
+    // Carousel HTML Generation
+    const carouselControls = hasImages && postData.images.length > 1
+        ? `<button class="carousel-control-prev" type="button" data-bs-target="#${modalCarouselId}" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+           <button class="carousel-control-next" type="button" data-bs-target="#${modalCarouselId}" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>`
+        : '';
+    
+    const carouselHTML = `<div id="${modalCarouselId}" class="carousel slide">
+                            <div class="carousel-inner">
+                            ${postData.images.map((img,index)=>`<div class="carousel-item ${index===0?'active':''}"><img src="../../../backend/${img}" class="d-block w-100" alt="Project Image ${index+1}"></div>`).join('')}
+                            </div>
+                            ${carouselControls}
+                          </div>`;
 
-    document.querySelector('#commentModal .comment-input').dataset.id = projectId;
-    document.querySelector('#commentModal .add-comment').dataset.id = projectId;
+    const commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
+    const modalPostEl = document.getElementById('modalPostContent');
+    const commentsEl = document.getElementById('modalComments');
+    const modalHeader = document.getElementById('modalProjectHeader');
 
-    modalHeader.innerHTML = postData.project_title;
-    modalPostEl.innerHTML = `
-      <p>${postData.project_description}</p>
-      ${postData.technologies.map(t => `<span class="badge bg-secondary me-1">${t}</span>`).join('')}
-      <hr>
-    `;
+    document.querySelector('#commentModal .comment-input').dataset.id = projectId;
+    document.querySelector('#commentModal .add-comment').dataset.id = projectId;
 
-    commentsEl.innerHTML = `<div class="text-muted">Loading comments...</div>`;
+    // Set the Modal Title
+    modalHeader.innerHTML = postData.project_title;
+    
+    // Build the full post content for the modal
+    modalPostEl.innerHTML = `
+        <div class="modal-project-content">
+            <div class="project-media">
+                ${carouselHTML}
+                <span class="project-badge ${categoryClassMap[postData.project_category.toLowerCase().trim()] || 'all'}-badge position-absolute top-0 end-0 m-4">${postData.project_category}</span>
+            </div>
 
-    try {
-      const response = await fetch(`../../../backend/api/get_comments.php?project_id=${projectId}`);
-      const data = await response.json();
-      commentsEl.innerHTML = data.length
-        ? data.map(c => `<div class="mb-2"><strong>${c.name}</strong>: ${c.comment}</div>`).join('')
-        : `<div class="text-muted">No comments yet.</div>`;
-    } catch (err) {
-      commentsEl.innerHTML = `<div class="text-danger">Failed to load comments.</div>`;
+            <div class="d-flex align-items-center gap-3 mb-3">
+              
+            </div>
+
+            <p class="project-description mb-3">${postData.project_description}</p>
+
+            <div class="project-tech mb-3">
+                ${postData.technologies.map(t => `<span class="badge me-1 tech-tag">${t}</span>`).join('')}
+            </div>
+          <div class="project-links d-flex flex-row flex-wrap justify-content-center gap-2">${postData.download_link ? `<a href="${postData.download_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-download-2-line fs-5"></i> Download</a>` : ''}${postData.live_link ? `<a href="${postData.live_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-global-line fs-5"></i> Live Demo</a>` : ''}${postData.github_link ? `<a href="${postData.github_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-github-fill fs-5"></i> GitHub</a>` : ''}</div>
+            </div><h5 class="mt-2">Comments</h5>`;
+
+    // Initialize the carousel for the modal
+    if (hasImages) {
+        new bootstrap.Carousel(document.getElementById(modalCarouselId), {
+            interval: false, 
+            ride: false,
+            wrap: true
+        });
     }
 
-    commentModal.show();
-    return;
-  }
+
+    commentsEl.innerHTML = `<div class="text-muted">Loading comments...</div>`;
+
+    try {
+      const response = await fetch(`../../../backend/api/get_comments.php?project_id=${projectId}`);
+      const data = await response.json();
+      // Enhanced comment rendering to include profile picture/initials
+      commentsEl.innerHTML = data.length
+        ? data.map(c => {
+            const commentInitials = getInitials(c.name);
+            const commentAvatar = c.profile_photo 
+                ? `<img src="../../../backend/${c.profile_photo}" class="comment-avatar me-2" alt="Commenter Avatar">`
+                : `<div class="comment-avatar me-2">${commentInitials}</div>`;
+
+            return `<div class="d-flex align-items-start mb-3">
+                        ${commentAvatar}
+                        <div>
+                            <strong>${c.name}</strong> <span class="text-muted small">${formatPostDate(c.created_at)}</span>
+                            <p class="mb-0">${c.comment}</p>
+                        </div>
+                    </div>`;
+        }).join('')
+        : `<div class="text-muted">No comments yet.</div>`;
+    } catch (err) {
+      commentsEl.innerHTML = `<div class="text-danger">Failed to load comments.</div>`;
+    }
+
+    commentModal.show();
+    return;
+  }
 
   // ---------------- POST A COMMENT ----------------
   if (postComment) {
@@ -507,6 +595,7 @@ function filterProjects(query = null) {
   }
 
   const projects = document.querySelectorAll('.project-container');
+  let visibleCount = 0;
 
   projects.forEach(project => {
     const title = project.querySelector('.project-title')?.innerText.toLowerCase() || '';
@@ -518,9 +607,23 @@ function filterProjects(query = null) {
     const matchesSearch = title.includes(query) || description.includes(query) || techs.includes(query) || student.includes(query);
     const matchesCategory = (activeCategory === 'all') || (projectBadge === activeCategory);
 
-    project.style.display = (matchesSearch && matchesCategory) ? 'block' : 'none';
+    const isVisible = matchesSearch && matchesCategory;
+
+    project.style.display = isVisible ? 'block' : 'none';
+    if (isVisible) {
+            visibleCount++;
+        }
   });
+  // noResultsMessage is now correctly in scope
+    if (noResultsMessage) { 
+        if (visibleCount === 0) {
+            noResultsMessage.classList.remove('d-none');
+        } else {
+            noResultsMessage.classList.add('d-none');
+        }
+    }
 }
+
 
 // Attach event listener to all search inputs
 searchInputs.forEach(input => {
@@ -567,5 +670,6 @@ if (allCategory) allCategory.classList.add('active');
   }
 
 });
+
 
 

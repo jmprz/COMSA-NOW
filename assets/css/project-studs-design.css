@@ -251,6 +251,7 @@ body {
   line-height: 1.6;
   color: var(--text-dark);
   margin-bottom: 15px;
+  text-align: justify;
 }
 
 .project-media {
@@ -926,4 +927,39 @@ body.dark-mode .compact-form .form-select {
   .row {
     flex-wrap: wrap !important;
   }
+}
+
+/* Media query to target screen sizes 575.98px and below (mobile) */
+@media (max-width: 575.98px) {
+  .post-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+   .project-links a{
+    font-size: 0.7rem;
+  }
+}
+
+.read-more-link{
+  color: var(--accent-color);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Styling for commenter avatars inside the modal */
+.comment-avatar {
+    height: 30px; /* Smaller than main post avatar */
+    width: 30px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    color: #495057;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    flex-shrink: 0; /* Prevents it from shrinking if text is long */
+    object-fit: cover;
 }

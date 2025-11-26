@@ -275,8 +275,7 @@ main {
 
     <!-- Main Feed -->
     <section class="col-lg-7 order-lg-2">
-      <div id="projectFeed" class="posts-column">
-        
+      <div id="projectFeed" class="posts-column" >
         <!-- Upload for Mobile -->
            <div class="d-lg-none mb-3">
          <div class="shadow-sm mb-3 border-0">
@@ -356,7 +355,6 @@ main {
   </div>
 </div>
         <!-- Posts dynamically loaded here -->
-        
         <!-- Comment Modal -->
         <div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
           <div class="modal-dialog modal-lg">
@@ -378,6 +376,11 @@ main {
         </div>
 
       </div>
+    <div id="noResultsMessage" class="d-none text-center mt-5">
+    <i class="ri-emotion-sad-line display-1 text-muted mb-3"></i> 
+    <h3 class="fw-bold">No result found</h3>
+    <p>Try refining your search or changing the category</p>
+</div>
     </section>
   </div>
 </main>
