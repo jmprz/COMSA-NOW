@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch student projects
     async function fetchStudentProjects() {
         try {
-            const response = await fetch(`../../../backend/api/get_student_projects.php`);
+            const response = await fetch(`../backend/api/get_student_projects.php`);
             const data = await response.json();
 
             if (data.success && data.posts && data.posts.length > 0) {
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="project-card shadow-sm h-100 position-relative overflow-hidden cursor-pointer" data-index="${index}">
                     <span class="project-badge ${categoryClass}-badge position-absolute top-0 end-0 m-2">${project.project_category}</span>
                     ${project.images && project.images.length > 0 ? 
-                        `<img src="../../../backend/${project.images[0]}" class="project-card-img w-100" alt="${project.project_title}">` :
+                        `<img src="../backend/${project.images[0]}" class="project-card-img w-100" alt="${project.project_title}">` :
                         `<div class="project-card-img placeholder d-flex align-items-center justify-content-center">
                             <i class="ri-image-line fs-1 text-muted"></i>
                         </div>`
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
             projectData.images.forEach((img, index) => {
                 const item = document.createElement('div');
                 item.className = `carousel-item ${index === 0 ? 'active' : ''}`;
-                item.innerHTML = `<img src="../../../backend/${img}" class="d-block w-100" alt="Project Image ${index+1}">`;
+                item.innerHTML = `<img src="../backend/${img}" class="d-block w-100" alt="Project Image ${index+1}">`;
                 carouselInner.appendChild(item);
             });
         } else {
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         commentsEl.innerHTML = `<div class="text-muted">Loading comments...</div>`;
         try {
-            const res = await fetch(`../../../backend/api/get_comments.php?project_id=${projectId}`);
+            const res = await fetch(`../backend/api/get_comments.php?project_id=${projectId}`);
             const commentsData = await res.json();
             commentsEl.innerHTML = commentsData.length
                 ? commentsData.map(c => `<div class="mb-2"><strong>${c.name}</strong>: ${c.comment}</div>`).join('')
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
             likeIcon.classList.toggle('ri-heart-3-line', liked);
             likeCount.textContent = Number(likeCount.textContent) + (liked ? -1 : 1);
 
-            await fetch("../../../backend/api/like_project.php", {
+            await fetch("../backend/api/like_project.php", {
                 method: 'POST',
                 headers: { "Content-type": "application/json" },
                 credentials: 'include',
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('modalAddCommentBtn').onclick = async () => {
             const comment = commentInput.value.trim();
             if (!comment) return;
-            const res = await fetch("../../../backend/api/add_comment.php", {
+            const res = await fetch("../backend/api/add_comment.php", {
                 method: 'POST',
                 headers: { "Content-type": "application/json" },
                 credentials: 'include',
@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to handle project editing
     async function editProject(projectId) {
         try {
-            const response = await fetch(`../../../backend/api/get_project_details.php?id=${projectId}`);
+            const response = await fetch(`../backend/api/get_project_details.php?id=${projectId}`);
             const data = await response.json();
             
             if (data.success && data.project) {
@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     imgWrapper.style.height = '100px';
                     
                     imgWrapper.innerHTML = `
-                        <img src="../../../backend/${imagePath}" 
+                        <img src="../backend/${imagePath}" 
                              class="img-thumbnail w-100 h-100 object-fit-cover" 
                              alt="Project image ${index + 1}"
                              style="object-fit: cover;">
@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function deleteProject(projectId) {
         if (confirm('Are you sure you want to delete this project? This action cannot be undone.')) {
             try {
-                const response = await fetch(`../../../backend/api/delete_project.php`, {
+                const response = await fetch(`../backend/api/delete_project.php`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...';
                 
-                const response = await fetch(`../../../backend/api/update_project.php?id=${projectId}`, {
+                const response = await fetch(`../backend/api/update_project.php?id=${projectId}`, {
                     method: 'POST',
                     body: formData
                 });

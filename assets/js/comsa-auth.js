@@ -168,9 +168,9 @@ const comsaAuthSystem = (function () {
         if (data.loggedIn) {
           console.log(data.role);
           if (data.role === 'admin') {
-            window.location.href = "../COMSA-NOW/pages-to-accounts/for-admin/admin-dashboard.php";
+            window.location.href = "../COMSA-NOW/admin/admin-dashboard.php";
           } else {
-            window.location.href = "../COMSA-NOW/pages-to-accounts/for-students/student-dashboard.php";
+            window.location.href = "../COMSA-NOW/home.php";
           }
         } else {
           const loginModal = new bootstrap.Modal(document.getElementById('comsaLoginModal'));

@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Function to fetch posts from server
     function fetchPosts() {
-        fetch('../../../backend/api/student/get_posts.php')
+        fetch('../backend/api/student/get_posts.php')
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
         postElement.innerHTML = `
         <div class="post-header d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <img src="../../assets/img/logo.png" class="post-avatar me-2" alt="Admin Avatar">
+                <img src="./assets/img/logo.png" class="post-avatar me-2" alt="Admin Avatar">
         <div class="d-flex flex-column">
              <p class="mb-0 fw-bold project-username">Computer Science Student Association</p>
             <small class="text-muted project-date">${postDate}</small>
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>  
             
             ${post.post_image ? `
-                <img src="../../../backend/${post.post_image}" class="post-image" alt="Post Image" onerror="this.style.display='none'">
+                <img src="../backend/${post.post_image}" class="post-image" alt="Post Image" onerror="this.style.display='none'">
             ` : ''}
             <div class="post-caption">
                 <span class="fs-6 fw-semibold">Computer Science Student Association</span>
@@ -225,7 +225,7 @@ function formatTimeAgo(dateString) {
 
 // Global functions for post interactions
 function toggleLike(postId) {
-    fetch('../../../backend/api/student/toggle_like.php', {
+    fetch('../backend/api/student/toggle_like.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -255,7 +255,7 @@ function addComment(postId) {
     
     if (!comment) return;
     
-    fetch('../../../backend/api/student/add_comment.php', {
+    fetch('../backend/api/student/add_comment.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

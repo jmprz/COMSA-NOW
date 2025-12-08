@@ -1,4 +1,4 @@
-fetch("../../../backend/api/get_user_avatar.php")
+fetch("../backend/api/get_user_avatar.php")
   .then(res => res.json())
   .then(data => {
     const avatarImgs = document.querySelectorAll(".user-avatar"); // select all avatars
@@ -9,7 +9,7 @@ fetch("../../../backend/api/get_user_avatar.php")
 
       // Show image for all avatar elements
       avatarImgs.forEach(img => {
-        img.src = `../../../backend/${data.filepath}`;
+        img.src = `../backend/${data.filepath}`;
         img.classList.remove("d-none");
       });
 

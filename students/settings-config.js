@@ -97,18 +97,18 @@ document.addEventListener("DOMContentLoaded", function () {
       let removePhotoFlag = false;
 
       profilePicModalEl.addEventListener("show.bs.modal", () => {
-        fetch("../../../backend/api/get_user_avatar.php")
+        fetch("../backend/api/get_user_avatar.php")
           .then(res => res.json())
           .then(data => {
             console.log(data)
             if (data.success && data.filepath) {
               console.log(data.filepath)
-              profilePicPreview.src = `../../../backend/${data.filepath}`;
+              profilePicPreview.src = `../backend/${data.filepath}`;
               profilePicPreview.classList.remove("d-none");
               profilePicInitial.classList.add("d-none")
               hasProfileInDB = true;
             } else {
-              fetch("../../../backend/api/get_initials.php")
+              fetch("../backend/api/get_initials.php")
                 .then(res => res.json())
                 .then(data => {
                   profilePicInitial.textContent = getInitials(data.name);
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
         saveProfilePic.disabled = true;
         saveProfilePic.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Saving...';
 
-        fetch("../../../backend/api/update_user_avatar.php", {
+        fetch("../backend/api/update_user_avatar.php", {
           method: "POST",
           body: formData
         })

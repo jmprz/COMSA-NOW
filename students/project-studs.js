@@ -207,7 +207,7 @@ uploadForm.addEventListener("submit", function (e) {
     clearFieldErrors();
     document.getElementById("generalUploadError").classList.add("d-none");
 
-    fetch("../../../backend/api/student_upload_proj.php", { method: "POST", body: formData })
+    fetch("../backend/api/student_upload_proj.php", { method: "POST", body: formData })
       .then(res => res.json())
       .then(response => {
         if (response.success) {
@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 🌟 FIX: Generate the avatar HTML just like the initial loading block
         const commentInitials = getInitials(data.name);
         const commentAvatar = data.profile_photo 
-            ? `<img src="../../../backend/${data.profile_photo}" class="comment-avatar me-2" alt="Commenter Avatar">`
+            ? `<img src="../backend/${data.profile_photo}" class="comment-avatar me-2" alt="Commenter Avatar">`
             : `<div class="comment-avatar me-2">${commentInitials}</div>`;
         
         // Use the same formatted HTML structure as when initially loading comments
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
   socket.onerror = (err) => console.error("WS error", err);
 
   // -------------------- FETCH PROJECTS --------------------
-  fetch('../../../backend/api/get_project.php')
+  fetch('../backend/api/get_project.php')
     .then(res => res.json())
     .then(data => {
       if (!data.success || !data.posts || data.posts.length === 0) {
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoryKey = post.project_category.toLowerCase().trim();
         const categoryClass = categoryClassMap[categoryKey] || 'all';
         const initials = getInitials(post.student_name);
-        const studentProfileUrl = `view-profile-func.php?id=${post.student_id}`;
+        const studentProfileUrl = `view.php?id=${post.student_id}`;
         const postDate = formatPostDate(post.created_at);
         const carouselId = `carousel-${post.id}`;
         const hasImages = post.images && post.images.length > 0;
@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ? `<button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
              <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>`
           : '';
-        const carouselHTML = `<div id="${carouselId}" class="carousel slide"><div class="carousel-inner">${post.images.map((img,index)=>`<div class="carousel-item ${index===0?'active':''}"><img src="../../../backend/${img}" class="d-block w-100" alt="Project Image ${index+1}"></div>`).join('')}</div>${carouselControls}</div>`;
+        const carouselHTML = `<div id="${carouselId}" class="carousel slide"><div class="carousel-inner">${post.images.map((img,index)=>`<div class="carousel-item ${index===0?'active':''}"><img src="../backend/${img}" class="d-block w-100" alt="Project Image ${index+1}"></div>`).join('')}</div>${carouselControls}</div>`;
  // ------------------ DESCRIPTION TRUNCATE ------------------
       const maxLength = 150; // characters to show on card
       let shortDesc = post.project_description;
@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="project-tech mb-3">${post.technologies.map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div>
           <div class="project-header d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3">
             <div class="d-flex align-items-center gap-3 mb-2 mb-sm-0">
-              ${post.profile_photo ? `<a href="${studentProfileUrl}"><img src="../../../backend/${post.profile_photo}" class="project-avatar" alt="User Avatar"></a>` : `<a href="${studentProfileUrl}"><div class="project-avatar">${initials}</div></a>`}
+              ${post.profile_photo ? `<a href="${studentProfileUrl}"><img src="../backend/${post.profile_photo}" class="project-avatar" alt="User Avatar"></a>` : `<a href="${studentProfileUrl}"><div class="project-avatar">${initials}</div></a>`}
               <div><p class="project-username mb-0">${post.student_name}</p><p class="project-date mb-0">${postDate}</p></div>
             </div>
             <div class="d-flex gap-2 flex-wrap post-actions">
@@ -434,7 +434,7 @@ feed.addEventListener("click", async (e) => {
     // Helper values for the HTML generation
     const postDate = formatPostDate(postData.created_at);
     const initials = getInitials(postData.student_name);
-    const studentProfileUrl = `view-profile-func.php?id=${postData.student_id}`;
+    const studentProfileUrl = `view.php?id=${postData.student_id}`;
     const modalCarouselId = `modal-carousel-${projectId}`; // Unique ID for modal carousel
     const hasImages = postData.images && postData.images.length > 0;
 
@@ -446,7 +446,7 @@ feed.addEventListener("click", async (e) => {
     
     const carouselHTML = `<div id="${modalCarouselId}" class="carousel slide">
                             <div class="carousel-inner">
-                            ${postData.images.map((img,index)=>`<div class="carousel-item ${index===0?'active':''}"><img src="../../../backend/${img}" class="d-block w-100" alt="Project Image ${index+1}"></div>`).join('')}
+                            ${postData.images.map((img,index)=>`<div class="carousel-item ${index===0?'active':''}"><img src="../backend/${img}" class="d-block w-100" alt="Project Image ${index+1}"></div>`).join('')}
                             </div>
                             ${carouselControls}
                           </div>`;
@@ -495,14 +495,14 @@ feed.addEventListener("click", async (e) => {
     commentsEl.innerHTML = `<div class="text-muted">Loading comments...</div>`;
 
     try {
-      const response = await fetch(`../../../backend/api/get_comments.php?project_id=${projectId}`);
+      const response = await fetch(`../backend/api/get_comments.php?project_id=${projectId}`);
       const data = await response.json();
       // Enhanced comment rendering to include profile picture/initials
       commentsEl.innerHTML = data.length
         ? data.map(c => {
             const commentInitials = getInitials(c.name);
             const commentAvatar = c.profile_photo 
-                ? `<img src="../../../backend/${c.profile_photo}" class="comment-avatar me-2" alt="Commenter Avatar">`
+                ? `<img src="../backend/${c.profile_photo}" class="comment-avatar me-2" alt="Commenter Avatar">`
                 : `<div class="comment-avatar me-2">${commentInitials}</div>`;
 
             return `<div class="d-flex align-items-start mb-3">
@@ -530,7 +530,7 @@ feed.addEventListener("click", async (e) => {
     const projectId = postComment.dataset.id;
 
     if (comment.trim() !== '') {
-      const res = await fetch("../../../backend/api/add_comment.php", {
+      const res = await fetch("../backend/api/add_comment.php", {
         method: 'POST',
         headers: { "Content-type": "application/json" },
         credentials: 'include',
@@ -567,7 +567,7 @@ feed.addEventListener("click", async (e) => {
     }
 
     // Backend update
-    await fetch("../../../backend/api/like_project.php", {
+    await fetch("../backend/api/like_project.php", {
       method: 'POST',
       headers: { "Content-type": "application/json" },
       credentials: 'include',

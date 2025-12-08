@@ -1,9 +1,9 @@
 <?php
-require_once "../../../backend/config/session.php";
-require_once "../../../backend/config/db.php";
-require_once '../../../backend/middleware/student_middleware.php';
+require_once "../backend/config/session.php";
+require_once "../backend/config/db.php";
+require_once '../backend/middleware/student_middleware.php';
 
-require_once "../../../backend/api/update_nickname_bio.php";
+require_once "../backend/api/update_nickname_bio.php";
 
 
 
@@ -23,8 +23,8 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../..//assets/img/favicon/favicon-16x16.png">
   <link rel="manifest" href="../assets/img/favicon/site.webmanifest">
 
@@ -38,20 +38,20 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
     rel="stylesheet" />
   <!-- Vendor CSS Files -->
-  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="./assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="./assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="./assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="./assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="../../assets/css/main.css" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/login-form.css">
-  <link rel="stylesheet" href="../../assets/css/search.css">
-  <link rel="stylesheet" href="../../assets/css/student-dash.css">
-    <link rel="stylesheet" href="../../assets/css/project-studs-design.css">  <!-- Also responsible for nav design-->
-  <link rel="stylesheet" href="../../assets/css/dark-mode.css">
+  <link href="./assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/login-form.css">
+  <link rel="stylesheet" href="./assets/css/search.css">
+  <link rel="stylesheet" href="./assets/css/student-dash.css">
+    <link rel="stylesheet" href="./assets/css/project-studs-design.css">  <!-- Also responsible for nav design-->
+  <link rel="stylesheet" href="./assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <style>
@@ -265,7 +265,7 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
 
     <!-- Left: Logo -->
     <a class="navbar-brand fs-2 fw-bold d-flex align-items-center gap-2" href="#">
-      <img src="../../assets/img/logo.png" alt="COMSA Logo" class="img-fluid" style="height:60px;">
+      <img src="./assets/img/logo.png" alt="COMSA Logo" class="img-fluid" style="height:60px;">
       <span class="d-lg-inline">COMSA-NOW</span>
     </a>
 
@@ -279,21 +279,21 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
         <i class="ri-home-9-line fs-4"></i>
       </a>
 
-      <a href="../../pages-to-accounts/for-students/project-studs.php"
+      <a href="projects.php"
          class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
          style="width:50px; height:50px;">
         <i class="ri-shapes-line fs-4"></i>
       </a>
 
-      <a href="../../pages-to-accounts/for-students/settings-studs.php"
+      <a href="settings.php"
          class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
          style="width:50px; height:50px;">
         <i class="ri-settings-line fs-4"></i>
       </a>
 
       <!-- Profile -->
-      <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
-        <img src="../../assets/img/team/default_user.png" alt="Profile"
+      <a href="profile.php" class="d-flex align-items-center">
+        <img src="./assets/img/team/default_user.png" alt="Profile"
              class="user-avatar rounded-circle border" width="45" height="45">
       </a>
 
@@ -368,22 +368,22 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
        <i class="ri-home-9-line fs-1"></i>
     </a>
 
-    <a href="../../pages-to-accounts/for-students/project-studs.php" 
+    <a href="projects.php" 
        class="btn d-flex align-items-center justify-content-center"
        style="width:50px; height:50px;">
        <i class="ri-shapes-line fs-1"></i>
     </a>
 
-    <a href="../../pages-to-accounts/for-students/settings-studs.php" 
+    <a href="settings.php" 
        class="btn d-flex align-items-center justify-content-center"
        style="width:50px; height:50px;">
        <i class="ri-settings-line fs-1"></i>
     </a>
 
-    <a href="../../pages-to-accounts/for-students/profile-studs.php" 
+    <a href="profile.php" 
        class="btn d-flex align-items-center justify-content-center"
        style="width:50px; height:50px;">
-       <img src="../../assets/img/team/default_user.png" 
+       <img src="./assets/img/team/default_user.png" 
             alt="Profile"
             class="user-avatar rounded-circle border"
             width="40" height="40">
@@ -397,27 +397,27 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
 
 
     <!-- Vendor JS Files -->
-    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/vendor/php-email-form/validate.js"></script>
-    <script src="../../assets/vendor/aos/aos.js"></script>
-    <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/vendor/php-email-form/validate.js"></script>
+    <script src="./assets/vendor/aos/aos.js"></script>
+    <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="./assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="./assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="../../assets/js/main.js"></script>
-    <script src="../for-students/js/studs-search.js"></script>
-    <script src="../../assets/js/studs-main-func.js"></script>
-    <script src="../for-students/js/profile-bio-nick.js"></script>
-    <script src="../for-students/js/profile-project-studs.js" defer></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./students/studs-search.js"></script>
+    <script src="./assets/js/studs-main-func.js"></script>
+    <script src="./students/profile-bio-nick.js"></script>
+    <script src="./students/profile-project-studs.js" defer></script>
 
-    <script src="../for-students/js/project-studs.js" defer></script>
+    <script src="./students/project-studs.js" defer></script>
 
-    <script src="../for-students/js/fetch-posts.js"></script>
-    <script src="../for-students/js/fetch-events-links.js"></script>
-    <script src="../for-students/js/profile-picture-handler.js" defer></script> <!-- For Handleling profile picture Image -->
-    <script src="../for-students/js/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
+    <script src="./students/fetch-posts.js"></script>
+    <script src="./students/fetch-events-links.js"></script>
+    <script src="./students/profile-picture-handler.js" defer></script> <!-- For Handleling profile picture Image -->
+    <script src="./students/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
     <script>
       //session with disabilities haha
       const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;

@@ -1,9 +1,9 @@
 <?php
-require_once "../../../backend/config/session.php";
-require_once "../../../backend/config/db.php";
-require_once '../../../backend/middleware/student_middleware.php';
+require_once "../backend/config/session.php";
+require_once "../backend/config/db.php";
+require_once '../backend/middleware/student_middleware.php';
 
-require_once "../../../backend/api/view-profile.php";
+require_once "../backend/api/view-profile.php";
 
 
 ?>
@@ -20,9 +20,9 @@ require_once "../../../backend/api/view-profile.php";
     <meta name="keywords" content="student profile, account settings, project management">
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
     <link rel="manifest" href="../assets/img/favicon/site.webmanifest">
 
     <!-- Fonts -->
@@ -33,17 +33,17 @@ require_once "../../../backend/api/view-profile.php";
 
 
     <!-- Vendor CSS Files -->
-    <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-    <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="./assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="./assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="./assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="./assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="../../assets/css/dark-mode.css">
-    <link rel="stylesheet" href="../../assets/css/project-studs-design.css">
-    <link rel="stylesheet" href="../../assets/css/search-profile-design.css">
+    <link rel="stylesheet" href="./assets/css/dark-mode.css">
+    <link rel="stylesheet" href="./assets/css/project-studs-design.css">
+    <link rel="stylesheet" href="./assets/css/search-profile-design.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -108,7 +108,7 @@ require_once "../../../backend/api/view-profile.php";
 
     <!-- Left: Logo -->
     <a class="navbar-brand fs-2 fw-bold d-flex align-items-center gap-2" href="#">
-      <img src="../../assets/img/logo.png" alt="COMSA Logo" class="img-fluid" style="height:60px;">
+      <img src="./assets/img/logo.png" alt="COMSA Logo" class="img-fluid" style="height:60px;">
       <span class="d-lg-inline">COMSA-NOW</span>
     </a>
 
@@ -117,26 +117,26 @@ require_once "../../../backend/api/view-profile.php";
       <!-- Right: Icon buttons -->
     <div class="d-flex align-items-center gap-3 d-none d-lg-flex">
 
-      <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
+      <a href="home.php" class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
          style="width:50px; height:50px;">
         <i class="ri-home-9-line fs-4"></i>
       </a>
 
-      <a href="../../pages-to-accounts/for-students/project-studs.php"
+      <a href="projects.php"
          class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
          style="width:50px; height:50px;">
         <i class="ri-shapes-line fs-4"></i>
       </a>
 
-      <a href="../../pages-to-accounts/for-students/settings-studs.php"
+      <a href="settings.php"
          class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
          style="width:50px; height:50px;">
         <i class="ri-settings-line fs-4"></i>
       </a>
 
       <!-- Profile -->
-      <a href="../../pages-to-accounts/for-students/profile-studs.php" class="d-flex align-items-center">
-        <img src="../../assets/img/team/default_user.png" alt="Profile"
+      <a href="profile.php" class="d-flex align-items-center">
+        <img src="./assets/img/team/default_user.png" alt="Profile"
              class="user-avatar rounded-circle btn-user-comsa-border" style="width: 45px; height: 45px;">
       </a>
 
@@ -161,7 +161,7 @@ require_once "../../../backend/api/view-profile.php";
 
         <!-- Back Button -->
         <div class="mb-3">
-            <a href="profile-studs.php" class="btn btn-back" 
+            <a href="profile.php" class="btn btn-back" 
                style="background-color: rgba(125, 184, 50, 0.8); color: white;">
                 <i class="ri-arrow-left-line me-1"></i> Back to My Profile
             </a>
@@ -173,7 +173,7 @@ require_once "../../../backend/api/view-profile.php";
 
                 <!-- Avatar -->
                 <div class="d-flex flex-column align-items-center text-center position-relative">
-                    <img src="../../../backend/<?php echo !empty($profile['profile_picture']) ? $profile['profile_picture'] : '../../assets/img/team/default_user.png'; ?>"
+                    <img src="../backend/<?php echo !empty($profile['profile_picture']) ? $profile['profile_picture'] : './assets/img/team/default_user.png'; ?>"
                          class="rounded-circle shadow"
                          width="180" height="180">
 
@@ -218,25 +218,25 @@ require_once "../../../backend/api/view-profile.php";
     </div>
 </main>
     <!-- Vendor JS Files -->
-    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/vendor/php-email-form/validate.js"></script>
-    <script src="../../assets/vendor/aos/aos.js"></script>
-    <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/vendor/php-email-form/validate.js"></script>
+    <script src="./assets/vendor/aos/aos.js"></script>
+    <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="./assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="./assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="../../assets/js/main.js"></script>
-    <script src="../for-students/js/project-upload.js" defer></script>
-    <script src="../for-students/js/profile-bio-nick.js"></script>
-    <script src="../for-students/js/profile-project-studs.js" defer></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./students/project-upload.js" defer></script>
+    <script src="./students/profile-bio-nick.js"></script>
+    <script src="./students/profile-project-studs.js" defer></script>
 
-    <script src="../for-students/js/project-studs.js" defer></script>
+    <script src="./students/project-studs.js" defer></script>
 
 
-    <script src="../for-students/js/profile-picture-handler.js" defer></script> <!-- For Handleling profile picture Image -->
-    <script src="../for-students/js/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
+    <script src="./students/profile-picture-handler.js" defer></script> <!-- For Handleling profile picture Image -->
+    <script src="./students/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
 
 
 

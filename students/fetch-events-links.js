@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // -------- EVENTS ----------
     function fetchEvents(container) {
-        fetch("../../../backend/api/student/get_events.php")
+        fetch("../backend/api/student/get_events.php")
             .then(res => res.json())
             .then(data => {
                 if (data.success && data.events?.length > 0) {
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // -------- QUICK LINKS ----------
     function fetchQuickLinks(container) {
-        fetch("../../../backend/api/student/get_quick_links.php")
+        fetch("../backend/api/student/get_quick_links.php")
             .then(res => res.json())
             .then(data => {
                 if (data.success && data.links?.length > 0) {

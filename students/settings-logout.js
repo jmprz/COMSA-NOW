@@ -1,6 +1,6 @@
 document.getElementById("logoutBtn").addEventListener('click', function () {
 
-    fetch("../../../backend/api/logout.php", {
+    fetch("../backend/api/logout.php", {
         method: "POST",
         credentials: "include",
     })

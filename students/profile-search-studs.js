@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Load all students for initial display
   function loadAllStudents() {
-    fetch("../../../backend/api/get_all_students.php")
+    fetch("../backend/api/get_all_students.php")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
       '<div class="search-message"><span class="search-loading"></span>Searching...</div>';
 
     // Debug the URL
-    const apiUrl = `../../../backend/api/search_students.php?q=${encodeURIComponent(
+    const apiUrl = `../backend/api/search_students.php?q=${encodeURIComponent(
       searchTerm
     )}`;
     console.log("Calling API:", apiUrl);
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let resultsHTML = "";
     students.forEach((student) => {
       const profileImage = student.profile_picture
-        ? `../../../backend/${student.profile_picture}`
+        ? `../backend/${student.profile_picture}`
         : "../../assets/img/team/default_user.png";
 
       const nickname = student.nickname || "No nickname";
@@ -161,10 +161,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function viewStudentProfile(studentId) {
     if (studentId == currentStudentId) {
       // Redirect to own profile
-      window.location.href = "profile-studs.php";
+      window.location.href = "profile.php";
     } else {
       // Redirect to view other student's profile
-      window.location.href = `view-profile-func.php?id=${studentId}`;
+      window.location.href = `view.php?id=${studentId}`;
     }
 
     closeSearch();

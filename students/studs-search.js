@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
       { 
         title: 'Settings', 
         content: 'Update your profile and preferences', 
-        link: '../../pages-to-accounts/for-students/settings-studs.php',
+        link: '../../pages-to-accounts/for-students/settings.php',
         keywords: 'settings profile preferences account' 
       },
       { 

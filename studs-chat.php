@@ -1,6 +1,6 @@
 <?php
-require_once "../../../backend/config/session.php";
-require_once '../../../backend/middleware/student_middleware.php';
+require_once "../backend/config/session.php";
+require_once '../backend/middleware/student_middleware.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,9 +14,9 @@ require_once '../../../backend/middleware/student_middleware.php';
   <meta name="keywords" content="student chat, messaging, real-time communication">
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
   <link rel="manifest" href="../assets/img/favicon/site.webmanifest">
 
   <!-- Fonts -->
@@ -27,19 +27,19 @@ require_once '../../../backend/middleware/student_middleware.php';
     href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
     rel="stylesheet" />
   <!-- Vendor CSS Files -->
-  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../../assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="./assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="./assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="./assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="./assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link rel="stylesheet" href="../../assets/css/chat-studs-design.css">
-  <link rel="stylesheet" href="../../assets/css/search-profile-design.css">
-  <link rel="stylesheet" href="../../assets/css/project-studs-design.css">  <!-- Also responsible for nav design-->
-  <link rel="stylesheet" href="../../assets/css/dark-mode.css">
-  <link rel="stylesheet" href="../../assets/css/student-chat.css">
+  <link rel="stylesheet" href="./assets/css/chat-studs-design.css">
+  <link rel="stylesheet" href="./assets/css/search-profile-design.css">
+  <link rel="stylesheet" href="./assets/css/project-studs-design.css">  <!-- Also responsible for nav design-->
+  <link rel="stylesheet" href="./assets/css/dark-mode.css">
+  <link rel="stylesheet" href="./assets/css/student-chat.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
@@ -57,16 +57,16 @@ require_once '../../../backend/middleware/student_middleware.php';
             <!-- Side Nav Header -->
             <div>
               <div class="text-center mb-5 side-nav-header">
-                <img src="../../assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
+                <img src="./assets/img/logo.png" class="img-fluid" alt="COMSA Logo">
                 <h3 class="fw-bold">COMSA-NOW</h3>
               </div>
 
               <!-- Nav Menu -->
               <div class="side-nav-menu d-flex flex-column gap-3">
-                <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="btn text-start d-flex align-items-center gap-2">
+                <a href="../../pages-to-accounts/for-students/home.php" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-home-9-line"></i> <span>Home</span>
                 </a>
-                <a href="../../pages-to-accounts/for-students/project-studs.php" class="btn text-start d-flex align-items-center gap-2">
+                <a href="../../pages-to-accounts/for-students/projects.php" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-shapes-line"></i> <span>Projects</span>
                 </a>
                 <a href="../../pages-to-accounts/for-students/studs-chat.php" class="btn text-start d-flex align-items-center gap-2 btn-active">
@@ -75,10 +75,10 @@ require_once '../../../backend/middleware/student_middleware.php';
                 <a href="#" id="search-toggle" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-search-line"></i> <span>Search</span>
                 </a>
-                <a href="../../pages-to-accounts/for-students/profile-studs.php" class="btn text-start d-flex align-items-center gap-2">
+                <a href="../../pages-to-accounts/for-students/profile.php" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-user-line"></i> <span>Profile</span>
                 </a>
-                <a href="../../pages-to-accounts/for-students/settings-studs.php" class="btn text-start d-flex align-items-center gap-2">
+                <a href="../../pages-to-accounts/for-students/settings.php" class="btn text-start d-flex align-items-center gap-2">
                   <i class="ri-settings-line"></i> <span>Settings</span>
                 </a>
               </div>
@@ -109,7 +109,7 @@ require_once '../../../backend/middleware/student_middleware.php';
 
                 <!-- Profile Icon Button -->
                 <button type="button" class="btn p-0 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#profileModal">
-                  <img src="../../assets/img/team/default_user.png" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
+                  <img src="./assets/img/team/default_user.png" class="rounded-circle" alt="Profile" style="width: 40px; height: 40px;">
                 </button>
               </div>
             </div>
@@ -173,10 +173,10 @@ require_once '../../../backend/middleware/student_middleware.php';
       <!-- Bottom Navigation Bar (for md and below) -->
       <nav class="d-lg-none fixed-bottom bg-light border-top">
         <div class="d-flex justify-content-around py-2">
-          <a href="../../pages-to-accounts/for-students/student-dashboard.php" class="text-center mt-2">
+          <a href="../../pages-to-accounts/for-students/home.php" class="text-center mt-2">
             <i class="ri-home-9-line fs-1"></i>
           </a>
-          <a href="../../pages-to-accounts/for-students/project-studs.php" class="text-center mt-2">
+          <a href="../../pages-to-accounts/for-students/projects.php" class="text-center mt-2">
             <i class="ri-shapes-line fs-1"></i>
           </a>
           <a href="../../pages-to-accounts/for-students/studs-chat.php" class="text-center mt-2 btn-active-mobile">
@@ -185,7 +185,7 @@ require_once '../../../backend/middleware/student_middleware.php';
           <a href="#" class="text-center mt-2">
             <i class="ri-notification-3-line fs-1"></i>
           </a>
-          <a href="../../pages-to-accounts/for-students/settings-studs.php" class="text-center mt-2">
+          <a href="../../pages-to-accounts/for-students/settings.php" class="text-center mt-2">
             <i class="ri-settings-line fs-1"></i>
           </a>
         </div>
@@ -219,18 +219,18 @@ require_once '../../../backend/middleware/student_middleware.php';
   </div>
 
   <!-- Vendor JS Files -->
-  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../../assets/vendor/aos/aos.js"></script>
-  <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/vendor/php-email-form/validate.js"></script>
+  <script src="./assets/vendor/aos/aos.js"></script>
+  <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="./assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="./assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Main JS File -->
-  <script src="../../assets/js/main.js"></script>
-  <script src="../for-students/js/profile-search-studs.js" defer></script>
-   <script src="../for-students/js/chat-studs-config.js" defer></script>
+  <script src="./assets/js/main.js"></script>
+  <script src="./students/profile-search-studs.js" defer></script>
+   <script src="./students/chat-studs-config.js" defer></script>
 
 <script>
   

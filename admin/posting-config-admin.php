@@ -1,5 +1,5 @@
 <?php
-require_once '../../../backend/middleware/admin_middleware.php';
+require_once '../../backend/middleware/admin_middleware.php';
 
 ?>
 
