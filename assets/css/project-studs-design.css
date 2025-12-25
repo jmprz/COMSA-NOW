@@ -2,7 +2,7 @@
 :root {
   --primary-color: #007a00;
   --primary-dark: #055a0f;
-  --primary-light: rgb(230, 237, 217);
+  --primary-light: #e6f2e6;
   --accent-color: #007a00;
   --text-dark: #333;
   --text-light: #f8f9fa;
@@ -14,7 +14,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #f5f7fa;
+  background-color: #f6f8f6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -106,13 +106,11 @@ body {
 }
 
 .btn-active, .btn-active-mobile {
-  background: linear-gradient(135deg, #007a00, #6aa32a);
-  color: #fff !important;
+  color:  var(--accent-color);
 }
 
 .btn-active:hover {
-  background: linear-gradient(135deg, #6aa32a, #007a00);
-  color: #fff !important;
+  color: var(--accent-color);
 }
 
 .btn-light:hover {
@@ -146,8 +144,7 @@ body {
 /* ===== Project Cards ===== */
 .project-container, .post-container {
   background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px var(--shadow-color);
+  border-radius: 35px;
   margin-bottom: 30px;
   border: 1px solid var(--border-color);
   transition: all 0.3s ease;
@@ -306,7 +303,7 @@ body {
 }
 
 .tech-tag {
-  background-color: #f0f7e9;
+  background-color: #e6f2e6;
   color: var(--primary-dark);
   padding: 5px 12px;
   border-radius: 20px;
@@ -401,10 +398,13 @@ button.post-action {
   color: var(--text-dark);
   border-radius: 8px;
   transition: all 0.3s;
+  color: #475569 !important;
 }
 
+
 .category-item:hover {
-  background-color: #f0f7e9;
+  color: var(--accent-color);
+  background-color: #e6f2e6;
   transform: translateX(5px);
 }
 
@@ -678,8 +678,9 @@ button.post-action {
   border: 2px solid #007a00;
   color: #007a00 !important;
 }
-.btn-comsa-gradient:hover{
-  background: linear-gradient(135deg, #007a00, #6aa32a);
+
+.btn-comsa:hover{
+  background-color: #007a00 !important;
   color: #fff !important;
 }
 
@@ -877,7 +878,7 @@ body.dark-mode .compact-form .form-select {
   width: 100%;
   margin-bottom: 20px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 35px;
   overflow: hidden;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

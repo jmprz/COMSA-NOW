@@ -119,7 +119,15 @@ document.addEventListener("DOMContentLoaded", function() {
         const postDate = formatPostDate(post.created_at);
         
         postElement.innerHTML = `
-        <div class="post-header d-flex align-items-center justify-content-between">
+
+            
+            ${post.post_image ? `
+                <img src="../backend/${post.post_image}" class="post-image" alt="Post Image" onerror="this.style.display='none'">
+            ` : ''}
+            <div class="post-caption fs-6 mt-2">
+                ${post.content}
+            </div>
+              <div class="post-header d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <img src="./assets/img/logo.png" class="post-avatar me-2" alt="Admin Avatar">
         <div class="d-flex flex-column">
@@ -128,22 +136,18 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         </div>
        <div class="d-flex flex-column align-items-center">
-        <button class="post-action like-btn fs-3" data-post="${post.id}" onclick="toggleLike(${post.id})">
-            <i class="${post.user_liked ? 'ri-heart-3-fill like-count-color' : 'ri-heart-3-line'}"></i>
-         </button>
-     <div class="post-likes small me-3 text-center">
+        <button 
+    class="btn btn-light rounded-pill shadow-sm d-flex align-items-center gap-2 like-btn px-3" 
+    data-post="${post.id}" 
+    onclick="toggleLike(${post.id})"
+>
+    <i class="${post.user_liked ? 'ri-heart-3-fill text-comsa-highlight' : 'ri-heart-3-line'} fs-6 like-icon" id="like-icon-${post.id}"></i>
+    <span id="like-count-${post.id}" class="fw-semibold">
         ${post.like_count || 0}
-    </div>
+    </span>
+</button>
     </div>
         </div>  
-            
-            ${post.post_image ? `
-                <img src="../backend/${post.post_image}" class="post-image" alt="Post Image" onerror="this.style.display='none'">
-            ` : ''}
-            <div class="post-caption">
-                <span class="fs-6 fw-semibold">Computer Science Student Association</span>
-                ${post.content}
-            </div>
             
             ${post.tags && post.tags.length > 0 ? `
                 <div class="post-tags">
@@ -161,8 +165,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     `).join('') : ''
                 }
             </div>
-            
-            <div class="post-time">${formatTimeAgo(post.created_at)}</div>
+        
             
             <div class="post-add-comment" id="addComment${post.id}">
                 <input type="text" class="comment-input" placeholder="Add a comment..." data-post="${post.id}" 
@@ -227,22 +230,24 @@ function formatTimeAgo(dateString) {
 function toggleLike(postId) {
     fetch('../backend/api/student/toggle_like.php', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ post_id: postId })
     })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Update like button and count
-            const likeBtn = document.querySelector(`[data-post="${postId}"].like-btn`);
-            const likeCount = document.querySelector(`[data-post-id="${postId}"] .post-likes`);
-            
-           if (likeBtn && likeCount) {
-            likeBtn.innerHTML = `
-            <i class="${data.liked ? 'ri-heart-3-fill like-count-color' : 'ri-heart-3-line'}"></i>`;
-            likeCount.textContent = `${data.like_count} likes`;
+            // Update icon inside the button
+            const likeIcon = document.getElementById(`like-icon-${postId}`);
+            if (likeIcon) {
+                likeIcon.className = data.liked 
+                    ? 'ri-heart-3-fill text-comsa-highlight fs-6 like-icon'
+                    : 'ri-heart-3-line fs-6 like-icon';
+            }
+
+            // Update like count inside the button
+            const likeCount = document.getElementById(`like-count-${postId}`);
+            if (likeCount) {
+                likeCount.textContent = data.like_count;
             }
         }
     })

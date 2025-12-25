@@ -7,8 +7,6 @@ const closeUpload = document.querySelectorAll(".close-uploadInfo");
 const techInput = document.getElementById("projectTechnologies");
 const tagWrapper = document.getElementById("tagsWrapper");
 
-const projMemberInput = document.getElementById("projectTeam");
-const tagMemberWrapper = document.getElementById("tagsMemberWrapper");
 
 const uploadArea = document.getElementById("mediaUploadArea");
 const uploadInput = document.getElementById("mediaUpload");
@@ -30,11 +28,11 @@ techInput.addEventListener("keydown", (e) => {
       console.log("Current tags:", tags);
 
       const tag = document.createElement("span");
-      tag.className = "badge bg-secondary px-2 py-1 rounded-pill d-flex align-items-center";
+      tag.className = "badge badge-tag px-2 py-1 rounded-pill d-flex align-items-center";
       tag.innerText = value;
 
       const closeBtn = document.createElement("button");
-      closeBtn.className = "btn-close btn-close-white btn-sm ms-2";
+      closeBtn.className = "btn-close btn-close btn-sm ms-2";
       closeBtn.type = "button";
       closeBtn.innerHTML = "&times;";
       closeBtn.onclick = () => {
@@ -50,36 +48,6 @@ techInput.addEventListener("keydown", (e) => {
   }
 });
 
-// ----- MEMBERS -----
-projMemberInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    const value = projMemberInput.value.trim();
-
-    if (value !== "" && !members.includes(value)) {
-      members.push(value);
-      console.log("Current members:", members);
-
-      const tag = document.createElement("span");
-      tag.className = "badge bg-secondary px-2 py-1 rounded-pill d-flex align-items-center";
-      tag.innerText = value;
-
-      const closeBtn = document.createElement("button");
-      closeBtn.className = "btn-close btn-close-white btn-sm ms-2";
-      closeBtn.type = "button";
-      closeBtn.innerHTML = "&times;";
-      closeBtn.onclick = () => {
-        members.splice(members.indexOf(value), 1);
-        console.log("Updated members:", members);
-        tag.remove();
-      };
-
-      tag.appendChild(closeBtn);
-      tagMemberWrapper.appendChild(tag);
-      projMemberInput.value = "";
-    }
-  }
-});
 
 // ----- MEDIA UPLOAD -----
 uploadArea.addEventListener("click", () => uploadInput.click());
@@ -405,9 +373,9 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
           <div class="project-links d-flex flex-row flex-wrap justify-content-center gap-2">
-            ${post.download_link ? `<a href="${post.download_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-download-2-line fs-5"></i> Download</a>` : ''}
-            ${post.live_link ? `<a href="${post.live_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-global-line fs-5"></i> Live Demo</a>` : ''}
-            ${post.github_link ? `<a href="${post.github_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-github-fill fs-5"></i> GitHub</a>` : ''}
+            ${post.download_link ? `<a href="${post.download_link}" class="btn btn-outline-secondary btn-comsa rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-download-2-line fs-5"></i> Download</a>` : ''}
+            ${post.live_link ? `<a href="${post.live_link}" class="btn btn-outline-secondary btn-comsa rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-global-line fs-5"></i> Live Demo</a>` : ''}
+            ${post.github_link ? `<a href="${post.github_link}" class="btn btn-outline-secondary btn-comsa rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-github-fill fs-5"></i> GitHub</a>` : ''}
           </div>
         </div>`;
 
@@ -479,7 +447,7 @@ feed.addEventListener("click", async (e) => {
             <div class="project-tech mb-3">
                 ${postData.technologies.map(t => `<span class="badge me-1 tech-tag">${t}</span>`).join('')}
             </div>
-          <div class="project-links d-flex flex-row flex-wrap justify-content-center gap-2">${postData.download_link ? `<a href="${postData.download_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-download-2-line fs-5"></i> Download</a>` : ''}${postData.live_link ? `<a href="${postData.live_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-global-line fs-5"></i> Live Demo</a>` : ''}${postData.github_link ? `<a href="${postData.github_link}" class="btn btn-outline-secondary btn-comsa-gradient rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-github-fill fs-5"></i> GitHub</a>` : ''}</div>
+          <div class="project-links d-flex flex-row flex-wrap justify-content-center gap-2">${postData.download_link ? `<a href="${postData.download_link}" class="btn btn-outline-secondary btn-comsa rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-download-2-line fs-5"></i> Download</a>` : ''}${postData.live_link ? `<a href="${postData.live_link}" class="btn btn-outline-secondary btn-comsa rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-global-line fs-5"></i> Live Demo</a>` : ''}${postData.github_link ? `<a href="${postData.github_link}" class="btn btn-outline-secondary btn-comsa rounded-pill px-3 d-flex align-items-center gap-2"><i class="ri-github-fill fs-5"></i> GitHub</a>` : ''}</div>
             </div><h5 class="mt-2">Comments</h5>`;
 
     // Initialize the carousel for the modal

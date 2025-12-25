@@ -4,7 +4,7 @@
 body {
   display: flex;
   min-height: 100vh;
-  background-color: #f5f7fa;
+  background-color: #f6f8f6;
   font-family: "Poppins", sans-serif;
 }
 
@@ -41,8 +41,7 @@ body {
 }
 
 .btn-active {
-     background: linear-gradient(135deg, var(--accent-color) 0%, #007a00 100%);
-  color: #fff !important;
+  color: var(--accent-color) !important;
 }
 
 .btn-light:hover {

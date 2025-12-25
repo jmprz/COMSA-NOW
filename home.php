@@ -2,10 +2,7 @@
 require_once "../backend/config/session.php";
 require_once "../backend/config/db.php";
 require_once '../backend/middleware/student_middleware.php';
-
 require_once "../backend/api/update_nickname_bio.php";
-
-
 
 $name = htmlspecialchars($_SESSION['user_name']);
 $email = htmlspecialchars($_SESSION['user_email']);
@@ -18,7 +15,7 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>COMSA-NOW - Student Dashboard</title>
+  <title>COMSA-NOW - Home</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -34,9 +31,7 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
-  <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
   <!-- Vendor CSS Files -->
   <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="./assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -50,7 +45,7 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
   <link rel="stylesheet" href="./assets/css/login-form.css">
   <link rel="stylesheet" href="./assets/css/search.css">
   <link rel="stylesheet" href="./assets/css/student-dash.css">
-    <link rel="stylesheet" href="./assets/css/project-studs-design.css">  <!-- Also responsible for nav design-->
+  <link rel="stylesheet" href="./assets/css/project-studs-design.css"> <!-- Also responsible for nav design-->
   <link rel="stylesheet" href="./assets/css/dark-mode.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -259,175 +254,152 @@ $studentNumber = htmlspecialchars($_SESSION['user_student_number']);
   </div>
   <!-- /Search Modal -->
 
-<!-- Navbar -->
-<nav class="navbar navbar-light bg-white shadow-sm fixed-top">
-  <div class="container-xxl d-flex align-items-center justify-content-between">
+  <!-- Navbar -->
+  <nav class="navbar navbar-mobile bg-white shadow-sm fixed-top py-1">
+    <div class="container-xxl d-flex align-items-center">
 
-    <!-- Left: Logo -->
-    <a class="navbar-brand fs-2 fw-bold d-flex align-items-center gap-2" href="#">
-      <img src="./assets/img/logo.png" alt="COMSA Logo" class="img-fluid" style="height:60px;">
-      <span class="d-lg-inline">COMSA-NOW</span>
-    </a>
-
-
+      <!-- Left: Logo -->
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <img src="./assets/img/logo.png" alt="COMSA Logo" class="img-fluid" style="height:60px;">
+        <span class="d-lg-inline fs-4 fw-bold">COMSA-NOW</span>
+      </a>
 
       <!-- Right: Icon buttons -->
-    <div class="d-flex align-items-center gap-3 d-none d-lg-flex">
+      <div class="d-flex align-items-center gap-2 ms-auto d-none d-lg-flex">
 
-      <a href="#" class="btn btn-active rounded-3 d-flex align-items-center justify-content-center"
-         style="width:50px; height:50px;">
-        <i class="ri-home-9-line fs-4"></i>
-      </a>
+        <a href="home.php" class="btn-active d-flex align-items-center justify-content-center p-1 rounded-4"
+          style="width:45px; height:45px;">
+          <i class="ri-home-5-fill fs-3"></i>
+        </a>
 
-      <a href="projects.php"
-         class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
-         style="width:50px; height:50px;">
-        <i class="ri-shapes-line fs-4"></i>
-      </a>
+        <a href="projects.php" class="btn-header d-flex align-items-center justify-content-center p-1 rounded-4"
+          style="width:45px; height:45px;">
+          <i class="ri-shapes-line fs-3"></i>
+        </a>
 
-      <a href="settings.php"
-         class="btn btn-light rounded-3 d-flex align-items-center justify-content-center"
-         style="width:50px; height:50px;">
-        <i class="ri-settings-line fs-4"></i>
-      </a>
+        <a href="settings.php" class="btn-header d-flex align-items-center justify-content-center p-1 rounded-4"
+          style="width:45px; height:45px;">
+          <i class="ri-settings-4-line fs-3"></i>
+        </a>
 
-      <!-- Profile -->
-      <a href="profile.php" class="d-flex align-items-center">
-        <img src="./assets/img/team/default_user.png" alt="Profile"
-             class="user-avatar rounded-circle border" width="45" height="45">
-      </a>
-
-  </div>
-</nav>
-
-<!-- /Navbar -->
-
-<!-- Main Content -->
-<main class="container-fluid" style="margin-top: 80px;">
-<div class="container my-4"> <!-- Add container to limit width -->
-  <div class="content-header container py-4 mb-4 rounded-4 shadow-sm position-relative overflow-hidden"
-       style="background: linear-gradient(13deg, #007a00, #7db832); color: white;">
-
-    <!-- Abstract shapes (low opacity circles) -->
-    <div style="position: absolute; top: -20px; right: -50px; width: 200px; height: 200px; background-color: #ffffff; border-radius: 50%; opacity: 0.1;"></div>
-    <div style="position: absolute; bottom: -60px; left: -40px; width: 150px; height: 150px; background-color: #ffffff; border-radius: 50%; opacity: 0.1;"></div>
-    <div style="position: absolute; top: 10px; left: 20px; width: 100px; height: 100px; background-color: #ffffff; border-radius: 50%; opacity: 0.05;"></div>
-    <div style="position: absolute; bottom: 40px; right: 100px; width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; opacity: 0.05;"></div>
-        <div class="ms-3">
-          <h1 class="fw-bold mb-1 text-white">Announcements</h1>
-   <p class="mb-1 text-white" style="opacity: 0.9;">Stay informed about upcoming events and important news for students.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row g-4 justify-content-center">
-
-    <!-- Left Sidebar (Events + Quick Links stacked) -->
-    <aside class="col-lg-3 d-none d-lg-block">
-      <div class="left-sidebar sticky-top" style="top: 120px;">
-        
-        <!-- Events Card -->
-        <div class="card shadow-sm mb-4 border-0 rounded-3">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h6 class="fw-bold mb-0">Upcoming Events</h6>
-              <a href="#" class="small">View Calendar</a>
-            </div>
-            <!-- fetch events -->
-          </div>
-        </div>
-
-        <!-- Quick Links Card -->
-        <div class="card shadow-sm border-0 rounded-3">
-          <div class="card-body">
-            <h6 class="fw-bold mb-3">Quick Links</h6>
-            <!-- fetch quick links -->
-          </div>
-        </div>
-
-      </div>
-    </aside>
-
-    <!-- Right Column (Posts Feed) -->
-    <div class="col-lg-7">
-      <div class="posts-column mb-5 mt-3">
-
-      </div>
-    </div>
-
-  </div>
-</main>
-
-
-<!-- 📌 Bottom Navigation (mobile only) -->
-<nav class="d-lg-none fixed-bottom bg-white border-top shadow-sm">
-  <div class="d-flex justify-content-around py-2 mt-2">
-
-    <a href="#" class="btn btn-active rounded-3 d-flex align-items-center justify-content-center"
-       style="width:50px; height:50px;">
-       <i class="ri-home-9-line fs-1"></i>
-    </a>
-
-    <a href="projects.php" 
-       class="btn d-flex align-items-center justify-content-center"
-       style="width:50px; height:50px;">
-       <i class="ri-shapes-line fs-1"></i>
-    </a>
-
-    <a href="settings.php" 
-       class="btn d-flex align-items-center justify-content-center"
-       style="width:50px; height:50px;">
-       <i class="ri-settings-line fs-1"></i>
-    </a>
-
-    <a href="profile.php" 
-       class="btn d-flex align-items-center justify-content-center"
-       style="width:50px; height:50px;">
-       <img src="./assets/img/team/default_user.png" 
-            alt="Profile"
-            class="user-avatar rounded-circle border"
+        <a href="profile.php" class="d-flex align-items-center profile-border">
+          <img src="./assets/img/team/default_user.png" alt="Profile" class="user-avatar rounded-circle border"
             width="40" height="40">
-    </a>
+        </a>
 
-  </div>
-</nav>
-
-
- 
+      </div>
+    </div>
+  </nav>
 
 
-    <!-- Vendor JS Files -->
-    <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/vendor/php-email-form/validate.js"></script>
-    <script src="./assets/vendor/aos/aos.js"></script>
-    <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="./assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="./assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <!-- /Navbar -->
 
-    <!-- Main JS File -->
-    <script src="./assets/js/main.js"></script>
-    <script src="./students/studs-search.js"></script>
-    <script src="./assets/js/studs-main-func.js"></script>
-    <script src="./students/profile-bio-nick.js"></script>
-    <script src="./students/profile-project-studs.js" defer></script>
+  <!-- Main Content -->
+  <main class="container-fluid" style="margin-top: 80px;">
+    <div class="row g-4 justify-content-center">
 
-    <script src="./students/project-studs.js" defer></script>
+      <!-- Left Sidebar (Events + Quick Links stacked) -->
+      <aside class="col-lg-3 d-none d-lg-block">
+        <div class="left-sidebar sticky-top" style="top: 120px;">
 
-    <script src="./students/fetch-posts.js"></script>
-    <script src="./students/fetch-events-links.js"></script>
-    <script src="./students/profile-picture-handler.js" defer></script> <!-- For Handleling profile picture Image -->
-    <script src="./students/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
-    <script>
-      //session with disabilities haha
-      const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
+          <!-- Events Card -->
+          <div class="card shadow-sm mb-4 border-0 rounded-3">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="fw-bold mb-0">Upcoming Events</h6>
+                <a href="#" class="small">View Calendar</a>
+              </div>
+              <!-- fetch events -->
+            </div>
+          </div>
+
+          <!-- Quick Links Card -->
+          <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-body">
+              <h6 class="fw-bold mb-3">Quick Links</h6>
+              <!-- fetch quick links -->
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- Right Column (Posts Feed) -->
+      <div class="col-lg-7">
+        <div class="posts-column mb-5 mt-3">
+
+        </div>
+      </div>
+
+    </div>
+  </main>
 
 
-      // Helper function to check if element contains text
-      Element.prototype.containsText = function(text) {
-        return this.textContent.toLowerCase().includes(text.toLowerCase());
-      };
-    </script>
+  <!-- 📌 Bottom Navigation (mobile only) -->
+  <nav class="d-lg-none fixed-bottom bg-white shadow-lg border-0 bottom-nav">
+    <div class="d-flex justify-content-around align-items-center py-2">
+
+      <a href="#" class="nav-item-mobile active">
+        <i class="ri-home-5-fill"></i>
+        <span style="color: #007a00">Home</span>
+      </a>
+
+      <a href="projects.php" class="nav-item-mobile">
+        <i class="ri-shapes-line"></i>
+        <span>Projects</span>
+      </a>
+
+      <a href="settings.php" class="nav-item-mobile">
+        <i class="ri-settings-4-line"></i>
+        <span>Settings</span>
+      </a>
+
+      <a href="profile.php" class="nav-item-mobile">
+        <img src="./assets/img/team/default_user.png" class="rounded-circle user-avatar border profile-icon"
+          alt="Profile">
+        <span>Profile</span>
+      </a>
+
+    </div>
+  </nav>
+
+
+
+
+
+
+  <!-- Vendor JS Files -->
+  <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/vendor/php-email-form/validate.js"></script>
+  <script src="./assets/vendor/aos/aos.js"></script>
+  <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="./assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="./assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="./assets/js/main.js"></script>
+  <script src="./students/studs-search.js"></script>
+  <script src="./assets/js/studs-main-func.js"></script>
+  <script src="./students/profile-bio-nick.js"></script>
+  <script src="./students/profile-project-studs.js" defer></script>
+
+  <script src="./students/project-studs.js" defer></script>
+
+  <script src="./students/fetch-posts.js"></script>
+  <script src="./students/fetch-events-links.js"></script>
+  <script src="./students/profile-picture-handler.js" defer></script> <!-- For Handleling profile picture Image -->
+  <script src="./students/profile-search-studs.js" defer></script> <!-- For Handleling search engine -->
+  <script>
+    //session with disabilities haha
+    const studentId = <?php echo json_encode($_SESSION['user_id']); ?>;
+
+
+    // Helper function to check if element contains text
+    Element.prototype.containsText = function (text) {
+      return this.textContent.toLowerCase().includes(text.toLowerCase());
+    };
+  </script>
 
 
 </body>
